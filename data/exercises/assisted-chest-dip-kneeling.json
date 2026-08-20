@@ -1,0 +1,118 @@
+{
+  "slug": "assisted-chest-dip-kneeling",
+  "name": "assisted chest dip (kneeling)",
+  "name_vi": "Hít đất hỗ trợ trên máy (quỳ gối)",
+  "subtitle_vi": "Bài tập cho ngực với máy hỗ trợ.",
+  "tags": [
+    "Ngực",
+    "Máy đòn bẩy",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Ngực",
+  "secondary_muscles": [
+    "Tay sau",
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Máy Hỗ Trợ Kéo Xà Và Dip",
+      "en": "Assisted Pull-Up/Dip Machine"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-chest-dip-kneeling.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-chest-dip-kneeling.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-chest-dip-kneeling.gif"
+  },
+  "goal_vi": "Phát triển cơ ngực và rèn luyện khả năng kiểm soát chuyển động.",
+  "instructions": [
+    "Điều chỉnh máy đến độ cao mong muốn và đặt hai đầu gối lên phần đệm.",
+    "Nắm lấy tay cầm, lòng bàn tay úp xuống, cánh tay duỗi thẳng.",
+    "Hạ thấp cơ thể bằng cách gập khuỷu tay cho đến khi bắp tay song song với sàn.",
+    "Giữ tư thế trong giây lát, sau đó dùng lực đẩy người trở lại vị trí ban đầu.",
+    "Lặp lại đủ số lần theo yêu cầu."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Dừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện không đủ biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong suốt quá trình thực hiện.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted chest dip kneeling",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0009",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "PAgTVaK",
+    "raw_gif": "videos/0009-PAgTVaK.gif",
+    "raw_image": "images/0009-PAgTVaK.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0003",
+  "modifiers": []
+}

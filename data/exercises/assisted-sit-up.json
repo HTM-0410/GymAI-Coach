@@ -1,0 +1,118 @@
+{
+  "slug": "assisted-sit-up",
+  "name": "assisted sit-up",
+  "name_vi": "Gập bụng có trợ giúp",
+  "subtitle_vi": "Tăng cường sức mạnh cơ bụng.",
+  "tags": [
+    "waist",
+    "assisted",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ gấp hông"
+  ],
+  "equipment": [
+    {
+      "vi": "Trọng Lượng Cơ Thể",
+      "en": "Bodyweight"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-sit-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-sit-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-sit-up.gif"
+  },
+  "goal_vi": "Phát triển sức mạnh và sức bền cho cơ bụng, cải thiện khả năng gập người về phía trước.",
+  "instructions": [
+    "Ngồi ở mép ghế dài hoặc nhờ người khác giữ chặt hai chân.",
+    "Nằm ngửa, hai gối co và bàn chân đặt phẳng trên sàn.",
+    "Đặt hai tay sau đầu, khuỷu tay hướng ra ngoài.",
+    "Siết cơ bụng và từ từ nâng phần thân trên khỏi mặt đất, gập người về phía trước cho đến khi thân người tạo một góc 45 độ.",
+    "Giữ tư thế ở đỉnh trong giây lát, sau đó từ từ hạ thân trên trở lại vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Tập trung vào việc sử dụng cơ bụng để nâng người, không dùng lực cổ.",
+    "Kiểm soát chuyển động khi hạ người xuống."
+  ],
+  "common_mistakes": [
+    "Sử dụng lực quán tính hoặc giật cổ để nâng người.",
+    "Hạ người xuống quá nhanh hoặc không kiểm soát."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Nếu có vấn đề về lưng, hãy tham khảo ý kiến chuyên gia trước khi thực hiện. Đảm bảo người hỗ trợ giữ chân chắc chắn.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted sit-up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1758",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "aumB2IV",
+    "raw_gif": "videos/1758-aumB2IV.gif",
+    "raw_image": "images/1758-aumB2IV.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0006",
+  "modifiers": []
+}

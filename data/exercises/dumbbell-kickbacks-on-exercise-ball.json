@@ -1,0 +1,117 @@
+{
+  "slug": "dumbbell-kickbacks-on-exercise-ball",
+  "name": "dumbbell kickbacks on exercise ball",
+  "name_vi": "Tạ đơn kickbacks on exercise ball",
+  "subtitle_vi": "Bài tập upper arms với tạ đơn.",
+  "tags": [
+    "upper arms",
+    "Tạ đơn",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay sau",
+  "secondary_muscles": [
+    "Vai",
+    "Lưng"
+  ],
+  "equipment": [
+    {
+      "vi": "Tạ Đơn",
+      "en": "Dumbbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/dumbbell-kickbacks-on-exercise-ball.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-kickbacks-on-exercise-ball.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-kickbacks-on-exercise-ball.gif"
+  },
+  "goal_vi": "Phát triển tay sau và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Sit on an exercise ball with your feet flat on the ground and your back straight.",
+    "Hold a dumbbell in each hand with your palms facing inwards and your arms bent at a 90-degree angle.",
+    "Extend your arms straight back, squeezing your triceps at the top of the movement.",
+    "Pause for a moment, then slowly lower the dumbbells back to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Tạ đơn kickbacks on exercise ball",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1734",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "cAvTaSg",
+    "raw_gif": "videos/1734-cAvTaSg.gif",
+    "raw_image": "images/1734-cAvTaSg.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

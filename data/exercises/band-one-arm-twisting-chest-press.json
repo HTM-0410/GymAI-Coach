@@ -1,0 +1,121 @@
+{
+  "slug": "band-one-arm-twisting-chest-press",
+  "name": "band one arm twisting chest press",
+  "name_vi": "Dây kháng lực một tay xoay ép ngực",
+  "subtitle_vi": "Bài tập ngực với dây kháng lực.",
+  "tags": [
+    "Ngực",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Ngực",
+  "secondary_muscles": [
+    "Vai",
+    "Tay sau"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-one-arm-twisting-chest-press.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-one-arm-twisting-chest-press.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-one-arm-twisting-chest-press.gif"
+  },
+  "goal_vi": "Phát triển cơ ngực và cải thiện khả năng kiểm soát chuyển động xoay.",
+  "instructions": [
+    "Buộc dây kháng lực vào điểm neo chắc chắn ngang tầm ngực.",
+    "Đứng nghiêng người so với điểm neo, một tay nắm lấy dây.",
+    "Bước ra xa điểm neo để tạo lực căng cho dây.",
+    "Hai chân rộng bằng vai, hơi khuỵu gối.",
+    "Đưa tay cầm dây về phía vai đối diện, giữ nguyên vị trí.",
+    "Từ từ đẩy tay ra phía trước và sang ngang, duỗi thẳng cánh tay, cảm nhận cơ ngực co lại.",
+    "Từ từ đưa tay về vị trí ban đầu và lặp lại đủ số lần.",
+    "Đổi bên và thực hiện tương tự với tay còn lại."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Tập trung cảm nhận cơ ngực hoạt động."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà để thực hiện động tác.",
+    "Không kiểm soát chuyển động khi trả tay về."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp và giữ thăng bằng tốt trong suốt bài tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực one arm twisting chest đẩy",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0989",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "c16nYGA",
+    "raw_gif": "videos/0989-c16nYGA.gif",
+    "raw_image": "images/0989-c16nYGA.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0014",
+  "modifiers": []
+}

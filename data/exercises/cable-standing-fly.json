@@ -1,0 +1,121 @@
+{
+  "slug": "cable-standing-fly",
+  "name": "cable standing fly",
+  "name_vi": "Cáp đứng ép ngực",
+  "subtitle_vi": "Bài tập ngực với cáp.",
+  "tags": [
+    "Ngực",
+    "Cáp",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Ngực",
+  "secondary_muscles": [
+    "deltoids",
+    "Tay sau"
+  ],
+  "equipment": [
+    {
+      "vi": "Máy Cáp",
+      "en": "Cable Machine"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/cable-standing-fly.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/cable-standing-fly.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/cable-standing-fly.gif"
+  },
+  "goal_vi": "Phát triển ngực và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Attach the handles to the cables at chest height.",
+    "Stand with your feet shoulder-width apart, facing away from the cable machine.",
+    "Grasp the handles with an overhand grip, palms facing forward.",
+    "Step forward slightly to create tension in the cables.",
+    "Keep your core engaged and your back straight throughout the exercise.",
+    "With a slight bend in your elbows, slowly bring your arms forward and together in front of your chest.",
+    "Squeeze your chest muscles at the peak of the movement.",
+    "Slowly reverse the movement, returning your arms to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Cáp đứng ép ngực",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0227",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "Pr9Rhf4",
+    "raw_gif": "videos/0227-Pr9Rhf4.gif",
+    "raw_image": "images/0227-Pr9Rhf4.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

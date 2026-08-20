@@ -1,0 +1,120 @@
+{
+  "slug": "back-lever",
+  "name": "back lever",
+  "name_vi": "Tư thế giữ lưng",
+  "subtitle_vi": "Bài tập lưng với trọng lượng cơ thể.",
+  "tags": [
+    "Lưng",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "upper back",
+  "secondary_muscles": [
+    "Tay trước",
+    "Cẳng tay",
+    "core"
+  ],
+  "equipment": [
+    {
+      "vi": "Xà Đơn",
+      "en": "Pull-up Bar"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/back-lever.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/back-lever.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/back-lever.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh phần lưng trên và cải thiện khả năng kiểm soát chuyển động.",
+  "instructions": [
+    "Bắt đầu bằng cách treo người trên xà đơn với lòng bàn tay hướng ra ngoài, hai tay rộng hơn vai một chút.",
+    "Siết chặt cơ bụng và kéo hai xương bả vai xuống và ra sau.",
+    "Gập đầu gối và co chúng về phía ngực.",
+    "Từ từ nâng hai chân lên, giữ thẳng, cho đến khi cơ thể song song với mặt đất.",
+    "Giữ tư thế này trong vài giây, sau đó từ từ hạ chân trở lại vị trí ban đầu.",
+    "Lặp lại theo số lần mong muốn."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Ngừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong suốt quá trình thực hiện.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập back lever",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "3297",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "GaSzzuh",
+    "raw_gif": "videos/3297-GaSzzuh.gif",
+    "raw_image": "images/3297-GaSzzuh.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0008",
+  "modifiers": []
+}

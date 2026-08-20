@@ -1,0 +1,120 @@
+{
+  "slug": "band-standing-twisting-crunch",
+  "name": "band standing twisting crunch",
+  "name_vi": "Dây kháng lực đứng xoay gập bụng",
+  "subtitle_vi": "Bài tập cho cơ bụng chéo với dây kháng lực.",
+  "tags": [
+    "waist",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "rotation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ liên sườn"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-standing-twisting-crunch.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-standing-twisting-crunch.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-standing-twisting-crunch.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và độ nét cho cơ bụng chéo (liên sườn).",
+  "instructions": [
+    "Đặt dây kháng lực vòng qua phần lưng trên, bắt chéo hai đầu dây ở phía trước ngực.",
+    "Hai tay nắm lấy hai đầu dây, giữ khuỷu tay gập và áp sát vào thân người.",
+    "Hai chân đứng dang rộng bằng vai.",
+    "Siết chặt cơ bụng, xoay thân người sang một bên, đưa khuỷu tay về phía đầu gối đối diện.",
+    "Giữ nguyên tư thế trong giây lát, sau đó trở về vị trí ban đầu.",
+    "Lặp lại cho phía còn lại và tiếp tục luân phiên cho đến hết số lần yêu cầu."
+  ],
+  "tips": [
+    "Tập trung vào việc xoay người bằng cơ bụng chéo.",
+    "Giữ hông tương đối ổn định, chỉ xoay phần thân trên.",
+    "Thực hiện động tác chậm và có kiểm soát."
+  ],
+  "common_mistakes": [
+    "Xoay người quá nhiều bằng hông.",
+    "Sử dụng đà để thực hiện động tác.",
+    "Không cảm nhận được sự hoạt động của cơ liên sườn."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Nếu cảm thấy đau, hãy dừng lại ngay lập tức.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực đứng twisting gập bụng",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1007",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "euq4pwp",
+    "raw_gif": "videos/1007-euq4pwp.gif",
+    "raw_image": "images/1007-euq4pwp.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0017",
+  "modifiers": []
+}

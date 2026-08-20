@@ -1,0 +1,116 @@
+{
+  "slug": "dumbbell-push-press",
+  "name": "dumbbell push press",
+  "name_vi": "Tạ đơn đẩy đẩy",
+  "subtitle_vi": "Bài tập vai với tạ đơn.",
+  "tags": [
+    "Vai",
+    "Tạ đơn",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Vai",
+  "secondary_muscles": [
+    "Tay sau",
+    "core"
+  ],
+  "equipment": [
+    {
+      "vi": "Tạ Đơn",
+      "en": "Dumbbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/dumbbell-push-press.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-push-press.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-push-press.gif"
+  },
+  "goal_vi": "Phát triển vai và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Stand with your feet shoulder-width apart, holding a dumbbell in each hand at shoulder level.",
+    "Bend your knees slightly and dip your body down, then explosively extend your legs and press the dumbbells overhead.",
+    "Lock out your arms at the top of the movement, then lower the dumbbells back to shoulder level.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Tạ đơn đẩy đẩy",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1700",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "FS63wTN",
+    "raw_gif": "videos/1700-FS63wTN.gif",
+    "raw_image": "images/1700-FS63wTN.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

@@ -1,0 +1,116 @@
+{
+  "slug": "band-jack-knife-sit-up",
+  "name": "band jack knife sit-up",
+  "name_vi": "Dây kháng lực jack knife sit-up",
+  "subtitle_vi": "Bài tập cho vùng eo với dây kháng lực.",
+  "tags": [
+    "waist",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ gấp hông"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-jack-knife-sit-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-jack-knife-sit-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-jack-knife-sit-up.gif"
+  },
+  "goal_vi": "Phát triển cơ bụng và rèn luyện kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Nằm thẳng trên sàn, hai chân duỗi thẳng, hai tay duỗi thẳng qua đầu, nắm dây kháng lực.",
+    "Siết chặt cơ bụng, đồng thời nâng hai chân và phần thân trên lên, đưa hai tay về phía chân.",
+    "Giữ nguyên tư thế trong giây lát, sau đó từ từ hạ hai chân và thân trên về vị trí ban đầu.",
+    "Lặp lại đủ số lần."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Ngừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà thay vì kiểm soát cơ bắp.",
+    "Thực hiện sai phạm vi chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp và giữ tư thế ổn định trong suốt quá trình tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực jack knife sit-up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0981",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "KCBKjma",
+    "raw_gif": "videos/0981-KCBKjma.gif",
+    "raw_image": "images/0981-KCBKjma.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0012",
+  "modifiers": []
+}

@@ -1,0 +1,123 @@
+{
+  "slug": "band-step-up",
+  "name": "band step-up",
+  "name_vi": "Dây kháng lực step-up",
+  "subtitle_vi": "Bài tập cho phần thân dưới với dây kháng lực.",
+  "tags": [
+    "upper legs",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "lunge",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Mông",
+  "secondary_muscles": [
+    "Đùi trước",
+    "Đùi sau",
+    "Bắp chân"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-step-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-step-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-step-up.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và độ ổn định cho mông và đùi.",
+  "instructions": [
+    "Đặt một dây kháng lực quanh đùi, ngay phía trên đầu gối.",
+    "Đứng đối mặt với bục hoặc bệ đỡ, hai chân dang rộng bằng vai.",
+    "Bước chân phải lên bục, dùng gót chân làm trụ để đẩy người lên.",
+    "Duỗi thẳng chân trái ra phía sau, giữ thẳng.",
+    "Hạ chân trái xuống đất một cách có kiểm soát.",
+    "Lặp lại với chân trái bước lên bục.",
+    "Tiếp tục đổi chân cho đến khi đạt đủ số lần lặp."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Tập trung vào việc siết cơ mông khi bước lên.",
+    "Đảm bảo bục đủ vững chắc."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà để bước lên thay vì dùng lực cơ.",
+    "Không giữ lưng thẳng trong suốt quá trình tập.",
+    "Hạ người xuống quá nhanh, mất kiểm soát."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Đảm bảo bục đủ chắc chắn và không trơn trượt. Nếu cảm thấy đau, hãy dừng lại.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực step-up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1008",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "d5bTEPV",
+    "raw_gif": "videos/1008-d5bTEPV.gif",
+    "raw_image": "images/1008-d5bTEPV.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0018",
+  "modifiers": []
+}

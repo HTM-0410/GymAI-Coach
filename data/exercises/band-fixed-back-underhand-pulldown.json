@@ -1,0 +1,125 @@
+{
+  "slug": "band-fixed-back-underhand-pulldown",
+  "name": "band fixed back underhand pulldown",
+  "name_vi": "Kéo xô tay ngửa với dây kháng lực cố định",
+  "subtitle_vi": "Bài tập cho lưng với dây kháng lực.",
+  "tags": [
+    "Lưng",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ xô",
+  "secondary_muscles": [
+    "Tay trước",
+    "rhomboids",
+    "rear deltoids"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-fixed-back-underhand-pulldown.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-fixed-back-underhand-pulldown.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-fixed-back-underhand-pulldown.gif"
+  },
+  "goal_vi": "Phát triển cơ xô, cơ lưng dưới và tay trước, cải thiện sức mạnh kéo và khả năng kiểm soát chuyển động.",
+  "instructions": [
+    "Gắn dây kháng lực vào điểm cố định phía trên đầu.",
+    "Đứng đối diện điểm cố định, hai chân rộng bằng vai.",
+    "Nắm dây bằng hai tay với lòng bàn tay hướng lên (underhand grip), khoảng cách rộng hơn vai một chút.",
+    "Bước lùi lại để tạo độ căng cho dây, giữ tay duỗi thẳng.",
+    "Siết cơ bụng và ép hai xương bả vai lại với nhau.",
+    "Kéo dây xuống về phía ngực, dẫn động bằng khuỷu tay.",
+    "Giữ ở điểm cuối chuyển động một giây, cảm nhận sự co cơ ở cơ xô.",
+    "Từ từ nhả dây về vị trí ban đầu, giữ kiểm soát.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Tập trung vào việc siết cơ xô và cảm nhận sự kéo giãn ở lưng.",
+    "Giữ cho thân người ổn định, tránh dùng lực quán tính.",
+    "Kéo dây xuống bằng cách sử dụng cơ lưng, không phải tay."
+  ],
+  "common_mistakes": [
+    "Dùng lực quán tính hoặc xoay người để kéo dây.",
+    "Không kéo dây đủ sâu hoặc nhả dây quá nhanh.",
+    "Để lưng cong hoặc vai rụt lên."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Đảm bảo điểm cố định chắc chắn. Chọn mức kháng lực phù hợp. Nếu cảm thấy đau ở vai hoặc lưng, hãy dừng lại.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực fixed back underhand pulldown",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "3116",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "ZH68exZ",
+    "raw_gif": "videos/3116-ZH68exZ.gif",
+    "raw_image": "images/3116-ZH68exZ.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0011",
+  "modifiers": []
+}

@@ -1,0 +1,117 @@
+{
+  "slug": "assisted-prone-rectus-femoris-stretch",
+  "name": "assisted prone rectus femoris stretch",
+  "name_vi": "Bài tập kéo giãn cơ đùi trước nằm sấp có trợ giúp",
+  "subtitle_vi": "Tăng cường sự linh hoạt cho cơ đùi trước.",
+  "tags": [
+    "waist",
+    "assisted",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Đùi trước"
+  ],
+  "equipment": [
+    {
+      "vi": "Trọng Lượng Cơ Thể",
+      "en": "Bodyweight"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-prone-rectus-femoris-stretch.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-prone-rectus-femoris-stretch.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-prone-rectus-femoris-stretch.gif"
+  },
+  "goal_vi": "Kéo giãn và tăng cường sự linh hoạt cho cơ đùi trước, cải thiện phạm vi chuyển động của khớp háng.",
+  "instructions": [
+    "Nằm úp trên sàn, hai chân duỗi thẳng.",
+    "Gập gối chân phải và dùng tay phải đưa ra sau nắm lấy cổ chân hoặc bàn chân phải.",
+    "Nhẹ nhàng kéo bàn chân hoặc cổ chân phải về phía mông, cảm nhận sự căng ở mặt trước đùi phải.",
+    "Giữ nguyên tư thế kéo giãn trong 20-30 giây.",
+    "Thả lỏng và lặp lại với chân còn lại."
+  ],
+  "tips": [
+    "Thực hiện chuyển động chậm rãi và có kiểm soát.",
+    "Nếu cảm thấy đau, hãy dừng lại ngay lập tức."
+  ],
+  "common_mistakes": [
+    "Sử dụng quán tính thay vì kiểm soát cơ bắp.",
+    "Thực hiện động tác với biên độ quá lớn hoặc quá nhỏ."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Đảm bảo bạn có người hỗ trợ hoặc sử dụng thiết bị hỗ trợ phù hợp để tránh chấn thương.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted prone rectus femoris stretch",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1714",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "2Ryn564",
+    "raw_gif": "videos/1714-2Ryn564.gif",
+    "raw_image": "images/1714-2Ryn564.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0006",
+  "modifiers": []
+}

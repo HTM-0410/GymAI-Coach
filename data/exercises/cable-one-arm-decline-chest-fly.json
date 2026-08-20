@@ -1,0 +1,118 @@
+{
+  "slug": "cable-one-arm-decline-chest-fly",
+  "name": "cable one arm decline chest fly",
+  "name_vi": "Cáp one arm dốc xuống chest ép ngực",
+  "subtitle_vi": "Bài tập ngực với cáp.",
+  "tags": [
+    "Ngực",
+    "Cáp",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Ngực",
+  "secondary_muscles": [
+    "Vai",
+    "Tay sau"
+  ],
+  "equipment": [
+    {
+      "vi": "Máy Cáp",
+      "en": "Cable Machine"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/cable-one-arm-decline-chest-fly.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/cable-one-arm-decline-chest-fly.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/cable-one-arm-decline-chest-fly.gif"
+  },
+  "goal_vi": "Phát triển ngực và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Attach a D-handle to a low pulley cable machine and set the bench to a decline angle.",
+    "Lie down on the bench with your head towards the machine and grab the handle with your right hand.",
+    "Extend your arm straight up above your chest, keeping a slight bend in your elbow.",
+    "With a controlled motion, lower your arm out to the side until your hand is in line with your shoulder.",
+    "Pause for a moment, then reverse the motion and bring your arm back to the starting position.",
+    "Repeat for the desired number of repetitions, then switch to your left arm and repeat the exercise."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Cáp one arm dốc xuống chest ép ngực",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1262",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "w4dLzSx",
+    "raw_gif": "videos/1262-w4dLzSx.gif",
+    "raw_image": "images/1262-w4dLzSx.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

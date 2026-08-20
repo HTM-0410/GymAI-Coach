@@ -1,0 +1,121 @@
+{
+  "slug": "balance-board",
+  "name": "balance board",
+  "name_vi": "Balance Board",
+  "subtitle_vi": "Bài tập thăng bằng và ổn định cho toàn thân.",
+  "tags": [
+    "upper legs",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Đùi trước",
+  "secondary_muscles": [
+    "Bắp chân",
+    "Đùi sau",
+    "Mông"
+  ],
+  "equipment": [
+    {
+      "vi": "Trọng Lượng Cơ Thể",
+      "en": "Bodyweight"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/balance-board.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/balance-board.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/balance-board.gif"
+  },
+  "goal_vi": "Cải thiện khả năng giữ thăng bằng, tăng cường sức mạnh cho cơ lõi, mắt cá chân và cẳng chân.",
+  "instructions": [
+    "Đặt tấm ván thăng bằng (balance board) trên một bề mặt phẳng, ổn định.",
+    "Bước một chân lên giữa tấm ván, giữ cho cơ thể thẳng đứng.",
+    "Từ từ chuyển trọng lượng cơ thể lên chân đang đứng trên ván, đồng thời siết chặt cơ bụng để giữ thăng bằng.",
+    "Duy trì tư thế này trong khoảng thời gian mong muốn, cố gắng giữ cho tấm ván càng ít di chuyển càng tốt.",
+    "Lặp lại với chân còn lại."
+  ],
+  "tips": [
+    "Bắt đầu với thời gian giữ thăng bằng ngắn và tăng dần.",
+    "Nhìn vào một điểm cố định phía trước để hỗ trợ giữ thăng bằng.",
+    "Giữ đầu gối hơi chùng nhẹ, không khóa khớp."
+  ],
+  "common_mistakes": [
+    "Mất tập trung hoặc nhìn xung quanh.",
+    "Để hông bị nghiêng hoặc cong lưng.",
+    "Di chuyển chân quá nhiều để giữ thăng bằng thay vì dùng cơ."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Luôn giữ một khoảng cách an toàn với các vật xung quanh. Nếu bạn mới bắt đầu, hãy đứng gần tường hoặc ghế để có điểm tựa.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập balance board",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0020",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "xAySMB0",
+    "raw_gif": "videos/0020-xAySMB0.gif",
+    "raw_image": "images/0020-xAySMB0.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0009",
+  "modifiers": []
+}

@@ -1,0 +1,122 @@
+{
+  "slug": "band-straight-leg-deadlift",
+  "name": "band straight leg deadlift",
+  "name_vi": "Dây kháng lực straight leg deadlift",
+  "subtitle_vi": "Bài tập cho lưng dưới và gân kheo với dây kháng lực.",
+  "tags": [
+    "Lưng",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "hinge",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "spine",
+  "secondary_muscles": [
+    "Đùi sau",
+    "Mông"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-straight-leg-deadlift.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-straight-leg-deadlift.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-straight-leg-deadlift.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh cho lưng dưới, gân kheo và cải thiện khả năng giữ thăng bằng.",
+  "instructions": [
+    "Đứng thẳng, hai chân dang rộng bằng vai, đặt dây kháng lực dưới lòng bàn chân.",
+    "Hai tay nắm lấy dây kháng lực phía trước đùi, lòng bàn tay hướng vào người, giữ cánh tay thẳng.",
+    "Siết chặt cơ bụng và giữ cho đầu gối hơi cong nhẹ.",
+    "Từ từ gập hông, giữ lưng thẳng và ngực ưỡn.",
+    "Hạ dây kháng lực xuống gần sàn, giữ cho chân càng thẳng càng tốt.",
+    "Dừng lại một chút ở điểm thấp nhất, sau đó siết cơ mông và gân kheo để trở về vị trí ban đầu.",
+    "Lặp lại cho đến khi đạt đủ số lần yêu cầu."
+  ],
+  "tips": [
+    "Giữ lưng thẳng tuyệt đối trong suốt bài tập.",
+    "Cảm nhận sự căng giãn ở gân kheo.",
+    "Kiểm soát chuyển động ở cả hai chiều lên và xuống."
+  ],
+  "common_mistakes": [
+    "Cong lưng khi hạ người.",
+    "Gập đầu gối quá nhiều.",
+    "Sử dụng đà để nâng người lên."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Giữ lưng thẳng trong suốt bài tập. Nếu cảm thấy đau ở lưng dưới, hãy giảm biên độ hoặc dừng lại.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực straight leg deadlift",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1010",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "KUaoUV8",
+    "raw_gif": "videos/1010-KUaoUV8.gif",
+    "raw_image": "images/1010-KUaoUV8.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0018",
+  "modifiers": []
+}

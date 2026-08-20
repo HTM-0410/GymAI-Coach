@@ -1,0 +1,119 @@
+{
+  "slug": "assisted-side-lying-adductor-stretch",
+  "name": "assisted side lying adductor stretch",
+  "name_vi": "Bài tập kéo giãn cơ khép đùi nằm nghiêng có trợ giúp",
+  "subtitle_vi": "Tăng cường sự linh hoạt cho cơ khép đùi.",
+  "tags": [
+    "upper legs",
+    "assisted",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "adductors",
+  "secondary_muscles": [
+    "Đùi sau",
+    "Mông"
+  ],
+  "equipment": [
+    {
+      "vi": "Trọng Lượng Cơ Thể",
+      "en": "Bodyweight"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-side-lying-adductor-stretch.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-side-lying-adductor-stretch.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-side-lying-adductor-stretch.gif"
+  },
+  "goal_vi": "Kéo giãn và tăng cường sự linh hoạt cho nhóm cơ khép đùi (mặt trong đùi), cải thiện phạm vi chuyển động của khớp háng.",
+  "instructions": [
+    "Nằm nghiêng, hai chân duỗi thẳng và xếp chồng lên nhau.",
+    "Gập nhẹ chân dưới để tạo sự ổn định.",
+    "Đặt bàn chân trên của bạn lên một bề mặt ổn định, ví dụ như ghế dài hoặc bục.",
+    "Giữ chân trên thẳng, từ từ hạ chân xuống về phía sàn, cảm nhận sự căng ở mặt trong đùi.",
+    "Giữ tư thế kéo giãn trong 20-30 giây.",
+    "Trở về vị trí ban đầu và lặp lại với bên còn lại."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Cảm nhận sự căng ở cơ khép đùi, không phải ở khớp gối."
+  ],
+  "common_mistakes": [
+    "Gập gối chân trên thay vì giữ thẳng.",
+    "Hạ chân quá nhanh hoặc không kiểm soát."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Sử dụng bề mặt hỗ trợ ổn định. Nếu cảm thấy đau ở khớp háng hoặc đầu gối, hãy giảm biên độ hoặc dừng lại.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted side nằm adductor stretch",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1712",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "hC6oYY5",
+    "raw_gif": "videos/1712-hC6oYY5.gif",
+    "raw_image": "images/1712-hC6oYY5.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0006",
+  "modifiers": []
+}

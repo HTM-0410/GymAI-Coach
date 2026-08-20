@@ -1,0 +1,120 @@
+{
+  "slug": "band-close-grip-push-up",
+  "name": "band close-grip push-up",
+  "name_vi": "Chống đẩy tay hẹp với dây kháng lực",
+  "subtitle_vi": "Bài tập cho tay sau với dây kháng lực.",
+  "tags": [
+    "upper arms",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay sau",
+  "secondary_muscles": [
+    "Ngực",
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-close-grip-push-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-close-grip-push-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-close-grip-push-up.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và kích thước cơ tay sau, cải thiện sức bền và khả năng kiểm soát chuyển động.",
+  "instructions": [
+    "Quấn dây kháng lực quanh bắp tay, ngay phía trên khuỷu tay.",
+    "Vào tư thế chống đẩy với hai tay đặt dưới vai, cơ thể tạo thành một đường thẳng từ đầu đến gót chân.",
+    "Hạ thấp ngực về phía sàn, giữ khuỷu tay ép sát vào thân người.",
+    "Dùng lực đẩy từ lòng bàn tay để duỗi thẳng tay, trở về tư thế ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Thực hiện chuyển động chậm rãi và có kiểm soát.",
+    "Siết chặt cơ tay sau ở điểm cao nhất của chuyển động.",
+    "Giữ cho lưng thẳng và cơ bụng siết chặt."
+  ],
+  "common_mistakes": [
+    "Dùng lực quán tính thay vì kiểm soát cơ bắp.",
+    "Không hạ thấp đủ sâu hoặc đẩy lên không hết biên độ.",
+    "Để hông võng xuống hoặc nhô cao quá mức."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp để có thể thực hiện đúng kỹ thuật. Nếu cảm thấy đau, hãy dừng lại ngay lập tức.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực close-grip push-up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0975",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "ufaxB52",
+    "raw_gif": "videos/0975-ufaxB52.gif",
+    "raw_image": "images/0975-ufaxB52.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0011",
+  "modifiers": []
+}

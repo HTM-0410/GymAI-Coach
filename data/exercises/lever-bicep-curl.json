@@ -1,0 +1,117 @@
+{
+  "slug": "lever-bicep-curl",
+  "name": "lever bicep curl",
+  "name_vi": "lever bicep cuốn tay",
+  "subtitle_vi": "Bài tập upper arms với máy đòn bẩy.",
+  "tags": [
+    "upper arms",
+    "Máy đòn bẩy",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay trước",
+  "secondary_muscles": [
+    "Cẳng tay"
+  ],
+  "equipment": [
+    {
+      "vi": "Máy Cuốn Tay Trước Đòn Bẩy",
+      "en": "Lever Bicep Curl"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/lever-bicep-curl.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/lever-bicep-curl.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/lever-bicep-curl.gif"
+  },
+  "goal_vi": "Phát triển tay trước và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Adjust the seat height and position yourself on the machine with your back against the pad.",
+    "Grasp the handles with an underhand grip, palms facing up, and keep your elbows close to your sides.",
+    "Exhale and curl the handles upward, contracting your biceps.",
+    "Pause for a moment at the top of the movement, squeezing your biceps.",
+    "Inhale and slowly lower the handles back to the starting position, fully extending your arms.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập lever bicep cuốn tay",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0575",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "q6y3OhV",
+    "raw_gif": "videos/0575-q6y3OhV.gif",
+    "raw_image": "images/0575-q6y3OhV.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

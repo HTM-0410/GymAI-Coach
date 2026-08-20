@@ -1,0 +1,119 @@
+{
+  "slug": "suspended-push-up",
+  "name": "suspended push-up",
+  "name_vi": "suspended push-up",
+  "subtitle_vi": "Bài tập ngực với trọng lượng cơ thể.",
+  "tags": [
+    "Ngực",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Ngực",
+  "secondary_muscles": [
+    "Tay sau",
+    "Vai",
+    "core"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Treo TRX",
+      "en": "Suspension Trainer (TRX)"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/suspended-push-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/suspended-push-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/suspended-push-up.gif"
+  },
+  "goal_vi": "Phát triển ngực và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Find a suspension trainer and adjust it to an appropriate height.",
+    "Stand facing away from the anchor point and hold the handles with an overhand grip.",
+    "Walk your feet forward, leaning your body forward until your weight is supported by the suspension trainer.",
+    "Keep your body straight from head to heels, engage your core, and lower your chest towards the handles.",
+    "Push through your chest and arms to return to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập suspended push-up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0806",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "IaGQCrC",
+    "raw_gif": "videos/0806-IaGQCrC.gif",
+    "raw_image": "images/0806-IaGQCrC.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

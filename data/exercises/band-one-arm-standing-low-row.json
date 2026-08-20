@@ -1,0 +1,119 @@
+{
+  "slug": "band-one-arm-standing-low-row",
+  "name": "band one arm standing low row",
+  "name_vi": "Dây kháng lực một tay đứng kéo",
+  "subtitle_vi": "Bài tập lưng với dây kháng lực.",
+  "tags": [
+    "Lưng",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "upper back",
+  "secondary_muscles": [
+    "Tay trước",
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-one-arm-standing-low-row.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-one-arm-standing-low-row.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-one-arm-standing-low-row.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và cải thiện khả năng kiểm soát cơ lưng trên.",
+  "instructions": [
+    "Buộc dây kháng lực vào điểm cố định ngang tầm thắt lưng.",
+    "Đứng đối mặt với điểm neo, hai chân rộng bằng vai, giữ dây bằng một tay, lòng bàn tay hướng vào trong.",
+    "Bước lùi lại để tạo lực căng cho dây, hơi khuỵu gối và gập hông, giữ lưng thẳng.",
+    "Kéo dây về phía eo, siết chặt hai xương bả vai vào nhau.",
+    "Giữ tư thế trong giây lát ở điểm cao nhất, sau đó từ từ thả dây về vị trí ban đầu.",
+    "Lặp lại đủ số lần yêu cầu, sau đó đổi bên."
+  ],
+  "tips": [
+    "Thực hiện động tác chậm rãi và có kiểm soát.",
+    "Ngừng lại ngay nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà để thực hiện động tác thay vì dùng sức cơ.",
+    "Không thực hiện đủ biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp và duy trì tư thế ổn định trong suốt quá trình tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực one arm đứng low chèo",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0988",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "km0sQC0",
+    "raw_gif": "videos/0988-km0sQC0.gif",
+    "raw_image": "images/0988-km0sQC0.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0014",
+  "modifiers": []
+}

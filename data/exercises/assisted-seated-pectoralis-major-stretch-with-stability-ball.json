@@ -1,0 +1,118 @@
+{
+  "slug": "assisted-seated-pectoralis-major-stretch-with-stability-ball",
+  "name": "assisted seated pectoralis major stretch with stability ball",
+  "name_vi": "Kéo giãn cơ ngực ngồi với bóng thăng bằng có trợ giúp",
+  "subtitle_vi": "Tăng cường sự linh hoạt cho cơ ngực.",
+  "tags": [
+    "Ngực",
+    "assisted",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Ngực",
+  "secondary_muscles": [
+    "Vai",
+    "Tay sau"
+  ],
+  "equipment": [
+    {
+      "vi": "Bóng Tập",
+      "en": "Stability Ball"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-seated-pectoralis-major-stretch-with-stability-ball.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-seated-pectoralis-major-stretch-with-stability-ball.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-seated-pectoralis-major-stretch-with-stability-ball.gif"
+  },
+  "goal_vi": "Kéo giãn và tăng cường sự linh hoạt cho cơ ngực, cải thiện tư thế và giảm căng cứng vùng vai.",
+  "instructions": [
+    "Ngồi trên bóng thăng bằng, hai chân đặt phẳng trên sàn, lưng thẳng.",
+    "Hai tay giữ bóng thăng bằng, duỗi thẳng tay về phía trước.",
+    "Từ từ hạ bóng thăng bằng về phía ngực, cảm nhận sự căng ở cơ ngực.",
+    "Giữ tư thế kéo giãn trong vài giây, sau đó từ từ đưa bóng trở lại vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Giữ lưng thẳng và tránh cong lưng.",
+    "Điều chỉnh vị trí bóng để đạt được cảm giác căng phù hợp."
+  ],
+  "common_mistakes": [
+    "Cong lưng hoặc gồng vai khi thực hiện động tác.",
+    "Hạ bóng quá nhanh hoặc không kiểm soát."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Đảm bảo bóng thăng bằng ổn định và bạn có thể giữ thăng bằng tốt. Nếu cảm thấy đau vai, hãy giảm biên độ hoặc dừng lại.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted ngồi pectoralis major stretch with stability ball",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1716",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "RoV1Rfa",
+    "raw_gif": "videos/1716-RoV1Rfa.gif",
+    "raw_image": "images/1716-RoV1Rfa.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0006",
+  "modifiers": []
+}

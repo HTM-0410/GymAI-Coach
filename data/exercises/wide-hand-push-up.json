@@ -1,0 +1,117 @@
+{
+  "slug": "wide-hand-push-up",
+  "name": "wide hand push up",
+  "name_vi": "wide hand đẩy up",
+  "subtitle_vi": "Bài tập ngực với trọng lượng cơ thể.",
+  "tags": [
+    "Ngực",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Ngực",
+  "secondary_muscles": [
+    "Tay sau",
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Trọng Lượng Cơ Thể",
+      "en": "Bodyweight"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/wide-hand-push-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/wide-hand-push-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/wide-hand-push-up.gif"
+  },
+  "goal_vi": "Phát triển ngực và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Start in a high plank position with your hands wider than shoulder-width apart.",
+    "Keep your body in a straight line from head to toe.",
+    "Lower your chest towards the ground by bending your elbows, keeping them close to your sides.",
+    "Push through your palms to extend your arms and return to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập wide hand đẩy up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1311",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "JmMVpR3",
+    "raw_gif": "videos/1311-JmMVpR3.gif",
+    "raw_image": "images/1311-JmMVpR3.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

@@ -1,0 +1,118 @@
+{
+  "slug": "3-4-sit-up",
+  "name": "3/4 sit-up",
+  "name_vi": "3/4 sit-up",
+  "subtitle_vi": "Bài tập cho cơ bụng với trọng lượng cơ thể.",
+  "tags": [
+    "waist",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ gấp hông",
+    "Lưng dưới"
+  ],
+  "equipment": [
+    {
+      "vi": "Thảm Tập",
+      "en": "Exercise Mat"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/3-4-sit-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/3-4-sit-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/3-4-sit-up.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và độ bền cho cơ bụng, cải thiện khả năng kiểm soát chuyển động.",
+  "instructions": [
+    "Nằm ngửa trên sàn, hai chân co, bàn chân đặt phẳng trên mặt đất.",
+    "Đặt hai tay sau đầu, khuỷu tay hướng ra ngoài.",
+    "Siết chặt cơ bụng, từ từ nâng phần thân trên khỏi mặt đất, gập người về phía trước cho đến khi thân người tạo một góc 45 độ.",
+    "Giữ tư thế này trong giây lát, sau đó từ từ hạ thân trên trở về vị trí ban đầu.",
+    "Lặp lại cho đủ số lần yêu cầu."
+  ],
+  "tips": [
+    "Thực hiện chuyển động chậm rãi và có kiểm soát.",
+    "Tập trung vào việc siết cơ bụng thay vì dùng lực quán tính."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà để nâng người thay vì dùng sức cơ bụng.",
+    "Không giữ lưng thẳng hoặc gồng cổ quá mức."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Đảm bảo bạn thực hiện bài tập trên một bề mặt phẳng và ổn định. Nếu cảm thấy đau, hãy dừng lại.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập 3/4 sit-up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0001",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "2gPfomN",
+    "raw_gif": "videos/0001-2gPfomN.gif",
+    "raw_image": "images/0001-2gPfomN.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0001",
+  "modifiers": []
+}

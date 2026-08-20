@@ -1,0 +1,119 @@
+{
+  "slug": "dumbbell-hammer-curls-with-arm-blaster",
+  "name": "dumbbell hammer curls (with arm blaster)",
+  "name_vi": "Tạ đơn hammer curls with arm blaster",
+  "subtitle_vi": "Bài tập upper arms với tạ đơn.",
+  "tags": [
+    "upper arms",
+    "Tạ đơn",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay trước",
+  "secondary_muscles": [
+    "Cẳng tay"
+  ],
+  "equipment": [
+    {
+      "vi": "Tạ Đơn",
+      "en": "Dumbbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/dumbbell-hammer-curls-with-arm-blaster.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-hammer-curls-with-arm-blaster.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-hammer-curls-with-arm-blaster.gif"
+  },
+  "goal_vi": "Phát triển tay trước và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Stand up straight with a dumbbell in each hand, palms facing your torso.",
+    "Keep your elbows close to your torso and rotate the palms of your hands until they are facing forward.",
+    "This will be your starting position.",
+    "Now, while holding your upper arm stationary, exhale and curl the weights while contracting your biceps.",
+    "Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level.",
+    "Hold the contracted position for a brief pause as you squeeze your biceps.",
+    "Then, inhale and slowly begin to lower the dumbbells back to the starting position.",
+    "Repeat for the recommended amount of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Tạ đơn hammer curls with arm blaster",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "2402",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "GNhAeJ0",
+    "raw_gif": "videos/2402-GNhAeJ0.gif",
+    "raw_image": "images/2402-GNhAeJ0.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

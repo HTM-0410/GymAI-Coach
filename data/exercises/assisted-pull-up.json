@@ -1,0 +1,120 @@
+{
+  "slug": "assisted-pull-up",
+  "name": "assisted pull-up",
+  "name_vi": "Kéo xà có trợ giúp",
+  "subtitle_vi": "Phát triển sức mạnh lưng và tay.",
+  "tags": [
+    "Lưng",
+    "Máy đòn bẩy",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ xô",
+  "secondary_muscles": [
+    "Tay trước",
+    "Cẳng tay"
+  ],
+  "equipment": [
+    {
+      "vi": "Máy Hỗ Trợ Kéo Xà Và Dip",
+      "en": "Assisted Pull-Up/Dip Machine"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-pull-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-pull-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-pull-up.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh cho cơ xô, cơ tay trước và cẳng tay, cải thiện khả năng thực hiện động tác kéo người lên.",
+  "instructions": [
+    "Điều chỉnh máy hỗ trợ với mức trọng lượng và chiều cao phù hợp với bạn.",
+    "Nắm thanh xà với lòng bàn tay hướng ra ngoài, độ rộng tay hơn vai một chút.",
+    "Treo người với cánh tay duỗi thẳng hoàn toàn, hai chân nhấc khỏi mặt đất.",
+    "Sử dụng cơ lưng để kéo người lên phía thanh xà, giữ khuỷu tay gần cơ thể.",
+    "Tiếp tục kéo cho đến khi cằm vượt qua thanh xà.",
+    "Giữ tư thế ở đỉnh trong giây lát, sau đó từ từ hạ người xuống vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Tập trung vào việc siết cơ lưng khi kéo lên.",
+    "Kiểm soát hoàn toàn cả hai pha lên và xuống của chuyển động."
+  ],
+  "common_mistakes": [
+    "Sử dụng lực quán tính để hoàn thành động tác.",
+    "Không kéo người lên đủ cao hoặc hạ xuống quá nhanh."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Bắt đầu với mức trợ giúp cao hơn và giảm dần khi bạn khỏe hơn. Đảm bảo tay nắm chắc chắn vào thanh xà.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted pull-up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0017",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "kiJ4Z2K",
+    "raw_gif": "videos/0017-kiJ4Z2K.gif",
+    "raw_image": "images/0017-kiJ4Z2K.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0006",
+  "modifiers": []
+}

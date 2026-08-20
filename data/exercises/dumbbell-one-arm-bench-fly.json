@@ -1,0 +1,118 @@
+{
+  "slug": "dumbbell-one-arm-bench-fly",
+  "name": "dumbbell one arm bench fly",
+  "name_vi": "Tạ đơn one arm bench ép ngực",
+  "subtitle_vi": "Bài tập ngực với tạ đơn.",
+  "tags": [
+    "Ngực",
+    "Tạ đơn",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Ngực",
+  "secondary_muscles": [
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Tạ Đơn",
+      "en": "Dumbbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/dumbbell-one-arm-bench-fly.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-one-arm-bench-fly.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-one-arm-bench-fly.gif"
+  },
+  "goal_vi": "Phát triển ngực và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Sit on a flat bench with a dumbbell in one hand, resting it on top of your thigh.",
+    "Lie back on the bench, keeping the dumbbell pressed against your thigh.",
+    "Using your free hand, help lift the dumbbell up to the starting position.",
+    "Hold the dumbbell directly above your shoulder with your arm extended and palm facing inward.",
+    "Lower the dumbbell out to the side in a wide arc, keeping a slight bend in your elbow.",
+    "Pause when your arm is parallel to the ground, then reverse the movement and bring the dumbbell back to the starting position.",
+    "Repeat for the desired number of repetitions, then switch arms and repeat."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Tạ đơn one arm bench ép ngực",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1285",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "o5Jsk92",
+    "raw_gif": "videos/1285-o5Jsk92.gif",
+    "raw_image": "images/1285-o5Jsk92.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "canonical_slug": "weight-vest",
+    "output_filename": "weight-vest.webp",
+    "model": "@cf/black-forest-labs/flux-2-klein-4b",
+    "prompt": "Commercial product photograph of a heavy-duty adjustable weighted workout vest resting on a clean pure white background, viewed from a front three-quarter angle at thirty-five degrees with the camera positioned at product mid-height, the entire vest fully visible with generous margins. The vest is constructed from thick black tactical nylon fabric with reinforced stitched webbing along all edges. The front and back panels feature evenly spaced horizontal pockets designed to hold individual steel weight bars, with the openings secured by heavy-duty hook-and-loop flaps. Adjustable side closure straps are fitted with molded black plastic side-release buckle clips and tri-glide slides for tension adjustment over heavy-duty elastic webbing gussets. The shoulder straps are wide, padded, and fixed to the main panels with dense box-X stitching. All surfaces are completely blank and unbranded in matte black and graphite with brushed steel hardware. The studio lighting is soft and diffused, casting a subtle, natural contact shadow directly beneath the base of the vest. Strictly prohibited are any person, body part, wearing the vest, dumbbells, barbells, racks, gym rooms, background shadows, text, trademarks, logos, labels, watermarks, collages, cropped components, duplicated components, and mechanically impossible structures.",
+    "seed": 20260820,
+    "steps": 8,
+    "generated_at": "2026-08-20T09:29:50.104Z",
+    "width": 800,
+    "height": 600,
+    "format": "webp",
+    "sha256": "05f70165fb73535f48568c6cbee32968848191b7d0dbfce5bc39f48e8ff163a9",
+    "status": "generated"
+  },
+  {
+    "canonical_slug": "ab-wheel",
+    "output_filename": "ab-wheel.webp",
+    "model": "@cf/black-forest-labs/flux-2-klein-4b",
+    "prompt": "Commercial studio product photograph of a dual-wheel abdominal exercise roller centered on a solid pure white background, viewed from a front three-quarter angle at approximately 35 degrees with the camera positioned at product mid-height, capturing the entire accessory with generous margins. The device features two wide, heavy-duty matte black rubber wheels with deep grooved treads for anti-slip traction, rigidly mounted in parallel on a central high-strength brushed steel axle. Extending outward from the center through the wheels are two cylindrical ergonomic hand grips covered in dense, high-friction black foam rubber padding, terminating in flush end caps. All surfaces are completely blank and unbranded with no logos, trademarks, labels, or text. The setup utilizes soft, diffused studio lighting that casts a subtle, natural contact shadow directly beneath the wheels on the seamless white surface. Exclude any person, body part, floor, mat, stability ball, dumbbell, kettlebell, resistance band, room environment, watermark, collage, cropped component, duplicated component, and mechanically impossible structure.",
+    "seed": 20260820,
+    "steps": 8,
+    "generated_at": "2026-08-20T09:30:07.857Z",
+    "width": 800,
+    "height": 600,
+    "format": "webp",
+    "sha256": "820d8cfc9e6e0448b77d61dab2ae3a903bb267eee395e22ae3c091e9353d122c",
+    "status": "generated"
+  },
+  {
+    "canonical_slug": "sledgehammer",
+    "output_filename": "sledgehammer.webp",
+    "model": "@cf/black-forest-labs/flux-2-klein-4b",
+    "prompt": "Studio product photograph of a heavy solid steel conditioning sledgehammer centered on a pure seamless white background angled at thirty-five degrees with a front three-quarter view showing the camera at product mid-height capturing the entire object with generous margins, featuring a single heavy matte black forged steel hammer head with a flat rectangular striking face securely welded to a long straight structural steel handle shaft, the entire handle length covered in a durable textured black rubberized grip with diamond knurling pattern for secure non-slip handling, soft diffused studio lighting casting a subtle natural contact shadow directly beneath the base, all surfaces completely blank and unbranded with no tires, no gym floors, no persons, no weight plates, no barbells, no text, no trademarks, no labels, no watermarks, no collages, and no cropped components.",
+    "seed": 20260820,
+    "steps": 8,
+    "generated_at": "2026-08-20T09:30:32.278Z",
+    "width": 800,
+    "height": 600,
+    "format": "webp",
+    "sha256": "ed57ad5dd37adfcc3b6319d194a37d3d697d1fe11732fff7fc80131994acfcae",
+    "status": "generated"
+  },
+  {
+    "canonical_slug": "wrist-roller",
+    "output_filename": "wrist-roller.webp",
+    "model": "@cf/black-forest-labs/flux-2-klein-4b",
+    "prompt": "Studio product photograph of a commercial forearm wrist roller trainer centered against a pure seamless white background captured in a front three quarter view at approximately thirty five degrees with the camera positioned at product mid height showing the entire object with generous margins. The equipment consists of a single horizontal straight cylindrical rotating grip shaft with textured matte black rubberized hand grips spanning both sides and smooth bearing collars separating the handle sections from the center. A strong flat woven black nylon strap is securely anchored to the exact center of the rotating shaft, with multiple turns of the strap visibly wrapped around the central barrel of the shaft. The free hanging end of the strap extends vertically downward, connecting seamlessly to a vertical steel loading pin finished in graphite gray, which securely holds a single solid black calibrated weight plate at its base. The entire mechanical assembly is engineered so that manual rotation of the cylindrical grip shaft visibly winds the nylon strap around the center and lifts the suspended loading pin and weight plate vertically. The materials consist exclusively of industrial matte black powder-coated steel, graphite-finished components, and high-strength black nylon webbing. Soft diffused studio lighting illuminates the equipment from all sides, casting a subtle, clean contact shadow directly beneath the base of the loading pin on the floor plane. There are no fixed D-rings, no straps merely stitched to the handle without wrapping around the shaft, no T-shaped carry handles, no cable-row attachments, no barbells, EZ bars, dumbbells, racks, seats, people, body parts, rooms, logos, trademarks, labels, readable or invented text, watermarks, collages, cropped components, duplicated components, or mechanically impossible structures. All surfaces are completely blank and unbranded.",
+    "seed": 20260820,
+    "steps": 8,
+    "generated_at": "2026-08-20T09:30:54.951Z",
+    "width": 800,
+    "height": 600,
+    "format": "webp",
+    "sha256": "cdb8e5022fc0130f8f9c78729a5963d3b3e47e3f9d7f851ec2bd890dcc6c7c8e",
+    "status": "generated"
+  }
+]

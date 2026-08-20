@@ -1,0 +1,120 @@
+{
+  "slug": "band-concentration-curl",
+  "name": "band concentration curl",
+  "name_vi": "Cuốn tạ đơn tập trung với dây kháng lực",
+  "subtitle_vi": "Bài tập cho tay trước với dây kháng lực.",
+  "tags": [
+    "upper arms",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay trước",
+  "secondary_muscles": [
+    "Cẳng tay"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-concentration-curl.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-concentration-curl.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-concentration-curl.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và kích thước cơ tay trước, cải thiện khả năng cô lập và kiểm soát chuyển động.",
+  "instructions": [
+    "Ngồi trên ghế hoặc mép giường, hai chân dang rộng, bàn chân đặt phẳng trên sàn.",
+    "Một tay giữ một đầu dây kháng lực, chân cùng bên bước lên đầu dây còn lại.",
+    "Hơi cúi người về phía trước, đặt khuỷu tay lên mặt trong đùi, ngay trên đầu gối.",
+    "Lòng bàn tay hướng lên, từ từ cuốn tay về phía vai, giữ bắp tay cố định.",
+    "Giữ ở điểm cao nhất một giây, sau đó từ từ hạ tay về vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu, sau đó đổi bên."
+  ],
+  "tips": [
+    "Tập trung cảm nhận sự co cơ ở tay trước.",
+    "Giữ khuỷu tay cố định và không dùng đà.",
+    "Thực hiện chuyển động chậm và có kiểm soát."
+  ],
+  "common_mistakes": [
+    "Dùng lực quán tính hoặc xoay người để nâng dây.",
+    "Không giữ khuỷu tay cố định.",
+    "Thực hiện chuyển động quá nhanh."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Đảm bảo khuỷu tay được giữ ổn định trong suốt bài tập. Nếu cảm thấy đau, hãy dừng lại.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực concentration cuốn tay",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0976",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "kmVVAfu",
+    "raw_gif": "videos/0976-kmVVAfu.gif",
+    "raw_image": "images/0976-kmVVAfu.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0011",
+  "modifiers": []
+}

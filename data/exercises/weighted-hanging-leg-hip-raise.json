@@ -1,0 +1,117 @@
+{
+  "slug": "weighted-hanging-leg-hip-raise",
+  "name": "weighted hanging leg-hip raise",
+  "name_vi": "weighted hanging leg-hip nâng",
+  "subtitle_vi": "Bài tập waist với weighted.",
+  "tags": [
+    "waist",
+    "weighted",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ gấp hông",
+    "Lưng dưới"
+  ],
+  "equipment": [
+    {
+      "vi": "Xà Đơn",
+      "en": "Pull-up Bar"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/weighted-hanging-leg-hip-raise.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/weighted-hanging-leg-hip-raise.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/weighted-hanging-leg-hip-raise.gif"
+  },
+  "goal_vi": "Phát triển cơ bụng và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Hang from a pull-up bar with your arms fully extended and your palms facing away from you.",
+    "Engage your core and lift your legs up in front of you, keeping them straight.",
+    "Continue lifting until your legs are parallel to the ground or slightly higher.",
+    "Pause for a moment at the top, then slowly lower your legs back down to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập weighted hanging leg-hip nâng",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0866",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "QOA0FD0",
+    "raw_gif": "videos/0866-QOA0FD0.gif",
+    "raw_image": "images/0866-QOA0FD0.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

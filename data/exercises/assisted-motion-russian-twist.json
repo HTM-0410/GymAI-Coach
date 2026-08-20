@@ -1,0 +1,119 @@
+{
+  "slug": "assisted-motion-russian-twist",
+  "name": "assisted motion russian twist",
+  "name_vi": "Xoay người Russian Twist có trợ giúp",
+  "subtitle_vi": "Bài tập cho cơ bụng với bóng tạ.",
+  "tags": [
+    "waist",
+    "medicine ball",
+    "Gym visual"
+  ],
+  "movement_pattern": "rotation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ liên sườn",
+    "Lưng dưới"
+  ],
+  "equipment": [
+    {
+      "vi": "Bóng Tạ",
+      "en": "Medicine Ball"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-motion-russian-twist.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-motion-russian-twist.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-motion-russian-twist.gif"
+  },
+  "goal_vi": "Phát triển cơ bụng và rèn luyện khả năng xoay người có kiểm soát.",
+  "instructions": [
+    "Ngồi trên sàn, hai gối co, hai bàn chân đặt phẳng trên mặt đất.",
+    "Hai tay giữ bóng tạ trước ngực.",
+    "Ngả người ra sau một chút, siết chặt cơ bụng và giữ lưng thẳng.",
+    "Từ từ xoay thân sang phải, đưa bóng tạ về phía bên phải cơ thể.",
+    "Dừng lại một chút, sau đó xoay thân sang trái, đưa bóng tạ về phía bên trái cơ thể.",
+    "Tiếp tục luân phiên hai bên cho đủ số lần lặp lại."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Dừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà thay vì dùng sức cơ.",
+    "Không thực hiện đủ biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức tạ phù hợp và giữ ổn định tư thế trong suốt quá trình tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted motion russian twist",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0014",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "r7cT9YD",
+    "raw_gif": "videos/0014-r7cT9YD.gif",
+    "raw_image": "images/0014-r7cT9YD.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0005",
+  "modifiers": []
+}

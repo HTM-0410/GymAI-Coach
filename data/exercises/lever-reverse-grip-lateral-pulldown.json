@@ -1,0 +1,119 @@
+{
+  "slug": "lever-reverse-grip-lateral-pulldown",
+  "name": "lever reverse grip lateral pulldown",
+  "name_vi": "lever reverse grip sang bên pulldown",
+  "subtitle_vi": "Bài tập lưng với máy đòn bẩy.",
+  "tags": [
+    "Lưng",
+    "Máy đòn bẩy",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ xô",
+  "secondary_muscles": [
+    "Tay trước",
+    "rhomboids",
+    "rear deltoids"
+  ],
+  "equipment": [
+    {
+      "vi": "Máy Kéo Xà Đòn Bẩy",
+      "en": "Lever Pulldown"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/lever-reverse-grip-lateral-pulldown.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/lever-reverse-grip-lateral-pulldown.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/lever-reverse-grip-lateral-pulldown.gif"
+  },
+  "goal_vi": "Phát triển cơ xô và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Adjust the seat height and position yourself on the machine with your knees under the pads and your feet flat on the ground.",
+    "Grasp the handles with an overhand grip, slightly wider than shoulder-width apart.",
+    "Sit upright with your chest out and shoulders back, maintaining a slight arch in your lower back.",
+    "Pull the handles down towards your chest, leading with your elbows and squeezing your shoulder blades together.",
+    "Pause for a moment at the bottom of the movement, then slowly release the handles back to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập lever reverse grip sang bên pulldown",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "2736",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "ky8FLU8",
+    "raw_gif": "videos/2736-ky8FLU8.gif",
+    "raw_image": "images/2736-ky8FLU8.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

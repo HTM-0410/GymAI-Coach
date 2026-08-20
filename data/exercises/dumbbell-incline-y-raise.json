@@ -1,0 +1,117 @@
+{
+  "slug": "dumbbell-incline-y-raise",
+  "name": "dumbbell incline y-raise",
+  "name_vi": "Tạ đơn dốc lên y-raise",
+  "subtitle_vi": "Bài tập lưng với tạ đơn.",
+  "tags": [
+    "Lưng",
+    "Tạ đơn",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "upper back",
+  "secondary_muscles": [
+    "Vai",
+    "rear deltoids"
+  ],
+  "equipment": [
+    {
+      "vi": "Tạ Đơn",
+      "en": "Dumbbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/dumbbell-incline-y-raise.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-incline-y-raise.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-incline-y-raise.gif"
+  },
+  "goal_vi": "Phát triển upper back và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Set an incline bench to a 45-degree angle and sit on it with a dumbbell in each hand, palms facing inwards.",
+    "Lean forward slightly and let your arms hang straight down, keeping a slight bend in your elbows.",
+    "Raise your arms out to the sides and up in a Y shape until they are parallel to the ground.",
+    "Pause for a moment at the top, then slowly lower your arms back down to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Tạ đơn dốc lên y-raise",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "3541",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "PbzNu7c",
+    "raw_gif": "videos/3541-PbzNu7c.gif",
+    "raw_image": "images/3541-PbzNu7c.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

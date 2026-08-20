@@ -1,0 +1,123 @@
+{
+  "slug": "dumbbell-reverse-grip-incline-bench-one-arm-row",
+  "name": "dumbbell reverse grip incline bench one arm row",
+  "name_vi": "Tạ đơn reverse grip dốc lên bench one arm chèo",
+  "subtitle_vi": "Bài tập lưng với tạ đơn.",
+  "tags": [
+    "Lưng",
+    "Tạ đơn",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "upper back",
+  "secondary_muscles": [
+    "Tay trước",
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Tạ Đơn",
+      "en": "Dumbbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/dumbbell-reverse-grip-incline-bench-one-arm-row.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-reverse-grip-incline-bench-one-arm-row.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-reverse-grip-incline-bench-one-arm-row.gif"
+  },
+  "goal_vi": "Phát triển upper back và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Set up an incline bench at a 45-degree angle.",
+    "Place a dumbbell on the floor next to the bench.",
+    "Stand facing the bench with your feet shoulder-width apart.",
+    "Bend at the waist and place your left knee and left hand on the bench for support.",
+    "Pick up the dumbbell with your right hand using a reverse grip (palm facing down).",
+    "Keep your back straight and your core engaged.",
+    "Pull the dumbbell up towards your chest, keeping your elbow close to your body.",
+    "Squeeze your back muscles at the top of the movement.",
+    "Lower the dumbbell back down to the starting position in a controlled manner.",
+    "Repeat for the desired number of repetitions.",
+    "Switch sides and repeat the exercise with your left arm."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Tạ đơn reverse grip dốc lên bench one arm chèo",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1330",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "ZIViNh1",
+    "raw_gif": "videos/1330-ZIViNh1.gif",
+    "raw_image": "images/1330-ZIViNh1.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

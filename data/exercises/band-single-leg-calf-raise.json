@@ -1,0 +1,118 @@
+{
+  "slug": "band-single-leg-calf-raise",
+  "name": "band single leg calf raise",
+  "name_vi": "Dây kháng lực single leg calf nâng",
+  "subtitle_vi": "Bài tập bắp chân với dây kháng lực.",
+  "tags": [
+    "lower legs",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Bắp chân",
+  "secondary_muscles": [
+    "ankles",
+    "feet"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-single-leg-calf-raise.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-single-leg-calf-raise.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-single-leg-calf-raise.gif"
+  },
+  "goal_vi": "Phát triển cơ bắp chân và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Đứng thẳng, hai chân rộng bằng hông, đặt dây kháng lực quanh phần đệm của bàn chân trái.",
+    "Nếu cần, bám vào vật cố định để giữ thăng bằng.",
+    "Từ từ nhấc gót chân trái khỏi mặt đất, dồn trọng lượng cơ thể lên phần đệm của bàn chân.",
+    "Giữ nguyên tư thế ở đỉnh chuyển động trong giây lát, sau đó từ từ hạ gót chân trái về vị trí ban đầu.",
+    "Lặp lại đủ số lần, sau đó đổi sang chân phải."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Ngừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà thay vì kiểm soát cơ bắp.",
+    "Thực hiện chuyển động không đúng biên độ."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp và giữ tư thế ổn định trong suốt quá trình tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực single leg calf nâng",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0999",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "9JprnPh",
+    "raw_gif": "videos/0999-9JprnPh.gif",
+    "raw_image": "images/0999-9JprnPh.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0016",
+  "modifiers": []
+}

@@ -1,0 +1,117 @@
+{
+  "slug": "roller-side-lat-stretch",
+  "name": "roller side lat stretch",
+  "name_vi": "roller side lat stretch",
+  "subtitle_vi": "Bài tập lưng với roller.",
+  "tags": [
+    "Lưng",
+    "roller",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ xô",
+  "secondary_muscles": [
+    "Vai",
+    "Tay sau"
+  ],
+  "equipment": [
+    {
+      "vi": "Con Lăn Xốp",
+      "en": "Foam Roller"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/roller-side-lat-stretch.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/roller-side-lat-stretch.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/roller-side-lat-stretch.gif"
+  },
+  "goal_vi": "Phát triển cơ xô và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Stand with your feet shoulder-width apart and hold the roller with both hands in front of your body.",
+    "Bend your knees slightly and hinge forward at the hips, keeping your back straight.",
+    "Extend your arms forward and roll the roller down towards your feet, feeling a stretch in your lats.",
+    "Hold the stretch for a few seconds, then slowly roll the roller back up to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập roller side lat stretch",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "2207",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "c3Pfhti",
+    "raw_gif": "videos/2207-c3Pfhti.gif",
+    "raw_image": "images/2207-c3Pfhti.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

@@ -1,0 +1,118 @@
+{
+  "slug": "medicine-ball-catch-and-overhead-throw",
+  "name": "medicine ball catch and overhead throw",
+  "name_vi": "medicine ball catch and overhead throw",
+  "subtitle_vi": "Bài tập lưng với medicine ball.",
+  "tags": [
+    "Lưng",
+    "medicine ball",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ xô",
+  "secondary_muscles": [
+    "Vai",
+    "core"
+  ],
+  "equipment": [
+    {
+      "vi": "Bóng Tạ",
+      "en": "Medicine Ball"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/medicine-ball-catch-and-overhead-throw.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/medicine-ball-catch-and-overhead-throw.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/medicine-ball-catch-and-overhead-throw.gif"
+  },
+  "goal_vi": "Phát triển cơ xô và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Stand with your feet shoulder-width apart, holding a medicine ball in both hands at chest level.",
+    "Bend your knees slightly and engage your core.",
+    "Lower your body into a squat position, keeping your back straight and chest up.",
+    "Explosively extend your hips and legs, while simultaneously throwing the medicine ball overhead.",
+    "Release the ball at the top of the movement and catch it on the way down.",
+    "Lower your body back into the squat position and repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập medicine ball catch and overhead throw",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1353",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "PsVS1QP",
+    "raw_gif": "videos/1353-PsVS1QP.gif",
+    "raw_image": "images/1353-PsVS1QP.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

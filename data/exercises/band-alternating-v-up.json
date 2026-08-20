@@ -1,0 +1,119 @@
+{
+  "slug": "band-alternating-v-up",
+  "name": "band alternating v-up",
+  "name_vi": "V-up luân phiên với dây kháng lực",
+  "subtitle_vi": "Bài tập cho cơ bụng và cơ hông với dây kháng lực.",
+  "tags": [
+    "waist",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ gấp hông"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-alternating-v-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-alternating-v-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-alternating-v-up.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh cho cơ bụng, cơ liên sườn và cơ gấp hông.",
+  "instructions": [
+    "Nằm ngửa trên sàn, hai chân duỗi thẳng, hai tay giơ thẳng qua đầu và giữ hai đầu dây kháng lực.",
+    "Siết chặt cơ bụng, đồng thời nhấc cả hai chân và phần thân trên lên khỏi mặt đất, vươn tay về phía mũi chân.",
+    "Khi hạ xuống, bắt chéo một chân lên trên chân kia.",
+    "Lặp lại động tác, đổi chiều bắt chéo chân ở mỗi lần thực hiện.",
+    "Thực hiện cho đến khi đạt đủ số lần yêu cầu."
+  ],
+  "tips": [
+    "Giữ lưng dưới áp sát sàn, tránh cong lưng.",
+    "Tập trung vào việc siết cơ bụng để nâng người và chân.",
+    "Kiểm soát chuyển động khi hạ người và chân xuống."
+  ],
+  "common_mistakes": [
+    "Cong lưng hoặc nhấc cả lưng khỏi sàn.",
+    "Dùng đà để nâng người thay vì dùng sức cơ bụng.",
+    "Hạ người xuống quá nhanh, mất kiểm soát."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực vừa phải để có thể kiểm soát chuyển động. Nếu cảm thấy đau ở lưng dưới, hãy giảm biên độ hoặc dừng lại.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực alternating v-up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0969",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "ztAa1RK",
+    "raw_gif": "videos/0969-ztAa1RK.gif",
+    "raw_image": "images/0969-ztAa1RK.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0009",
+  "modifiers": []
+}

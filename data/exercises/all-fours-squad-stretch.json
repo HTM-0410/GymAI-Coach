@@ -1,0 +1,118 @@
+{
+  "slug": "all-fours-squad-stretch",
+  "name": "all fours squad stretch",
+  "name_vi": "Tư thế bò kéo giãn đùi",
+  "subtitle_vi": "Bài tập giãn cơ đùi trước với trọng lượng cơ thể.",
+  "tags": [
+    "upper legs",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Đùi trước",
+  "secondary_muscles": [
+    "Đùi sau",
+    "Mông"
+  ],
+  "equipment": [
+    {
+      "vi": "Thảm Tập",
+      "en": "Exercise Mat"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/all-fours-squad-stretch.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/all-fours-squad-stretch.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/all-fours-squad-stretch.gif"
+  },
+  "goal_vi": "Kéo giãn cơ đùi trước, cải thiện sự linh hoạt của khớp hông.",
+  "instructions": [
+    "Bắt đầu ở tư thế bò, hai tay chống thẳng dưới vai, hai gối đặt dưới hông.",
+    "Duỗi thẳng một chân ra phía sau, giữ cho đầu gối vẫn cong và mũi chân hướng xuống.",
+    "Từ từ hạ thấp hông về phía sàn, cảm nhận sự căng giãn ở cơ đùi trước của chân đang duỗi.",
+    "Giữ tư thế này trong khoảng 20-30 giây.",
+    "Đổi chân và lặp lại động tác."
+  ],
+  "tips": [
+    "Giữ lưng thẳng và cơ bụng siết nhẹ.",
+    "Chỉ hạ thấp hông đến mức cảm thấy căng giãn thoải mái, không gây đau."
+  ],
+  "common_mistakes": [
+    "Ưỡn lưng hoặc cong lưng quá mức.",
+    "Hạ hông quá thấp gây áp lực lên khớp gối."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Nếu bạn có vấn đề về khớp gối, hãy đặt một tấm đệm dưới đầu gối. Không cố gắng kéo giãn quá mức.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập all fours squad stretch",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1512",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "qBcKorM",
+    "raw_gif": "videos/1512-qBcKorM.gif",
+    "raw_image": "images/1512-qBcKorM.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0001",
+  "modifiers": []
+}

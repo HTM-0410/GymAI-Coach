@@ -1,0 +1,122 @@
+{
+  "slug": "snatch-pull",
+  "name": "snatch pull",
+  "name_vi": "snatch kéo",
+  "subtitle_vi": "Bài tập upper legs với thanh đòn.",
+  "tags": [
+    "upper legs",
+    "Thanh đòn",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Đùi trước",
+  "secondary_muscles": [
+    "Đùi sau",
+    "Mông",
+    "Bắp chân"
+  ],
+  "equipment": [
+    {
+      "vi": "Thanh Tạ Đòn",
+      "en": "Barbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/snatch-pull.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/snatch-pull.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/snatch-pull.gif"
+  },
+  "goal_vi": "Phát triển đùi trước và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Stand with your feet shoulder-width apart and the barbell on the ground in front of you.",
+    "Bend your knees and hinge at the hips to lower into a squat position, gripping the barbell with an overhand grip.",
+    "Keep your back straight and chest up as you drive through your heels to lift the barbell off the ground, extending your hips and knees.",
+    "As the barbell reaches hip level, explosively pull it upwards, shrugging your shoulders and pulling your elbows high and to the sides.",
+    "As the barbell reaches its highest point, quickly drop underneath it, pulling yourself into a deep squat position.",
+    "Catch the barbell overhead with your arms fully extended and your knees bent.",
+    "Stand up by extending your hips and knees, keeping the barbell overhead.",
+    "Lower the barbell back down to the starting position by reversing the movement.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập snatch kéo",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0776",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "dG5Smob",
+    "raw_gif": "videos/0776-dG5Smob.gif",
+    "raw_image": "images/0776-dG5Smob.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

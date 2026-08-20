@@ -1,0 +1,113 @@
+{
+  "slug": "ez-bar-lying-close-grip-triceps-extension-behind-head",
+  "name": "ez bar lying close grip triceps extension behind head",
+  "name_vi": "ez bar nằm close grip triceps duỗi behind head",
+  "subtitle_vi": "Bài tập upper arms với ez barbell.",
+  "tags": [
+    "upper arms",
+    "ez barbell",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay sau",
+  "secondary_muscles": [
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Tạ EZ",
+      "en": "EZ Bar"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/ez-bar-lying-close-grip-triceps-extension-behind-head.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/ez-bar-lying-close-grip-triceps-extension-behind-head.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/ez-bar-lying-close-grip-triceps-extension-behind-head.gif"
+  },
+  "goal_vi": "Phát triển tay sau và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Lie flat on a bench with your feet flat on the ground and your head at the end of the bench.",
+    "Hold the ez barbell with a close grip, palms facing up, and extend your arms straight up over your chest.",
+    "Keeping your upper arms stationary, slowly lower the barbell behind your head by bending your elbows.",
+    "Pause for a moment, then extend your arms back up to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập ez bar nằm close grip triceps duỗi behind head",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1748",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "6CKUx7o",
+    "raw_gif": "videos/1748-6CKUx7o.gif",
+    "raw_image": "images/1748-6CKUx7o.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production"
+  }
+}

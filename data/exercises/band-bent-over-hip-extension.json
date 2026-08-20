@@ -1,0 +1,122 @@
+{
+  "slug": "band-bent-over-hip-extension",
+  "name": "band bent-over hip extension",
+  "name_vi": "Dây kháng lực duỗi hông gập người",
+  "subtitle_vi": "Bài tập mông và đùi sau với dây kháng lực.",
+  "tags": [
+    "upper legs",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Mông",
+  "secondary_muscles": [
+    "Đùi sau",
+    "Lưng dưới"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-bent-over-hip-extension.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-bent-over-hip-extension.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-bent-over-hip-extension.gif"
+  },
+  "goal_vi": "Phát triển cơ mông và rèn luyện khả năng kiểm soát chuyển động.",
+  "instructions": [
+    "Gắn dây kháng lực vào điểm neo chắc chắn ở ngang mắt cá chân.",
+    "Đứng đối mặt với điểm neo, hai chân dang rộng bằng vai, hơi chùng gối.",
+    "Bước lùi lại để tạo lực căng cho dây, giữ lưng thẳng.",
+    "Gập người về phía trước từ khớp hông, giữ cột sống trung tính.",
+    "Duỗi thẳng chân ra sau, siết chặt cơ mông ở điểm cao nhất.",
+    "Hạ chân trở lại và lặp lại với chân kia.",
+    "Tiếp tục đổi bên đủ số lần."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Tập trung siết chặt cơ mông ở cuối chuyển động.",
+    "Nếu cảm thấy đau, hãy dừng lại."
+  ],
+  "common_mistakes": [
+    "Sử dụng quán tính thay vì dùng sức cơ.",
+    "Thực hiện chuyển động quá nhanh.",
+    "Gồng lưng thay vì dùng cơ mông."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp để bạn có thể thực hiện bài tập với kỹ thuật tốt. Giữ thăng bằng tốt trong suốt chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực bent-over hip duỗi",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0980",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "wSScovH",
+    "raw_gif": "videos/0980-wSScovH.gif",
+    "raw_image": "images/0980-wSScovH.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0010",
+  "modifiers": []
+}

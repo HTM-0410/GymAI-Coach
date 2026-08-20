@@ -1,0 +1,122 @@
+{
+  "slug": "band-underhand-pulldown",
+  "name": "band underhand pulldown",
+  "name_vi": "Kéo dây kháng lực xuống với lòng bàn tay hướng vào",
+  "subtitle_vi": "Bài tập lưng với dây kháng lực.",
+  "tags": [
+    "Lưng",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ xô",
+  "secondary_muscles": [
+    "Tay trước",
+    "Cẳng tay"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-underhand-pulldown.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-underhand-pulldown.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-underhand-pulldown.gif"
+  },
+  "goal_vi": "Phát triển cơ xô, cơ vai sau và cơ tay trước, cải thiện sức mạnh kéo.",
+  "instructions": [
+    "Gắn dây kháng lực vào điểm neo cao (ví dụ: xà đơn, thanh ngang).",
+    "Đứng đối diện với điểm neo, hai chân rộng bằng vai.",
+    "Nắm dây bằng lòng bàn tay hướng vào, hai tay rộng hơn vai một chút.",
+    "Duỗi thẳng tay lên trên đầu, khuỷu tay hơi cong.",
+    "Sử dụng cơ xô để kéo dây xuống về phía ngực, siết chặt hai xương bả vai.",
+    "Giữ ở vị trí cuối chuyển động trong giây lát, sau đó từ từ thả lỏng và đưa tay về vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Giữ lưng thẳng và cố định trong suốt bài tập.",
+    "Tập trung siết cơ xô ở cuối chuyển động.",
+    "Điều chỉnh độ cao của điểm neo để phù hợp với chiều cao của bạn."
+  ],
+  "common_mistakes": [
+    "Dùng đà hoặc vung người để kéo dây.",
+    "Không siết chặt cơ xô ở cuối chuyển động.",
+    "Để lưng cong hoặc chuyển động quá nhiều."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Đảm bảo điểm neo chắc chắn. Chọn mức kháng lực phù hợp để có thể kiểm soát chuyển động. Tránh giật mạnh dây.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực underhand pulldown",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1013",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "k6tUeqS",
+    "raw_gif": "videos/1013-k6tUeqS.gif",
+    "raw_image": "images/1013-k6tUeqS.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0019",
+  "modifiers": []
+}

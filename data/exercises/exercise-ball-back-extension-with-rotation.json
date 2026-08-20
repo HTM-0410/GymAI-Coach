@@ -1,0 +1,118 @@
+{
+  "slug": "exercise-ball-back-extension-with-rotation",
+  "name": "exercise ball back extension with rotation",
+  "name_vi": "exercise ball back duỗi with rotation",
+  "subtitle_vi": "Bài tập lưng với stability ball.",
+  "tags": [
+    "Lưng",
+    "stability ball",
+    "Gym visual"
+  ],
+  "movement_pattern": "rotation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "spine",
+  "secondary_muscles": [
+    "Mông",
+    "Đùi sau"
+  ],
+  "equipment": [
+    {
+      "vi": "Bóng Tập",
+      "en": "Stability Ball"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/exercise-ball-back-extension-with-rotation.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/exercise-ball-back-extension-with-rotation.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/exercise-ball-back-extension-with-rotation.gif"
+  },
+  "goal_vi": "Phát triển spine và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Start by lying face down on the stability ball with your hips resting on the ball and your feet firmly planted on the ground.",
+    "Place your hands behind your head or cross them over your chest.",
+    "Engage your core and slowly lift your upper body off the ball, extending your back until your body forms a straight line from your head to your heels.",
+    "Pause for a moment at the top, then slowly rotate your torso to one side, keeping your hips and legs stable.",
+    "Return to the center and repeat the rotation to the other side.",
+    "Lower your upper body back down to the starting position and repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập exercise ball back duỗi with rotation",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1336",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "WVD66ff",
+    "raw_gif": "videos/1336-WVD66ff.gif",
+    "raw_image": "images/1336-WVD66ff.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

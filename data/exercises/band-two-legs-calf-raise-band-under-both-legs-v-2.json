@@ -1,0 +1,120 @@
+{
+  "slug": "band-two-legs-calf-raise-band-under-both-legs-v-2",
+  "name": "band two legs calf raise - (band under both legs) v. 2",
+  "name_vi": "Dây kháng lực two legs calf nâng - Dây kháng lực dưới cả hai chân v. 2",
+  "subtitle_vi": "Bài tập bắp chân với dây kháng lực.",
+  "tags": [
+    "lower legs",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Bắp chân",
+  "secondary_muscles": [
+    "ankles",
+    "feet"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-two-legs-calf-raise-band-under-both-legs-v-2.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-two-legs-calf-raise-band-under-both-legs-v-2.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-two-legs-calf-raise-band-under-both-legs-v-2.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và kích thước cơ bắp chân, cải thiện khả năng giữ thăng bằng.",
+  "instructions": [
+    "Đứng thẳng, hai chân dang rộng bằng vai, đặt dây kháng lực dưới lòng bàn chân.",
+    "Hai tay giữ chặt hai đầu dây để tạo sự ổn định.",
+    "Dùng lực cơ bắp chân nhón gót chân lên cao nhất có thể.",
+    "Giữ ở vị trí đỉnh trong giây lát, sau đó từ từ hạ gót chân về vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Thực hiện động tác chậm rãi và có kiểm soát.",
+    "Tập trung cảm nhận cơ bắp chân hoạt động.",
+    "Đảm bảo giữ thăng bằng tốt trong suốt bài tập."
+  ],
+  "common_mistakes": [
+    "Dùng lực quán tính thay vì cơ bắp để nhón gót.",
+    "Không thực hiện hết biên độ chuyển động.",
+    "Mất thăng bằng hoặc ngã."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Nếu cảm thấy đau nhói ở mắt cá chân hoặc bắp chân, hãy dừng lại ngay lập tức.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực two legs calf nâng - Dây kháng lực under both legs v. 2",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1369",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "jl6uxZV",
+    "raw_gif": "videos/1369-jl6uxZV.gif",
+    "raw_image": "images/1369-jl6uxZV.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0019",
+  "modifiers": []
+}

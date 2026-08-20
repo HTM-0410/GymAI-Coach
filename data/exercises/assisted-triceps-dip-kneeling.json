@@ -1,0 +1,118 @@
+{
+  "slug": "assisted-triceps-dip-kneeling",
+  "name": "assisted triceps dip (kneeling)",
+  "name_vi": "Assisted triceps dip quỳ",
+  "subtitle_vi": "Bài tập tay sau với máy hỗ trợ.",
+  "tags": [
+    "upper arms",
+    "Máy đòn bẩy",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay sau",
+  "secondary_muscles": [
+    "Ngực",
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Máy Hỗ Trợ Kéo Xà Và Dip",
+      "en": "Assisted Pull-Up/Dip Machine"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-triceps-dip-kneeling.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-triceps-dip-kneeling.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-triceps-dip-kneeling.gif"
+  },
+  "goal_vi": "Phát triển cơ tay sau và rèn luyện kỹ thuật hạ người có kiểm soát.",
+  "instructions": [
+    "Điều chỉnh máy để có chiều cao và mức hỗ trợ mong muốn.",
+    "Quỳ trên đệm, đối diện với máy, hai tay nắm lấy tay cầm.",
+    "Hạ thấp người bằng cách gập khuỷu tay, giữ lưng thẳng và sát với máy.",
+    "Giữ tư thế ở điểm thấp nhất trong giây lát, sau đó dùng lực đẩy người trở lại vị trí ban đầu.",
+    "Lặp lại số lần mong muốn."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Ngừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà để đẩy người lên.",
+    "Để vai đưa lên cao hoặc hạ thấp quá mức."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức hỗ trợ phù hợp và duy trì tư thế ổn định trong suốt quá trình tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted triceps dip kneeling",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0019",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "J60bN17",
+    "raw_gif": "videos/0019-J60bN17.gif",
+    "raw_image": "images/0019-J60bN17.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0007",
+  "modifiers": []
+}

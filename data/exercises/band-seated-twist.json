@@ -1,0 +1,118 @@
+{
+  "slug": "band-seated-twist",
+  "name": "band seated twist",
+  "name_vi": "Dây kháng lực ngồi xoay người",
+  "subtitle_vi": "Bài tập eo với dây kháng lực.",
+  "tags": [
+    "waist",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "rotation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ liên sườn"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-seated-twist.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-seated-twist.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-seated-twist.gif"
+  },
+  "goal_vi": "Phát triển cơ bụng và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Ngồi trên sàn, hai chân duỗi thẳng phía trước, lưng thẳng.",
+    "Quấn dây kháng lực quanh eo, hai tay giữ hai đầu dây.",
+    "Siết cơ bụng và từ từ xoay thân trên sang một bên, giữ lưng thẳng và hai chân trên sàn.",
+    "Giữ ở cuối chuyển động xoay trong giây lát, sau đó từ từ trở về vị trí ban đầu.",
+    "Lặp lại động tác xoay sang bên kia.",
+    "Tiếp tục luân phiên hai bên cho đủ số lần lặp."
+  ],
+  "tips": [
+    "Thực hiện chuyển động chậm và có kiểm soát.",
+    "Ngừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng lực quán tính thay vì kiểm soát cơ bắp.",
+    "Thực hiện không đúng biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp và giữ tư thế ổn định trong suốt quá trình tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực ngồi twist",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1011",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "S1JXDAG",
+    "raw_gif": "videos/1011-S1JXDAG.gif",
+    "raw_image": "images/1011-S1JXDAG.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0015",
+  "modifiers": []
+}

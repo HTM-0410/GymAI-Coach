@@ -1,0 +1,117 @@
+{
+  "slug": "assisted-hanging-knee-raise-with-throw-down",
+  "name": "assisted hanging knee raise with throw down",
+  "name_vi": "Treo người nâng gối có đạp chân xuống",
+  "subtitle_vi": "Bài tập cho cơ bụng với sự hỗ trợ.",
+  "tags": [
+    "waist",
+    "assisted",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ gấp hông",
+    "Lưng dưới"
+  ],
+  "equipment": [
+    {
+      "vi": "Xà Đơn",
+      "en": "Pull-up Bar"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-hanging-knee-raise-with-throw-down.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-hanging-knee-raise-with-throw-down.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-hanging-knee-raise-with-throw-down.gif"
+  },
+  "goal_vi": "Phát triển cơ bụng và rèn luyện khả năng kiểm soát chuyển động.",
+  "instructions": [
+    "Treo người trên xà đơn với cánh tay duỗi thẳng và lòng bàn tay hướng ra ngoài.",
+    "Siết chặt cơ bụng, nâng hai gối về phía ngực, giữ hai chân khép lại.",
+    "Khi hai gối ngang ngực, dùng lực đạp mạnh hai chân xuống về phía sàn, duỗi thẳng hoàn toàn.",
+    "Cho phép chân đung đưa lên và lặp lại động tác cho đủ số lần theo yêu cầu."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Dừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện không đủ biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong suốt quá trình thực hiện.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted hanging knee nâng with throw down",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0010",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "8K0w2yA",
+    "raw_gif": "videos/0010-8K0w2yA.gif",
+    "raw_image": "images/0010-8K0w2yA.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0003",
+  "modifiers": []
+}

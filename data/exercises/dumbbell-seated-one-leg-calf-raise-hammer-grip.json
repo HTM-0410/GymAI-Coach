@@ -1,0 +1,118 @@
+{
+  "slug": "dumbbell-seated-one-leg-calf-raise-hammer-grip",
+  "name": "dumbbell seated one leg calf raise - hammer grip",
+  "name_vi": "Tạ đơn ngồi one leg calf nâng - hammer grip",
+  "subtitle_vi": "Bài tập lower legs với tạ đơn.",
+  "tags": [
+    "lower legs",
+    "Tạ đơn",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Bắp chân",
+  "secondary_muscles": [
+    "Đùi sau",
+    "Mông"
+  ],
+  "equipment": [
+    {
+      "vi": "Tạ Đơn",
+      "en": "Dumbbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/dumbbell-seated-one-leg-calf-raise-hammer-grip.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-seated-one-leg-calf-raise-hammer-grip.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-seated-one-leg-calf-raise-hammer-grip.gif"
+  },
+  "goal_vi": "Phát triển bắp chân và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Sit on a bench or chair with your feet flat on the ground and a dumbbell resting on your thighs.",
+    "Place one foot on a raised surface, such as a step or block, with your heel hanging off the edge.",
+    "Hold the dumbbell with a hammer grip, meaning your palms are facing each other and your fingers are wrapped around the handle.",
+    "Keeping your core engaged and your back straight, slowly raise your heel as high as possible by pushing through the ball of your foot.",
+    "Pause for a moment at the top, then slowly lower your heel back down to the starting position.",
+    "Repeat for the desired number of repetitions, then switch to the other leg."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Tạ đơn ngồi one leg calf nâng - hammer grip",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1380",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "FxhcxUW",
+    "raw_gif": "videos/1380-FxhcxUW.gif",
+    "raw_image": "images/1380-FxhcxUW.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

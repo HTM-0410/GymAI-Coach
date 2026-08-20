@@ -1,0 +1,121 @@
+{
+  "slug": "high-knee-against-wall",
+  "name": "high knee against wall",
+  "name_vi": "high knee against wall",
+  "subtitle_vi": "Bài tập cardio với trọng lượng cơ thể.",
+  "tags": [
+    "cardio",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "cardiovascular system",
+  "secondary_muscles": [
+    "Đùi trước",
+    "Đùi sau",
+    "Mông",
+    "Bắp chân"
+  ],
+  "equipment": [
+    {
+      "vi": "Trọng Lượng Cơ Thể",
+      "en": "Bodyweight"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/high-knee-against-wall.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/high-knee-against-wall.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/high-knee-against-wall.gif"
+  },
+  "goal_vi": "Phát triển cardiovascular system và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Stand facing a wall with your feet hip-width apart.",
+    "Place your hands on the wall for support.",
+    "Engage your core and lift your right knee up towards your chest, while keeping your left foot on the ground.",
+    "Quickly switch legs, bringing your left knee up towards your chest and lowering your right foot back down.",
+    "Continue alternating legs in a running motion, bringing your knees up as high as possible.",
+    "Maintain a fast pace and keep your upper body stable throughout the exercise.",
+    "Repeat for the desired duration or number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập high knee against wall",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "3636",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "ealLwvX",
+    "raw_gif": "videos/3636-ealLwvX.gif",
+    "raw_image": "images/3636-ealLwvX.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

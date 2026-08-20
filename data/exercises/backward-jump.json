@@ -1,0 +1,120 @@
+{
+  "slug": "backward-jump",
+  "name": "backward jump",
+  "name_vi": "Backward Jump",
+  "subtitle_vi": "Bài tập cho phần thân dưới với trọng lượng cơ thể.",
+  "tags": [
+    "upper legs",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Đùi trước",
+  "secondary_muscles": [
+    "Đùi sau",
+    "Mông",
+    "Bắp chân"
+  ],
+  "equipment": [
+    {
+      "vi": "Trọng Lượng Cơ Thể",
+      "en": "Bodyweight"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/backward-jump.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/backward-jump.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/backward-jump.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và khả năng bùng nổ cho đùi trước, đùi sau và mông.",
+  "instructions": [
+    "Đứng thẳng với hai chân dang rộng bằng vai.",
+    "Hơi khuỵu gối và thực hiện cú nhảy lùi về phía sau, dùng lực đẩy từ cả hai chân.",
+    "Tiếp đất nhẹ nhàng bằng mũi chân, đồng thời khuỵu gối để hấp thụ lực.",
+    "Lặp lại động tác cho đến khi đạt đủ số lần yêu cầu."
+  ],
+  "tips": [
+    "Giữ chuyển động có kiểm soát, tránh dùng đà quá nhiều.",
+    "Tập trung vào việc tiếp đất mềm mại để giảm áp lực lên khớp gối.",
+    "Cảm nhận sự hoạt động của cơ đùi và mông khi thực hiện."
+  ],
+  "common_mistakes": [
+    "Tiếp đất quá mạnh hoặc không khuỵu gối đủ.",
+    "Không kiểm soát được hướng nhảy, dẫn đến mất thăng bằng.",
+    "Sử dụng lực đẩy từ lưng thay vì chân."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Đảm bảo bề mặt tiếp đất bằng phẳng và không trơn trượt. Nếu cảm thấy đau ở khớp gối hoặc mắt cá chân, hãy dừng lại.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập backward jump",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1473",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "SaDOwk7",
+    "raw_gif": "videos/1473-SaDOwk7.gif",
+    "raw_image": "images/1473-SaDOwk7.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0009",
+  "modifiers": []
+}

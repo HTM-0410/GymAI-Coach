@@ -1,0 +1,122 @@
+{
+  "slug": "band-standing-rear-delt-row",
+  "name": "band standing rear delt row",
+  "name_vi": "Dây kháng lực đứng kéo vai sau",
+  "subtitle_vi": "Bài tập cho vai sau và lưng trên với dây kháng lực.",
+  "tags": [
+    "Vai",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Vai",
+  "secondary_muscles": [
+    "trapezius",
+    "rhomboids",
+    "Tay trước"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-standing-rear-delt-row.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-standing-rear-delt-row.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-standing-rear-delt-row.gif"
+  },
+  "goal_vi": "Phát triển cơ vai sau, cải thiện tư thế và sức mạnh phần lưng trên.",
+  "instructions": [
+    "Đặt dây kháng lực dưới lòng bàn chân, hai chân dang rộng bằng vai.",
+    "Hai tay nắm lấy hai đầu dây, lòng bàn tay hướng vào nhau, cánh tay duỗi thẳng phía trước.",
+    "Hơi khuỵu gối, gập người về phía trước từ hông, giữ lưng thẳng.",
+    "Kéo dây về phía ngực, đồng thời siết chặt hai bả vai vào nhau.",
+    "Giữ nguyên tư thế trong giây lát, sau đó từ từ thả lỏng và trở về vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Tập trung siết cơ vai sau ở cuối chuyển động.",
+    "Giữ lưng thẳng và ổn định trong suốt quá trình.",
+    "Tránh nhấc vai lên cao."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà để kéo dây.",
+    "Lưng bị cong hoặc gù.",
+    "Kéo dây bằng tay trước thay vì vai sau."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Nếu cảm thấy đau, hãy dừng lại ngay lập tức.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực đứng sau delt chèo",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1022",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "tc5dYrf",
+    "raw_gif": "videos/1022-tc5dYrf.gif",
+    "raw_image": "images/1022-tc5dYrf.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0017",
+  "modifiers": []
+}

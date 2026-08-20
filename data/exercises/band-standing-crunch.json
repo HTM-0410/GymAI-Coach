@@ -1,0 +1,120 @@
+{
+  "slug": "band-standing-crunch",
+  "name": "band standing crunch",
+  "name_vi": "Dây kháng lực đứng gập bụng",
+  "subtitle_vi": "Bài tập cho cơ bụng với dây kháng lực.",
+  "tags": [
+    "waist",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "rotation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ liên sườn"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-standing-crunch.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-standing-crunch.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-standing-crunch.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và độ nét cho cơ bụng.",
+  "instructions": [
+    "Cố định dây kháng lực vào điểm neo chắc chắn ngang tầm thắt lưng.",
+    "Đứng quay lưng lại với điểm neo, hai chân dang rộng bằng vai.",
+    "Hai tay nắm lấy hai đầu dây, đưa lên ngang ngực, khuỷu tay gập lại và áp sát vào thân người.",
+    "Siết chặt cơ bụng, từ từ gập người về phía trước, đưa ngực về phía đầu gối.",
+    "Giữ nguyên tư thế trong giây lát, sau đó từ từ trở về vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Tập trung vào việc siết cơ bụng ở điểm cao nhất của chuyển động.",
+    "Giữ cho chuyển động chậm và có kiểm soát.",
+    "Tránh dùng lực từ vai hoặc tay."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà để thực hiện động tác.",
+    "Không gập người đủ sâu.",
+    "Căng cứng cổ hoặc vai."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Nếu cảm thấy đau, hãy dừng lại ngay lập tức.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực đứng gập bụng",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1005",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "Kzg30R7",
+    "raw_gif": "videos/1005-Kzg30R7.gif",
+    "raw_image": "images/1005-Kzg30R7.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0017",
+  "modifiers": []
+}

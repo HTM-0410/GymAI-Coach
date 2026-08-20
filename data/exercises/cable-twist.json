@@ -1,0 +1,118 @@
+{
+  "slug": "cable-twist",
+  "name": "cable twist",
+  "name_vi": "Cáp twist",
+  "subtitle_vi": "Bài tập waist với cáp.",
+  "tags": [
+    "waist",
+    "Cáp",
+    "Gym visual"
+  ],
+  "movement_pattern": "rotation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ liên sườn"
+  ],
+  "equipment": [
+    {
+      "vi": "Máy Cáp",
+      "en": "Cable Machine"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/cable-twist.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/cable-twist.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/cable-twist.gif"
+  },
+  "goal_vi": "Phát triển cơ bụng và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Stand with your feet shoulder-width apart, facing the cable machine.",
+    "Hold the cable handle with both hands in front of your chest, keeping your arms slightly bent.",
+    "Engage your core and twist your torso to the right, pulling the cable across your body.",
+    "Pause for a moment at the end of the movement, feeling the contraction in your abs and obliques.",
+    "Slowly return to the starting position, resisting the cable's pull.",
+    "Repeat the movement to the left side.",
+    "Continue alternating sides for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Cáp twist",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0243",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "aVs3BR3",
+    "raw_gif": "videos/0243-aVs3BR3.gif",
+    "raw_image": "images/0243-aVs3BR3.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

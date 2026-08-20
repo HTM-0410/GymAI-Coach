@@ -1,0 +1,122 @@
+{
+  "slug": "band-squat",
+  "name": "band squat",
+  "name_vi": "Dây kháng lực squat",
+  "subtitle_vi": "Bài tập cho phần thân dưới với dây kháng lực.",
+  "tags": [
+    "upper legs",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "squat",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Mông",
+  "secondary_muscles": [
+    "Đùi trước",
+    "Đùi sau",
+    "Bắp chân"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-squat.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-squat.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-squat.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và kích thước cho cơ mông và đùi.",
+  "instructions": [
+    "Đặt dây kháng lực ngay phía trên đầu gối.",
+    "Đứng hai chân dang rộng bằng vai, mũi chân hơi hướng ra ngoài.",
+    "Giữ ngực thẳng, lưng thẳng, hạ thấp hông xuống như đang ngồi vào ghế.",
+    "Đảm bảo đầu gối hướng ra ngoài theo hướng của mũi chân và không đổ vào trong.",
+    "Đẩy mạnh qua gót chân để trở về tư thế đứng thẳng.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Luôn giữ cho dây kháng lực căng.",
+    "Tập trung cảm nhận sự hoạt động của cơ mông.",
+    "Giữ lưng thẳng trong suốt quá trình thực hiện."
+  ],
+  "common_mistakes": [
+    "Đầu gối đổ vào trong khi hạ người.",
+    "Lưng bị cong hoặc gù.",
+    "Không xuống đủ sâu hoặc xuống quá nhanh."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Nếu cảm thấy đau, hãy dừng lại ngay lập tức.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực squat",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1004",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "TUZLh71",
+    "raw_gif": "videos/1004-TUZLh71.gif",
+    "raw_image": "images/1004-TUZLh71.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0017",
+  "modifiers": []
+}

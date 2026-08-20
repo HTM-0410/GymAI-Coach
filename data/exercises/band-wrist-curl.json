@@ -1,0 +1,120 @@
+{
+  "slug": "band-wrist-curl",
+  "name": "band wrist curl",
+  "name_vi": "Cuốn cổ tay với dây kháng lực",
+  "subtitle_vi": "Bài tập cẳng tay với dây kháng lực.",
+  "tags": [
+    "lower arms",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cẳng tay",
+  "secondary_muscles": [
+    "Tay trước",
+    "Tay sau"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-wrist-curl.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-wrist-curl.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-wrist-curl.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và độ bền cho cơ cẳng tay, cải thiện khả năng cầm nắm.",
+  "instructions": [
+    "Ngồi trên ghế hoặc mép giường, hai chân đặt phẳng trên sàn.",
+    "Giữ dây kháng lực bằng hai tay, lòng bàn tay hướng lên, đặt cẳng tay lên đùi sao cho cổ tay lơ lửng.",
+    "Từ từ cuốn cổ tay lên trên, siết chặt cơ cẳng tay.",
+    "Giữ ở vị trí đỉnh trong giây lát, sau đó từ từ hạ cổ tay về vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Tập trung vào việc cảm nhận cơ cẳng tay hoạt động.",
+    "Có thể điều chỉnh độ căng của dây bằng cách thay đổi vị trí nắm tay."
+  ],
+  "common_mistakes": [
+    "Dùng lực từ vai hoặc cánh tay để cuốn cổ tay.",
+    "Thực hiện động tác quá nhanh.",
+    "Không giữ yên cẳng tay trên đùi."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Nếu cảm thấy đau ở cổ tay, hãy giảm mức kháng lực hoặc dừng lại. Tránh cử động giật cục.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực wrist cuốn tay",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1016",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "vUTfFHw",
+    "raw_gif": "videos/1016-vUTfFHw.gif",
+    "raw_image": "images/1016-vUTfFHw.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0019",
+  "modifiers": []
+}

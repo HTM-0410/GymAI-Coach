@@ -1,0 +1,194 @@
+[
+  {
+    "slug": "alternate-single-leg-raise-plank",
+    "name": "Alternate Single Leg Raise Plank",
+    "name_vi": null,
+    "video_id": "510412",
+    "video_url": "https://pub-51593a4f184f42908b6377b56bf19486.r2.dev/male/51041201.mp4",
+    "primary_muscle": "Vai",
+    "secondary_muscles": null,
+    "equipment": [
+      "Khác"
+    ],
+    "difficulty": "intermediate",
+    "movement_pattern": "anti-extension",
+    "tags": [
+      "Isolation",
+      "Đơn khớp",
+      "Vai"
+    ],
+    "subtitle_vi": null,
+    "goal_vi": null,
+    "instructions": null,
+    "tips": null,
+    "common_mistakes": null,
+    "setup": {
+      "sets": null,
+      "reps": null,
+      "rir": null,
+      "rest_seconds": null,
+      "tempo": null
+    },
+    "safety_vi": null,
+    "media_metadata": {
+      "version": "1.0.0",
+      "last_updated": "2026-08-19",
+      "source": "ExerciseLibrary.app",
+      "language": "vi"
+    }
+  },
+  {
+    "slug": "barbell-seated-front-raise",
+    "name": "Barbell Seated Front Raise",
+    "name_vi": null,
+    "video_id": "372612",
+    "video_url": "https://pub-51593a4f184f42908b6377b56bf19486.r2.dev/male/37261201.mp4",
+    "primary_muscle": "Vai",
+    "secondary_muscles": null,
+    "equipment": [
+      "Thanh đòn",
+      "Tạ đĩa"
+    ],
+    "difficulty": "intermediate",
+    "movement_pattern": "isolation",
+    "tags": [
+      "Isolation",
+      "Đơn khớp",
+      "Thanh đòn",
+      "Vai"
+    ],
+    "subtitle_vi": null,
+    "goal_vi": null,
+    "instructions": null,
+    "tips": null,
+    "common_mistakes": null,
+    "setup": {
+      "sets": null,
+      "reps": null,
+      "rir": null,
+      "rest_seconds": null,
+      "tempo": null
+    },
+    "safety_vi": null,
+    "media_metadata": {
+      "version": "1.0.0",
+      "last_updated": "2026-08-19",
+      "source": "ExerciseLibrary.app",
+      "language": "vi"
+    }
+  },
+  {
+    "slug": "bodyweight-svend-press",
+    "name": "Bodyweight Svend Press",
+    "name_vi": null,
+    "video_id": "507712",
+    "video_url": "https://pub-51593a4f184f42908b6377b56bf19486.r2.dev/male/50771201.mp4",
+    "primary_muscle": "Vai",
+    "secondary_muscles": null,
+    "equipment": [
+      "Bodyweight"
+    ],
+    "difficulty": "intermediate",
+    "movement_pattern": "push",
+    "tags": [
+      "Push",
+      "Đa khớp",
+      "Bodyweight",
+      "Vai"
+    ],
+    "subtitle_vi": null,
+    "goal_vi": null,
+    "instructions": null,
+    "tips": null,
+    "common_mistakes": null,
+    "setup": {
+      "sets": null,
+      "reps": null,
+      "rir": null,
+      "rest_seconds": null,
+      "tempo": null
+    },
+    "safety_vi": null,
+    "media_metadata": {
+      "version": "1.0.0",
+      "last_updated": "2026-08-19",
+      "source": "ExerciseLibrary.app",
+      "language": "vi"
+    }
+  },
+  {
+    "slug": "dip-leg-raise-a-padded-stool-supported",
+    "name": "Dip Leg Raise A Padded Stool Supported",
+    "name_vi": null,
+    "video_id": "535412",
+    "video_url": "https://pub-51593a4f184f42908b6377b56bf19486.r2.dev/male/53541201.mp4",
+    "primary_muscle": "Vai",
+    "secondary_muscles": null,
+    "equipment": [
+      "Bodyweight"
+    ],
+    "difficulty": "intermediate",
+    "movement_pattern": "isolation",
+    "tags": [
+      "Isolation",
+      "Đơn khớp",
+      "Vai"
+    ],
+    "subtitle_vi": null,
+    "goal_vi": null,
+    "instructions": null,
+    "tips": null,
+    "common_mistakes": null,
+    "setup": {
+      "sets": null,
+      "reps": null,
+      "rir": null,
+      "rest_seconds": null,
+      "tempo": null
+    },
+    "safety_vi": null,
+    "media_metadata": {
+      "version": "1.0.0",
+      "last_updated": "2026-08-19",
+      "source": "ExerciseLibrary.app",
+      "language": "vi"
+    }
+  },
+  {
+    "slug": "dumbbell-shoulder-internal-rotation-at-90-abduction",
+    "name": "Dumbbell Shoulder Internal Rotation At 90 Abduction",
+    "name_vi": null,
+    "video_id": "506512",
+    "video_url": "https://pub-51593a4f184f42908b6377b56bf19486.r2.dev/male/50651201.mp4",
+    "primary_muscle": "Vai",
+    "secondary_muscles": null,
+    "equipment": [
+      "Tạ đôi"
+    ],
+    "difficulty": "intermediate",
+    "movement_pattern": "rotation",
+    "tags": [
+      "Tạ đôi",
+      "Vai"
+    ],
+    "subtitle_vi": null,
+    "goal_vi": null,
+    "instructions": null,
+    "tips": null,
+    "common_mistakes": null,
+    "setup": {
+      "sets": null,
+      "reps": null,
+      "rir": null,
+      "rest_seconds": null,
+      "tempo": null
+    },
+    "safety_vi": null,
+    "media_metadata": {
+      "version": "1.0.0",
+      "last_updated": "2026-08-19",
+      "source": "ExerciseLibrary.app",
+      "language": "vi"
+    }
+  }
+]

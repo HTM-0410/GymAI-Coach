@@ -1,0 +1,122 @@
+{
+  "slug": "archer-push-up",
+  "name": "archer push up",
+  "name_vi": "Chống đẩy kiểu cung thủ",
+  "subtitle_vi": "Bài tập ngực, vai và tay sau với trọng lượng cơ thể.",
+  "tags": [
+    "Ngực",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Ngực",
+  "secondary_muscles": [
+    "Tay sau",
+    "Vai",
+    "core"
+  ],
+  "equipment": [
+    {
+      "vi": "Trọng Lượng Cơ Thể",
+      "en": "Bodyweight"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/archer-push-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/archer-push-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/archer-push-up.gif"
+  },
+  "goal_vi": "Phát triển sức mạnh và sự cân bằng cho cơ ngực, vai và tay sau.",
+  "instructions": [
+    "Bắt đầu ở tư thế chống đẩy, hai tay đặt rộng hơn vai một chút.",
+    "Hạ thấp người xuống bằng cách khuỵu một bên khuỷu tay, đồng thời duỗi thẳng tay còn lại sang ngang.",
+    "Giữ lưng thẳng và cơ bụng siết chặt.",
+    "Dùng lực đẩy người trở lại vị trí ban đầu.",
+    "Lặp lại động tác với bên còn lại, duỗi tay kia sang ngang.",
+    "Tiếp tục luân phiên hai bên cho mỗi lần lặp."
+  ],
+  "tips": [
+    "Giữ cơ thể tạo thành một đường thẳng từ đầu đến gót chân.",
+    "Tập trung cảm nhận sự căng ở cơ ngực bên tay đang co.",
+    "Điều chỉnh độ rộng của hai tay để phù hợp với khả năng."
+  ],
+  "common_mistakes": [
+    "Để hông võng xuống hoặc nhô cao.",
+    "Duỗi tay không thẳng hoặc không đủ sang ngang.",
+    "Thực hiện quá nhanh, thiếu kiểm soát."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Nếu cảm thấy đau cổ tay hoặc vai, hãy giảm biên độ chuyển động hoặc đặt đầu gối xuống sàn để hỗ trợ.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập archer đẩy up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "3294",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "A9qxk2F",
+    "raw_gif": "videos/3294-A9qxk2F.gif",
+    "raw_image": "images/3294-A9qxk2F.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0002",
+  "modifiers": []
+}

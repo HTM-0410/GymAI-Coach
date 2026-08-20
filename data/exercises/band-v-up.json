@@ -1,0 +1,118 @@
+{
+  "slug": "band-v-up",
+  "name": "band v-up",
+  "name_vi": "V-up với dây kháng lực",
+  "subtitle_vi": "Bài tập cơ bụng với dây kháng lực.",
+  "tags": [
+    "waist",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ gấp hông"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-v-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-v-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-v-up.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh và độ săn chắc cho cơ bụng, cải thiện khả năng gập người.",
+  "instructions": [
+    "Nằm ngửa trên sàn, hai chân duỗi thẳng, hai tay duỗi thẳng qua đầu, giữ dây kháng lực.",
+    "Siết chặt cơ bụng, nhấc cả hai chân và phần thân trên khỏi sàn đồng thời, đưa tay về phía mũi chân.",
+    "Giữ ở vị trí đỉnh trong giây lát, sau đó từ từ hạ chân và thân trên trở về vị trí ban đầu.",
+    "Lặp lại theo số lần yêu cầu."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát, đặc biệt là khi hạ người xuống.",
+    "Tập trung vào việc siết cơ bụng.",
+    "Nếu cảm thấy căng ở lưng dưới, hãy thử co nhẹ đầu gối."
+  ],
+  "common_mistakes": [
+    "Dùng đà để nhấc người lên.",
+    "Không kiểm soát được chuyển động khi hạ người xuống.",
+    "Để lưng dưới cong lên khỏi sàn."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực vừa phải. Nếu cảm thấy đau ở lưng dưới, hãy giảm biên độ hoặc dừng lại. Đảm bảo không gian xung quanh đủ rộng.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực v-up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "1014",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "H6ETwO9",
+    "raw_gif": "videos/1014-H6ETwO9.gif",
+    "raw_image": "images/1014-H6ETwO9.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0019",
+  "modifiers": []
+}

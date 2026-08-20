@@ -1,0 +1,118 @@
+{
+  "slug": "cable-underhand-pulldown",
+  "name": "cable underhand pulldown",
+  "name_vi": "Cáp underhand pulldown",
+  "subtitle_vi": "Bài tập lưng với cáp.",
+  "tags": [
+    "Lưng",
+    "Cáp",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ xô",
+  "secondary_muscles": [
+    "Tay trước",
+    "Cẳng tay"
+  ],
+  "equipment": [
+    {
+      "vi": "Máy Cáp",
+      "en": "Cable Machine"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/cable-underhand-pulldown.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/cable-underhand-pulldown.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/cable-underhand-pulldown.gif"
+  },
+  "goal_vi": "Phát triển cơ xô và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Adjust the cable machine so that the pulldown bar is at a height above your head.",
+    "Sit down on the seat and grab the pulldown bar with an underhand grip, hands slightly wider than shoulder-width apart.",
+    "Keep your back straight and lean back slightly.",
+    "Pull the bar down towards your chest, squeezing your shoulder blades together.",
+    "Pause for a moment at the bottom of the movement, then slowly release the bar back up to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Cáp underhand pulldown",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0245",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "xBYcQHj",
+    "raw_gif": "videos/0245-xBYcQHj.gif",
+    "raw_image": "images/0245-xBYcQHj.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

@@ -1,0 +1,118 @@
+{
+  "slug": "resistance-band-seated-hip-abduction",
+  "name": "resistance band seated hip abduction",
+  "name_vi": "resistance Dây kháng lực ngồi hip abduction",
+  "subtitle_vi": "Bài tập upper legs với resistance band.",
+  "tags": [
+    "upper legs",
+    "resistance band",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "abductors",
+  "secondary_muscles": [
+    "Mông",
+    "Đùi sau"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/resistance-band-seated-hip-abduction.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/resistance-band-seated-hip-abduction.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/resistance-band-seated-hip-abduction.gif"
+  },
+  "goal_vi": "Phát triển abductors và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Sit on a chair or bench with your back straight and feet flat on the ground.",
+    "Wrap the resistance band around your thighs, just above your knees.",
+    "Place your hands on the sides of the chair or bench for support.",
+    "Engage your abductors (outer thigh muscles) and slowly push your knees apart, against the resistance of the band.",
+    "Pause for a moment at the end of the movement, then slowly bring your knees back together.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập resistance Dây kháng lực ngồi hip abduction",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "3006",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "0xDpB4L",
+    "raw_gif": "videos/3006-0xDpB4L.gif",
+    "raw_image": "images/3006-0xDpB4L.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

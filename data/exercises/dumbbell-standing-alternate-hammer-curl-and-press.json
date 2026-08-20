@@ -1,0 +1,123 @@
+{
+  "slug": "dumbbell-standing-alternate-hammer-curl-and-press",
+  "name": "dumbbell standing alternate hammer curl and press",
+  "name_vi": "Tạ đơn đứng alternate hammer cuốn tay and đẩy",
+  "subtitle_vi": "Bài tập upper arms với tạ đơn.",
+  "tags": [
+    "upper arms",
+    "Tạ đơn",
+    "Gym visual"
+  ],
+  "movement_pattern": "push",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay trước",
+  "secondary_muscles": [
+    "Cẳng tay",
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Tạ Đơn",
+      "en": "Dumbbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/dumbbell-standing-alternate-hammer-curl-and-press.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-standing-alternate-hammer-curl-and-press.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/dumbbell-standing-alternate-hammer-curl-and-press.gif"
+  },
+  "goal_vi": "Phát triển tay trước và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Stand up straight with a dumbbell in each hand, palms facing your body.",
+    "Keep your elbows close to your torso and your back straight.",
+    "Exhale and curl the dumbbell in your right hand towards your shoulder, keeping your upper arm stationary.",
+    "Continue to raise the dumbbell until your biceps are fully contracted and the dumbbell is at shoulder level.",
+    "Inhale and slowly lower the dumbbell back to the starting position.",
+    "Repeat the curl with your left hand.",
+    "After completing the curl with your left hand, exhale and press the dumbbell in your right hand overhead.",
+    "Extend your arm fully and hold for a moment at the top.",
+    "Inhale and slowly lower the dumbbell back to the starting position.",
+    "Repeat the press with your left hand.",
+    "Continue alternating between curls and presses for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Tạ đơn đứng alternate hammer cuốn tay and đẩy",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "3560",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "LeaZOIz",
+    "raw_gif": "videos/3560-LeaZOIz.gif",
+    "raw_image": "images/3560-LeaZOIz.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

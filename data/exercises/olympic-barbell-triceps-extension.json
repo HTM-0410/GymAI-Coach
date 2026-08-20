@@ -1,0 +1,116 @@
+{
+  "slug": "olympic-barbell-triceps-extension",
+  "name": "olympic barbell triceps extension",
+  "name_vi": "olympic Thanh đòn triceps duỗi",
+  "subtitle_vi": "Bài tập upper arms với olympic barbell.",
+  "tags": [
+    "upper arms",
+    "olympic barbell",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay sau",
+  "secondary_muscles": [
+    "Vai"
+  ],
+  "equipment": [
+    {
+      "vi": "Thanh Tạ Đòn",
+      "en": "Barbell"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/olympic-barbell-triceps-extension.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/olympic-barbell-triceps-extension.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/olympic-barbell-triceps-extension.gif"
+  },
+  "goal_vi": "Phát triển tay sau và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Start by standing with your feet shoulder-width apart and holding the barbell with an overhand grip.",
+    "Raise the barbell above your head, fully extending your arms.",
+    "Keeping your upper arms close to your head, slowly lower the barbell behind your head by bending your elbows.",
+    "Pause for a moment, then extend your arms back to the starting position.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập olympic Thanh đòn triceps duỗi",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0637",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "wu5LXwz",
+    "raw_gif": "videos/0637-wu5LXwz.gif",
+    "raw_image": "images/0637-wu5LXwz.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

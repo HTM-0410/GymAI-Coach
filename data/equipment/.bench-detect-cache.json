@@ -1,0 +1,937 @@
+{
+  "assisted-chest-dip-kneeling": {
+    "has_bench": true,
+    "bench_type": "other",
+    "reason": "The machine features a knee pad platform rather than a standard weight bench."
+  },
+  "back-pec-stretch": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "Uses an adjustable gym bench set to an incline position for support."
+  },
+  "barbell-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The person is using a preacher curl bench to rest their arms."
+  },
+  "barbell-reverse-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The person is seated at a preacher curl bench."
+  },
+  "bodyweight-incline-side-plank": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat exercise bench to elevate the upper body during a side plank."
+  },
+  "cable-one-arm-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise utilizes a preacher curl bench with an angled arm pad."
+  },
+  "cable-one-arm-reverse-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise utilizes a preacher curl bench with an angled arm pad."
+  },
+  "cable-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed seated on a preacher bench."
+  },
+  "cable-reverse-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed seated on a preacher bench."
+  },
+  "cable-rope-hammer-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed seated on a preacher bench."
+  },
+  "dumbbell-alternate-hammer-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise utilizes a specialized preacher bench with an arm pad."
+  },
+  "dumbbell-alternate-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed seated at a preacher curl bench."
+  },
+  "dumbbell-incline-t-raise": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed lying face down on an incline bench."
+  },
+  "dumbbell-incline-triceps-extension": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed sitting on an incline bench."
+  },
+  "dumbbell-incline-twisted-flyes": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed lying back on an incline bench."
+  },
+  "dumbbell-incline-two-arm-extension": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed sitting on an incline bench facing backward."
+  },
+  "dumbbell-incline-y-raise": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed lying face down on an incline bench."
+  },
+  "dumbbell-kickback": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed using a flat gym bench for support."
+  },
+  "dumbbell-lying-alternate-extension": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise uses an incline bench for support while lying down."
+  },
+  "dumbbell-lying-elbow-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat bench to lie on."
+  },
+  "dumbbell-lying-extension-across-face": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed lying flat on a standard gym bench."
+  },
+  "dumbbell-lying-femoral": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat bench for lying face down during leg curls."
+  },
+  "dumbbell-lying-hammer-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed lying on a flat bench."
+  },
+  "dumbbell-one-arm-hammer-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise uses a preacher bench with an arm pad."
+  },
+  "dumbbell-one-arm-reverse-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed using a preacher bench."
+  },
+  "dumbbell-one-arm-zottman-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise utilizes a preacher bench attachment on a flat bench."
+  },
+  "dumbbell-peacher-hammer-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed sitting at a preacher bench."
+  },
+  "dumbbell-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise uses a standard preacher bench."
+  },
+  "dumbbell-reverse-bench-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed lying on a flat gym bench."
+  },
+  "dumbbell-reverse-fly": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed face down on an incline bench."
+  },
+  "dumbbell-reverse-grip-incline-bench-one-arm-row": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed chest-supported on an incline bench."
+  },
+  "dumbbell-reverse-grip-incline-bench-two-arm-row": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed chest-supported on an incline bench."
+  },
+  "dumbbell-reverse-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed using a preacher bench."
+  },
+  "dumbbell-reverse-spider-curl": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed chest-down on an incline bench."
+  },
+  "dumbbell-reverse-wrist-curl": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed sitting on a flat bench."
+  },
+  "dumbbell-rotation-reverse-fly": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed face down on an incline bench."
+  },
+  "dumbbell-seated-alternate-front-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while sitting on a flat gym bench."
+  },
+  "dumbbell-seated-alternate-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed while sitting on an incline bench with a back support."
+  },
+  "dumbbell-seated-alternate-shoulder": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise uses an incline bench with foot/leg supports."
+  },
+  "dumbbell-seated-bench-extension": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while sitting on a flat gym bench."
+  },
+  "dumbbell-seated-bent-arm-lateral-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while sitting on a flat gym bench."
+  },
+  "dumbbell-seated-bent-over-alternate-kickback": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while seated in a bent-over position on a flat bench."
+  },
+  "dumbbell-seated-bent-over-triceps-extension": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while seated in a bent-over position on a flat bench."
+  },
+  "dumbbell-seated-bicep-curl": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed while sitting on an upright incline bench."
+  },
+  "dumbbell-seated-biceps-curl-to-shoulder-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed while sitting on an adjustable incline bench."
+  },
+  "dumbbell-seated-calf-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while sitting on a flat gym bench."
+  },
+  "dumbbell-seated-curl": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while sitting on a flat gym bench."
+  },
+  "dumbbell-seated-front-raise": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed while sitting on an incline bench."
+  },
+  "dumbbell-seated-hammer-curl": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed while sitting on an incline bench."
+  },
+  "dumbbell-seated-inner-biceps-curl": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed while sitting on an incline bench."
+  },
+  "dumbbell-seated-kickback": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while bent over on a flat gym bench."
+  },
+  "dumbbell-seated-lateral-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while sitting on a flat gym bench."
+  },
+  "dumbbell-seated-lateral-raise-v-2": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed while sitting on an incline bench."
+  },
+  "dumbbell-seated-neutral-wrist-curl": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while sitting on a flat gym bench."
+  },
+  "dumbbell-seated-one-arm-kickback": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is seated on a standard flat gym bench."
+  },
+  "dumbbell-seated-one-arm-rotate": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while sitting on a flat exercise bench."
+  },
+  "dumbbell-seated-one-leg-calf-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is sitting on a flat bench to perform calf raises."
+  },
+  "dumbbell-seated-one-leg-calf-raise-hammer-grip": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is seated on a flat bench holding dumbbells."
+  },
+  "dumbbell-seated-one-leg-calf-raise-palm-up": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise utilizes a flat gym bench for the seated position."
+  },
+  "dumbbell-seated-palms-up-wrist-curl": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is seated on a flat weight bench."
+  },
+  "dumbbell-seated-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise uses a specialized preacher curl bench."
+  },
+  "dumbbell-seated-revers-grip-concentration-curl": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is seated on a flat workout bench."
+  },
+  "dumbbell-seated-reverse-grip-one-arm-overhead-tricep-extension": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The person is seated on an adjustable bench set to an upright or incline position."
+  },
+  "dumbbell-seated-shoulder-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed while seated on an incline bench."
+  },
+  "dumbbell-seated-shoulder-press-parallel-grip": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The person is seated on an incline bench for shoulder pressing."
+  },
+  "dumbbell-seated-triceps-extension": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed seated on an incline bench with back support."
+  },
+  "dumbbell-side-lying-one-hand-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is lying on their side on a flat exercise bench."
+  },
+  "dumbbell-single-leg-split-squat": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat gym bench to support the rear foot."
+  },
+  "dumbbell-standing-one-arm-curl-over-incline-bench-0422": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise uses an incline bench for arm support during curls."
+  },
+  "dumbbell-standing-one-arm-curl-over-incline-bench-1680": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise uses a preacher bench attachment for arm curls."
+  },
+  "dumbbell-standing-one-arm-palm-in-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "An incline bench is used as a support standing beside the exerciser."
+  },
+  "dumbbell-standing-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "A preacher bench pad is used to support the arms."
+  },
+  "dumbbell-standing-zottman-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "A preacher bench pad is used for arm support."
+  },
+  "dumbbell-step-up-lunge": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "Flat gym benches are used for the Bulgarian split squat/lunge stance."
+  },
+  "dumbbell-step-up-single-leg-balance-with-bicep-curl": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "A flat gym bench is used as the step-up platform."
+  },
+  "dumbbell-step-up-split-squat": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "Flat gym benches are used to support the back foot."
+  },
+  "dumbbell-straight-arm-pullover": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "A flat gym bench is used to lie on for the pullover."
+  },
+  "dumbbell-tate-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "A flat gym bench is used to lie on during the press."
+  },
+  "ez-bar-close-grip-bench-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed lying down on a flat gym bench."
+  },
+  "ez-bar-lying-bent-arms-pullover": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed lying on a standard flat gym bench."
+  },
+  "ez-bar-lying-close-grip-triceps-extension-behind-head": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat gym bench to support the body."
+  },
+  "ez-bar-seated-close-grip-concentration-curl": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is seated on a flat exercise bench."
+  },
+  "ez-barbell-anti-gravity-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise uses an incline bench to support the chest."
+  },
+  "ez-barbell-close-grip-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed using a preacher curl bench."
+  },
+  "ez-barbell-decline-close-grip-face-press": {
+    "has_bench": true,
+    "bench_type": "decline",
+    "reason": "The exercise is performed lying on a decline bench."
+  },
+  "ez-barbell-decline-triceps-extension": {
+    "has_bench": true,
+    "bench_type": "decline",
+    "reason": "The exercise is performed lying on a decline bench."
+  },
+  "ez-barbell-incline-triceps-extension": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed seated on an incline bench."
+  },
+  "ez-barbell-jm-bench-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed lying on a flat bench."
+  },
+  "ez-barbell-reverse-grip-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed using a preacher curl bench."
+  },
+  "ez-barbell-seated-curls": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed seated on a flat bench."
+  },
+  "ez-barbell-seated-triceps-extension": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed seated on a flat bench."
+  },
+  "ez-barbell-spider-curl-0454": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise uses an incline bench for chest support in a prone position."
+  },
+  "ez-barbell-spider-curl-1628": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise uses a preacher curl bench attachment."
+  },
+  "finger-curls": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed sitting on a flat bench with forearms resting on the thighs."
+  },
+  "flutter-kicks": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is lying face down on a flat exercise bench."
+  },
+  "glute-ham-raise": {
+    "has_bench": true,
+    "bench_type": "hyperextension",
+    "reason": "The exercise uses a glute-ham raise / hyperextension bench."
+  },
+  "hyght-dumbbell-fly": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed seated on an incline bench."
+  },
+  "incline-push-up-depth-jump": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The feet are elevated on a flat gym bench."
+  },
+  "incline-scapula-push-up": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed with hands elevated on a flat gym bench."
+  },
+  "inverse-leg-curl-on-pull-up-cable-machine": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses an attached padded bench/pad of a cable machine."
+  },
+  "kettlebell-seated-two-arm-military-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed sitting on a flat gym bench."
+  },
+  "lever-alternate-leg-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The machine features an integrated backrest seat."
+  },
+  "lever-alternating-narrow-grip-seated-row": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed sitting on an attached seat bench."
+  },
+  "lever-assisted-chin-up": {
+    "has_bench": true,
+    "bench_type": "other",
+    "reason": "The machine includes a kneeling knee pad platform."
+  },
+  "lever-bicep-curl": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed sitting on the machine seat."
+  },
+  "lever-calf-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user is seated on an integrated machine seat."
+  },
+  "lever-chest-press-0576": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses the integrated seat of the chest press machine."
+  },
+  "lever-chest-press-0577": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user is seated on the attached seat of the machine."
+  },
+  "lever-decline-chest-press": {
+    "has_bench": true,
+    "bench_type": "decline",
+    "reason": "The machine features a decline seat setup."
+  },
+  "lever-front-pulldown": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user is seated on the built-in seat of the pulldown machine."
+  },
+  "lever-gripper-hands": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user is seated on a small flat exercise seat."
+  },
+  "lever-hammer-grip-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The machine features an integrated preacher pad and seat."
+  },
+  "lever-high-row": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user is seated on the machine's integrated seat."
+  },
+  "lever-incline-chest-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed on an incline press machine with an integrated incline seat."
+  },
+  "lever-incline-chest-press-v-2": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise utilizes an incline lever chest press machine featuring an incline seat/bench."
+  },
+  "lever-lateral-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The machine features a flat seated pad used for performing lateral raises."
+  },
+  "lever-leg-extension": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The leg extension machine has an inclined seat backrest."
+  },
+  "lever-military-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The machine includes a seated bench for the military press."
+  },
+  "lever-narrow-grip-seated-row": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The seated row machine incorporates a flat seat for the user."
+  },
+  "lever-one-arm-lateral-high-row": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The machine features an integrated flat seat for performing rows."
+  },
+  "lever-one-arm-lateral-wide-pulldown": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The pulldown machine includes an integrated flat seat."
+  },
+  "lever-overhand-triceps-dip": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a specialized dip machine equipped with a flat seat and thigh pads."
+  },
+  "lever-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed on a lever preacher curl machine incorporating a preacher bench pad."
+  },
+  "lever-preacher-curl-v-2": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise utilizes a preacher curl machine with an integrated preacher bench pad."
+  },
+  "lever-pullover": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The pullover machine features an inclined backrest seat."
+  },
+  "lever-reverse-grip-lateral-pulldown": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a machine with an integrated flat seat."
+  },
+  "lever-reverse-grip-preacher-curl": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise is performed on a preacher curl bench with an arm pad."
+  },
+  "lever-reverse-grip-vertical-row": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user is seated on an integrated flat bench of the machine."
+  },
+  "lever-reverse-hyperextension": {
+    "has_bench": true,
+    "bench_type": "hyperextension",
+    "reason": "The exercise utilizes a hyperextension bench supporting the torso."
+  },
+  "lever-reverse-t-bar-row": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed using an inclined chest-supported pad."
+  },
+  "lever-rotary-calf": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The machine features an integrated flat seat for the user."
+  },
+  "lever-seated-calf-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The user sits on an angled seating platform for a leg press."
+  },
+  "lever-seated-calf-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while seated on a flat padded bench."
+  },
+  "lever-seated-crunch": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The machine includes an integrated flat seat and back support."
+  },
+  "lever-seated-crunch-chest-pad": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user is seated on a flat bench pad with back support."
+  },
+  "lever-seated-crunch-v-2": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed on an inclined seated bench structure."
+  },
+  "lever-seated-dip": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The machine features a flat seat for performing dips."
+  },
+  "lever-seated-fly": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise utilizes a flat seat with a backrest."
+  },
+  "lever-seated-good-morning": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user sits on a flat seated pad while performing the exercise."
+  },
+  "lever-seated-hip-abduction": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The machine includes a flat seated bench and backrest."
+  },
+  "lever-seated-hip-adduction": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while seated on a flat machine bench."
+  },
+  "lever-seated-leg-curl": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user is seated on a flat pad with an angled back support."
+  },
+  "lever-seated-leg-raise-crunch": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a machine with an integrated flat seat."
+  },
+  "lever-seated-reverse-fly": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user is seated on a flat bench facing the machine."
+  },
+  "lever-seated-reverse-fly-parallel-grip": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while seated on a flat machine bench."
+  },
+  "lever-seated-row": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while seated on an integrated machine bench."
+  },
+  "lever-seated-squat-calf-raise-on-leg-press-machine": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise uses an angled seat and back pad resembling an incline bench."
+  },
+  "lever-shoulder-press-v-2": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise is performed while seated against an inclined machine back support."
+  },
+  "lever-shoulder-press-v-3": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise uses an integrated machine seat with an inclined backrest."
+  },
+  "lever-standing-chest-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The user leans against an upright back support pad attached to the machine."
+  },
+  "lever-triceps-extension": {
+    "has_bench": true,
+    "bench_type": "preacher",
+    "reason": "The exercise uses a preacher-style arm support pad on a seated machine."
+  },
+  "lever-unilateral-row": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed with one knee resting on an integrated flat bench pad."
+  },
+  "lying-leg-hip-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed lying down on a flat gym bench."
+  },
+  "lying-leg-raise-flat-bench": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed lying flat on a standard gym bench."
+  },
+  "negative-crunch": {
+    "has_bench": true,
+    "bench_type": "decline",
+    "reason": "The person is lying on a decline bench specifically designed for crunches."
+  },
+  "oblique-crunch-v-2": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The feet are elevated and resting on a flat bench."
+  },
+  "olympic-barbell-triceps-extension": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is seated on a flat utility bench."
+  },
+  "one-arm-dip": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed using a flat bench for support."
+  },
+  "one-leg-donkey-calf-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is leaning forward with hands resting on a flat bench."
+  },
+  "potty-squat-with-support": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The person holds onto an incline utility bench for balance and support."
+  },
+  "resistance-band-seated-hip-abduction": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed sitting on a flat gym bench."
+  },
+  "resistance-band-seated-shoulder-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while seated on a flat bench."
+  },
+  "resistance-band-seated-straight-back-row": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The user is seated on an adjustable bench set to an incline position."
+  },
+  "reverse-grip-machine-lat-pulldown": {
+    "has_bench": true,
+    "bench_type": "other",
+    "reason": "The user is seated on the integrated seat of a lat pulldown machine."
+  },
+  "scapula-dips": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat gym bench for support during dips."
+  },
+  "seated-leg-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed while sitting on a flat gym bench."
+  },
+  "seated-lower-back-stretch": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat gym bench to sit on."
+  },
+  "seated-piriformis-stretch": {
+    "has_bench": true,
+    "bench_type": "other",
+    "reason": "The stretch is performed sitting on a specialized chair or small stool."
+  },
+  "self-assisted-inverse-leg-curl-1766": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise utilizes an incline bench positioned nearby for assistance."
+  },
+  "side-plank-hip-adduction": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The top foot is elevated on a flat gym bench."
+  },
+  "sissy-squat": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "An adjustable flat/incline gym bench is used for support."
+  },
+  "smith-behind-neck-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The person is seated on an upright bench inside a Smith machine."
+  },
+  "smith-bench-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is lying on a flat bench performing a press in a Smith machine."
+  },
+  "smith-close-grip-bench-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat bench underneath a Smith machine barbell."
+  },
+  "smith-decline-bench-press": {
+    "has_bench": true,
+    "bench_type": "decline",
+    "reason": "The person is lying on a decline bench positioned in a Smith machine."
+  },
+  "smith-decline-reverse-grip-press": {
+    "has_bench": true,
+    "bench_type": "decline",
+    "reason": "The exercise uses a decline bench inside a Smith machine."
+  },
+  "smith-incline-bench-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise uses an incline bench positioned inside a Smith machine."
+  },
+  "smith-incline-reverse-grip-press": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The person is lying on an incline bench inside a Smith machine."
+  },
+  "smith-incline-shoulder-raises": {
+    "has_bench": true,
+    "bench_type": "incline",
+    "reason": "The exercise uses an incline bench set up in a Smith machine."
+  },
+  "smith-toe-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The person is sitting on a flat exercise bench inside the Smith machine."
+  },
+  "smith-wide-grip-bench-press": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed lying on a flat bench inside a Smith machine."
+  },
+  "smith-wide-grip-decline-bench-press": {
+    "has_bench": true,
+    "bench_type": "decline",
+    "reason": "The exercise is performed lying on a decline bench inside a Smith machine."
+  },
+  "standing-calves-calf-stretch": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat gym bench to elevate the foot for a stretch."
+  },
+  "twin-handle-parallel-grip-lat-pulldown": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise is performed sitting on a flat bench attached to a cable machine."
+  },
+  "weighted-bench-dip": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses flat gym benches to support the body and feet."
+  },
+  "weighted-donkey-calf-raise": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses a flat gym bench for upper body support."
+  },
+  "weighted-drop-push-up": {
+    "has_bench": true,
+    "bench_type": "flat",
+    "reason": "The exercise uses two flat gym benches for elevated push-ups."
+  }
+}

@@ -1,0 +1,758 @@
+{
+  "assisted-chest-dip-kneeling": {
+    "slug": "assisted-chest-dip-kneeling",
+    "subtype": "assisted-dip-machine",
+    "confidence": 1,
+    "reasoning": "Bài tập dip ngực có trợ giúp thuộc máy assisted-dip-machine.",
+    "source": "llm"
+  },
+  "assisted-parallel-close-grip-pull-up": {
+    "slug": "assisted-parallel-close-grip-pull-up",
+    "subtype": "assisted-pull-up-machine",
+    "confidence": 1,
+    "reasoning": "Bài kéo xà hẹp tay có trợ giúp thuộc máy assisted-pull-up-machine.",
+    "source": "llm"
+  },
+  "assisted-pull-up": {
+    "slug": "assisted-pull-up",
+    "subtype": "assisted-pull-up-machine",
+    "confidence": 1,
+    "reasoning": "Bài kéo xà có trợ giúp sử dụng assisted-pull-up-machine.",
+    "source": "llm"
+  },
+  "assisted-standing-chin-up": {
+    "slug": "assisted-standing-chin-up",
+    "subtype": "assisted-chin-up-machine",
+    "confidence": 1,
+    "reasoning": "Bài chin-up đứng có trợ giúp thuộc assisted-chin-up-machine.",
+    "source": "llm"
+  },
+  "assisted-standing-pull-up": {
+    "slug": "assisted-standing-pull-up",
+    "subtype": "assisted-pull-up-machine",
+    "confidence": 1,
+    "reasoning": "Bài kéo xà đứng có trợ giúp thuộc assisted-pull-up-machine.",
+    "source": "llm"
+  },
+  "assisted-triceps-dip-kneeling": {
+    "slug": "assisted-triceps-dip-kneeling",
+    "subtype": "assisted-dip-machine",
+    "confidence": 1,
+    "reasoning": "Bài tập dip tay sau có trợ giúp thuộc máy assisted-dip-machine.",
+    "source": "llm"
+  },
+  "assisted-wide-grip-chest-dip-kneeling": {
+    "slug": "assisted-wide-grip-chest-dip-kneeling",
+    "subtype": "assisted-dip-machine",
+    "confidence": 1,
+    "reasoning": "Bài dip ngực rộng tay có trợ giúp thuộc assisted-dip-machine.",
+    "source": "llm"
+  },
+  "lever-alternating-narrow-grip-seated-row": {
+    "slug": "lever-alternating-narrow-grip-seated-row",
+    "subtype": "lever-seated-row",
+    "confidence": 0.95,
+    "reasoning": "Bài tập chèo ngồi hẹp tay khớp hoàn toàn với lever-seated-row.",
+    "source": "llm"
+  },
+  "lever-bent-over-row-with-v-bar": {
+    "slug": "lever-bent-over-row-with-v-bar",
+    "subtype": "lever-bent-over-row",
+    "confidence": 0.95,
+    "reasoning": "Biến thể chèo gập người có thanh V thuộc nhóm lever-bent-over-row.",
+    "source": "llm"
+  },
+  "lever-bent-over-row": {
+    "slug": "lever-bent-over-row",
+    "subtype": "lever-bent-over-row",
+    "confidence": 1,
+    "reasoning": "Khớp chính xác với tên gọi trong từ vựng kiểm soát.",
+    "source": "llm"
+  },
+  "lever-bicep-curl": {
+    "slug": "lever-bicep-curl",
+    "subtype": "lever-bicep-curl",
+    "confidence": 1,
+    "reasoning": "Khớp chính xác với bài tập cuốn tay trước trên máy.",
+    "source": "llm"
+  },
+  "lever-chest-press-0576": {
+    "slug": "lever-chest-press-0576",
+    "subtype": "lever-chest-press",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy ngực trên máy khớp với lever-chest-press.",
+    "source": "llm"
+  },
+  "lever-chest-press-0577": {
+    "slug": "lever-chest-press-0577",
+    "subtype": "lever-chest-press",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy ngực trên máy khớp với lever-chest-press.",
+    "source": "llm"
+  },
+  "lever-deadlift": {
+    "slug": "lever-deadlift",
+    "subtype": "lever-hip-extension",
+    "confidence": 1,
+    "reasoning": "Bài lever deadlift tập trung vào duỗi hông bằng đòn bẩy.",
+    "source": "llm"
+  },
+  "lever-decline-chest-press": {
+    "slug": "lever-decline-chest-press",
+    "subtype": "lever-decline-chest-press",
+    "confidence": 1,
+    "reasoning": "Khớp hoàn toàn với máy đẩy ngực dốc xuống.",
+    "source": "llm"
+  },
+  "lever-gripless-shrug-v-2": {
+    "slug": "lever-gripless-shrug-v-2",
+    "subtype": "lever-shrug",
+    "confidence": 0.9,
+    "reasoning": "Bài tập nhún vai không cần cầm nắm khớp với lever-shrug.",
+    "source": "llm"
+  },
+  "lever-gripless-shrug": {
+    "slug": "lever-gripless-shrug",
+    "subtype": "lever-shrug",
+    "confidence": 0.9,
+    "reasoning": "Bài tập nhún vai trên máy thuộc nhóm lever-shrug.",
+    "source": "llm"
+  },
+  "lever-gripper-hands": {
+    "slug": "lever-gripper-hands",
+    "subtype": "grip-strengthener",
+    "confidence": 0.95,
+    "reasoning": "Grip strengthener/hand gripper riêng biệt, không phải lever-bicep-curl.",
+    "source": "manual"
+  },
+  "lever-hammer-grip-preacher-curl": {
+    "slug": "lever-hammer-grip-preacher-curl",
+    "subtype": "lever-preacher-curl",
+    "confidence": 0.95,
+    "reasoning": "Cuốn tay tạ đòn bẩy tư thế ghế preacher khớp với lever-preacher-curl.",
+    "source": "llm"
+  },
+  "lever-high-row": {
+    "slug": "lever-high-row",
+    "subtype": "lever-high-row",
+    "confidence": 1,
+    "reasoning": "Khớp hoàn toàn với bài tập chèo cao trên máy.",
+    "source": "llm"
+  },
+  "lever-hip-extension-v-2": {
+    "slug": "lever-hip-extension-v-2",
+    "subtype": "lever-hip-extension",
+    "confidence": 1,
+    "reasoning": "Bài tập duỗi hông trên máy đòn bẩy.",
+    "source": "llm"
+  },
+  "lever-incline-chest-press-v-2": {
+    "slug": "lever-incline-chest-press-v-2",
+    "subtype": "lever-incline-chest-press",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy ngực dốc lên trên máy đòn bẩy.",
+    "source": "llm"
+  },
+  "lever-incline-chest-press": {
+    "slug": "lever-incline-chest-press",
+    "subtype": "lever-incline-chest-press",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy ngực dốc lên trên máy đòn bẩy.",
+    "source": "llm"
+  },
+  "lever-kneeling-twist": {
+    "slug": "lever-kneeling-twist",
+    "subtype": "lever-seated-crunch",
+    "confidence": 1,
+    "reasoning": "Bài xoay người quỳ gối trên máy đòn bẩy phân loại tương đương gập bụng.",
+    "source": "llm"
+  },
+  "lever-lateral-raise": {
+    "slug": "lever-lateral-raise",
+    "subtype": "lever-lateral-raise",
+    "confidence": 1,
+    "reasoning": "Bài tập nâng vai sang bên trên máy.",
+    "source": "llm"
+  },
+  "lever-military-press": {
+    "slug": "lever-military-press",
+    "subtype": "lever-shoulder-press",
+    "confidence": 0.9,
+    "reasoning": "Bài tập đẩy vai trên máy.",
+    "source": "llm"
+  },
+  "lever-narrow-grip-seated-row": {
+    "slug": "lever-narrow-grip-seated-row",
+    "subtype": "lever-seated-row",
+    "confidence": 0.9,
+    "reasoning": "Bài tập chèo kéo ngồi hẹp tay trên máy.",
+    "source": "llm"
+  },
+  "lever-one-arm-bent-over-row": {
+    "slug": "lever-one-arm-bent-over-row",
+    "subtype": "lever-bent-over-row",
+    "confidence": 0.9,
+    "reasoning": "Bài tập chèo cúi người một tay trên máy.",
+    "source": "llm"
+  },
+  "lever-one-arm-lateral-high-row": {
+    "slug": "lever-one-arm-lateral-high-row",
+    "subtype": "lever-high-row",
+    "confidence": 0.9,
+    "reasoning": "Bài tập chèo cao trên máy.",
+    "source": "llm"
+  },
+  "lever-one-arm-lateral-wide-pulldown": {
+    "slug": "lever-one-arm-lateral-wide-pulldown",
+    "subtype": "lever-pulldown",
+    "confidence": 0.9,
+    "reasoning": "Bài tập kéo xô trên máy.",
+    "source": "llm"
+  },
+  "lever-one-arm-shoulder-press": {
+    "slug": "lever-one-arm-shoulder-press",
+    "subtype": "lever-shoulder-press",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy vai một tay trên máy.",
+    "source": "llm"
+  },
+  "lever-overhand-triceps-dip": {
+    "slug": "lever-overhand-triceps-dip",
+    "subtype": "lever-seated-dip",
+    "confidence": 0.9,
+    "reasoning": "Bài tập nhún tay sau trên máy.",
+    "source": "llm"
+  },
+  "lever-preacher-curl-v-2": {
+    "slug": "lever-preacher-curl-v-2",
+    "subtype": "lever-preacher-curl",
+    "confidence": 1,
+    "reasoning": "Bài tập cuốn tay trước trên máy preacher.",
+    "source": "llm"
+  },
+  "lever-preacher-curl": {
+    "slug": "lever-preacher-curl",
+    "subtype": "lever-preacher-curl",
+    "confidence": 1,
+    "reasoning": "Bài tập cuốn tay trước trên máy preacher.",
+    "source": "llm"
+  },
+  "lever-pullover": {
+    "slug": "lever-pullover",
+    "subtype": "lever-pullover",
+    "confidence": 1,
+    "reasoning": "Bài tập pullover cơ xô trên máy.",
+    "source": "llm"
+  },
+  "lever-reverse-grip-lateral-pulldown": {
+    "slug": "lever-reverse-grip-lateral-pulldown",
+    "subtype": "lever-pulldown",
+    "confidence": 0.9,
+    "reasoning": "Bài tập kéo xô tay ngược trên máy.",
+    "source": "llm"
+  },
+  "lever-reverse-grip-preacher-curl": {
+    "slug": "lever-reverse-grip-preacher-curl",
+    "subtype": "lever-preacher-curl",
+    "confidence": 0.9,
+    "reasoning": "Bài tập cuốn tay trước tay ngược trên máy preacher.",
+    "source": "llm"
+  },
+  "lever-reverse-grip-vertical-row": {
+    "slug": "lever-reverse-grip-vertical-row",
+    "subtype": "lever-seated-row",
+    "confidence": 1,
+    "reasoning": "Bài kéo dọc với tay cầm ngược tương đương chèo ghế ngồi.",
+    "source": "llm"
+  },
+  "lever-reverse-t-bar-row": {
+    "slug": "lever-reverse-t-bar-row",
+    "subtype": "lever-t-bar-row",
+    "confidence": 1,
+    "reasoning": "Bài tập chèo t-bar trên máy.",
+    "source": "llm"
+  },
+  "lever-seated-crunch-chest-pad": {
+    "slug": "lever-seated-crunch-chest-pad",
+    "subtype": "lever-seated-crunch",
+    "confidence": 1,
+    "reasoning": "Bài tập gập bụng ngồi có đệm ngực trên máy.",
+    "source": "llm"
+  },
+  "lever-seated-crunch-v-2": {
+    "slug": "lever-seated-crunch-v-2",
+    "subtype": "lever-seated-crunch",
+    "confidence": 1,
+    "reasoning": "Bài tập gập bụng trên máy lever ngồi.",
+    "source": "llm"
+  },
+  "lever-seated-crunch": {
+    "slug": "lever-seated-crunch",
+    "subtype": "lever-seated-crunch",
+    "confidence": 1,
+    "reasoning": "Bài tập gập bụng trên máy lever ngồi.",
+    "source": "llm"
+  },
+  "lever-seated-dip": {
+    "slug": "lever-seated-dip",
+    "subtype": "lever-seated-dip",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy tay sau trên máy lever ngồi.",
+    "source": "llm"
+  },
+  "lever-seated-good-morning": {
+    "slug": "lever-seated-good-morning",
+    "subtype": "lever-seated-good-morning",
+    "confidence": 1,
+    "reasoning": "Bài tập good morning trên máy lever ngồi.",
+    "source": "llm"
+  },
+  "lever-seated-hip-abduction": {
+    "slug": "lever-seated-hip-abduction",
+    "subtype": "lever-hip-abduction",
+    "confidence": 1,
+    "reasoning": "Bài tập dang chân trên máy lever.",
+    "source": "llm"
+  },
+  "lever-seated-hip-adduction": {
+    "slug": "lever-seated-hip-adduction",
+    "subtype": "lever-hip-adduction",
+    "confidence": 1,
+    "reasoning": "Bài tập khép chân trên máy lever.",
+    "source": "llm"
+  },
+  "lever-seated-leg-raise-crunch": {
+    "slug": "lever-seated-leg-raise-crunch",
+    "subtype": "lever-seated-crunch",
+    "confidence": 0.9,
+    "reasoning": "Bài tập cơ bụng kết hợp nâng chân trên máy lever.",
+    "source": "llm"
+  },
+  "lever-seated-reverse-fly-parallel-grip": {
+    "slug": "lever-seated-reverse-fly-parallel-grip",
+    "subtype": "lever-reverse-fly",
+    "confidence": 1,
+    "reasoning": "Bài tập ép ngực ngược trên máy lever cho vai sau.",
+    "source": "llm"
+  },
+  "lever-seated-reverse-fly": {
+    "slug": "lever-seated-reverse-fly",
+    "subtype": "lever-reverse-fly",
+    "confidence": 1,
+    "reasoning": "Bài tập ép ngực ngược trên máy lever cho vai sau.",
+    "source": "llm"
+  },
+  "lever-seated-row": {
+    "slug": "lever-seated-row",
+    "subtype": "lever-seated-row",
+    "confidence": 1,
+    "reasoning": "Bài tập kéo lưng trên máy lever dạng ngồi.",
+    "source": "llm"
+  },
+  "lever-shoulder-press-v-2": {
+    "slug": "lever-shoulder-press-v-2",
+    "subtype": "lever-shoulder-press",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy vai trên máy lever.",
+    "source": "llm"
+  },
+  "lever-shoulder-press-v-3": {
+    "slug": "lever-shoulder-press-v-3",
+    "subtype": "lever-shoulder-press",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy vai trên máy lever.",
+    "source": "llm"
+  },
+  "lever-shoulder-press": {
+    "slug": "lever-shoulder-press",
+    "subtype": "lever-shoulder-press",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy vai trên máy lever.",
+    "source": "llm"
+  },
+  "lever-shrug": {
+    "slug": "lever-shrug",
+    "subtype": "lever-shrug",
+    "confidence": 1,
+    "reasoning": "Bài tập nhún vai trên máy lever.",
+    "source": "llm"
+  },
+  "lever-standing-chest-press": {
+    "slug": "lever-standing-chest-press",
+    "subtype": "lever-chest-press",
+    "confidence": 0.95,
+    "reasoning": "Bài tập đẩy ngực trên máy lever ở tư thế đứng.",
+    "source": "llm"
+  },
+  "lever-t-bar-reverse-grip-row": {
+    "slug": "lever-t-bar-reverse-grip-row",
+    "subtype": "lever-t-bar-row",
+    "confidence": 0.95,
+    "reasoning": "Bài tập chèo T-bar với tay cầm ngược trên máy lever.",
+    "source": "llm"
+  },
+  "lever-t-bar-row": {
+    "slug": "lever-t-bar-row",
+    "subtype": "lever-t-bar-row",
+    "confidence": 1,
+    "reasoning": "Bài tập chèo T-bar trên máy lever.",
+    "source": "llm"
+  },
+  "lever-triceps-extension": {
+    "slug": "lever-triceps-extension",
+    "subtype": "lever-triceps-extension",
+    "confidence": 1,
+    "reasoning": "Bài tập duỗi tay sau trên máy lever.",
+    "source": "llm"
+  },
+  "lever-unilateral-row": {
+    "slug": "lever-unilateral-row",
+    "subtype": "lever-seated-row",
+    "confidence": 0.9,
+    "reasoning": "Bài tập chèo một tay trên máy lever.",
+    "source": "llm"
+  },
+  "machine-inner-chest-press": {
+    "slug": "machine-inner-chest-press",
+    "subtype": "lever-chest-press",
+    "confidence": 0.9,
+    "reasoning": "Bài tập đẩy ngực tập trung vào phần trong trên máy.",
+    "source": "llm"
+  },
+  "smith-back-shrug": {
+    "slug": "smith-back-shrug",
+    "subtype": "smith-shrug",
+    "confidence": 1,
+    "reasoning": "Bài tập nhún vai với máy Smith machine, khớp với smith-shrug.",
+    "source": "llm"
+  },
+  "smith-behind-neck-press": {
+    "slug": "smith-behind-neck-press",
+    "subtype": "smith-shoulder-press",
+    "confidence": 0.95,
+    "reasoning": "Bài tập đẩy vai sau cổ trên máy Smith, thuộc nhóm smith-shoulder-press.",
+    "source": "llm"
+  },
+  "smith-bench-press": {
+    "slug": "smith-bench-press",
+    "subtype": "smith-bench-press",
+    "confidence": 1,
+    "reasoning": "Bài tập đẩy ngực nằm ngang trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-bent-knee-good-morning": {
+    "slug": "smith-bent-knee-good-morning",
+    "subtype": "smith-squat",
+    "confidence": 0.9,
+    "reasoning": "Bài good morning trên máy Smith sử dụng khung gánh tương tự smith-squat.",
+    "source": "llm"
+  },
+  "smith-bent-over-row": {
+    "slug": "smith-bent-over-row",
+    "subtype": "smith-row",
+    "confidence": 1,
+    "reasoning": "Bài tập chèo lưng trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-chair-squat": {
+    "slug": "smith-chair-squat",
+    "subtype": "smith-squat",
+    "confidence": 0.9,
+    "reasoning": "Biến thể squat trên máy Smith machine.",
+    "source": "llm"
+  },
+  "smith-close-grip-bench-press": {
+    "slug": "smith-close-grip-bench-press",
+    "subtype": "smith-triceps-extension",
+    "confidence": 0.9,
+    "reasoning": "Bài đẩy ngực tay hẹp tập trung vào tay sau trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-deadlift": {
+    "slug": "smith-deadlift",
+    "subtype": "smith-squat",
+    "confidence": 1,
+    "reasoning": "Bài deadlift trên máy Smith được phân loại vào nhóm smith-squat.",
+    "source": "llm"
+  },
+  "smith-decline-bench-press": {
+    "slug": "smith-decline-bench-press",
+    "subtype": "smith-bench-press",
+    "confidence": 0.95,
+    "reasoning": "Bài đẩy ngực dốc xuống trên máy Smith, gần nhất với smith-bench-press.",
+    "source": "llm"
+  },
+  "smith-decline-reverse-grip-press": {
+    "slug": "smith-decline-reverse-grip-press",
+    "subtype": "smith-bench-press",
+    "confidence": 0.9,
+    "reasoning": "Biến thể đẩy ngực trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-front-squat-clean-grip": {
+    "slug": "smith-front-squat-clean-grip",
+    "subtype": "smith-squat",
+    "confidence": 1,
+    "reasoning": "Bài front squat thực hiện trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-full-squat": {
+    "slug": "smith-full-squat",
+    "subtype": "smith-squat",
+    "confidence": 1,
+    "reasoning": "Bài squat toàn diện trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-hack-squat": {
+    "slug": "smith-hack-squat",
+    "subtype": "smith-squat",
+    "confidence": 0.95,
+    "reasoning": "Biến thể hack squat trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-hip-raise": {
+    "slug": "smith-hip-raise",
+    "subtype": "smith-squat",
+    "confidence": 1,
+    "reasoning": "Bài nâng hông trên máy Smith xếp vào nhóm smith-squat.",
+    "source": "llm"
+  },
+  "smith-incline-bench-press": {
+    "slug": "smith-incline-bench-press",
+    "subtype": "smith-incline-press",
+    "confidence": 1,
+    "reasoning": "Bài đẩy ngực dốc lên trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-incline-reverse-grip-press": {
+    "slug": "smith-incline-reverse-grip-press",
+    "subtype": "smith-incline-press",
+    "confidence": 0.95,
+    "reasoning": "Bài đẩy ngực dốc lên cầm tay ngược trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-incline-shoulder-raises": {
+    "slug": "smith-incline-shoulder-raises",
+    "subtype": "smith-shoulder-press",
+    "confidence": 0.9,
+    "reasoning": "Bài nâng vai trên máy Smith dốc xếp vào nhóm đẩy vai.",
+    "source": "llm"
+  },
+  "smith-leg-press": {
+    "slug": "smith-leg-press",
+    "subtype": "smith-squat",
+    "confidence": 1,
+    "reasoning": "Bài đẩy chân trên máy Smith phân loại vào nhóm smith-squat.",
+    "source": "llm"
+  },
+  "smith-low-bar-squat": {
+    "slug": "smith-low-bar-squat",
+    "subtype": "smith-squat",
+    "confidence": 1,
+    "reasoning": "Bài squat đòn thấp trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-machine-bicep-curl": {
+    "slug": "smith-machine-bicep-curl",
+    "subtype": "smith-curl",
+    "confidence": 1,
+    "reasoning": "Bài cuốn tay trước với máy Smith.",
+    "source": "llm"
+  },
+  "smith-machine-decline-close-grip-bench-press": {
+    "slug": "smith-machine-decline-close-grip-bench-press",
+    "subtype": "smith-bench-press",
+    "confidence": 0.9,
+    "reasoning": "Bài tập đẩy ngực trên máy smith dạng decline.",
+    "source": "llm"
+  },
+  "smith-machine-incline-tricep-extension": {
+    "slug": "smith-machine-incline-tricep-extension",
+    "subtype": "smith-triceps-extension",
+    "confidence": 0.9,
+    "reasoning": "Bài tập duỗi tay sau trên máy smith.",
+    "source": "llm"
+  },
+  "smith-machine-reverse-decline-close-grip-bench-press": {
+    "slug": "smith-machine-reverse-decline-close-grip-bench-press",
+    "subtype": "smith-bench-press",
+    "confidence": 0.9,
+    "reasoning": "Bài tập đẩy ngực trên máy smith với góc dốc xuống.",
+    "source": "llm"
+  },
+  "smith-narrow-row": {
+    "slug": "smith-narrow-row",
+    "subtype": "smith-row",
+    "confidence": 0.95,
+    "reasoning": "Bài tập chèo lưng trên máy smith.",
+    "source": "llm"
+  },
+  "smith-one-arm-row": {
+    "slug": "smith-one-arm-row",
+    "subtype": "smith-row",
+    "confidence": 0.95,
+    "reasoning": "Bài tập chèo lưng một tay trên máy smith.",
+    "source": "llm"
+  },
+  "smith-one-leg-floor-calf-raise": {
+    "slug": "smith-one-leg-floor-calf-raise",
+    "subtype": "smith-calf-raise",
+    "confidence": 0.95,
+    "reasoning": "Smith calf-raise một chân.",
+    "source": "manual"
+  },
+  "smith-rear-delt-row": {
+    "slug": "smith-rear-delt-row",
+    "subtype": "smith-row",
+    "confidence": 0.95,
+    "reasoning": "Bài tập chèo tác động vai sau trên máy smith.",
+    "source": "llm"
+  },
+  "smith-reverse-calf-raises-0763": {
+    "slug": "smith-reverse-calf-raises-0763",
+    "subtype": "smith-calf-raise",
+    "confidence": 0.95,
+    "reasoning": "Smith reverse calf raises.",
+    "source": "manual"
+  },
+  "smith-reverse-calf-raises-1394": {
+    "slug": "smith-reverse-calf-raises-1394",
+    "subtype": "smith-calf-raise",
+    "confidence": 0.95,
+    "reasoning": "Smith reverse calf raises (variant).",
+    "source": "manual"
+  },
+  "smith-reverse-grip-bent-over-row": {
+    "slug": "smith-reverse-grip-bent-over-row",
+    "subtype": "smith-row",
+    "confidence": 0.95,
+    "reasoning": "Bài tập chèo gập người trên máy smith.",
+    "source": "llm"
+  },
+  "smith-reverse-grip-press": {
+    "slug": "smith-reverse-grip-press",
+    "subtype": "smith-bench-press",
+    "confidence": 0.9,
+    "reasoning": "Bài tập đẩy ngực với tay cầm ngược trên máy smith.",
+    "source": "llm"
+  },
+  "smith-seated-one-leg-calf-raise": {
+    "slug": "smith-seated-one-leg-calf-raise",
+    "subtype": "smith-calf-raise",
+    "confidence": 0.95,
+    "reasoning": "Smith seated calf raise một chân.",
+    "source": "manual"
+  },
+  "smith-seated-shoulder-press": {
+    "slug": "smith-seated-shoulder-press",
+    "subtype": "smith-shoulder-press",
+    "confidence": 0.95,
+    "reasoning": "Bài tập đẩy vai ngồi trên máy smith.",
+    "source": "llm"
+  },
+  "smith-seated-wrist-curl": {
+    "slug": "smith-seated-wrist-curl",
+    "subtype": "smith-curl",
+    "confidence": 1,
+    "reasoning": "Bài cuốn cổ tay trên máy Smith xếp vào nhóm smith-curl.",
+    "source": "llm"
+  },
+  "smith-shoulder-press": {
+    "slug": "smith-shoulder-press",
+    "subtype": "smith-shoulder-press",
+    "confidence": 0.95,
+    "reasoning": "Bài tập đẩy vai trên máy smith.",
+    "source": "llm"
+  },
+  "smith-shrug": {
+    "slug": "smith-shrug",
+    "subtype": "smith-shrug",
+    "confidence": 1,
+    "reasoning": "Bài tập nhún vai chính xác trên máy smith.",
+    "source": "llm"
+  },
+  "smith-single-leg-split-squat": {
+    "slug": "smith-single-leg-split-squat",
+    "subtype": "smith-squat",
+    "confidence": 0.9,
+    "reasoning": "Bài tập squat chân trên máy smith.",
+    "source": "llm"
+  },
+  "smith-sprint-lunge": {
+    "slug": "smith-sprint-lunge",
+    "subtype": "smith-squat",
+    "confidence": 1,
+    "reasoning": "Bài chùng chân trên máy Smith thuộc nhóm smith-squat.",
+    "source": "llm"
+  },
+  "smith-squat": {
+    "slug": "smith-squat",
+    "subtype": "smith-squat",
+    "confidence": 1,
+    "reasoning": "Bài tập gánh đùi chính xác trên máy smith.",
+    "source": "llm"
+  },
+  "smith-standing-back-wrist-curl": {
+    "slug": "smith-standing-back-wrist-curl",
+    "subtype": "smith-curl",
+    "confidence": 1,
+    "reasoning": "Bài cuốn cổ tay ngược trên máy Smith xếp vào nhóm smith-curl.",
+    "source": "llm"
+  },
+  "smith-standing-behind-head-military-press": {
+    "slug": "smith-standing-behind-head-military-press",
+    "subtype": "smith-shoulder-press",
+    "confidence": 0.95,
+    "reasoning": "Bài tập đẩy vai trên máy Smith với thanh đòn.",
+    "source": "llm"
+  },
+  "smith-standing-leg-calf-raise": {
+    "slug": "smith-standing-leg-calf-raise",
+    "subtype": "smith-calf-raise",
+    "confidence": 0.95,
+    "reasoning": "Smith standing calf raise.",
+    "source": "manual"
+  },
+  "smith-standing-military-press": {
+    "slug": "smith-standing-military-press",
+    "subtype": "smith-shoulder-press",
+    "confidence": 0.95,
+    "reasoning": "Bài tập đẩy vai đứng trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-sumo-squat": {
+    "slug": "smith-sumo-squat",
+    "subtype": "smith-squat",
+    "confidence": 0.95,
+    "reasoning": "Biến thể squat tư thế rộng thực hiện trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-toe-raise": {
+    "slug": "smith-toe-raise",
+    "subtype": "smith-calf-raise",
+    "confidence": 0.95,
+    "reasoning": "Smith toe raise = calf raise exercise.",
+    "source": "manual"
+  },
+  "smith-upright-row": {
+    "slug": "smith-upright-row",
+    "subtype": "smith-row",
+    "confidence": 0.9,
+    "reasoning": "Bài tập kéo thẳng đứng cơ vai và cầu vai trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-wide-grip-bench-press": {
+    "slug": "smith-wide-grip-bench-press",
+    "subtype": "smith-bench-press",
+    "confidence": 0.95,
+    "reasoning": "Bài đẩy ngực phẳng cầm tay rộng trên máy Smith.",
+    "source": "llm"
+  },
+  "smith-wide-grip-decline-bench-press": {
+    "slug": "smith-wide-grip-decline-bench-press",
+    "subtype": "smith-bench-press",
+    "confidence": 0.9,
+    "reasoning": "Bài đẩy ngực dốc xuống trên máy Smith.",
+    "source": "llm"
+  }
+}

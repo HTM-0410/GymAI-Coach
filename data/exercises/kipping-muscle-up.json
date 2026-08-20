@@ -1,0 +1,120 @@
+{
+  "slug": "kipping-muscle-up",
+  "name": "kipping muscle up",
+  "name_vi": "kipping muscle up",
+  "subtitle_vi": "Bài tập lưng với trọng lượng cơ thể.",
+  "tags": [
+    "Lưng",
+    "Trọng lượng cơ thể",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ xô",
+  "secondary_muscles": [
+    "Tay trước",
+    "Tay sau",
+    "Vai",
+    "core"
+  ],
+  "equipment": [
+    {
+      "vi": "Xà Đơn",
+      "en": "Pull-up Bar"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/kipping-muscle-up.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/kipping-muscle-up.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/kipping-muscle-up.gif"
+  },
+  "goal_vi": "Phát triển cơ xô và rèn kỹ thuật chuyển động có kiểm soát.",
+  "instructions": [
+    "Start by hanging from a pull-up bar with an overhand grip, hands slightly wider than shoulder-width apart.",
+    "Engage your core and use a swinging motion to generate momentum.",
+    "As you swing forward, pull your chest towards the bar, using your lats and biceps to initiate the movement.",
+    "Continue the upward motion until your chest reaches the bar, then transition into a dip position by pushing down on the bar and extending your arms.",
+    "Lower yourself back down to the starting position by bending your arms and controlling the descent.",
+    "Repeat for the desired number of repetitions."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và kiểm soát.",
+    "Dừng lại nếu xuất hiện đau bất thường."
+  ],
+  "common_mistakes": [
+    "Dùng đà thay vì kiểm soát cơ thể.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập kipping muscle up",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "machine_pending",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0558",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "pM07UxU",
+    "raw_gif": "videos/0558-pM07UxU.gif",
+    "raw_image": "images/0558-pM07UxU.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "modifiers": []
+}

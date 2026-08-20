@@ -1,0 +1,119 @@
+{
+  "slug": "band-one-arm-single-leg-split-squat",
+  "name": "band one arm single leg split squat",
+  "name_vi": "Dây kháng lực one arm single leg split squat",
+  "subtitle_vi": "Bài tập cho đùi với dây kháng lực.",
+  "tags": [
+    "upper legs",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "squat",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Đùi trước",
+  "secondary_muscles": [
+    "Mông",
+    "Đùi sau"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-one-arm-single-leg-split-squat.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-one-arm-single-leg-split-squat.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-one-arm-single-leg-split-squat.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh cho đùi trước, mông và cải thiện khả năng giữ thăng bằng.",
+  "instructions": [
+    "Đứng hai chân rộng bằng hông, đặt dây kháng lực quanh hai mắt cá chân.",
+    "Bước một chân về phía trước, đặt mu bàn chân còn lại lên một bục hoặc ghế phía sau.",
+    "Một tay bám vào điểm tựa để giữ thăng bằng.",
+    "Gập chân phía trước và hạ thấp cơ thể xuống tư thế squat, giữ cho đầu gối thẳng hàng với mũi chân.",
+    "Dùng lực gót chân đẩy người trở lại vị trí ban đầu.",
+    "Lặp lại cho đến khi đạt đủ số lần, sau đó đổi chân."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Dừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà thay vì dùng sức cơ.",
+    "Thực hiện sai biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp và giữ vững tư thế trong suốt quá trình tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực one arm single leg split squat",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0987",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "arsYEd3",
+    "raw_gif": "videos/0987-arsYEd3.gif",
+    "raw_image": "images/0987-arsYEd3.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0013",
+  "modifiers": []
+}

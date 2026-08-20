@@ -1,0 +1,120 @@
+{
+  "slug": "assisted-lying-leg-raise-with-lateral-throw-down",
+  "name": "assisted lying leg raise with lateral throw down",
+  "name_vi": "Nâng chân nằm sang ngang có trợ lực",
+  "subtitle_vi": "Bài tập bụng với sự hỗ trợ.",
+  "tags": [
+    "waist",
+    "assisted",
+    "Gym visual"
+  ],
+  "movement_pattern": "pull",
+  "exercise_type": "compound",
+  "difficulty": "intermediate",
+  "primary_muscle": "Cơ bụng",
+  "secondary_muscles": [
+    "Cơ gấp hông",
+    "Cơ liên sườn"
+  ],
+  "equipment": [
+    {
+      "vi": "Thảm Tập",
+      "en": "Exercise Mat"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/assisted-lying-leg-raise-with-lateral-throw-down.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-lying-leg-raise-with-lateral-throw-down.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/assisted-lying-leg-raise-with-lateral-throw-down.gif"
+  },
+  "goal_vi": "Tăng cường sức mạnh cơ bụng và cải thiện khả năng kiểm soát chuyển động.",
+  "instructions": [
+    "Nằm ngửa, hai chân duỗi thẳng, hai tay đặt dọc thân.",
+    "Đặt hai tay dưới mông để hỗ trợ.",
+    "Siết cơ bụng, nhấc hai chân khỏi sàn, giữ thẳng.",
+    "Khi giữ hai chân khép lại, hạ xuống một bên cho đến khi cách sàn vài centimet.",
+    "Giữ tư thế trong giây lát, sau đó nâng chân trở lại vị trí ban đầu.",
+    "Lặp lại động tác sang bên còn lại.",
+    "Tiếp tục luân phiên hai bên cho đủ số lần yêu cầu."
+  ],
+  "tips": [
+    "Giữ chuyển động chậm và có kiểm soát.",
+    "Ngừng lại nếu cảm thấy đau bất thường."
+  ],
+  "common_mistakes": [
+    "Sử dụng đà thay vì dùng lực cơ.",
+    "Không giữ lưng áp sát sàn."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức độ trợ lực phù hợp và giữ cơ thể ổn định trong suốt bài tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập assisted nằm leg nâng with sang bên throw down",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0012",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "UGhRD1A",
+    "raw_gif": "videos/0012-UGhRD1A.gif",
+    "raw_image": "images/0012-UGhRD1A.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0004",
+  "modifiers": []
+}

@@ -1,0 +1,119 @@
+{
+  "slug": "band-alternating-biceps-curl",
+  "name": "band alternating biceps curl",
+  "name_vi": "Cuốn tay trước luân phiên với dây kháng lực",
+  "subtitle_vi": "Bài tập cho cơ tay trước với dây kháng lực.",
+  "tags": [
+    "upper arms",
+    "Dây kháng lực",
+    "Gym visual"
+  ],
+  "movement_pattern": "isolation",
+  "exercise_type": "isolation",
+  "difficulty": "intermediate",
+  "primary_muscle": "Tay trước",
+  "secondary_muscles": [
+    "Cẳng tay"
+  ],
+  "equipment": [
+    {
+      "vi": "Dây Kháng Lực",
+      "en": "Resistance Band"
+    }
+  ],
+  "gallery": {
+    "main": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-images/band-alternating-biceps-curl.jpg",
+    "views": [
+      {
+        "src": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-alternating-biceps-curl.gif",
+        "label": "Animation"
+      }
+    ],
+    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/band-alternating-biceps-curl.gif"
+  },
+  "goal_vi": "Phát triển sức mạnh và kích thước cơ tay trước (biceps).",
+  "instructions": [
+    "Đứng thẳng, hai chân dang rộng bằng vai, đặt giữa dây kháng lực.",
+    "Nắm hai đầu dây kháng lực bằng lòng bàn tay hướng lên (underhand grip).",
+    "Giữ khuỷu tay cố định sát hai bên sườn, từ từ cuốn một tay lên về phía vai, siết chặt cơ tay trước ở đỉnh chuyển động.",
+    "Hạ tay xuống vị trí ban đầu một cách có kiểm soát và lặp lại với tay kia.",
+    "Tiếp tục cuốn luân phiên hai tay cho đến khi đạt đủ số lần yêu cầu."
+  ],
+  "tips": [
+    "Kiểm soát cả hai pha của chuyển động: đi lên và đi xuống.",
+    "Tránh đung đưa người hoặc dùng đà để nâng dây.",
+    "Cảm nhận sự căng của dây kháng lực trong suốt bài tập."
+  ],
+  "common_mistakes": [
+    "Để khuỷu tay di chuyển về phía trước hoặc ra sau.",
+    "Cuốn dây quá nhanh, không kiểm soát.",
+    "Không hoàn thành đủ biên độ chuyển động."
+  ],
+  "setup": {
+    "sets": "3",
+    "reps": "8-12",
+    "rir": "2",
+    "rest_seconds": 90,
+    "tempo": "2-0-2-0"
+  },
+  "safety_vi": "Chọn mức kháng lực phù hợp. Đảm bảo dây kháng lực không bị sờn hoặc hư hỏng trước khi tập.",
+  "performance_metrics": {
+    "current_weight_kg": 0,
+    "rep_range": "8-12",
+    "estimated_1rm_kg": 0
+  },
+  "performance_chart": {
+    "labels": [
+      "Buổi 1",
+      "Buổi 2",
+      "Buổi 3"
+    ],
+    "values_kg": [
+      0,
+      0,
+      0
+    ],
+    "goal_kg": 0,
+    "min": 0,
+    "max": 1
+  },
+  "ai_coach": {
+    "next_session_vi": "Luyện tập Dây kháng lực alternating biceps cuốn tay",
+    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+  },
+  "alternatives": [],
+  "translation_status": "review_required",
+  "source": {
+    "provider": "hasaneyldrm/exercises-dataset",
+    "source_id": "0968",
+    "source_url": "https://github.com/hasaneyldrm/exercises-dataset",
+    "media_id": "3omWx6P",
+    "raw_gif": "videos/0968-3omWx6P.gif",
+    "raw_image": "images/0968-3omWx6P.jpg",
+    "languages": [
+      "en",
+      "it",
+      "tr",
+      "es",
+      "ru",
+      "zh",
+      "hi",
+      "pl",
+      "ko",
+      "fr"
+    ]
+  },
+  "media_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-08-19",
+    "source": "Gym visual via hasaneyldrm/exercises-dataset",
+    "language": "vi",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "license_status": "prototype-only; obtain Gym visual license for production",
+    "equipment_catalog_version": "1.0.0",
+    "last_equipment_migration": "2026-08-20"
+  },
+  "translation_batch": "batch-0009",
+  "modifiers": []
+}
