@@ -15,12 +15,42 @@
     "difficulty": {"type": "string", "enum": ["beginner", "intermediate", "advanced"]},
     "primary_muscle": {"type": "string"},
     "secondary_muscles": {"type": "array", "items": {"type": "string"}},
-    "equipment": {"type": "array", "items": {"type": "string"}},
+    "equipment": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {"type": "string", "minLength": 1},
+          {
+            "type": "object",
+            "required": ["vi", "en"],
+            "properties": {
+              "vi": {"type": "string", "minLength": 1},
+              "en": {"type": "string", "minLength": 1}
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
     "gallery": {"type": "object", "required": ["main", "views", "caption_vi"]},
     "instructions": {"type": "array", "items": {"type": "string"}},
     "translation_status": {"type": "string", "enum": ["machine_pending", "llm_pending", "review_required", "approved"]},
+    "workout_role": {
+      "type": "string",
+      "enum": ["general_warmup", "dynamic_mobility", "activation", "main_strength", "cooldown_aerobic", "static_stretch"]
+    },
+    "workout_role_review_status": {"type": "string", "enum": ["reviewed", "needs_review"]},
+    "workout_role_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "workout_role_source": {"type": "string", "minLength": 1},
     "source": {"type": "object"},
     "media_metadata": {"type": "object"}
+  },
+  "dependentRequired": {
+    "workout_role": ["workout_role_review_status", "workout_role_confidence", "workout_role_source"],
+    "workout_role_review_status": ["workout_role", "workout_role_confidence", "workout_role_source"],
+    "workout_role_confidence": ["workout_role", "workout_role_review_status", "workout_role_source"],
+    "workout_role_source": ["workout_role", "workout_role_review_status", "workout_role_confidence"]
   },
   "additionalProperties": true
 }

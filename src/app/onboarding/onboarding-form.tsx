@@ -255,7 +255,7 @@ export default function OnboardingForm({
 
           <div>
             <label className="label">
-              Số ngày tập / tuần —{' '}
+              Số ngày tập / tuần:{' '}
               <span className="text-accent font-mono font-bold">{days} ngày</span>
             </label>
             <input
@@ -275,7 +275,7 @@ export default function OnboardingForm({
 
           <div>
             <label className="label">
-              Thời lượng mỗi buổi —{' '}
+              Thời lượng mỗi buổi:{' '}
               <span className="text-accent font-mono font-bold">{duration} phút</span>
             </label>
             <input

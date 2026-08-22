@@ -53,17 +53,16 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track {
-    background: rgb(var(--chassis-lo));
-    box-shadow: inset 1px 1px 3px var(--shadow-dark);
-    border-radius: 3px;
+  /* Hide native number input spinners/arrows globally */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
-  ::-webkit-scrollbar-thumb {
-    background: var(--shadow-dark);
-    border-radius: 3px;
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
   }
-  ::-webkit-scrollbar-thumb:hover { background: #9aacbd; }
 }
 
 @layer components {
@@ -245,7 +244,6 @@
     border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 0.5rem;
     box-shadow: inset 3px 3px 6px rgba(166, 180, 200, 0.75), inset -3px -3px 6px rgba(255, 255, 255, 0.85);
-    font-family: 'JetBrains Mono', monospace;
     font-size: 0.875rem;
     transition: all 200ms;
   }
@@ -276,10 +274,9 @@
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: var(--ink-sec);
     margin-bottom: 0.5rem;
-    font-family: 'JetBrains Mono', monospace;
   }
 
   .chip {
@@ -692,33 +689,8 @@
   pointer-events: none;
 }
 
-.laser-border-box {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-}
-.laser-border-box::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(
-    transparent 0deg,
-    transparent 280deg,
-    rgba(249, 115, 22, 0.8) 320deg,
-    transparent 360deg
-  );
-  animation: laser-spin 4s linear infinite;
-  pointer-events: none;
-}
-
-.laser-border-box-inner {
-  position: relative;
-  z-index: 1;
-  background: inherit;
-  border-radius: inherit;
+.radar-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .hud-tag {
@@ -733,4 +705,42 @@
 
 .float-gentle {
   animation: float-gentle 4s ease-in-out infinite;
+}
+
+/* ── MODERN CUSTOM SCROLLBAR ── */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(249, 115, 22, 0.4) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(249, 115, 22, 0.35);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.8);
+}
+
+.dark .custom-scrollbar {
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.8);
 }

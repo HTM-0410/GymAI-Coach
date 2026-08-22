@@ -24,6 +24,7 @@ import type {
   Difficulty,
   ExerciseType,
 } from './exercises-types';
+import { matchExerciseSearch } from './exercises-search';
 
 // ─── Types ────────────────────────────────────────────────────────────────
 export type ExerciseFilter = {
@@ -264,16 +265,12 @@ export async function getAllExerciseSummaries(): Promise<ExerciseSummary[]> {
 
 export async function filterExercises(filter: ExerciseFilter): Promise<ExerciseSummary[]> {
   const all = await getAllExerciseSummaries();
-  const q = filter.q?.trim().toLowerCase();
+  const q = filter.q?.trim();
   const muscle = filter.muscle?.toLowerCase();
   const equipment = filter.equipment?.toLowerCase();
 
   return all.filter((e) => {
-    if (q) {
-      const haystack =
-        `${e.name_vi} ${e.name} ${e.primary_muscle} ${e.tags.join(' ')}`.toLowerCase();
-      if (!haystack.includes(q)) return false;
-    }
+    if (q && !matchExerciseSearch(q, e)) return false;
     if (filter.difficulty && e.difficulty !== filter.difficulty) return false;
     if (filter.movement_pattern && e.movement_pattern !== filter.movement_pattern) return false;
     if (filter.exercise_type && e.exercise_type !== filter.exercise_type) return false;

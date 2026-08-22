@@ -1,7 +1,6 @@
 // Layer 3 — Coach chat
 // Conversation context: profile + recent workouts + memory
 
-import { callGemini } from './gemini';
 import { createClient } from '@/lib/supabase/server';
 
 export type ChatMessage = { role: 'user' | 'assistant'; content: string };
@@ -11,28 +10,45 @@ export async function chatWithCoach(userId: string, messages: ChatMessage[]): Pr
   const { data: profile } = await supabase.from('profiles').select('*').eq('user_id', userId).single();
   const { data: recent } = await supabase
     .from('workouts')
-    .select('date, status, workout_exercises(workout_sets(weight, reps, rir, completed), exercises(name_vi, name))')
+    .select('date, status, workout_exercises(phase, prescription_mode, workout_sets(weight, reps, rir, completed, set_type), exercises(name_vi, name))')
     .eq('user_id', userId)
     .eq('status', 'completed')
     .order('date', { ascending: false })
     .limit(3);
 
-  const ctx = `Bạn là AI Personal Coach cho GymAI Coach. Trả lời tiếng Việt, ngắn gọn, thực tế, KHÔNG đưa lời khuyên y tế.
+  const goalViMap: Record<string, string> = {
+    muscle_gain: 'Tăng cơ (Hypertrophy)',
+    fat_loss: 'Giảm mỡ (Fat loss)',
+    strength: 'Tăng sức mạnh (Strength)',
+    general_fitness: 'Thể lực & Sức khỏe tổng quát',
+  };
+  const goalDisplay = goalViMap[profile?.goal ?? ''] || profile?.goal || 'Tập luyện thể hình';
 
-USER CONTEXT:
+  const ctx = `Bạn là Huấn Luyện Viên Cá Nhân AI (GymAI Coach).
+QUY TẮC QUAN TRỌNG:
+1. Trả lời HOÀN TOÀN bằng TIẾNG VIỆT tự nhiên, nhiệt huyết, súc tích (khoảng 60-90 từ). Tuyệt đối không dùng các cụm từ tiếng Anh như "Actionable advice:", "Key takeaways:", thay vào đó dùng "Lời khuyên hành động:" hoặc "Gợi ý cho bạn:".
+2. Khi nhắc đến mục tiêu người dùng, luôn dùng tiếng Việt (ví dụ: "${goalDisplay}" thay vì mã kỹ thuật "muscle_gain").
+3. Sử dụng icon phù hợp để thông tin sinh động, dễ đọc.
+4. KHÔNG đưa lời khuyên y tế.
+
+THÔNG TIN HỌC VIÊN:
 - Tên: ${profile?.display_name ?? 'bạn'}
-- Kinh nghiệm: ${profile?.experience_level ?? 'chưa rõ'}
-- Mục tiêu: ${profile?.goal ?? 'chưa rõ'}
-- Cân nặng: ${profile?.current_weight_kg ?? '?'}kg, cao: ${profile?.height_cm ?? '?'}cm
+- Trình độ: ${profile?.experience_level ?? 'chưa rõ'}
+- Mục tiêu: ${goalDisplay}
+- Thể trạng: ${profile?.current_weight_kg ?? '?'}kg, cao ${profile?.height_cm ?? '?'}cm
 
-BUỔI TẬP GẦN ĐÂY:
-${(recent ?? []).slice(0, 3).map((w: any) => `- ${w.date}: ${(w.workout_exercises ?? []).map((we: any) => `${we.exercises?.name_vi}(${(we.workout_sets ?? []).filter((s: any) => s.completed).map((s: any) => `${s.weight}x${s.reps}@${s.rir ?? '?'}RIR`).join(',')})`).join('; ')}`).join('\n') || 'chưa có'}
+LỊCH SỬ TẬP GẦN ĐÂY:
+${(recent ?? []).slice(0, 3).map((w: any) => `- Ngày ${w.date}: ${(w.workout_exercises ?? [])
+  .filter((we: any) => (we.phase ?? 'main') === 'main' && (we.prescription_mode ?? 'reps') === 'reps')
+  .map((we: any) => `${we.exercises?.name_vi || we.exercises?.name}(${(we.workout_sets ?? [])
+    .filter((s: any) => s.completed && (s.set_type ?? 'working') === 'working')
+    .map((s: any) => `${s.weight}kg x ${s.reps} reps`).join(', ')})`).join('; ')}`).join('\n') || 'Chưa có dữ liệu'}
 
-Trả lời ngắn gọn (≤ 80 từ), dùng icon phù hợp, đưa ra 1-2 actionable advice.`;
+Hãy trả lời câu hỏi của học viên một cách thân thiện, rõ ràng, thực tế và dễ áp dụng ngay!`;
 
   const fullMessages = [{ role: 'user', content: ctx }, ...messages];
 
-  // Gemini chấp nhận format này
+  // Gemini format
   const contents = fullMessages.map((m) => ({
     role: m.role === 'assistant' ? 'model' : 'user',
     parts: [{ text: m.content }],

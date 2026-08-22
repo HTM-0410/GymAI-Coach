@@ -5,6 +5,7 @@ node_modules/
 
 # Build outputs
 .next/
+.next-stale-*/
 out/
 dist/
 build/
@@ -77,6 +78,7 @@ data/.archive/
 .pnpm-store/
 
 # Local inspection and generated working files
+.tmp/
 .tmp_seed.sql
 tmp.txt
 data/exercises/.llm-normalize-cache.json

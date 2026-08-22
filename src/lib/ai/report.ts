@@ -1,6 +1,7 @@
 // Weekly AI report — tổng hợp 7 ngày qua
 import { createClient } from '@/lib/supabase/server';
 import { callGemini } from './gemini';
+import { isMainRepsExercise } from '@/lib/training/workout-phases';
 
 export type WeeklyReport = {
   period: { from: string; to: string };
@@ -24,7 +25,7 @@ export async function generateWeeklyReport(userId: string): Promise<WeeklyReport
 
   const [workoutsRes, setsRes, weightRes, prsRes, feedbackRes] = await Promise.all([
     supabase.from('workouts').select('id, status, started_at, completed_at, planned_duration, workout_exercises(workout_exercises.muscles_via_targets)').eq('user_id', userId).gte('date', from).eq('status', 'completed'),
-    supabase.from('workout_sets').select('weight, reps, set_type, completed, workout_exercises!inner(workouts!inner(user_id, date))').eq('completed', true).eq('workout_exercises.workouts.user_id', userId).gte('workout_exercises.workouts.date', from),
+    supabase.from('workout_sets').select('weight, reps, set_type, completed, workout_exercises!inner(phase, prescription_mode, workouts!inner(user_id, date))').eq('completed', true).eq('workout_exercises.workouts.user_id', userId).gte('workout_exercises.workouts.date', from),
     supabase.from('body_weight_logs').select('weight_kg, recorded_date').eq('user_id', userId).gte('recorded_date', from).order('recorded_date'),
     supabase.from('personal_records').select('record_type, value, exercises(slug), achieved_at').eq('user_id', userId).gte('achieved_at', from.toString()),
     supabase.from('workout_feedback').select('difficulty, energy, quality, workouts!inner(user_id, date)').eq('workouts.user_id', userId).gte('workouts.date', from),
@@ -36,9 +37,13 @@ export async function generateWeeklyReport(userId: string): Promise<WeeklyReport
   const prs = prsRes.data ?? [];
   const feedback = feedbackRes.data ?? [];
 
-  const totalSets = sets.filter((s: any) => s.set_type !== 'warmup').length;
-  const totalVolume = sets
-    .filter((s: any) => s.set_type !== 'warmup' && s.weight && s.reps)
+  const mainWorkingSets = sets.filter((s: any) =>
+    isMainRepsExercise(s.workout_exercises ?? {}) &&
+    s.set_type !== 'warmup',
+  );
+  const totalSets = mainWorkingSets.length;
+  const totalVolume = mainWorkingSets
+    .filter((s: any) => s.weight && s.reps)
     .reduce((acc: number, s: any) => acc + Number(s.weight) * Number(s.reps), 0);
 
   const sessions = workouts

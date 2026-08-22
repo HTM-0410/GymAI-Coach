@@ -155,47 +155,65 @@ export default async function ExercisesPage({
   };
 
   return (
-    <main className="min-h-screen bg-chassis blueprint-grid">
-      <div className="max-w-6xl mx-auto px-4 pt-6 pb-24 space-y-5">
+    <main className="min-h-screen bg-chassis blueprint-grid w-full">
+      <div className="max-w-6xl mx-auto px-4 pt-4 sm:pt-6 pb-24 space-y-4 sm:space-y-5 w-full max-w-full">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 mb-1.5">
+            <div className="hidden sm:flex items-center gap-2 mb-1">
               <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_8px_rgba(249,115,22,0.8)]" />
               <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-muted">
-                Thư viện bài tập chuẩn hóa
+                Thư viện bài tập
               </span>
             </div>
-            <h1 className="text-3xl font-extrabold text-ink tracking-tight">Bài tập</h1>
-            <p className="text-sm text-ink-secondary mt-0.5 font-medium">
-              {sp?.saved === 'true'
-                ? `${totalCount} bài tập đã lưu trong danh sách yêu thích`
-                : activeCategory
-                  ? `${totalCount} bài — ${activeCategory.name_vi} (trang ${currentPage}/${totalPages})`
-                  : `${totalCount} bài tập sẵn sàng · trang ${currentPage}/${totalPages}`}
-            </p>
+            <div className="flex items-baseline gap-2.5">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">Bài tập</h1>
+              <span className="font-mono text-xs sm:text-sm text-ink-secondary font-bold">
+                {sp?.saved === 'true'
+                  ? `(${totalCount} đã lưu)`
+                  : activeCategory
+                    ? `(${totalCount} · ${activeCategory.name_vi})`
+                    : `(${totalCount})`}
+              </span>
+            </div>
           </div>
           <Link
             href="/exercises/new"
-            className="btn-primary inline-flex items-center gap-2 shrink-0 self-start sm:self-auto"
+            className="btn-primary hidden sm:inline-flex items-center gap-2 shrink-0"
           >
             <Plus className="h-4 w-4" strokeWidth={2} />
             Tạo bài tập với AI
           </Link>
         </div>
 
-        {/* BODY MAP STRIP — horizontal scrolling muscle filter */}
-        <section>
-          <BodyMapStrip categories={categoryCounts} />
-        </section>
+        {/* STICKY FILTER HEADER ON MOBILE (sm:static) */}
+        <div className="sticky top-14 z-30 -mx-4 px-4 py-2.5 bg-chassis/95 dark:bg-[#0c1017]/95 backdrop-blur-2xl border-b border-black/[0.06] dark:border-white/[0.08] shadow-xs sm:shadow-none sm:border-none sm:bg-transparent sm:backdrop-blur-none sm:static sm:mx-0 sm:px-0 sm:py-0 space-y-2">
+          {/* BODY MAP STRIP — horizontal scrolling muscle filter */}
+          <section>
+            <BodyMapStrip categories={categoryCounts} />
+          </section>
+
+          {/* Unified Search & Filters */}
+          <section className="lg:hidden">
+            <ExerciseFilters
+              savedCount={savedSlugs.length}
+              equipmentCategories={EQUIPMENT_CATEGORIES}
+              equipmentCounts={equipmentCounts}
+            />
+          </section>
+        </div>
 
         {/* Main + Sidebar */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_290px] gap-5 items-start">
           {/* Main column */}
           <div className="space-y-4 min-w-0">
-            {/* Secondary filters */}
-            <section>
-              <ExerciseFilters savedCount={savedSlugs.length} />
+            {/* Search & Filters on Desktop (hidden on mobile, rendered in sticky header above) */}
+            <section className="hidden lg:block">
+              <ExerciseFilters
+                savedCount={savedSlugs.length}
+                equipmentCategories={EQUIPMENT_CATEGORIES}
+                equipmentCounts={equipmentCounts}
+              />
             </section>
 
             {/* Results */}
@@ -302,7 +320,7 @@ export default async function ExercisesPage({
                   aria-label="Pagination"
                 >
                   <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-muted">
-                    Hiển thị {pageStart + 1}–{pageEnd} / {totalCount} bài
+                    Hiển thị {pageStart + 1}-{pageEnd} / {totalCount} bài
                   </p>
                   <div className="flex items-center gap-1.5">
                     {currentPage > 1 ? (

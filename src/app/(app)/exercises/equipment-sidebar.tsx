@@ -41,7 +41,7 @@ export default function EquipmentSidebar({ categories, counts, active }: Props) 
   });
 
   return (
-    <aside className="card p-4 lg:sticky lg:top-6 lg:self-start flex flex-col space-y-3 lg:max-h-[calc(100vh-3rem)] border border-white/80 dark:border-white/10 shadow-neumorph">
+    <aside className="card p-4 hidden lg:flex flex-col space-y-3 lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] border border-white/80 dark:border-white/10 shadow-neumorph">
       <header className="flex items-center justify-between gap-2 shrink-0 pb-1 border-b border-chassis-lo/50">
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_8px_rgba(249,115,22,0.8)]" />

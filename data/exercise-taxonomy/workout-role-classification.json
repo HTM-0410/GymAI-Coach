@@ -1,0 +1,321 @@
+{
+  "schema_version": "1.0.0",
+  "reviewed_at": "2026-08-21",
+  "eligibility_policy": "workout_role_review_status == 'reviewed'",
+  "reviewed": [
+    {
+      "slug": "jump-rope",
+      "workout_role": "general_warmup",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.96,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Pull", "Legs", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Continuous whole-body pulse raiser with explicit duration support in the instructions."
+    },
+    {
+      "slug": "stationary-bike-run-v-3",
+      "workout_role": "general_warmup",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.95,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Stationary cycling can raise temperature and heart rate before training."
+    },
+    {
+      "slug": "hands-bike",
+      "workout_role": "general_warmup",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.9,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Pull", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Upper-body ergometer movement is suitable as a low-load upper-body pulse raiser."
+    },
+    {
+      "slug": "dynamic-chest-stretch-male",
+      "workout_role": "dynamic_mobility",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.98,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "The catalog explicitly identifies this as a dynamic chest mobility drill."
+    },
+    {
+      "slug": "inchworm",
+      "workout_role": "dynamic_mobility",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.96,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Legs", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Moving hinge-to-plank sequence dynamically mobilizes the posterior chain and shoulders."
+    },
+    {
+      "slug": "world-greatest-stretch",
+      "workout_role": "dynamic_mobility",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.95,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Pull", "Legs", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Multi-position lunge and rotation sequence provides dynamic full-body mobility."
+    },
+    {
+      "slug": "walking-high-knees-lunge",
+      "workout_role": "dynamic_mobility",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.93,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Traveling high-knee-to-lunge pattern dynamically prepares hips and legs."
+    },
+    {
+      "slug": "dead-bug",
+      "workout_role": "activation",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.96,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Pull", "Legs", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Low-load trunk control drill suitable for core activation."
+    },
+    {
+      "slug": "glute-bridge-march",
+      "workout_role": "activation",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.96,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Low-load bridge variation targets glute recruitment and pelvic control."
+    },
+    {
+      "slug": "scapula-push-up",
+      "workout_role": "activation",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.95,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Scapular protraction drill activates serratus without a loaded press."
+    },
+    {
+      "slug": "scapular-pull-up",
+      "workout_role": "activation",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.94,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Pull", "Full Body"], "equipment_classes": ["bodyweight", "common_gym"] },
+      "rationale": "Small-range scapular depression drill prepares pulling musculature."
+    },
+    {
+      "slug": "high-knee-against-wall",
+      "workout_role": "activation",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.9,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Supported knee-drive drill primes hip flexion and single-leg posture."
+    },
+    {
+      "slug": "barbell-bench-press",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.99,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push"], "equipment_classes": ["common_gym"] },
+      "rationale": "Loaded compound horizontal press with progressive strength prescription."
+    },
+    {
+      "slug": "dumbbell-standing-overhead-press",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.99,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push"], "equipment_classes": ["common_gym"] },
+      "rationale": "Loaded compound vertical press appropriate for main-session progression."
+    },
+    {
+      "slug": "push-up",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.98,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Bodyweight horizontal press that can be prescribed as a primary resistance exercise."
+    },
+    {
+      "slug": "barbell-bent-over-row",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.99,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Pull"], "equipment_classes": ["common_gym"] },
+      "rationale": "Loaded compound horizontal pull with progressive strength prescription."
+    },
+    {
+      "slug": "pull-up",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.99,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Pull", "Full Body"], "equipment_classes": ["bodyweight", "common_gym"] },
+      "rationale": "Bodyweight compound vertical pull suitable as a main resistance exercise."
+    },
+    {
+      "slug": "cable-lat-pulldown-full-range-of-motion",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.99,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Pull"], "equipment_classes": ["common_gym"] },
+      "rationale": "Loaded cable vertical pull intended for main-session strength work."
+    },
+    {
+      "slug": "barbell-full-squat",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.99,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Loaded compound squat suitable for primary strength progression."
+    },
+    {
+      "slug": "barbell-deadlift",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.99,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Pull", "Legs", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Loaded compound hinge suitable for primary strength progression."
+    },
+    {
+      "slug": "dumbbell-goblet-squat",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.99,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Accessible loaded squat pattern for main-session resistance work."
+    },
+    {
+      "slug": "sled-45-leg-press",
+      "workout_role": "main_strength",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.99,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs"], "equipment_classes": ["common_gym"] },
+      "rationale": "Loaded machine squat pattern intended for main-session strength work."
+    },
+    {
+      "slug": "stationary-bike-walk",
+      "workout_role": "cooldown_aerobic",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.96,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Low-intensity stationary cycling supports gradual aerobic down-regulation."
+    },
+    {
+      "slug": "walk-elliptical-cross-trainer",
+      "workout_role": "cooldown_aerobic",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.96,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Pull", "Legs", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Walking-pace elliptical movement supports a low-impact cooldown."
+    },
+    {
+      "slug": "walking-on-incline-treadmill",
+      "workout_role": "cooldown_aerobic",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.91,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Pull", "Legs", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Walking treadmill movement can be prescribed at low intensity after resistance work."
+    },
+    {
+      "slug": "hamstring-stretch",
+      "workout_role": "static_stretch",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.98,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Instructions describe holding a hamstring lengthening position."
+    },
+    {
+      "slug": "calf-stretch-with-hands-against-wall",
+      "workout_role": "static_stretch",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.98,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Legs", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Instructions describe holding a supported calf stretch."
+    },
+    {
+      "slug": "overhead-triceps-stretch",
+      "workout_role": "static_stretch",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.98,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Instructions describe holding an overhead triceps lengthening position."
+    },
+    {
+      "slug": "kneeling-lat-stretch",
+      "workout_role": "static_stretch",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.97,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Pull", "Full Body"], "equipment_classes": ["bodyweight"] },
+      "rationale": "Instructions describe a held kneeling lat stretch."
+    },
+    {
+      "slug": "assisted-seated-pectoralis-major-stretch-with-stability-ball",
+      "workout_role": "static_stretch",
+      "workout_role_review_status": "reviewed",
+      "workout_role_confidence": 0.97,
+      "workout_role_source": "manual_review:canonical_instructions:2026-08-21",
+      "coverage": { "splits": ["Push", "Full Body"], "equipment_classes": ["common_gym"] },
+      "rationale": "Instructions and curated goal identify a held assisted pectoral stretch."
+    }
+  ],
+  "unresolved": [
+    {
+      "slug": "air-bike",
+      "workout_role_review_status": "needs_review",
+      "candidate_roles": ["activation", "main_strength"],
+      "reason": "Catalog name suggests cardio equipment, but source content describes a floor bicycle abdominal drill.",
+      "next_action": "Inspect source animation and decide whether to rename the exercise before assigning a role."
+    },
+    {
+      "slug": "all-fours-squad-stretch",
+      "workout_role_review_status": "needs_review",
+      "candidate_roles": ["dynamic_mobility", "static_stretch"],
+      "reason": "Name contains a likely squat/squad typo and the hold-versus-motion intent is not reliable from metadata.",
+      "next_action": "Inspect the source animation and verify whether the end position is held."
+    },
+    {
+      "slug": "pike-to-cobra-push-up",
+      "workout_role_review_status": "needs_review",
+      "candidate_roles": ["dynamic_mobility", "main_strength"],
+      "reason": "The sequence may be used as shoulder-spine mobility or as a loaded push-up progression.",
+      "next_action": "Review cadence and intended prescription in the source animation."
+    },
+    {
+      "slug": "back-pec-stretch",
+      "workout_role_review_status": "needs_review",
+      "candidate_roles": ["dynamic_mobility", "static_stretch"],
+      "reason": "Name, translated goal, and target muscle disagree about the intended movement.",
+      "next_action": "Verify movement and target tissue against the source media."
+    },
+    {
+      "slug": "circles-knee-stretch",
+      "workout_role_review_status": "needs_review",
+      "candidate_roles": ["dynamic_mobility", "static_stretch"],
+      "reason": "The word circles implies dynamic mobility while stretch metadata implies a hold.",
+      "next_action": "Inspect source animation to determine whether repetitions or a hold are prescribed."
+    },
+    {
+      "slug": "chair-leg-extended-stretch",
+      "workout_role_review_status": "needs_review",
+      "candidate_roles": ["static_stretch"],
+      "reason": "Equipment metadata says bodyweight although the name requires a chair, so catalog constraints are incomplete.",
+      "next_action": "Correct equipment taxonomy and verify the held position before review approval."
+    }
+  ]
+}

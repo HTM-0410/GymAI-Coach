@@ -30,10 +30,9 @@ STATUS: PARTIAL
 
 - 1,319 records remain `translation_status=machine_pending`; full translation requires 264 additional requests (5 per request, plus one final partial batch handled separately).
 - The media terms remain prototype-only until Gym visual grants GymAI Coach its own license. Attribution is preserved in every record.
-- `npm run build` is blocked by pre-existing TypeScript global-script collisions in `scripts/_diag.ts`; this is unrelated to the importer but prevents a READY release claim.
+- The obsolete Gemini batch diagnostic probe has been removed. A READY release still requires a fresh production build and end-to-end verification of the current checkout.
 - The old catalog is recoverable under the local timestamped archive; archive paths are intentionally ignored by Git.
 
 ## Decision
 
-Keep the new catalog available to the web for internal prototype review. Do not publish commercially or mark records `approved` until media rights, Vietnamese review and the existing build failure are resolved.
-
+Keep the new catalog available to the web for internal prototype review. Do not publish commercially or mark records `approved` until media rights, Vietnamese review and a fresh production build are verified.

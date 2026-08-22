@@ -1,15 +1,16 @@
 // Layer 2 — Personalization
-// Inputs: previous workouts per exercise, weight trend, RIR trend
+// Inputs: previous workouts per exercise, load and rep trend
 // Sử dụng rule engine + Gemini explainer
 
 import { createClient } from '@/lib/supabase/server';
 import { progressionRule, detectPlateau, type Verdict, type SetRecord } from './rules';
 import { callGemini } from './gemini';
+import { isMainRepsExercise } from '@/lib/training/workout-phases';
 
 type Result = {
   exercise_slug: string;
   exercise_name: string;
-  previous: { weight: number; reps: number[]; rir: number[] } | null;
+  previous: { weight: number; reps: number[] } | null;
   verdict: Verdict;
   ai_explanation: string;
   suggested_weight: number;
@@ -24,9 +25,9 @@ export async function buildProgressionRecommendations(userId: string): Promise<R
   const { data: setsRaw } = await supabase
     .from('workout_sets')
     .select(`
-      weight, reps, rir, set_type, completed, completed_at,
+      set_number, weight, reps, set_type, completed, completed_at,
       workout_exercises!inner(
-        exercise_id, target_rep_min, target_rep_max, target_rir,
+        exercise_id, target_rep_min, target_rep_max, phase, prescription_mode,
         exercises(slug, name_vi, name),
         workouts!inner(user_id, date, status)
       )
@@ -39,6 +40,8 @@ export async function buildProgressionRecommendations(userId: string): Promise<R
 
   const byExercise = new Map<string, any[]>();
   (setsRaw ?? []).forEach((row: any) => {
+    if (!isMainRepsExercise(row.workout_exercises ?? {})) return;
+    if ((row.set_type ?? 'working') !== 'working') return;
     const slug = row.workout_exercises?.exercises?.slug;
     if (!slug) return;
     if (!byExercise.has(slug)) byExercise.set(slug, []);
@@ -61,7 +64,7 @@ export async function buildProgressionRecommendations(userId: string): Promise<R
     const lastDate = sortedDates[sortedDates.length - 1];
     const lastSets: SetRecord[] = (byDate.get(lastDate) ?? []).map((r) => ({
       set_number: r.set_number ?? 0,
-      weight: r.weight, reps: r.reps, rir: r.rir,
+      weight: r.weight, reps: r.reps,
       set_type: r.set_type ?? 'working', completed: r.completed ?? false,
     }));
 
@@ -69,7 +72,6 @@ export async function buildProgressionRecommendations(userId: string): Promise<R
     const verdict = progressionRule(
       target.target_rep_min ?? 8,
       target.target_rep_max ?? 12,
-      target.target_rir ?? 2,
       lastSets
     );
 
@@ -79,7 +81,6 @@ export async function buildProgressionRecommendations(userId: string): Promise<R
       return {
         weight: ds[0].weight ?? 0,
         reps: ds.map((s: any) => s.reps ?? 0),
-        rir: ds.map((s: any) => s.rir ?? 0),
       };
     });
     const plateau = detectPlateau(history);
@@ -95,8 +96,7 @@ export async function buildProgressionRecommendations(userId: string): Promise<R
 
 Bài: ${ex.name_vi}
 Rep range: ${target.target_rep_min}-${target.target_rep_max}
-Target RIR: ${target.target_rir}
-Sets gần nhất: ${JSON.stringify(lastSets.map((s) => ({ w: s.weight, r: s.reps, rir: s.rir })))}
+Sets gần nhất: ${JSON.stringify(lastSets.map((s) => ({ w: s.weight, r: s.reps })))}
 Verdict rule engine: ${verdict.outcome} (delta ${verdict.weight_delta}kg)
 Plateau: ${plateau.plateau}
 
@@ -110,7 +110,6 @@ Viết 1-2 câu giải thích ngắn (≤ 30 từ), giọng thân thiện. BẮT
       previous: {
         weight: lastWeight,
         reps: lastSets.map((s) => s.reps ?? 0),
-        rir: lastSets.map((s) => s.rir ?? 0),
       },
       verdict,
       ai_explanation: aiExplanation.trim(),

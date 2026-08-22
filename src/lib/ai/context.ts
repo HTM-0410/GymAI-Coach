@@ -1,6 +1,23 @@
 import { createClient } from '@/lib/supabase/server';
-import type { WorkoutPlan } from './schema';
 import type { DumbbellInventoryItem } from '@/lib/dumbbell-inventory';
+import type { WorkoutPhase } from './workout-contract';
+import { effectiveGymEquipment, filterExplicitlyAvoided, isEquipmentCompatible, isExerciseRoleAllowed } from './workout-constraints';
+
+export const TARGETED_EXERCISE_SELECT = 'id, slug, name, name_vi, difficulty, exercise_type, status, owner_user_id, workout_role, workout_role_review_status, exercise_muscles!inner(muscles!inner(slug)), exercise_equipment(equipment(slug))';
+export const ACCESSORY_EXERCISE_SELECT = 'id, slug, name, name_vi, difficulty, exercise_type, status, owner_user_id, workout_role, workout_role_review_status, exercise_muscles(muscles(slug)), exercise_equipment(equipment(slug))';
+
+export function rankAccessoryCandidates<T extends { workout_role?: string | null; exercise_muscles?: any[] }>(
+  candidates: T[],
+  targetMuscles: string[],
+) {
+  const targets = new Set(targetMuscles);
+  const score = (candidate: T) => {
+    const overlap = (candidate.exercise_muscles ?? []).filter((link: any) => targets.has(link.muscles?.slug)).length;
+    const universal = ['general_warmup', 'cooldown_aerobic'].includes(candidate.workout_role ?? '') ? 0.5 : 0;
+    return overlap + universal;
+  };
+  return [...candidates].sort((a, b) => score(b) - score(a));
+}
 
 type Ctx = {
   userId: string;
@@ -8,22 +25,20 @@ type Ctx = {
   programDayId: string;
   gymId: string | null;
   durationMinutes: number;
+  userPrompt?: string | null;
 };
 
 export async function buildContext(ctx: Ctx) {
   const supabase = await createClient();
-  const [dayRes, gymRes, dumbbellRes, recentRes, weightRes] = await Promise.all([
+  const [dayRes, gymRes, recentRes, weightRes] = await Promise.all([
     supabase
       .from('training_program_days')
       .select('id, name, training_programs(name), training_day_targets(role, target_sets, muscles(slug, name_vi))')
       .eq('id', ctx.programDayId)
       .maybeSingle(),
     ctx.gymId
-      ? supabase.from('gym_equipment').select('equipment(slug, name_vi)').eq('gym_id', ctx.gymId)
-      : Promise.resolve({ data: [] as any[] }),
-    ctx.gymId
-      ? supabase.from('gym_dumbbell_inventory').select('weight_kg, quantity').eq('gym_id', ctx.gymId).order('weight_kg')
-      : Promise.resolve({ data: [] as DumbbellInventoryItem[] }),
+      ? supabase.from('gyms').select('id, gym_equipment(equipment(slug, name_vi)), gym_dumbbell_inventory(weight_kg, quantity)').eq('id', ctx.gymId).eq('owner_user_id', ctx.userId).maybeSingle()
+      : Promise.resolve({ data: null }),
     supabase
       .from('workout_sets')
       .select('weight, reps, rir, workout_exercises!inner(exercise_id, exercises(slug)), completed_at')
@@ -39,14 +54,20 @@ export async function buildContext(ctx: Ctx) {
       .limit(5),
   ]);
 
+  const dumbbellInventory = ((gymRes.data as any)?.gym_dumbbell_inventory ?? []).map((item: any) => ({
+    weight_kg: Number(item.weight_kg),
+    quantity: Number(item.quantity),
+  })) as DumbbellInventoryItem[];
+  const gymEquipment = effectiveGymEquipment(((gymRes.data as any)?.gym_equipment ?? [])
+    .map((item: any) => item.equipment?.slug)
+    .filter(Boolean), dumbbellInventory.length > 0);
+
   return {
     profile: ctx.profile,
     programDay: dayRes.data,
-    gymEquipment: (gymRes.data ?? []).map((r: any) => r.equipment?.slug).filter(Boolean),
-    dumbbellInventory: (dumbbellRes.data ?? []).map((item: any) => ({
-      weight_kg: Number(item.weight_kg),
-      quantity: Number(item.quantity),
-    })) as DumbbellInventoryItem[],
+    gymEquipment,
+    equipmentUnrestricted: ctx.gymId === null,
+    dumbbellInventory,
     recentSets: recentRes.data ?? [],
     recentWeight: weightRes.data ?? [],
     duration: ctx.durationMinutes,
@@ -54,62 +75,165 @@ export async function buildContext(ctx: Ctx) {
 }
 
 // Constraint engine: filter candidate exercises
-export async function candidateExercises(ctx: Ctx, existingContext?: Awaited<ReturnType<typeof buildContext>>) {
+export async function candidateExercises(
+  ctx: Ctx,
+  existingContext?: Awaited<ReturnType<typeof buildContext>>,
+  phase: WorkoutPhase = 'main',
+) {
   const supabase = await createClient();
   const c = existingContext ?? await buildContext(ctx);
 
   const targetMuscles = ((c.programDay as any)?.training_day_targets ?? [])
-    .filter((t: any) => t.role === 'primary')
     .map((t: any) => t.muscles?.slug)
     .filter(Boolean);
 
-  if (targetMuscles.length === 0) return [];
+  // If userPrompt is provided, also dynamically incorporate requested muscles/categories
+  const promptLower = (ctx.userPrompt ?? '').toLowerCase();
+  const mentionsPositive = (...terms: string[]) => terms.some((term) => {
+    const index = promptLower.indexOf(term);
+    if (index < 0) return false;
+    const prefix = promptLower.slice(Math.max(0, index - 24), index);
+    return !/(không|tránh|né|đau|mỏi|chấn thương)\s*[^,.]{0,16}$/.test(prefix);
+  });
+  const additionalMuscles: string[] = [];
+  if (mentionsPositive('cadio', 'cardio', 'chạy', 'tim mạch')) {
+    additionalMuscles.push('core', 'quads', 'calves', 'glutes');
+  }
+  if (mentionsPositive('bụng', 'abs', 'core')) {
+    additionalMuscles.push('core');
+  }
+  if (mentionsPositive('tay trước', 'bicep')) {
+    additionalMuscles.push('biceps', 'forearms');
+  }
+  if (mentionsPositive('tay sau', 'tricep')) {
+    additionalMuscles.push('triceps');
+  }
+  if (mentionsPositive('vai', 'shoulder')) {
+    additionalMuscles.push('shoulders', 'front_delts', 'side_delts', 'rear_delts');
+  }
+  if (mentionsPositive('ngực', 'chest')) {
+    additionalMuscles.push('chest');
+  }
+  if (mentionsPositive('lưng', 'back', 'lat')) {
+    additionalMuscles.push('back', 'lats');
+  }
+  if (mentionsPositive('chân', 'mông', 'đùi')) {
+    additionalMuscles.push('quads', 'hamstrings', 'glutes', 'calves');
+  }
 
-  // Find exercises whose primary muscle matches AND equipment is in gym
-  const { data: exMuscles } = await supabase
-    .from('exercise_muscles')
-    .select('exercise_id, muscles(slug), exercises!inner(id, slug, name_vi, difficulty, exercise_type, status, owner_user_id)')
-    .eq('role', 'primary')
-    .in('muscles.slug', targetMuscles);
+  const combinedMuscles = [...new Set([...targetMuscles, ...additionalMuscles])];
+  if (combinedMuscles.length === 0 && phase === 'main') return [];
 
-  const candIds = (exMuscles ?? [])
-    .filter((em: any) => {
-      const e = em.exercises;
+  // Query from exercises so PostgREST filters the parent relation and cannot
+  // truncate matching rows behind the default 1,000-row relationship page.
+  const phaseRoles = phase === 'warmup'
+    ? ['general_warmup', 'dynamic_mobility', 'activation']
+    : ['cooldown_aerobic', 'static_stretch'];
+  const exerciseQuery = phase === 'main'
+    ? supabase
+        .from('exercises')
+        .select(TARGETED_EXERCISE_SELECT)
+        .in('exercise_muscles.muscles.slug', combinedMuscles)
+        .eq('status', 'published')
+    : supabase
+        .from('exercises')
+        .select(ACCESSORY_EXERCISE_SELECT)
+        .in('workout_role', phaseRoles)
+        .eq('workout_role_review_status', 'reviewed')
+        .eq('status', 'published');
+  const { data: exerciseRows, error: exerciseError } = await exerciseQuery;
+  if (exerciseError) throw new Error(`Không thể tải candidate bài tập: ${exerciseError.message}`);
+  const rankedRows = phase === 'main'
+    ? (exerciseRows ?? [])
+    : rankAccessoryCandidates(exerciseRows ?? [], combinedMuscles);
+
+  const eligibleExercises = rankedRows.filter((e: any) => {
       if (!e || e.status !== 'published') return false;
       if (e.owner_user_id && e.owner_user_id !== ctx.userId) return false;
       if (e.difficulty && ctx.profile.experience_level === 'beginner' && e.difficulty === 'advanced') return false;
-      return true;
-    })
-    .map((em: any) => em.exercise_id);
+      const mode = phase === 'main' ? 'reps' : 'time';
+      return isExerciseRoleAllowed(phase, mode, e, ctx.userId);
+    });
+  const candIds = eligibleExercises.map((exercise: any) => exercise.id);
 
   if (candIds.length === 0) return [];
 
-  // Filter by equipment
-  let eqQuery = supabase
-    .from('exercise_equipment')
-    .select('exercise_id, equipment(slug)')
-    .in('exercise_id', candIds);
-  const { data: eqLinks } = await eqQuery;
+  // Filter by equipment and fetch muscle roles
+  const { data: muscleLinks } = await supabase
+      .from('exercise_muscles')
+      .select('exercise_id, role, muscles(slug, name_vi, name)')
+      .in('exercise_id', candIds);
 
   const exerciseEquipmentMap = new Map<string, string[]>();
-  (eqLinks ?? []).forEach((l: any) => {
-    if (!l.equipment?.slug) return;
-    if (!exerciseEquipmentMap.has(l.exercise_id)) exerciseEquipmentMap.set(l.exercise_id, []);
-    exerciseEquipmentMap.get(l.exercise_id)!.push(l.equipment.slug);
+  eligibleExercises.forEach((exercise: any) => {
+    exerciseEquipmentMap.set(exercise.id, (exercise.exercise_equipment ?? [])
+      .map((link: any) => link.equipment?.slug)
+      .filter(Boolean));
+  });
+
+  const exerciseMuscleMap = new Map<string, { primaryVi?: string; primarySlug?: string; allMusclesVi: string[] }>();
+  (muscleLinks ?? []).forEach((m: any) => {
+    if (!exerciseMuscleMap.has(m.exercise_id)) {
+      exerciseMuscleMap.set(m.exercise_id, { allMusclesVi: [] });
+    }
+    const info = exerciseMuscleMap.get(m.exercise_id)!;
+    const nameVi = m.muscles?.name_vi || m.muscles?.name;
+    if (nameVi && !info.allMusclesVi.includes(nameVi)) info.allMusclesVi.push(nameVi);
+    if (m.role === 'primary' && !info.primaryVi) {
+      info.primaryVi = nameVi;
+      info.primarySlug = m.muscles?.slug;
+    }
   });
 
   return candIds
     .filter((id) => {
       const required = exerciseEquipmentMap.get(id) ?? ['bodyweight'];
-      if (required.length === 0) return true;
-      if (c.gymEquipment.length === 0) return true;
-      return required.every((slug) => c.gymEquipment.includes(slug));
+      return isEquipmentCompatible(required, c.gymEquipment, c.equipmentUnrestricted);
     })
     .map((id) => {
-      const em = (exMuscles ?? []).find((x: any) => x.exercise_id === id);
-      return em?.exercises
-        ? { ...em.exercises, equipment_slugs: exerciseEquipmentMap.get(id) ?? [] }
+      const exercise = eligibleExercises.find((item: any) => item.id === id);
+      const muscleInfo = exerciseMuscleMap.get(id);
+      return exercise
+        ? {
+            ...exercise,
+            exercise_muscles: undefined,
+            exercise_equipment: undefined,
+            equipment_slugs: exerciseEquipmentMap.get(id) ?? [],
+            primary_muscle_vi: muscleInfo?.primaryVi ?? muscleInfo?.allMusclesVi?.[0] ?? 'Toàn thân',
+            primary_muscle_slug: muscleInfo?.primarySlug ?? '',
+            muscle_names_vi: muscleInfo?.allMusclesVi ?? [],
+          }
         : null;
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter((candidate): candidate is NonNullable<typeof candidate> => Boolean(candidate))
+    .filter((candidate) => filterExplicitlyAvoided([candidate], ctx.userPrompt).length === 1);
+}
+
+export async function visibleExercisesBySlugs(
+  ctx: Ctx,
+  slugs: string[],
+  phaseBySlug: Map<string, { phase: WorkoutPhase; mode: 'reps' | 'time' | 'hold' }>,
+  existingContext?: Awaited<ReturnType<typeof buildContext>>,
+) {
+  if (slugs.length === 0) return [];
+  const supabase = await createClient();
+  const c = existingContext ?? await buildContext(ctx);
+  const { data } = await supabase
+    .from('exercises')
+    .select('id, slug, name, name_vi, difficulty, exercise_type, status, owner_user_id, workout_role, workout_role_review_status, exercise_equipment(equipment(slug))')
+    .in('slug', slugs)
+    .eq('status', 'published');
+
+  return (data ?? []).map((exercise: any) => ({
+    ...exercise,
+    equipment_slugs: (exercise.exercise_equipment ?? []).map((link: any) => link.equipment?.slug).filter(Boolean),
+  })).filter((exercise: any) => {
+    const requested = phaseBySlug.get(exercise.slug);
+    return requested
+      && (!exercise.owner_user_id || exercise.owner_user_id === ctx.userId)
+      && isExerciseRoleAllowed(requested.phase, requested.mode, exercise, ctx.userId)
+      && isEquipmentCompatible(exercise.equipment_slugs, c.gymEquipment, c.equipmentUnrestricted)
+      && filterExplicitlyAvoided([exercise], ctx.userPrompt).length === 1;
+  });
 }

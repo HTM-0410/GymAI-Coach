@@ -17,6 +17,11 @@ import { join } from 'node:path';
 import { createClient as createSupabase } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { EXERCISES_SEED, EQUIPMENT_SEED, MUSCLES_SEED } from './seed-exercises-data';
+import {
+  WORKOUT_ROLES,
+  WORKOUT_ROLE_REVIEW_STATUSES,
+  workoutRoleManifestSchema,
+} from '../src/lib/exercises/workout-role';
 
 // ─── ENV ─────────────────────────────────────────────────────────────────────
 import { randomUUID } from 'node:crypto';
@@ -32,6 +37,12 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const DRY_RUN = process.argv.includes('--dry-run') || process.env.DRY_RUN === '1';
 const DATA_DIR = join(process.cwd(), 'data', 'exercises');
+const WORKOUT_ROLE_MANIFEST = join(
+  process.cwd(),
+  'data',
+  'exercise-taxonomy',
+  'workout-role-classification.json',
+);
 
 if (!SUPABASE_URL || !SUPABASE_KEY) {
   console.error('❌ NEXT_PUBLIC_SUPABASE_URL hoặc SUPABASE_SERVICE_ROLE_KEY missing');
@@ -92,6 +103,10 @@ const ExerciseSchema = z.object({
     rationale_vi: z.string().min(20).max(300),
   }),
   alternatives: z.array(z.object({ slug: z.string(), name_vi: z.string() })).max(3),
+  workout_role: z.enum(WORKOUT_ROLES).optional(),
+  workout_role_review_status: z.enum(WORKOUT_ROLE_REVIEW_STATUSES).optional(),
+  workout_role_confidence: z.number().min(0).max(1).optional(),
+  workout_role_source: z.string().min(1).optional(),
   media_metadata: z.object({
     version: z.string().regex(/^\d+\.\d+\.\d+$/),
     last_updated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -433,8 +448,21 @@ async function main() {
   console.log(`DRY_RUN: ${DRY_RUN}`);
   console.log(`Reading JSON from ${DATA_DIR}`);
 
+  const taxonomyManifest = workoutRoleManifestSchema.parse(
+    JSON.parse(await fs.readFile(WORKOUT_ROLE_MANIFEST, 'utf-8')),
+  );
+  const taxonomyBySlug = new Map(
+    taxonomyManifest.reviewed.map((entry) => [entry.slug, entry] as const),
+  );
+
   // 1. Load all JSON
-  const files = (await fs.readdir(DATA_DIR)).filter((f) => f.endsWith('.json') && f !== 'exercise.schema.json');
+  const files = (await fs.readdir(DATA_DIR)).filter(
+    (file) =>
+      file.endsWith('.json') &&
+      file !== 'exercise.schema.json' &&
+      !file.startsWith('.') &&
+      !file.endsWith('.sample.json'),
+  );
   const exercises: ExerciseRow[] = [];
   const skipped: string[] = [];
   for (const file of files) {
@@ -443,7 +471,18 @@ async function main() {
     try {
       const txt = await fs.readFile(join(DATA_DIR, file), 'utf-8');
       const parsed = JSON.parse(txt);
-      const r = ExerciseSchema.safeParse(parsed);
+      const taxonomy = taxonomyBySlug.get(slug);
+      const r = ExerciseSchema.safeParse(
+        taxonomy
+          ? {
+              ...parsed,
+              workout_role: taxonomy.workout_role,
+              workout_role_review_status: taxonomy.workout_role_review_status,
+              workout_role_confidence: taxonomy.workout_role_confidence,
+              workout_role_source: taxonomy.workout_role_source,
+            }
+          : parsed,
+      );
       if (!r.success) {
         const issue = r.error.issues[0];
         console.warn(`  ⚠️ ${slug}: ${issue.path.join('.')}: ${issue.message}`);
@@ -677,6 +716,14 @@ async function main() {
       performance_chart_json: ex.performance_chart,
       ai_coach_json: ex.ai_coach,
       content_json: ex,
+      ...(ex.workout_role
+        ? {
+            workout_role: ex.workout_role,
+            workout_role_review_status: ex.workout_role_review_status,
+            workout_role_confidence: ex.workout_role_confidence,
+            workout_role_source: ex.workout_role_source,
+          }
+        : {}),
       // Storage URLs override local paths. After upload-exercise-media.ts ran,
       // gallery.main is the JPG public URL and gallery.animation is the GIF URL.
       gallery_json: ex.gallery,

@@ -143,7 +143,7 @@ export default function UserPerformance({ exerciseSlug }: Props) {
                     {point.weight}
                   </span>
 
-                  <div className="absolute bottom-full left-1/2 z-10 mb-2 hidden whitespace-nowrap rounded-lg bg-ink px-2 py-1 text-xs font-bold text-white group-hover:block">
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 z-10 mb-2 hidden whitespace-nowrap rounded-lg bg-slate-900 px-2.5 py-1 text-xs font-bold text-white shadow-lg border border-slate-700 group-hover:block">
                     {point.weight} kg × {point.reps} reps
                   </div>
                 </div>

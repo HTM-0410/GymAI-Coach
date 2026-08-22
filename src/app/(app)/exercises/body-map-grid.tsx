@@ -23,8 +23,8 @@ export default function BodyMapStrip({ categories }: Props) {
   }
 
   return (
-    <section>
-      <div className="flex items-center justify-between gap-2 mb-2.5">
+    <section className="space-y-2">
+      <div className="hidden sm:flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_8px_rgba(249,115,22,0.8)]" />
           <span className="font-mono text-[10px] uppercase tracking-widest text-ink-muted font-bold">
@@ -42,7 +42,69 @@ export default function BodyMapStrip({ categories }: Props) {
         )}
       </div>
 
-      <div className="card p-2.5 overflow-x-auto border border-white/80 dark:border-white/10">
+      {/* MOBILE: Ultra-Compact Chip Strip (sm:hidden) */}
+      <div className="flex sm:hidden items-center gap-2 overflow-x-auto py-1 w-full no-scrollbar custom-scrollbar">
+        <button
+          type="button"
+          onClick={() => {
+            const next = new URLSearchParams(params);
+            next.delete('muscle_cat');
+            next.delete('page');
+            router.push(`/exercises?${next.toString()}`, { scroll: false });
+          }}
+          className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+            !active
+              ? 'bg-accent text-white border-accent shadow-accent'
+              : 'bg-chassis text-ink border-black/[0.08] dark:border-white/10 shadow-neumorph-sm'
+          }`}
+        >
+          <span>Tất cả cơ</span>
+        </button>
+
+        {categories.map(({ category, count }) => {
+          const isActive = active === category.id;
+          const isZero = count === 0;
+          return (
+            <button
+              key={category.id}
+              type="button"
+              onClick={() => select(category.id)}
+              disabled={isZero && !isActive}
+              aria-pressed={isActive}
+              className={`shrink-0 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+                isActive
+                  ? 'bg-gradient-to-br from-accent to-accent-dim text-white border-accent shadow-accent'
+                  : isZero
+                    ? 'opacity-40 cursor-not-allowed bg-black/[0.02] dark:bg-white/[0.02] text-ink-muted border-transparent'
+                    : 'bg-chassis text-ink border-black/[0.08] dark:border-white/10 hover:border-accent/40 shadow-neumorph-sm'
+              }`}
+            >
+              <div className="relative h-4 w-4 shrink-0 flex items-center justify-center">
+                <Image
+                  src={category.imagePath}
+                  alt={category.name_vi}
+                  fill
+                  className={`object-contain ${
+                    isActive ? 'brightness-0 invert' : 'dark:brightness-110 dark:contrast-125'
+                  }`}
+                  sizes="16px"
+                />
+              </div>
+              <span>{category.name_vi}</span>
+              <span
+                className={`font-mono text-[10px] px-1 py-0.2 rounded-md ${
+                  isActive ? 'bg-white/20 text-white' : 'bg-black/[0.04] dark:bg-white/10 text-ink-muted'
+                }`}
+              >
+                {count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* DESKTOP: Rich Cards with LED Intensity (hidden sm:block) */}
+      <div className="hidden sm:block card p-2.5 overflow-x-auto border border-white/80 dark:border-white/10">
         <div className="flex gap-2.5 min-w-min py-0.5">
           {categories.map(({ category, count }) => {
             const isActive = active === category.id;

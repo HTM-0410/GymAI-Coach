@@ -1,7 +1,8 @@
 // Progressive overload rule engine (deterministic)
-// Nguyên tắc spec #25:
-//   Nếu hoàn thành tất cả set + reps >= upper + RIR hợp lý → suggest tăng weight
-//   Nếu reps thấp hoặc RIR=0 → giữ/giảm intensity
+// Objective double progression:
+//   - increase reps inside the prescribed range first
+//   - only increase load next session when every working set reaches the upper bound
+//   - reduce load / extend rest when reps fall below the range or drop sharply
 //
 // Output: rule verdict + suggested next values + reason
 // Gemini sau đó chỉ giải thích verdict bằng tiếng Việt
@@ -10,7 +11,7 @@ export type SetRecord = {
   set_number: number;
   weight: number | null;
   reps: number | null;
-  rir: number | null;
+  rir?: number | null; // legacy data only; intentionally ignored by this engine
   set_type: 'warmup' | 'working' | 'drop' | 'failure';
   completed: boolean;
 };
@@ -27,7 +28,7 @@ export type Verdict = {
 const INCREMENT_KG = 2.5;
 
 export function progressionRule(
-  targetRepMin: number, targetRepMax: number, targetRir: number,
+  targetRepMin: number, targetRepMax: number,
   sets: SetRecord[]
 ): Verdict {
   const workingSets = sets.filter((s) => s.set_type === 'working' && s.completed && s.reps != null);
@@ -35,55 +36,52 @@ export function progressionRule(
     return { outcome: 'maintain', weight_delta: 0, rep_shift: 0, rest_delta: 0, reason_vi: 'Chưa có đủ dữ liệu để đánh giá.', confidence: 0 };
   }
 
-  // Tính reps trung bình + RIR trung bình + weight cố định trong set
+  // Only objective performance is used: completed reps and load.
   const reps = workingSets.map((s) => s.reps as number);
-  const rirs = workingSets.map((s) => s.rir).filter((r) => r != null) as number[];
   const weights = workingSets.map((s) => s.weight ?? 0);
   const avgReps = avg(reps);
-  const avgRir = rirs.length > 0 ? avg(rirs) : null;
   const allSameWeight = Math.max(...weights) === Math.min(...weights);
-  const weight = weights[0];
 
-  // Tiêu chí "hit the top of rep range + RIR đủ cao"
-  const hitUpper = avgReps >= targetRepMax;
+  const hitUpper = reps.every((rep) => rep >= targetRepMax);
   const hitMid = avgReps >= (targetRepMin + targetRepMax) / 2;
-  const rirOk = avgRir == null ? false : avgRir >= 1;       // không đến failure
-  const rirComfortable = avgRir == null ? false : avgRir >= 2;
-  const allCompleted = workingSets.length >= 3; // đủ set
+  const enoughSets = workingSets.length >= 2;
 
   // === CASE 1: Progress ===
-  if (allSameWeight && hitUpper && rirComfortable && allCompleted) {
+  if (allSameWeight && hitUpper && enoughSets) {
     return {
       outcome: 'progress',
       weight_delta: INCREMENT_KG,
       rep_shift: 0,
       rest_delta: 0,
-      reason_vi: `Reps trung bình ${avgReps.toFixed(1)} ≥ ${targetRepMax} và RIR trung bình ${avgRir?.toFixed(1)} ≥ 2 trên tất cả working sets. Đủ điều kiện tăng ${INCREMENT_KG}kg.`,
+      reason_vi: `Tất cả ${workingSets.length} working sets đều đạt ít nhất ${targetRepMax} reps ở cùng mức tạ. Buổi sau có thể tăng ${INCREMENT_KG}kg và quay về đáy rep range.`,
       confidence: 0.9,
     };
   }
 
   // === CASE 2: Maintain + minor progression ===
-  if (allSameWeight && hitMid && rirOk && allCompleted) {
+  if (allSameWeight && hitMid && enoughSets) {
     return {
       outcome: 'maintain',
       weight_delta: 0,
       rep_shift: 0,
       rest_delta: 0,
-      reason_vi: `Đạt gần giữa rep range với RIR ${avgRir?.toFixed(1) ?? '?'}. Giữ nguyên và cố thêm 1 rep buổi sau.`,
+      reason_vi: `Reps trung bình ${avgReps.toFixed(1)} đang trong vùng mục tiêu. Giữ tạ và cố thêm 1 rep trước khi tăng tạ.`,
       confidence: 0.7,
     };
   }
 
-  // === CASE 3: Deload (RIR=0 hoặc reps giảm mạnh) ===
-  const repsDropping = reps.length >= 2 && reps[reps.length - 1] < reps[0] - 2;
-  if (avgRir === 0 || repsDropping) {
+  // === CASE 3: below range or a >=20% rep drop ===
+  const repDropRatio = reps.length >= 2 && reps[0] > 0
+    ? (reps[0] - reps[reps.length - 1]) / reps[0]
+    : 0;
+  const belowRange = reps[reps.length - 1] < targetRepMin;
+  if (belowRange || repDropRatio >= 0.2) {
     return {
       outcome: 'deload',
       weight_delta: -INCREMENT_KG,
       rep_shift: 0,
-      rest_delta: 15,
-      reason_vi: `Đến failure (RIR=0) hoặc reps giảm mạnh giữa các sets. Đề xuất giảm ${INCREMENT_KG}kg và tăng rest 15s.`,
+      rest_delta: 30,
+      reason_vi: `Set cuối dưới ${targetRepMin} reps hoặc giảm ít nhất 20% so với set đầu. Đề xuất giảm ${INCREMENT_KG}kg và nghỉ thêm 30 giây.`,
       confidence: 0.8,
     };
   }
@@ -101,8 +99,8 @@ function avg(arr: number[]): number {
   return arr.reduce((a, b) => a + b, 0) / arr.length;
 }
 
-// Plateau detection: cùng weight, cùng reps ≥ 2 buổi liên tiếp, RIR tăng dần hoặc không
-export function detectPlateau(history: { weight: number; reps: number[]; rir: number[] }[]): { plateau: boolean; reason?: string } {
+// Plateau detection uses only repeatable objective values.
+export function detectPlateau(history: { weight: number; reps: number[] }[]): { plateau: boolean; reason?: string } {
   if (history.length < 2) return { plateau: false };
   const last = history[history.length - 1];
   const prev = history[history.length - 2];

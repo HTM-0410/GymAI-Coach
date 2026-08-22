@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:types": "supabase gen types typescript --local > src/types/database.ts",
-    "exercises:batch": "tsx scripts/generate-exercises.ts",
+    "test:workout-phases": "tsx --test tests/workout-phases.test.ts",
     "exercises:batch:parallel": "tsx scripts/generate-exercises.ts --parallel 5",
     "exercises:batch:resume": "tsx scripts/generate-exercises.ts --resume",
     "exercises:batch:dry": "tsx scripts/generate-exercises.ts --dry-run",
@@ -16,6 +15,7 @@
     "exercises:gen:skip": "tsx scripts/generate-exercises.ts --skip-existing",
     "exercises:gen:dry": "tsx scripts/generate-exercises.ts --dry-run",
     "exercises:gen:limit": "tsx scripts/generate-exercises.ts --limit 10 --dry-run",
+    "exercises:validate-taxonomy": "tsx scripts/validate-exercise-taxonomy.ts",
     "equipment:scrape": "tsx scripts/scrape-equipment-images.ts",
     "exercises:scrape-images": "tsx scripts/scrape-exerciselibrary-images.ts"
   },
@@ -30,6 +30,7 @@
     "@radix-ui/react-toast": "^1.2.2",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.45.4",
+    "@types/three": "^0.185.4",
     "body-highlighter": "^3.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -41,6 +42,7 @@
     "react-hook-form": "^7.53.0",
     "recharts": "^2.13.0",
     "tailwind-merge": "^2.5.4",
+    "three": "^0.185.1",
     "zod": "^3.23.8",
     "zustand": "^4.5.5"
   },

@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
+import { isMainRepsExercise } from '@/lib/training/workout-phases';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -33,6 +34,7 @@ export async function GET(request: Request) {
     .select(`
       weight, reps, rir, set_type, completed, completed_at,
       workout_exercises!inner(
+        phase, prescription_mode,
         workouts!inner(user_id, date, status)
       )
     `)
@@ -41,9 +43,14 @@ export async function GET(request: Request) {
     .eq('workout_exercises.workouts.user_id', user.id)
     .eq('workout_exercises.workouts.status', 'completed')
     .order('completed_at', { ascending: false })
-    .limit(50);
+    .limit(200);
 
-  if (!setsRaw || setsRaw.length === 0) {
+  const sets = (setsRaw ?? []).filter((row: any) =>
+    isMainRepsExercise(row.workout_exercises ?? {}) &&
+    (row.set_type ?? 'working') === 'working',
+  ).slice(0, 50);
+
+  if (sets.length === 0) {
     return NextResponse.json({
       exercise_name: exercise.name_vi ?? exercise.name,
       hasData: false,
@@ -53,7 +60,7 @@ export async function GET(request: Request) {
 
   // Nhóm theo ngày
   const byDate = new Map<string, any[]>();
-  setsRaw.forEach((row: any) => {
+  sets.forEach((row: any) => {
     const date = row.workout_exercises.workouts.date;
     if (!byDate.has(date)) byDate.set(date, []);
     byDate.get(date)!.push(row);
@@ -103,7 +110,7 @@ export async function GET(request: Request) {
     hasData: true,
     metrics: {
       current_weight_kg: currentWeight,
-      rep_range: `${avgReps}–${avgReps + 2}`,
+      rep_range: `${avgReps}-${avgReps + 2}`,
       estimated_1rm_kg: Math.round(estimated1RM),
       avg_rir: avgRir,
       sessions_count: sortedDates.length,

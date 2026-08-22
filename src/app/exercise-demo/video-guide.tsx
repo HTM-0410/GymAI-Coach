@@ -42,7 +42,7 @@ export default function VideoGuide() {
       {videoUrl ? (
         <div className="mt-4">
           {youtubeEmbed ? (
-            <div className="aspect-video overflow-hidden rounded-lg bg-ink shadow-inset">
+            <div className="aspect-video overflow-hidden rounded-lg bg-slate-950 shadow-inset">
               <iframe className="h-full w-full" src={youtubeEmbed} title="Video hướng dẫn bài tập" allowFullScreen />
             </div>
           ) : (

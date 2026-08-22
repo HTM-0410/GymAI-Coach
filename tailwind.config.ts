@@ -46,8 +46,8 @@ const config: Config = {
         // Pressed — active clicked mechanical switch
         'pressed':     'var(--shadow-pressed)',
         // Accent glow & LED
-        'accent':      '0 0 16px rgba(249, 115, 22, 0.35), 4px 4px 10px rgba(180, 60, 0, 0.25)',
-        'accent-lg':   '0 0 24px rgba(249, 115, 22, 0.5), 6px 6px 14px rgba(180, 60, 0, 0.3)',
+        'accent':      '0 2px 10px rgba(249, 115, 22, 0.28), 0 1px 2px rgba(0, 0, 0, 0.05)',
+        'accent-lg':   '0 4px 16px rgba(249, 115, 22, 0.38), 0 2px 4px rgba(0, 0, 0, 0.08)',
       },
     },
   },

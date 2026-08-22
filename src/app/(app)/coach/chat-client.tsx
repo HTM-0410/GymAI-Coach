@@ -51,28 +51,33 @@ export default function ChatClient() {
   }
 
   return (
-    <div className="card shadow-neumorph rounded-2xl overflow-hidden flex flex-col border border-white/80 dark:border-white/10" style={{ height: '76vh' }}>
-      {/* ── CYBER HUD HEADER ── */}
-      <div className="px-5 py-3.5 border-b border-black/[0.04] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.02] flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="relative h-8 w-8 rounded-lg bg-gradient-to-br from-accent to-accent-dim text-white flex items-center justify-center shadow-accent">
-            <Bot className="h-4 w-4" strokeWidth={1.5} />
-            <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-success ring-2 ring-chassis dark:ring-[#0c1017] led-pulse" />
-          </div>
-          <div>
-            <div className="text-xs font-bold text-ink flex items-center gap-1.5">
-              <span>GymAI Neural Coach</span>
-              <span className="text-[8px] font-mono font-bold px-1 py-0.2 rounded bg-accent/15 text-accent border border-accent/30">
-                PRO
-              </span>
-            </div>
-            <div className="text-[9px] font-mono text-ink-muted uppercase">Smart Training Model Online</div>
-          </div>
+    <div className="card shadow-neumorph rounded-2xl sm:rounded-3xl overflow-hidden flex flex-col flex-1 min-h-0 border border-white/80 dark:border-white/10 h-full w-full">
+      {/* ── COMPACT CHAT STATUS BAR ── */}
+      <div className="px-4 py-2.5 border-b border-black/[0.05] dark:border-white/[0.08] bg-black/[0.015] dark:bg-white/[0.02] flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-success ring-2 ring-success/30 led-pulse shrink-0" />
+          <span className="text-xs font-bold text-ink">Huấn luyện viên trực tuyến</span>
         </div>
 
-        <div className="flex items-center gap-1.5 font-mono text-[10px] text-ink-muted bg-black/[0.03] dark:bg-white/[0.04] px-2.5 py-1 rounded-md border border-black/[0.04] dark:border-white/[0.06]">
-          <Zap className="h-3 w-3 text-accent" />
-          <span>REALTIME AI</span>
+        <div>
+          {messages.length > 1 && (
+            <button
+              type="button"
+              onClick={() =>
+                setMessages([
+                  {
+                    role: 'assistant',
+                    content:
+                      'Xin chào! Tôi là Trí tuệ Huấn luyện GymAI. Tôi có thể phân tích form tập, tối ưu volume, chiến lược deload, hay giải quyết tình trạng chững tạ của bạn. Bạn muốn bắt đầu từ đâu?',
+                  },
+                ])
+              }
+              className="text-[10px] font-mono text-ink-muted hover:text-accent px-2 py-1 rounded-md bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.08] transition-colors cursor-pointer"
+              title="Xóa đoạn chat và bắt đầu lại"
+            >
+              Làm mới
+            </button>
+          )}
         </div>
       </div>
 
@@ -91,7 +96,7 @@ export default function ChatClient() {
                   <span className="font-mono text-[9px] uppercase tracking-widest text-ink-muted font-bold">AI Coach Response</span>
                 </div>
               )}
-              <span className="whitespace-pre-wrap">{m.content}</span>
+              <FormattedMessageContent content={m.content} isUser={m.role === 'user'} />
             </div>
           </div>
         ))}
@@ -144,3 +149,51 @@ export default function ChatClient() {
     </div>
   );
 }
+
+function FormattedMessageContent({ content, isUser }: { content: string; isUser: boolean }) {
+  if (isUser) {
+    return <span className="whitespace-pre-wrap">{content}</span>;
+  }
+
+  // Pre-process common AI raw artifacts and English phrases
+  const cleaned = content
+    .replace(/\*\*Actionable advice:\*\*/gi, '🎯 **Gợi ý hành động:**')
+    .replace(/Actionable advice:/gi, '🎯 **Gợi ý hành động:**')
+    .replace(/\*\*Key takeaways:\*\*/gi, '📌 **Ghi nhớ chính:**')
+    .replace(/\(muscle_gain\)/gi, '(Tăng cơ)')
+    .replace(/\(fat_loss\)/gi, '(Giảm mỡ)')
+    .replace(/\(strength\)/gi, '(Tăng sức mạnh)');
+
+  const lines = cleaned.split('\n');
+
+  return (
+    <div className="space-y-1.5 leading-relaxed text-sm">
+      {lines.map((line, lineIdx) => {
+        if (!line.trim()) {
+          return <div key={lineIdx} className="h-1.5" />;
+        }
+
+        // Parse **bold** parts
+        const parts = line.split(/(\*\*.*?\*\*)/g);
+
+        return (
+          <p key={lineIdx} className="leading-relaxed">
+            {parts.map((part, partIdx) => {
+              if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
+                return (
+                  <strong key={partIdx} className="font-extrabold text-ink dark:text-white">
+                    {part.slice(2, -2)}
+                  </strong>
+                );
+              }
+              // Clean any standalone unmatched **
+              const cleanPart = part.replace(/\*\*/g, '');
+              return <span key={partIdx}>{cleanPart}</span>;
+            })}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+

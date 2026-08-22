@@ -22,7 +22,7 @@ export default function ExerciseMedia({ jpgUrl, gifUrl, name, caption }: Exercis
   const video = isVideo(current);
 
   return (
-    <div className="relative aspect-video overflow-hidden rounded-xl bg-white dark:bg-black/40 border border-white/80 dark:border-white/10 shadow-neumorph-sm">
+    <div className="relative aspect-video overflow-hidden rounded-xl bg-white dark:bg-white border border-black/[0.06] dark:border-white/10 shadow-neumorph-sm">
       {!current ? (
         <div className="flex h-full w-full items-center justify-center">
           <Dumbbell className="h-12 w-12 text-ink-secondary opacity-30" />
@@ -48,7 +48,7 @@ export default function ExerciseMedia({ jpgUrl, gifUrl, name, caption }: Exercis
       )}
 
       {caption && (
-        <div className="absolute inset-x-0 bottom-0 bg-ink/75 px-4 py-3 text-sm font-medium text-white">
+        <div className="absolute inset-x-0 bottom-0 bg-black/75 backdrop-blur-xs px-4 py-3 text-sm font-medium text-white">
           {caption}
         </div>
       )}

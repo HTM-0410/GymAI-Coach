@@ -18,7 +18,7 @@ export default async function CoachClientPage({ params }: { params: Promise<{ id
   if (!client) notFound();
 
   const [workoutsRes, weightRes, prsRes] = await Promise.all([
-    supabase.from('workouts').select('id, date, status, workout_exercises(workout_sets(weight, reps, completed, set_type), exercises(name_vi))').eq('user_id', id).eq('status', 'completed').order('date', { ascending: false }).limit(15),
+    supabase.from('workouts').select('id, date, status, workout_exercises(phase, prescription_mode, workout_sets(weight, reps, completed, set_type), exercises(name_vi))').eq('user_id', id).eq('status', 'completed').order('date', { ascending: false }).limit(15),
     supabase.from('body_weight_logs').select('weight_kg, recorded_date').eq('user_id', id).order('recorded_date', { ascending: false }).limit(10),
     supabase.from('personal_records').select('id, record_type, value, exercises(name_vi), achieved_at').eq('user_id', id).order('achieved_at', { ascending: false }).limit(10),
   ]);
@@ -60,13 +60,18 @@ export default async function CoachClientPage({ params }: { params: Promise<{ id
           <div className="space-y-3">
             {(workoutsRes.data ?? []).map((w: any) => {
               const sets = (w.workout_exercises ?? []).reduce((s: number, we: any) =>
-                s + (we.workout_sets ?? []).filter((ss: any) => ss.completed && ss.set_type !== 'warmup').length, 0);
+                s + ((we.phase ?? 'main') === 'main' && (we.prescription_mode ?? 'reps') === 'reps'
+                  ? (we.workout_sets ?? []).filter((ss: any) => ss.completed && ss.set_type !== 'warmup').length
+                  : 0), 0);
+              const mainExerciseCount = (w.workout_exercises ?? []).filter((we: any) =>
+                (we.phase ?? 'main') === 'main' && (we.prescription_mode ?? 'reps') === 'reps',
+              ).length;
               return (
                 <div key={w.id} className="card shadow-neumorph-sm rounded-xl p-4 flex items-center justify-between">
                   <div>
                     <div className="font-medium text-ink text-sm">{new Date(w.date).toLocaleDateString('vi-VN')}</div>
                     <div className="font-mono text-[10px] text-ink-muted uppercase tracking-wider mt-0.5">
-                      {w.workout_exercises?.length ?? 0} bài · {sets} working sets
+                      {mainExerciseCount} bài chính · {sets} working sets
                     </div>
                   </div>
                   <Link href={`/workouts/${w.id}`} className="text-xs text-accent hover:underline font-medium shrink-0 ml-4">

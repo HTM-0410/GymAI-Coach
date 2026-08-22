@@ -8,6 +8,7 @@ type ThemeContextType = {
   theme: Theme;
   resolvedTheme: 'light' | 'dark';
   setTheme: (theme: Theme) => void;
+  toggleTheme: () => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -17,11 +18,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    // Read stored preference
-    const stored = localStorage.getItem('gymai_theme') as Theme | null;
-    if (stored && ['light', 'dark', 'system'].includes(stored)) {
-      setThemeState(stored);
-    }
+    // Read stored preference or inspect DOM
+    try {
+      const stored = localStorage.getItem('gymai_theme') as Theme | null;
+      if (stored && ['light', 'dark', 'system'].includes(stored)) {
+        setThemeState(stored);
+      }
+      const isCurrentlyDark = document.documentElement.classList.contains('dark');
+      setResolvedTheme(isCurrentlyDark ? 'dark' : 'light');
+    } catch (_) {}
   }, []);
 
   useEffect(() => {
@@ -63,11 +68,34 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   function setTheme(newTheme: Theme) {
     setThemeState(newTheme);
-    localStorage.setItem('gymai_theme', newTheme);
+    try {
+      localStorage.setItem('gymai_theme', newTheme);
+    } catch (_) {}
+
+    const root = document.documentElement;
+    const isDark =
+      newTheme === 'dark' ||
+      (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    if (isDark) {
+      root.classList.add('dark');
+      document.body?.classList.add('dark');
+      setResolvedTheme('dark');
+    } else {
+      root.classList.remove('dark');
+      document.body?.classList.remove('dark');
+      setResolvedTheme('light');
+    }
+  }
+
+  function toggleTheme() {
+    const isCurrentlyDark = document.documentElement.classList.contains('dark');
+    const next = isCurrentlyDark ? 'light' : 'dark';
+    setTheme(next);
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

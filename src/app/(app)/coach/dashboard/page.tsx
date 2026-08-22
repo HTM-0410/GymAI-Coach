@@ -44,13 +44,15 @@ export default async function CoachDashboardPage() {
   const sevenDaysAgo = new Date(Date.now() - 7 * 86400_000).toISOString().slice(0, 10);
   const clientIds = (clients ?? []).map((c: any) => c.user_id);
   const { data: recentWorkouts } = clientIds.length > 0
-    ? await supabase.from('workouts').select('user_id, status, date, workout_exercises(workout_sets(weight, reps, completed, set_type))').in('user_id', clientIds).gte('date', sevenDaysAgo).eq('status', 'completed')
+    ? await supabase.from('workouts').select('user_id, status, date, workout_exercises(phase, prescription_mode, workout_sets(weight, reps, completed, set_type))').in('user_id', clientIds).gte('date', sevenDaysAgo).eq('status', 'completed')
     : { data: [] as any[] };
 
   const perClient = new Map<string, number>();
   (recentWorkouts ?? []).forEach((w: any) => {
     const count = (w.workout_exercises ?? []).reduce((s: number, we: any) =>
-      s + (we.workout_sets ?? []).filter((ss: any) => ss.completed && ss.set_type !== 'warmup').length, 0);
+      s + ((we.phase ?? 'main') === 'main' && (we.prescription_mode ?? 'reps') === 'reps'
+        ? (we.workout_sets ?? []).filter((ss: any) => ss.completed && ss.set_type !== 'warmup').length
+        : 0), 0);
     perClient.set(w.user_id, (perClient.get(w.user_id) ?? 0) + count);
   });
 

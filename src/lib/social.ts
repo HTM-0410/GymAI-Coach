@@ -1,5 +1,6 @@
 // Phase 3: Social feed — public workout/PR sharing
 import { createClient } from '@/lib/supabase/server';
+import { isMainRepsExercise } from '@/lib/training/workout-phases';
 
 export type SharedPost = {
   id: string;
@@ -20,20 +21,23 @@ export async function generateShareableWorkoutSummary(workoutId: string, userId:
   const supabase = await createClient();
   const { data: workout } = await supabase
     .from('workouts')
-    .select('id, date, workout_exercises(workout_sets(weight, reps, completed, set_type), exercises(name_vi, name))')
+    .select('id, date, workout_exercises(phase, prescription_mode, workout_sets(weight, reps, completed, set_type), exercises(name_vi, name))')
     .eq('id', workoutId)
     .eq('user_id', userId)
     .maybeSingle();
 
   if (!workout) return null;
 
-  const sets = (workout.workout_exercises ?? []).flatMap((we: any) => (we.workout_sets ?? []).map((s: any) => ({ ...s, exercise: we.exercises?.name_vi })));
+  const mainExercises = (workout.workout_exercises ?? []).filter((we: any) => isMainRepsExercise(we));
+  const sets = mainExercises.flatMap((we: any) =>
+    (we.workout_sets ?? []).map((s: any) => ({ ...s, exercise: we.exercises?.name_vi })),
+  );
   const totalVolume = sets.filter((s: any) => s.completed && s.set_type !== 'warmup').reduce((acc: number, s: any) => acc + (Number(s.weight) || 0) * (Number(s.reps) || 0), 0);
 
   return {
     title: `Hoàn thành buổi tập ${new Date(workout.date).toLocaleDateString('vi-VN')}`,
-    summary: `${workout.workout_exercises?.length ?? 0} bài · ${sets.filter((s: any) => s.completed).length} sets · ${Math.round(totalVolume)}kg volume`,
-    exercises: (workout.workout_exercises ?? []).map((we: any) => ({
+    summary: `${mainExercises.length} bài chính · ${sets.filter((s: any) => s.completed && s.set_type !== 'warmup').length} sets · ${Math.round(totalVolume)}kg volume`,
+    exercises: mainExercises.map((we: any) => ({
       name: we.exercises?.name_vi,
       topSet: (we.workout_sets ?? []).filter((s: any) => s.completed && s.set_type === 'working').reduce((best: any, s: any) =>
         !best || (s.weight ?? 0) > (best.weight ?? 0) ? s : best, null),

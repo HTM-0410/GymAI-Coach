@@ -23,7 +23,7 @@ export default async function RegisterPage() {
         </div>
         {/* Footer */}
         <p className="text-center font-mono text-[10px] text-ink-muted mt-4 uppercase tracking-wider">
-          Miễn phí — Không cam kết — Khởi đầu ngay
+          Miễn phí - Không cam kết - Khởi đầu ngay
         </p>
       </div>
     </main>

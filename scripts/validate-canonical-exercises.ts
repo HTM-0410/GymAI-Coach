@@ -6,7 +6,13 @@ async function main() {
   const root = process.cwd();
   const dataDir = path.join(root, 'data', 'exercises');
   const publicDir = path.join(root, 'public');
-  const files = (await fs.readdir(dataDir)).filter((f) => f.endsWith('.json') && f !== 'exercise.schema.json');
+  const files = (await fs.readdir(dataDir)).filter(
+    (file) =>
+      file.endsWith('.json') &&
+      file !== 'exercise.schema.json' &&
+      !file.startsWith('.') &&
+      !file.endsWith('.sample.json'),
+  );
   const seen = new Set<string>();
   const errors: string[] = [];
   let pending = 0;

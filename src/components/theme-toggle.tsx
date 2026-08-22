@@ -1,11 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Sun, Moon, Monitor } from 'lucide-react';
 import { useTheme } from './theme-provider';
 
-export function ThemeToggle({ className = '', variant = 'compact' }: { className?: string; variant?: 'compact' | 'segmented' }) {
-  const { theme, resolvedTheme, setTheme } = useTheme();
+export function ThemeToggle({
+  className = '',
+  variant = 'compact',
+}: {
+  className?: string;
+  variant?: 'compact' | 'segmented';
+}) {
+  const { theme, resolvedTheme, setTheme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (variant === 'segmented') {
     return (
@@ -56,15 +67,20 @@ export function ThemeToggle({ className = '', variant = 'compact' }: { className
   }
 
   // Compact toggle button (cycles Light -> Dark)
-  const isDark = resolvedTheme === 'dark';
+  const isDark = mounted ? resolvedTheme === 'dark' : false;
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toggleTheme();
+  };
 
   return (
     <button
       type="button"
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className={`relative h-8 w-8 rounded-xl bg-chassis border border-white/80 dark:border-white/10 shadow-neumorph-sm hover:shadow-neumorph flex items-center justify-center text-ink-secondary hover:text-accent active:shadow-pressed transition-all duration-200 ${className}`}
+      onClick={handleClick}
+      className={`relative h-8 w-8 rounded-xl bg-chassis border border-black/[0.08] dark:border-white/10 shadow-neumorph-sm hover:shadow-neumorph flex items-center justify-center text-ink-secondary hover:text-accent active:shadow-pressed transition-all duration-200 cursor-pointer ${className}`}
       title={isDark ? 'Chuyển sang giao diện Sáng' : 'Chuyển sang giao diện Tối'}
-      aria-label="Chuyển đổi giao diện"
+      aria-label="Chuyển đổi giao diện Sáng / Tối"
     >
       {isDark ? (
         <Moon className="h-4 w-4 text-accent transition-transform duration-200 rotate-0 scale-100" strokeWidth={2} />

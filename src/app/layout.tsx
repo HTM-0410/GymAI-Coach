@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'GymAI Coach',
-  description: 'AI Personal Trainer — lập kế hoạch, tập luyện, ghi lại, phân tích',
+  description: 'AI Personal Trainer - lập kế hoạch, tập luyện, ghi lại, phân tích',
   manifest: '/manifest.json',
   icons: [{ rel: 'icon', url: '/icon.svg', type: 'image/svg+xml' }],
 };
@@ -24,12 +24,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              try {
-                const theme = localStorage.getItem('gymai_theme');
-                const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                if (isDark) document.documentElement.classList.add('dark');
-                else document.documentElement.classList.remove('dark');
-              } catch (_) {}
+              (function() {
+                try {
+                  var stored = localStorage.getItem('gymai_theme');
+                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  var isDark = stored === 'dark' || (!stored && prefersDark) || (stored === 'system' && prefersDark);
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
             `,
           }}
         />

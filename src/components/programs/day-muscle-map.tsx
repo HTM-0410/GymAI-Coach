@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import MuscleBody, { MuscleName } from '@/components/ui/MuscleBody';
 import { Target, Zap, Shield, Flame, Activity } from 'lucide-react';
+import { estimateSessionRecovery, type RecoveryExerciseInput } from '@/lib/programs/recovery';
 
 export type TargetMuscleItem = {
   muscle_name: string;
@@ -16,9 +18,10 @@ type Props = {
   dayName?: string;
   className?: string;
   variant?: 'compact' | 'full';
+  exercises?: RecoveryExerciseInput[];
 };
 
-// Map muscle strings to MuscleBody MuscleName enum ('CHEST' | 'SHOULDERS' | 'BACK' | 'TRICEPS' | 'BICEPS' | 'ABS' | 'LEGS' | 'GLUTES')
+// Map muscle strings to MuscleBody MuscleName enum ('CHEST' | 'SHOULDERS' | 'BACK' | 'TRICEPS' | 'BICEPS' | 'ABS' | 'LEGS' | 'GLUTES' | 'FOREARMS')
 function getHighlightedMuscleKeys(targets: TargetMuscleItem[], dayName: string = ''): MuscleName[] {
   const result = new Set<MuscleName>();
   const text = (
@@ -111,6 +114,20 @@ function getHighlightedMuscleKeys(targets: TargetMuscleItem[], dayName: string =
   return Array.from(result);
 }
 
+function getSingleMuscleKey(item: TargetMuscleItem): MuscleName | null {
+  const text = `${item.muscle_name} ${item.muscle_name_vi ?? ''}`.toLowerCase();
+  if (text.includes('ngực') || text.includes('chest')) return 'CHEST';
+  if (text.includes('vai') || text.includes('shoulder')) return 'SHOULDERS';
+  if (text.includes('lưng') || text.includes('back') || text.includes('xô')) return 'BACK';
+  if (text.includes('tay trước') || text.includes('bicep')) return 'BICEPS';
+  if (text.includes('cẳng tay') || text.includes('forearm')) return 'FOREARMS';
+  if (text.includes('tay sau') || text.includes('tricep')) return 'TRICEPS';
+  if (text.includes('bụng') || text.includes('core') || text.includes('abs')) return 'ABS';
+  if (text.includes('đùi') || text.includes('quad') || text.includes('chân')) return 'LEGS';
+  if (text.includes('mông') || text.includes('glute')) return 'GLUTES';
+  return null;
+}
+
 // Map muscle name to specific PNG asset in /public/muscle-groups/
 function getMuscleImagePath(name: string): string {
   const n = name.toLowerCase();
@@ -133,43 +150,66 @@ export default function DayMuscleMap({
   dayName = '',
   className = '',
   variant = 'full',
+  exercises = [],
 }: Props) {
+  const [hoveredMuscle, setHoveredMuscle] = useState<MuscleName | null>(null);
+
   const highlighted = getHighlightedMuscleKeys(targetMuscles, dayName);
   const totalTargetSets = targetMuscles.reduce((sum, m) => sum + (m.target_sets || 0), 0);
+  const recovery = estimateSessionRecovery(targetMuscles, exercises);
 
   // Separate primary and secondary muscles
   const primaryMuscles = targetMuscles.filter((m) => m.role === 'primary');
   const secondaryMuscles = targetMuscles.filter((m) => m.role !== 'primary');
 
+  const primaryKeys = getHighlightedMuscleKeys(primaryMuscles, dayName);
+  const secondaryKeys = getHighlightedMuscleKeys(secondaryMuscles, dayName);
+
   return (
     <div
-      className={`rounded-2xl border border-white/80 dark:border-white/10 bg-gradient-to-br from-chassis-hi/80 to-chassis-lo/40 p-4 shadow-neumorph-sm backdrop-blur-sm ${className}`}
+      className={`rounded-3xl border border-black/[0.08] dark:border-white/10 bg-gradient-to-br from-chassis-hi/90 via-chassis to-chassis-lo/90 p-4 sm:p-5 shadow-neumorph backdrop-blur-md ${className}`}
     >
-      <div className="flex flex-col md:flex-row items-stretch gap-4">
+      <div className="flex flex-col md:flex-row items-stretch gap-5">
         {/* Dual Anatomical Silhouette Map */}
-        <div className="relative shrink-0 flex items-center justify-center gap-4 bg-slate-100/80 dark:bg-slate-950/80 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-800/80 shadow-neumorph-sm">
-          {/* Subtle Grid Accent */}
-          <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] dark:bg-[radial-gradient(#475569_1px,transparent_1px)] [background-size:12px_12px] opacity-20 dark:opacity-30 rounded-2xl pointer-events-none" />
+        <div className="relative shrink-0 flex items-center justify-center gap-4 sm:gap-6 bg-slate-100/90 dark:bg-[#090d16] rounded-2xl p-4 sm:p-5 border border-black/[0.06] dark:border-white/15 shadow-neumorph-sm dark:shadow-2xl transition-colors duration-300">
+          {/* Subtle Grid Pattern Accent */}
+          <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] dark:bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:12px_12px] opacity-30 dark:opacity-15 rounded-2xl pointer-events-none" />
 
           {/* Front Body */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-[88px] h-[184px] sm:w-[98px] sm:h-[204px] transition-transform hover:scale-[1.03] duration-300">
-              <MuscleBody type="front" highlighted={highlighted} accentColor="#f97316" />
+          <div className="flex flex-col items-center z-10">
+            <div className="relative w-[90px] h-[190px] sm:w-[100px] sm:h-[210px] transition-transform hover:scale-105 duration-300">
+              <MuscleBody
+                type="front"
+                highlighted={primaryKeys}
+                secondaryMuscles={secondaryKeys}
+                accentColor="#f97316"
+                interactive={true}
+                hoveredMuscle={hoveredMuscle}
+                onHoverMuscle={setHoveredMuscle}
+              />
             </div>
-            <span className="mt-2.5 font-sans text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-300">
+            <span className="mt-2.5 font-mono text-[10px] font-extrabold uppercase tracking-widest text-ink-muted dark:text-slate-400 bg-black/5 dark:bg-white/5 px-2.5 py-0.5 rounded-md border border-black/5 dark:border-white/10">
               TRƯỚC
             </span>
           </div>
 
           {/* Vertical Divider */}
-          <div className="h-36 w-px bg-gradient-to-b from-transparent via-slate-300 dark:via-slate-700/80 to-transparent" />
+          <div className="h-40 w-px bg-gradient-to-b from-transparent via-black/10 dark:via-white/15 to-transparent z-10" />
 
           {/* Back Body */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-[88px] h-[184px] sm:w-[98px] sm:h-[204px] transition-transform hover:scale-[1.03] duration-300">
-              <MuscleBody type="back" highlighted={highlighted} accentColor="#f97316" />
+          <div className="flex flex-col items-center z-10">
+            <div className="relative w-[90px] h-[190px] sm:w-[100px] sm:h-[210px] transition-transform hover:scale-105 duration-300">
+              <MuscleBody
+                type="back"
+                highlighted={primaryKeys}
+                secondaryMuscles={secondaryKeys}
+                accentColor="#f97316"
+                interactive={true}
+                hoveredMuscle={hoveredMuscle}
+                onHoverMuscle={setHoveredMuscle}
+              />
             </div>
-            <span className="mt-2.5 font-sans text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-300">
+            <span className="mt-2.5 font-mono text-[10px] font-extrabold uppercase tracking-widest text-ink-muted dark:text-slate-400 bg-black/5 dark:bg-white/5 px-2.5 py-0.5 rounded-md border border-black/5 dark:border-white/10">
               SAU
             </span>
           </div>
@@ -178,68 +218,74 @@ export default function DayMuscleMap({
         {/* Target Muscles Badges & Volume Breakdown */}
         <div className="flex-1 flex flex-col justify-between min-w-0">
           {/* Header Info */}
-          <div className="flex items-center justify-between gap-2 mb-2.5">
-            <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_8px_rgba(249,115,22,0.8)]" />
-              <span className="font-mono text-[10px] uppercase tracking-widest text-ink-muted font-bold">
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_8px_rgba(249,115,22,0.8)] led-pulse" />
+              <span className="font-mono text-xs uppercase tracking-widest text-ink font-extrabold">
                 Nhóm cơ mục tiêu
               </span>
             </div>
             {totalTargetSets > 0 && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-accent/10 border border-accent/25 text-accent font-mono text-[10px] font-bold tracking-wider">
-                <Flame className="h-3 w-3" strokeWidth={2} />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-accent/15 border border-accent/30 text-accent font-mono text-xs font-extrabold tracking-wider shadow-xs">
+                <Flame className="h-3.5 w-3.5" strokeWidth={2.5} />
                 {totalTargetSets} sets mục tiêu
               </span>
             )}
           </div>
 
           {/* Muscle Cards Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
             {targetMuscles.length === 0 ? (
-              <div className="col-span-full text-xs text-ink-muted italic py-1">
-                Tập trung toàn diện theo cấu trúc bài tập
+              <div className="col-span-full text-xs text-ink-muted italic py-2">
+                Tập trung toàn diện theo cấu trúc bài tập.
               </div>
             ) : (
               targetMuscles.map((item, idx) => {
                 const isPrimary = item.role === 'primary';
                 const imagePath = getMuscleImagePath(item.muscle_name_vi ?? item.muscle_name);
                 const displayName = item.muscle_name_vi ?? item.muscle_name;
+                const muscleKey = getSingleMuscleKey(item);
+                const isCardHovered = hoveredMuscle && muscleKey === hoveredMuscle;
 
                 return (
                   <div
                     key={idx}
-                    className={`group relative flex items-center gap-2.5 p-2 rounded-xl border transition-all duration-200 ${
-                      isPrimary
+                    onMouseEnter={() => muscleKey && setHoveredMuscle(muscleKey)}
+                    onMouseLeave={() => setHoveredMuscle(null)}
+                    className={`group relative flex items-center gap-3 p-2.5 rounded-xl border transition-all duration-200 cursor-pointer ${
+                      isCardHovered
+                        ? 'bg-accent/25 border-accent scale-105 shadow-accent'
+                        : isPrimary
                         ? 'bg-gradient-to-r from-accent/[0.12] to-accent/[0.04] border-accent/30 shadow-[0_0_12px_rgba(249,115,22,0.12)]'
-                        : 'bg-chassis/60 border-black/[0.06] dark:border-white/10'
+                        : 'bg-chassis/70 border-black/[0.06] dark:border-white/10 hover:border-accent/40'
                     }`}
                   >
                     {/* Muscle Icon Thumbnail */}
-                    <div className="relative h-8 w-7 shrink-0 flex items-center justify-center bg-black/5 dark:bg-black/30 rounded-lg p-0.5">
+                    <div className="relative h-9 w-8 shrink-0 flex items-center justify-center bg-black/5 dark:bg-black/40 rounded-lg p-0.5">
                       <Image
                         src={imagePath}
                         alt={displayName}
                         fill
                         className="object-contain transition-transform group-hover:scale-110 drop-shadow-sm"
-                        sizes="28px"
+                        sizes="32px"
                       />
                     </div>
 
                     {/* Muscle Name & Role */}
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center justify-between gap-1">
-                        <span className="text-xs font-bold text-ink leading-tight truncate">
+                        <span className="text-xs sm:text-sm font-extrabold text-ink leading-tight truncate">
                           {displayName}
                         </span>
                         {item.target_sets > 0 && (
-                          <span className="font-mono text-[10px] text-accent font-extrabold shrink-0">
+                          <span className="font-mono text-xs text-accent font-extrabold shrink-0">
                             ×{item.target_sets}
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center gap-1 mt-0.5">
+                      <div className="flex items-center gap-1.5 mt-0.5">
                         <span
-                          className={`font-mono text-[8px] uppercase tracking-wider px-1 py-0.2 rounded font-bold ${
+                          className={`font-mono text-[9px] uppercase tracking-wider px-1.5 py-0.2 rounded-md font-bold ${
                             isPrimary
                               ? 'bg-accent text-white shadow-[0_0_4px_rgba(249,115,22,0.4)]'
                               : 'bg-black/5 dark:bg-white/10 text-ink-muted'
@@ -256,14 +302,18 @@ export default function DayMuscleMap({
           </div>
 
           {/* Quick Muscle Categories Active Strip */}
-          <div className="mt-3 pt-2.5 border-t border-black/[0.04] dark:border-white/[0.06] flex items-center justify-between text-[10px] font-mono text-ink-muted">
-            <span className="flex items-center gap-1">
-              <Zap className="h-3 w-3 text-accent" />
-              <span>Phục hồi: 48h - 72h</span>
+          <div className="mt-4 pt-3 border-t border-black/[0.05] dark:border-white/[0.08] flex items-center justify-between text-xs font-mono text-ink-muted">
+            <span className="flex items-center gap-1.5">
+              <Zap className="h-3.5 w-3.5 text-accent" />
+              <span
+                title={`${recovery.rationale}. Đây là khoảng ước tính; chỉ tập lại khi hiệu suất và đau mỏi đã hồi phục.`}
+              >
+                Phục hồi dự kiến: <strong className="text-ink font-extrabold">{recovery.minHours}-{recovery.maxHours} giờ</strong>
+              </span>
             </span>
-            <span className="flex items-center gap-1 font-semibold text-ink-secondary dark:text-ink">
-              <Activity className="h-3 w-3 text-accent" />
-              <span>{highlighted.length} vùng cơ kích hoạt</span>
+            <span className="flex items-center gap-1.5 font-bold text-accent">
+              <Activity className="h-3.5 w-3.5" />
+              <span>{targetMuscles.length} nhóm cơ kích hoạt</span>
             </span>
           </div>
         </div>

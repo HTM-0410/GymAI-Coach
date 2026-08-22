@@ -20,33 +20,21 @@ type NavItem = {
   badge?: string | null;
 };
 
-const navSections: { title: string; items: NavItem[] }[] = [
-  {
-    title: 'Tập luyện',
-    items: [
-      { href: '/dashboard',    label: 'Tổng quan',        icon: LayoutDashboard },
-      { href: '/workouts/new', label: 'Tập luyện AI',     icon: Brain, isAi: true, badge: 'HOT' },
-      { href: '/exercises',    label: 'Thư viện bài tập', icon: Dumbbell },
-      { href: '/programs',     label: 'Chương trình tập', icon: CalendarDays },
-      { href: '/gyms',         label: 'Phòng gym cá nhân', icon: Target },
-    ],
-  },
-  {
-    title: 'Trí tuệ AI & Dữ liệu',
-    items: [
-      { href: '/coach',           label: 'Chat AI Coach',    icon: MessageCircle, isAi: true },
-      { href: '/recommendations', label: 'Đề xuất tối ưu',   icon: Sparkles, isAi: true },
-      { href: '/progress',        label: 'Tiến độ & Kỷ lục', icon: TrendingUp },
-      { href: '/weekly',          label: 'Báo cáo tuần',     icon: BarChart3 },
-    ],
-  },
+const navItems: NavItem[] = [
+  { href: '/dashboard',    label: 'Tổng quan',          icon: LayoutDashboard },
+  { href: '/workouts/new', label: 'Tập luyện AI',       icon: Brain, isAi: true, badge: 'HOT' },
+  { href: '/exercises',    label: 'Thư viện bài tập',   icon: Dumbbell },
+  { href: '/programs',     label: 'Chương trình tập',   icon: CalendarDays },
+  { href: '/gyms',         label: 'Phòng gym cá nhân',  icon: Target },
+  { href: '/progress',     label: 'Tiến độ & Kỷ lục',   icon: TrendingUp },
+  { href: '/weekly',       label: 'Báo cáo tuần',       icon: BarChart3 },
 ];
 
 const mobileTabs: NavItem[] = [
   { href: '/dashboard',    label: 'Tổng quan', icon: LayoutDashboard },
   { href: '/exercises',    label: 'Bài tập',   icon: Dumbbell },
-  { href: '/workouts/new', label: 'AI Tập',    icon: Brain, isAi: true },
-  { href: '/coach',        label: 'Coach',     icon: MessageCircle, isAi: true },
+  { href: '/workouts/new', label: 'Tập ngay',  icon: Brain, isAi: true },
+  { href: '/programs',     label: 'Giáo án',   icon: CalendarDays },
   { href: '/profile',      label: 'Tôi',       icon: User },
 ];
 
@@ -117,90 +105,75 @@ export default function Nav({ displayName }: { displayName: string }) {
           </Link>
         </div>
 
-        {/* Navigation Sections */}
-        <nav className="flex-1 py-3 space-y-4 overflow-y-auto overflow-x-hidden px-2">
-          {navSections.map((section) => (
-            <div key={section.title} className="space-y-0.5">
-              <div
-                className={cn(
-                  'px-2.5 pb-1 font-mono text-[9px] uppercase tracking-widest text-ink-muted font-bold transition-opacity duration-200 h-4',
-                  isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        {/* Navigation Items (Single Unified List) */}
+        <nav className="flex-1 py-3 space-y-1 overflow-y-auto overflow-x-hidden px-2">
+          {navItems.map((it) => {
+            const Icon = it.icon;
+            const active = pathname === it.href || (it.href !== '/dashboard' && pathname.startsWith(it.href + '/'));
+
+            return (
+              <div key={it.href} className="relative group">
+                <Link
+                  href={it.href}
+                  className={cn(
+                    'flex items-center h-10 w-full rounded-xl pl-[15px] pr-2.5 gap-3 text-sm font-medium transition-colors relative overflow-hidden',
+                    active
+                      ? 'bg-accent/15 text-accent font-semibold shadow-xs dark:shadow-none'
+                      : 'text-ink-secondary hover:text-ink hover:bg-black/[0.04] dark:hover:bg-white/[0.05]',
+                  )}
+                >
+                  {/* Active indicator */}
+                  {active && (
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-r-full bg-accent" />
+                  )}
+
+                  <Icon
+                    className={cn(
+                      'h-4.5 w-4.5 shrink-0 transition-transform group-hover:scale-105',
+                      active ? 'text-accent' : 'text-ink-muted group-hover:text-ink',
+                      it.isAi && !active && 'text-accent/80',
+                    )}
+                    strokeWidth={active ? 1.75 : 1.4}
+                  />
+
+                  <div
+                    className={cn(
+                      'flex items-center justify-between flex-1 min-w-0 transition-opacity duration-200',
+                      isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    )}
+                  >
+                    <span className="tracking-tight text-xs truncate">{it.label}</span>
+                    {it.isAi && (
+                      <span className="text-[8px] font-mono uppercase font-bold text-accent bg-accent/10 px-1 py-0.2 rounded border border-accent/20 shrink-0 ml-1">
+                        AI
+                      </span>
+                    )}
+                  </div>
+                </Link>
+
+                {/* Floating Tooltip when Collapsed */}
+                {!isHovered && (
+                  <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 z-50 px-2 py-1 rounded-md bg-ink text-chassis dark:bg-white dark:text-ink text-xs font-semibold whitespace-nowrap shadow-xl opacity-0 translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none transition-all duration-150">
+                    {it.label} {it.isAi && '(AI)'}
+                  </div>
                 )}
-              >
-                {section.title}
               </div>
-
-              <div className="space-y-1">
-                {section.items.map((it) => {
-                  const Icon = it.icon;
-                  const active = pathname === it.href || (it.href !== '/dashboard' && pathname.startsWith(it.href + '/'));
-
-                  return (
-                    <div key={it.href} className="relative group">
-                      <Link
-                        href={it.href}
-                        className={cn(
-                          'flex items-center h-10 w-full rounded-xl pl-[15px] pr-2.5 gap-3 text-sm font-medium transition-colors relative overflow-hidden',
-                          active
-                            ? 'bg-accent/15 text-accent font-semibold shadow-xs dark:shadow-none'
-                            : 'text-ink-secondary hover:text-ink hover:bg-black/[0.04] dark:hover:bg-white/[0.05]',
-                        )}
-                      >
-                        {/* Active indicator */}
-                        {active && (
-                          <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-r-full bg-accent" />
-                        )}
-
-                        <Icon
-                          className={cn(
-                            'h-4.5 w-4.5 shrink-0 transition-transform group-hover:scale-105',
-                            active ? 'text-accent' : 'text-ink-muted group-hover:text-ink',
-                            it.isAi && !active && 'text-accent/80',
-                          )}
-                          strokeWidth={active ? 1.75 : 1.4}
-                        />
-
-                        <div
-                          className={cn(
-                            'flex items-center justify-between flex-1 min-w-0 transition-opacity duration-200',
-                            isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                          )}
-                        >
-                          <span className="tracking-tight text-xs truncate">{it.label}</span>
-                          {it.isAi && (
-                            <span className="text-[8px] font-mono uppercase font-bold text-accent bg-accent/10 px-1 py-0.2 rounded border border-accent/20 shrink-0 ml-1">
-                              AI
-                            </span>
-                          )}
-                        </div>
-                      </Link>
-
-                      {/* Floating Tooltip when Collapsed */}
-                      {!isHovered && (
-                        <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 z-50 px-2 py-1 rounded-md bg-ink text-chassis dark:bg-white dark:text-ink text-xs font-semibold whitespace-nowrap shadow-xl opacity-0 translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none transition-all duration-150">
-                          {it.label} {it.isAi && '(AI)'}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </nav>
 
-        {/* Footer Widget — Zero Layout Shift */}
+        {/* Footer Widget — Pixel-Perfect Symmetry & Zero Layout Shift */}
         <div className="p-2 border-t border-black/[0.04] dark:border-white/[0.06] shrink-0">
-          <div className="rounded-xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.06] p-1 flex flex-col gap-1">
+          <div className="rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.06] p-1.5 flex flex-col gap-1">
             
-            {/* Theme Toggle Row — 100% Stable Position, NEVER MOVES */}
-            <div className="h-9 w-full rounded-lg pl-[7px] pr-2 flex items-center gap-3 hover:bg-black/[0.04] dark:hover:bg-white/[0.05] transition-colors overflow-hidden group/theme">
-              <div className="shrink-0 flex items-center justify-center">
+            {/* Theme Toggle Row */}
+            <div className="h-9 w-full rounded-xl flex items-center hover:bg-black/[0.04] dark:hover:bg-white/[0.05] transition-colors group/theme">
+              <div className="w-9 h-9 shrink-0 flex items-center justify-center">
                 <ThemeToggle />
               </div>
               <span
                 className={cn(
-                  'text-xs font-semibold text-ink-muted group-hover/theme:text-ink transition-opacity duration-200 whitespace-nowrap',
+                  'text-xs font-semibold text-ink-muted group-hover/theme:text-ink transition-opacity duration-200 whitespace-nowrap pl-2',
                   isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 )}
               >
@@ -208,19 +181,24 @@ export default function Nav({ displayName }: { displayName: string }) {
               </span>
             </div>
 
-            {/* User Profile Row — 100% Stable Position, NEVER MOVES */}
-            <div className="h-9 w-full rounded-lg pl-[7px] pr-1.5 flex items-center justify-between gap-2 pt-0.5 border-t border-black/[0.04] dark:border-white/[0.06] overflow-hidden">
-              <Link href="/profile" className="flex items-center gap-2.5 min-w-0 flex-1 group">
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-accent to-accent-dim text-white font-mono font-bold text-xs flex items-center justify-center shadow-xs shrink-0 group-hover:scale-105 transition-transform">
-                  {initial}
+            {/* Divider */}
+            <div className="h-px bg-black/[0.04] dark:bg-white/[0.06] mx-1 my-0.5" />
+
+            {/* User Profile Row */}
+            <div className="h-9 w-full rounded-xl flex items-center justify-between hover:bg-black/[0.04] dark:hover:bg-white/[0.05] transition-colors group/user">
+              <Link href="/profile" className="flex items-center min-w-0 flex-1">
+                <div className="w-9 h-9 shrink-0 flex items-center justify-center">
+                  <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-accent to-accent-dim text-white font-mono font-bold text-xs flex items-center justify-center shadow-xs group-hover/user:scale-105 transition-transform">
+                    {initial}
+                  </div>
                 </div>
                 <div
                   className={cn(
-                    'min-w-0 transition-opacity duration-200',
+                    'min-w-0 pl-2 transition-opacity duration-200',
                     isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
                   )}
                 >
-                  <div className="text-xs font-semibold text-ink truncate group-hover:text-accent transition-colors">
+                  <div className="text-xs font-semibold text-ink truncate group-hover/user:text-accent transition-colors">
                     {displayName}
                   </div>
                   <div className="flex items-center gap-1">
@@ -234,7 +212,7 @@ export default function Nav({ displayName }: { displayName: string }) {
                 href="/auth/logout"
                 title="Đăng xuất"
                 className={cn(
-                  'h-7 w-7 rounded-lg text-ink-muted hover:text-danger hover:bg-danger/10 flex items-center justify-center transition-all shrink-0',
+                  'h-7 w-7 rounded-lg text-ink-muted hover:text-danger hover:bg-danger/10 flex items-center justify-center transition-all shrink-0 mr-1',
                   isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-75 pointer-events-none'
                 )}
               >
@@ -281,35 +259,28 @@ export default function Nav({ displayName }: { displayName: string }) {
           <div className="md:hidden fixed top-14 left-0 right-0 z-50 max-h-[calc(100vh-8rem)] overflow-y-auto
                           bg-chassis-hi dark:bg-[#0e1218] border-b border-black/[0.08] dark:border-white/[0.1]
                           p-4 shadow-2xl space-y-4 animate-in slide-in-from-top duration-200">
-            {navSections.map((section) => (
-              <div key={section.title} className="space-y-1.5">
-                <div className="font-mono text-[10px] uppercase tracking-widest text-ink-muted font-bold px-1">
-                  {section.title}
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {section.items.map((it) => {
-                    const Icon = it.icon;
-                    const active = pathname === it.href;
-                    return (
-                      <Link
-                        key={it.href}
-                        href={it.href}
-                        onClick={() => setMobileDrawerOpen(false)}
-                        className={cn(
-                          'flex items-center gap-2.5 p-3 rounded-xl text-xs font-semibold border transition-all',
-                          active
-                            ? 'bg-accent/15 text-accent border-accent/30'
-                            : 'bg-black/[0.02] dark:bg-white/[0.03] border-black/[0.04] dark:border-white/[0.06] text-ink',
-                        )}
-                      >
-                        <Icon className={cn('h-4 w-4', active ? 'text-accent' : 'text-ink-muted')} />
-                        <span className="truncate">{it.label}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
+            <div className="grid grid-cols-2 gap-2">
+              {navItems.map((it) => {
+                const Icon = it.icon;
+                const active = pathname === it.href;
+                return (
+                  <Link
+                    key={it.href}
+                    href={it.href}
+                    onClick={() => setMobileDrawerOpen(false)}
+                    className={cn(
+                      'flex items-center gap-2.5 p-3 rounded-xl text-xs font-semibold border transition-all',
+                      active
+                        ? 'bg-accent/15 text-accent border-accent/30'
+                        : 'bg-black/[0.02] dark:bg-white/[0.03] border-black/[0.04] dark:border-white/[0.06] text-ink',
+                    )}
+                  >
+                    <Icon className={cn('h-4 w-4', active ? 'text-accent' : 'text-ink-muted')} />
+                    <span className="truncate">{it.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
 
             <div className="pt-3 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between">
               <Link
@@ -337,26 +308,54 @@ export default function Nav({ displayName }: { displayName: string }) {
 
       {/* ── MOBILE FLOATING CYBERNETIC DOCK ── */}
       <nav className="md:hidden fixed bottom-3 inset-x-3 z-40 h-16
-                      bg-chassis-hi/90 dark:bg-[#0c1017]/95 backdrop-blur-2xl
+                      bg-chassis-hi/95 dark:bg-[#0c1017]/95 backdrop-blur-2xl
                       border border-black/[0.08] dark:border-white/[0.12] rounded-2xl
-                      shadow-[0_10px_30px_rgba(0,0,0,0.3)]
+                      shadow-neumorph-lg dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)]
                       px-2 flex items-center justify-around">
         {mobileTabs.map((it) => {
           const Icon = it.icon;
           const active = pathname === it.href;
 
           if (it.isAi && it.href === '/workouts/new') {
+            const isWorkoutActive = pathname === '/workouts/new' || pathname.startsWith('/workouts');
             return (
               <Link
                 key={it.href}
                 href={it.href}
-                className="relative -top-4 flex flex-col items-center group"
+                className="relative -top-3.5 flex flex-col items-center group select-none"
               >
-                <div className="relative h-13 w-13 rounded-2xl bg-gradient-to-tr from-accent to-accent-dim text-white shadow-accent-lg flex items-center justify-center group-hover:scale-105 active:scale-95 transition-transform border-2 border-white/40">
-                  <Brain className="h-6 w-6" strokeWidth={2.25} />
-                  <span className="absolute -bottom-1 h-1.5 w-6 rounded-full bg-accent/60 blur-xs" />
+                {/* Hero Floating Button */}
+                <div
+                  className={cn(
+                    'relative h-12 w-12 rounded-2xl flex items-center justify-center transition-all duration-200 group-hover:scale-105 active:scale-95',
+                    isWorkoutActive
+                      ? 'bg-gradient-to-tr from-accent via-accent to-accent-dim text-white shadow-[0_0_24px_rgba(249,115,22,0.65)] border-2 border-white/50 scale-105 ring-2 ring-accent/40'
+                      : 'bg-chassis dark:bg-[#12161f] text-ink-muted border border-black/10 dark:border-white/10 shadow-neumorph-sm hover:border-accent/40 hover:text-ink',
+                  )}
+                >
+                  <Brain
+                    className={cn(
+                      'h-5.5 w-5.5 transition-all duration-200',
+                      isWorkoutActive ? 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]' : 'text-ink-muted group-hover:text-accent',
+                    )}
+                    strokeWidth={2.2}
+                  />
+
+                  {isWorkoutActive && (
+                    <span className="absolute -bottom-1 h-1.5 w-6 rounded-full bg-accent/70 blur-xs" />
+                  )}
                 </div>
-                <span className="text-[9px] font-mono font-bold text-accent mt-0.5 uppercase tracking-wider">AI Tập</span>
+
+                <span
+                  className={cn(
+                    'text-[9px] font-mono mt-1 uppercase tracking-wider transition-colors',
+                    isWorkoutActive
+                      ? 'font-black text-accent'
+                      : 'font-medium text-ink-muted group-hover:text-ink',
+                  )}
+                >
+                  {it.label}
+                </span>
               </Link>
             );
           }

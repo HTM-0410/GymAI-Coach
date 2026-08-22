@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import Nav from '@/components/nav';
+import FloatingCoachWidget from '@/components/floating-coach-widget';
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   // DEV TEST (TIP-021G smoke): bypass auth gate
@@ -22,6 +23,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <div className="min-h-screen pb-20 md:pb-0 md:pl-16 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
       <Nav displayName={p?.display_name ?? user_.email ?? 'You'} />
       {children}
+      <FloatingCoachWidget />
     </div>
   );
 }

@@ -12,6 +12,12 @@ export type MediaType = 'image' | 'video';
 export type MediaSource = 'web_search_grounding' | 'manual' | 'ai_generated_flux' | 'ai_generated_veo';
 export type WorkoutStatus = 'planned' | 'in_progress' | 'completed' | 'skipped';
 export type SetType = 'warmup' | 'working' | 'drop' | 'failure';
+export type WorkoutPhase = 'warmup' | 'main' | 'cooldown';
+export type PrescriptionMode = 'reps' | 'time' | 'hold';
+export type ExerciseWorkoutRole =
+  | 'general_warmup' | 'dynamic_mobility' | 'activation'
+  | 'main_strength' | 'cooldown_aerobic' | 'static_stretch';
+export type WorkoutRoleReviewStatus = 'reviewed' | 'needs_review';
 export type ProgramType = 'system' | 'custom';
 export type DayTargetMuscleRole = 'primary' | 'secondary';
 export type RecommendationType =
@@ -50,6 +56,10 @@ export interface Database {
           instructions: string | null; tips: string | null;
           common_mistakes: string | null; status: ExerciseStatus;
           default_rest_seconds: number | null; default_rir: number | null;
+          workout_role: ExerciseWorkoutRole;
+          workout_role_review_status: WorkoutRoleReviewStatus;
+          workout_role_confidence: number | null;
+          workout_role_source: string | null;
           created_at: string;
         };
         Insert: Omit<Database['public']['Tables']['exercises']['Row'], 'id' | 'created_at'> & { id?: string; created_at?: string };
@@ -101,6 +111,34 @@ export interface Database {
         };
         Insert: Omit<Database['public']['Tables']['workouts']['Row'], 'id' | 'created_at'>;
         Update: Partial<Database['public']['Tables']['workouts']['Row']>;
+        Relationships: [];
+      };
+      workout_exercises: {
+        Row: {
+          id: string; workout_id: string; exercise_id: string; order_index: number;
+          target_sets: number | null; target_rep_min: number | null; target_rep_max: number | null;
+          target_weight: number | null; target_rir: number | null; rest_seconds: number | null;
+          ai_reason: string | null; phase: WorkoutPhase; prescription_mode: PrescriptionMode;
+          duration_seconds: number | null; hold_seconds: number | null; per_side: boolean;
+          started_at: string | null; completed_at: string | null;
+        };
+        Insert: Partial<Database['public']['Tables']['workout_exercises']['Row']> & {
+          workout_id: string; exercise_id: string; order_index: number;
+        };
+        Update: Partial<Database['public']['Tables']['workout_exercises']['Row']>;
+        Relationships: [];
+      };
+      workout_sets: {
+        Row: {
+          id: string; workout_exercise_id: string; set_number: number;
+          weight: number | null; reps: number | null; rir: number | null;
+          set_type: SetType; note: string | null; completed: boolean;
+          started_at: string | null; completed_at: string | null; actual_rest_seconds: number | null;
+        };
+        Insert: Partial<Database['public']['Tables']['workout_sets']['Row']> & {
+          workout_exercise_id: string; set_number: number;
+        };
+        Update: Partial<Database['public']['Tables']['workout_sets']['Row']>;
         Relationships: [];
       };
     };

@@ -35,6 +35,13 @@ export const dynamic = 'force-dynamic';
 
 type SlugParams = { slug: string };
 
+function safeWorkoutReturnPath(value?: string | string[]): string | null {
+  if (typeof value !== 'string') return null;
+  return /^\/workouts\/[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}(?:\?exercise=\d+)?$/i.test(value)
+    ? value
+    : null;
+}
+
 function Panel({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return <section className={`card corner-screws p-5 border border-white/80 dark:border-white/10 shadow-neumorph-sm ${className}`}>{children}</section>;
 }
@@ -48,8 +55,15 @@ function PanelTitle({ icon: Icon, children }: { icon: typeof Info; children: Rea
   );
 }
 
-export default async function ExerciseDetailPage({ params }: { params: Promise<SlugParams> }) {
+export default async function ExerciseDetailPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<SlugParams>;
+  searchParams: Promise<{ returnTo?: string | string[] }>;
+}) {
   const { slug } = await params;
+  const returnPath = safeWorkoutReturnPath((await searchParams).returnTo);
   const ex = await getExerciseBySlug(slug);
   if (!ex) notFound();
 
@@ -72,12 +86,27 @@ export default async function ExerciseDetailPage({ params }: { params: Promise<S
   return (
     <main className="min-h-screen bg-chassis blueprint-grid">
       <div className="mx-auto max-w-6xl px-4 pb-24 pt-6">
-        <Link
-          href="/exercises"
-          className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-ink-muted transition-colors hover:text-accent"
-        >
-          <ArrowLeft className="h-4 w-4" /> Thư viện bài tập
-        </Link>
+        {returnPath ? (
+          <Link
+            href={returnPath}
+            className="group sticky top-3 z-40 mb-5 inline-flex items-center gap-3 rounded-xl border-2 border-accent bg-accent px-4 py-2.5 text-white shadow-accent-lg transition-all hover:-translate-y-0.5 hover:brightness-105 active:translate-y-0"
+          >
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 shadow-inner">
+              <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-0.5" />
+            </span>
+            <span>
+              <span className="block text-sm font-extrabold uppercase tracking-wide">Quay Lại Buổi Tập</span>
+              <span className="block text-[10px] font-medium text-white/80">Tiếp tục đúng bài đang tập</span>
+            </span>
+          </Link>
+        ) : (
+          <Link
+            href="/exercises"
+            className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-ink-muted transition-colors hover:text-accent"
+          >
+            <ArrowLeft className="h-4 w-4" /> Thư viện bài tập
+          </Link>
+        )}
 
         <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
           <div>

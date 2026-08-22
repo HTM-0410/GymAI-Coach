@@ -23,7 +23,7 @@ export default async function LoginPage() {
         </div>
         {/* Footer */}
         <p className="text-center font-mono text-[10px] text-ink-muted mt-4 uppercase tracking-wider">
-          Hệ thống vận hành 24/7 — Phiên bản 2.0
+          Hệ thống vận hành 24/7 - Phiên bản 2.0
         </p>
       </div>
     </main>

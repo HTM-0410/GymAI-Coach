@@ -1,13 +1,11 @@
 import { TrendingUp } from 'lucide-react';
 
 export default function PreviousPerformance({ previous }: {
-  previous: { date: string; sets: { weight: number; reps: number; rir: number | null }[] } | null;
+  previous: { date: string; sets: { weight: number; reps: number }[] } | null;
 }) {
   if (!previous || previous.sets.length === 0) return null;
 
-  const avgWeight = previous.sets.reduce((s, x) => s + x.weight, 0) / previous.sets.length;
-  const avgReps = previous.sets.reduce((s, x) => s + x.reps, 0) / previous.sets.length;
-  const suggested = avgReps >= previous.sets[0].reps + 0.5 ? avgWeight + 2.5 : avgWeight;
+  const volume = previous.sets.reduce((sum, set) => sum + set.weight * set.reps, 0);
 
   return (
     <div className="card shadow-inset-sm rounded-xl p-4">
@@ -22,16 +20,13 @@ export default function PreviousPerformance({ previous }: {
           <div key={i} className="flex items-center gap-3 font-mono text-sm">
             <span className="text-ink-muted w-4 text-center text-xs">{i + 1}</span>
             <span className="text-ink font-medium">{s.weight}kg × {s.reps}</span>
-            {s.rir != null && (
-              <span className="font-mono text-[10px] text-ink-muted uppercase tracking-wider">RIR {s.rir}</span>
-            )}
           </div>
         ))}
       </div>
       <div className="border-t border-chassis-lo mt-3 pt-3 flex items-center justify-between">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-ink-muted">Đề xuất hôm nay</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-ink-muted">Tải tích lũy</span>
         <span className="font-mono text-sm font-extrabold text-accent">
-          {suggested}kg × {Math.max(1, Math.round(avgReps))} reps
+          {volume.toLocaleString('vi-VN', { maximumFractionDigits: 1 })} kg
         </span>
       </div>
     </div>
