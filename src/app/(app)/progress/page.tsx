@@ -41,7 +41,7 @@ export default async function ProgressPage() {
         <section className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           <Stat icon={<Activity className="h-4 w-4 text-accent" strokeWidth={1.4} />} label="Buổi 7 ngày" value={last7.toString()} />
           <Stat icon={<Activity className="h-4 w-4 text-accent" strokeWidth={1.4} />} label="Buổi 30 ngày" value={last30.toString()} />
-          <Stat icon={<Scale className="h-4 w-4 text-accent" strokeWidth={1.4} />} label="Cân nặng hiện tại" value={recentWeight ? `${recentWeight.weight_kg} kg` : '—'} />
+          <Stat icon={<Scale className="h-4 w-4 text-accent" strokeWidth={1.4} />} label="Cân nặng hiện tại" value={recentWeight ? `${recentWeight.weight_kg} kg` : '-'} />
           <Stat icon={<Award className="h-4 w-4 text-accent" strokeWidth={1.4} />} label="Personal Records" value={(prsRes.data?.length ?? 0).toString()} />
         </section>
 
@@ -81,7 +81,7 @@ export default async function ProgressPage() {
                         <td className={`py-2.5 text-right font-mono text-xs font-bold ${
                           deltaNum > 0 ? 'text-warn' : deltaNum < 0 ? 'text-success' : 'text-ink-muted'
                         }`}>
-                          {delta ? `${deltaNum > 0 ? '+' : ''}${delta}` : '—'}
+                          {delta ? `${deltaNum > 0 ? '+' : ''}${delta}` : '-'}
                         </td>
                       </tr>
                     );

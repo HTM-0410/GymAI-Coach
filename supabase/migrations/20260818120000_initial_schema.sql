@@ -1,5 +1,5 @@
 -- =====================================================================
--- GymAI Coach — Phase 1 MVP: Complete Database Schema
+-- GymAI Coach - Phase 1 MVP: Complete Database Schema
 -- Migration: 20260818120000_initial_schema.sql
 -- =====================================================================
 -- Pham vi: 22 tables theo spec.md section 36

@@ -56,22 +56,22 @@ exercise_review
 
 ## 4. Pipeline thực thi
 
-### Phase A — Crawl và discovery
+### Phase A - Crawl và discovery
 
 1. Crawl directory/list API trong browser context, lưu raw response và pagination metadata. Tạo `source_exercise_id -> canonical source URL` map; slug chỉ là khóa phụ vì có thể trùng.
 2. Với từng ID, mở detail page để lấy metadata server-rendered/JSON-LD và bắt network request. Nếu endpoint nội bộ thay đổi, chuyển sang route crawl thay vì sửa dữ liệu thủ công.
 3. Chuẩn hóa Unicode bằng UTF-8 NFC; giữ nguyên `name_en` nguồn. Chuẩn hóa equipment/muscle qua bảng mapping có version, không dùng fuzzy match tự động cho các biến thể nguy hiểm.
 4. Deduplicate theo `(source, source_exercise_id)`; cảnh báo nếu cùng tên nhưng khác ID hoặc cùng video cho nhiều tên.
 
-### Phase B — Lấy và xem video
+### Phase B - Lấy và xem video
 
 1. Chỉ tải video khi `license_status` đã được xác nhận hoặc Admin chọn “allow local copy”; nếu chưa rõ quyền, lưu URL để stream và không commit binary.
 2. Downloader phải hỗ trợ resume, retry exponential, checksum, giới hạn concurrency (3), timeout, content-length tối đa và không ghi đè file đã có hash đúng.
 3. Kiểm tra `HTTP 200/206`, `video/mp4`, magic bytes, kích thước hợp lý; không chấp nhận HTML lỗi được trả về với status 200.
-4. Dùng ffprobe/ffmpeg (hoặc thư viện tương đương) lấy duration, dimensions, fps, codec và trích frame đầu/giữa/cuối + mỗi 1–2 giây. Tạo contact sheet và lưu ngoài Git nếu file lớn.
+4. Dùng ffprobe/ffmpeg (hoặc thư viện tương đương) lấy duration, dimensions, fps, codec và trích frame đầu/giữa/cuối + mỗi 1-2 giây. Tạo contact sheet và lưu ngoài Git nếu file lớn.
 5. Video QA theo checklist: đúng người/thiết bị/bài tập, thấy đủ biên độ, hướng chuyển động, số bên (left/right), không bị cắt mất setup, không thay thế bằng clip của biến thể khác. `video_quality_status=pass` chỉ sau người duyệt xác nhận; vision LLM chỉ là candidate.
 
-### Phase C — Chuẩn bị lô LLM đúng 5 bài
+### Phase C - Chuẩn bị lô LLM đúng 5 bài
 
 Mỗi lần gọi là một request duy nhất:
 
@@ -89,7 +89,7 @@ Prompt bắt buộc yêu cầu JSON array đúng 5 phần tử, mỗi phần t�
 
 Schema validation phải chạy ngay sau response: parse JSON, kiểm tra đúng 5 slug, enum, độ dài, Unicode, dấu câu và cấm placeholder. Retry chỉ cho toàn lô khi JSON lỗi; không tự merge phần tử từ response lỗi.
 
-### Phase D — Human review và publish
+### Phase D - Human review và publish
 
 1. Hiển thị 5 bài cùng video/contact sheet, field nguồn, field AI và diff.
 2. Reviewer xác nhận riêng tên, video, muscle/equipment, instructions, safety; có thể sửa tiếng Việt mà không mất raw AI response.
@@ -128,7 +128,7 @@ Lệnh tối thiểu cần có: `crawl --dry-run`, `media verify --limit 5`, `ll
 2. Viết crawler raw + manifest, chạy pilot 10 bài (2 lô LLM × 5).
 3. Tải/xem 5 video pilot, sửa mapping và checklist đến khi reviewer pass 100%.
 4. Implement LLM request 5 bài + strict parser/retry/cache; đo token/cost và tỷ lệ reject.
-5. Mở rộng 100–120 bài MVP; mỗi batch publish sau review, theo dõi missing/duplicate/encoding.
+5. Mở rộng 100-120 bài MVP; mỗi batch publish sau review, theo dõi missing/duplicate/encoding.
 6. Sau khi pipeline ổn định mới mở rộng toàn catalog; không crawl 8,000+ một lần nếu chưa có rate-limit, storage và license budget.
 
 ## 8. Rủi ro cần quyết định trước khi code production
@@ -141,7 +141,7 @@ Lệnh tối thiểu cần có: `crawl --dry-run`, `media verify --limit 5`, `ll
 
 ## Nguồn tham khảo đã kiểm tra
 
-- [ExerciseLibrary.app homepage](https://www.exerciselibrary.app/) — mô tả catalog/filter/video.
-- [Barbell Bench Press detail](https://www.exerciselibrary.app/exercise/bench-press/barbell-bench-press) — cấu trúc metadata và hướng dẫn hiển thị.
-- [ExerciseLibrary API page](https://www.exerciselibrary.com/api/) — nguồn tên gần giống, **không phải** cùng domain; chỉ dùng để cảnh báo nhầm nguồn/API.
+- [ExerciseLibrary.app homepage](https://www.exerciselibrary.app/) - mô tả catalog/filter/video.
+- [Barbell Bench Press detail](https://www.exerciselibrary.app/exercise/bench-press/barbell-bench-press) - cấu trúc metadata và hướng dẫn hiển thị.
+- [ExerciseLibrary API page](https://www.exerciselibrary.com/api/) - nguồn tên gần giống, **không phải** cùng domain; chỉ dùng để cảnh báo nhầm nguồn/API.
 

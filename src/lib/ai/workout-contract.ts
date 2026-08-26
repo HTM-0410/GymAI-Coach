@@ -1,11 +1,15 @@
 import { z } from 'zod';
 import { isPhasePrescriptionValid } from './workout-constraints';
+import { normalizeTrackingMode, validateMetricValues } from '@/lib/workouts/metrics';
 
 export const WorkoutPhaseSchema = z.enum(['warmup', 'main', 'cooldown']);
-export const PrescriptionModeSchema = z.enum(['reps', 'time', 'hold']);
+export const TrackingModeSchema = z.enum(['weight_reps', 'reps', 'duration', 'duration_distance']);
+export const PrescriptionModeSchema = z.enum(['weight_reps', 'reps', 'duration', 'duration_distance', 'time', 'hold']);
+export const DurationStyleSchema = z.enum(['active', 'hold']);
 
 export type WorkoutPhase = z.infer<typeof WorkoutPhaseSchema>;
 export type PrescriptionMode = z.infer<typeof PrescriptionModeSchema>;
+export type TrackingMode = z.infer<typeof TrackingModeSchema>;
 
 export const WorkoutOptionsSchema = z.object({
   includeWarmup: z.boolean().default(false),
@@ -32,6 +36,7 @@ export const WorkoutDraftExerciseSchema = z.object({
   thumbnailUrl: z.string().nullable().default(null),
   phase: WorkoutPhaseSchema.default('main'),
   prescriptionMode: PrescriptionModeSchema.default('reps'),
+  durationStyle: DurationStyleSchema.nullable().default(null),
   targetSets: z.number().int().min(1).max(10),
   targetRepMin: nullablePositiveInt(50),
   targetRepMax: nullablePositiveInt(50),
@@ -40,13 +45,26 @@ export const WorkoutDraftExerciseSchema = z.object({
   restSeconds: z.number().int().min(0).max(600).default(0),
   durationSeconds: nullablePositiveInt(3600),
   holdSeconds: nullablePositiveInt(600),
+  targetDurationSeconds: nullablePositiveInt(3600),
+  targetDistanceMeters: nullablePositiveNumber,
   perSide: z.boolean().default(false),
   aiReason: z.string().max(500).default(''),
 }).superRefine((exercise, ctx) => {
   if (!isPhasePrescriptionValid(exercise.phase, exercise.prescriptionMode)) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Phase và prescription mode không tương thích' });
   }
-  if (exercise.prescriptionMode === 'reps') {
+  const mode = normalizeTrackingMode(exercise.prescriptionMode, { targetWeight: exercise.targetWeight, targetRir: exercise.targetRir });
+  const targetDuration = exercise.targetDurationSeconds
+    ?? exercise.durationSeconds
+    ?? exercise.holdSeconds;
+  const metricErrors = validateMetricValues(mode, {
+    weight: exercise.targetWeight,
+    reps: exercise.targetRepMin,
+    durationSeconds: targetDuration,
+    distanceMeters: exercise.targetDistanceMeters,
+  }, { allowMissingWeight: true });
+  metricErrors.forEach((message) => ctx.addIssue({ code: z.ZodIssueCode.custom, message }));
+  if (mode === 'weight_reps' || mode === 'reps') {
     if (exercise.targetRepMin == null || exercise.targetRepMax == null) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Bài theo reps phải có rep range' });
     } else if (exercise.targetRepMax < exercise.targetRepMin) {
@@ -55,37 +73,13 @@ export const WorkoutDraftExerciseSchema = z.object({
     if (exercise.restSeconds < 30) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Bài theo reps phải nghỉ ít nhất 30 giây' });
     }
-    if (exercise.durationSeconds != null || exercise.holdSeconds != null) {
+    if (exercise.durationSeconds != null || exercise.holdSeconds != null || exercise.targetDurationSeconds != null || exercise.targetDistanceMeters != null) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Bài theo reps không dùng duration/hold' });
     }
   }
 
-  if (exercise.prescriptionMode === 'time') {
-    if (exercise.targetSets !== 1) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Bài time MVP dùng đúng 1 hiệp' });
-    }
-    if (exercise.durationSeconds == null) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Bài theo thời gian phải có durationSeconds' });
-    }
-    if (exercise.targetRepMin != null || exercise.targetRepMax != null || exercise.holdSeconds != null) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Prescription time không dùng reps/hold' });
-    }
-  }
-
-  if (exercise.prescriptionMode === 'hold') {
-    if (exercise.targetSets !== 1) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Bài hold MVP dùng đúng 1 hiệp' });
-    }
-    if (exercise.holdSeconds == null) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Bài giữ tư thế phải có holdSeconds' });
-    }
-    if (exercise.targetRepMin != null || exercise.targetRepMax != null || exercise.durationSeconds != null) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Prescription hold không dùng reps/duration' });
-    }
-  }
-
-  if (exercise.prescriptionMode !== 'reps' && (exercise.targetWeight != null || exercise.targetRir != null)) {
-    ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Bài time/hold không dùng target weight hoặc RIR' });
+  if (mode !== 'weight_reps' && exercise.targetRir != null) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Chỉ weight_reps dùng target weight hoặc RIR' });
   }
 });
 
@@ -94,12 +88,13 @@ export type WorkoutDraftExercise = z.infer<typeof WorkoutDraftExerciseSchema>;
 export function estimateDraftExerciseSeconds(exercise: WorkoutDraftExercise) {
   const transition = 20;
   const rest = Math.max(0, exercise.targetSets - 1) * exercise.restSeconds;
-  if (exercise.prescriptionMode === 'reps') {
+  const mode = normalizeTrackingMode(exercise.prescriptionMode, { targetWeight: exercise.targetWeight, targetRir: exercise.targetRir });
+  if (mode === 'reps' || mode === 'weight_reps') {
     const averageReps = ((exercise.targetRepMin ?? 8) + (exercise.targetRepMax ?? 12)) / 2;
     return transition + exercise.targetSets * averageReps * 4 + rest;
   }
-  if (exercise.prescriptionMode === 'time') {
-    return transition + exercise.targetSets * (exercise.durationSeconds ?? 60) + rest;
+  if (mode === 'duration' || mode === 'duration_distance') {
+    return transition + exercise.targetSets * (exercise.targetDurationSeconds ?? exercise.durationSeconds ?? exercise.holdSeconds ?? 60) * (exercise.perSide ? 2 : 1) + rest;
   }
   return transition + exercise.targetSets * (exercise.holdSeconds ?? 30) * (exercise.perSide ? 2 : 1) + rest;
 }
@@ -129,7 +124,7 @@ export function allocatePhaseBudgets(
 
 const DraftBodyBase = z.object({
   programDayId: z.string().uuid(),
-  gymId: z.string().uuid().nullable(),
+  gymId: z.union([z.string().uuid(), z.literal('bodyweight'), z.literal('no_equipment')]).nullable(),
   durationMinutes: z.number().int().min(15).max(240),
   options: WorkoutOptionsSchema.optional(),
   phaseBudgets: PhaseBudgetsSchema.optional(),
@@ -204,6 +199,7 @@ export const CurrentDraftExerciseSchema = z.object({
   nameVi: z.string().nullable().optional(),
   phase: WorkoutPhaseSchema.default('main'),
   prescriptionMode: PrescriptionModeSchema.default('reps'),
+  durationStyle: DurationStyleSchema.nullable().optional(),
   targetSets: z.number().int().min(1).max(10).optional(),
   targetRepMin: z.number().int().min(1).max(50).nullable().optional(),
   targetRepMax: z.number().int().min(1).max(50).nullable().optional(),
@@ -212,18 +208,24 @@ export const CurrentDraftExerciseSchema = z.object({
   restSeconds: z.number().int().min(0).max(600).optional(),
   durationSeconds: z.number().int().min(1).max(3600).nullable().optional(),
   holdSeconds: z.number().int().min(1).max(600).nullable().optional(),
+  targetDurationSeconds: z.number().int().min(1).max(3600).nullable().optional(),
+  targetDistanceMeters: z.number().positive().nullable().optional(),
   perSide: z.boolean().optional(),
   aiReason: z.string().max(500).optional(),
 });
 
 export const WorkoutGenerateRequestSchema = z.object({
   programDayId: z.string().uuid(),
-  gymId: z.string().uuid().nullable(),
+  gymId: z.union([z.string().uuid(), z.literal('bodyweight'), z.literal('no_equipment')]).nullable(),
   durationMinutes: z.number().int().min(15).max(240).default(60),
   options: WorkoutOptionsSchema.optional().transform((value) => WorkoutOptionsSchema.parse(value ?? {})),
   regeneratePhase: WorkoutPhaseSchema.optional(),
-  userPrompt: z.string().max(1000).optional().nullable(),
+  userPrompt: z.string().max(4000).optional().nullable(),
   currentExercises: z.array(CurrentDraftExerciseSchema).max(15).optional().nullable(),
+  requestedRecoveryGroups: z.array(z.enum([
+    'CHEST', 'SHOULDERS', 'BACK', 'TRICEPS', 'BICEPS', 'FOREARMS', 'ABS', 'LEGS', 'GLUTES', 'CALVES',
+  ])).max(10).optional(),
+  recoveryDecision: z.enum(['exclude_weak', 'include_weak']).default('exclude_weak'),
 });
 
 export type WorkoutGenerateRequest = z.infer<typeof WorkoutGenerateRequestSchema>;

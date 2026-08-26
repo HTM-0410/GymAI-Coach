@@ -6,11 +6,13 @@ import {
   WorkoutPhaseSchema,
 } from './workout-contract';
 import { isPhasePrescriptionValid } from './workout-constraints';
+import { normalizeTrackingMode, validateMetricValues } from '@/lib/workouts/metrics';
 
 export const PlannedExerciseSchema = z.object({
   exercise_slug: z.string(),
   phase: WorkoutPhaseSchema,
   prescription_mode: PrescriptionModeSchema,
+  duration_style: z.enum(['active', 'hold']).nullable().optional(),
   target_sets: z.number().int().min(1).max(10),
   target_rep_min: z.number().int().min(1).max(50).nullable().default(null),
   target_rep_max: z.number().int().min(1).max(50).nullable().default(null),
@@ -19,39 +21,33 @@ export const PlannedExerciseSchema = z.object({
   rest_seconds: z.number().int().min(0).max(600).default(0),
   duration_seconds: z.number().int().min(1).max(3600).nullable().default(null),
   hold_seconds: z.number().int().min(1).max(600).nullable().default(null),
+  target_duration_seconds: z.number().int().min(1).max(3600).nullable().optional(),
+  target_distance_meters: z.number().positive().nullable().optional(),
   per_side: z.boolean().default(false),
   ai_reason: z.string().max(500).default(''),
 }).superRefine((exercise, ctx) => {
   if (!isPhasePrescriptionValid(exercise.phase, exercise.prescription_mode)) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'phase/prescription mismatch' });
   }
-  if (exercise.prescription_mode === 'reps') {
+  const mode = normalizeTrackingMode(exercise.prescription_mode, { targetWeight: exercise.target_weight, targetRir: exercise.target_rir });
+  const targetDuration = exercise.target_duration_seconds ?? exercise.duration_seconds ?? exercise.hold_seconds;
+  validateMetricValues(mode, {
+    weight: exercise.target_weight,
+    reps: exercise.target_rep_min,
+    durationSeconds: targetDuration,
+    distanceMeters: exercise.target_distance_meters,
+  }, { allowMissingWeight: true }).forEach((message) => ctx.addIssue({ code: z.ZodIssueCode.custom, message }));
+  if (mode === 'weight_reps' || mode === 'reps') {
     if (exercise.target_rep_min == null || exercise.target_rep_max == null) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'reps prescription requires a rep range' });
     } else if (exercise.target_rep_max < exercise.target_rep_min) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'target_rep_max must be >= target_rep_min' });
     }
-    if (exercise.rest_seconds < 30 || exercise.duration_seconds != null || exercise.hold_seconds != null) {
+    if (exercise.rest_seconds < 30 || exercise.duration_seconds != null || exercise.hold_seconds != null || exercise.target_duration_seconds != null || exercise.target_distance_meters != null) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'invalid reps prescription' });
     }
   }
-  if (exercise.prescription_mode === 'time') {
-    if (exercise.target_sets !== 1) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'time prescription requires one set in MVP' });
-    }
-    if (exercise.duration_seconds == null || exercise.target_rep_min != null || exercise.target_rep_max != null || exercise.hold_seconds != null) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'invalid time prescription' });
-    }
-  }
-  if (exercise.prescription_mode === 'hold') {
-    if (exercise.target_sets !== 1) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'hold prescription requires one set in MVP' });
-    }
-    if (exercise.hold_seconds == null || exercise.target_rep_min != null || exercise.target_rep_max != null || exercise.duration_seconds != null) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'invalid hold prescription' });
-    }
-  }
-  if (exercise.prescription_mode !== 'reps' && (exercise.target_weight != null || exercise.target_rir != null)) {
+  if (mode !== 'weight_reps' && exercise.target_rir != null) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'time/hold cannot use weight or RIR' });
   }
 });

@@ -20,7 +20,7 @@ export async function loginWithPassword(
 
   try {
     const supabase = await createClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
       return {
@@ -29,9 +29,24 @@ export async function loginWithPassword(
           : error.message,
       };
     }
-  } catch {
+
+    let isComplete = false;
+    if (data?.user) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('onboarding_step, experience_level, goal, preferred_training_days, preferred_session_duration')
+        .eq('user_id', data.user.id)
+        .maybeSingle();
+
+      const { isOnboardingComplete } = await import('@/lib/onboarding');
+      isComplete = isOnboardingComplete(profile);
+    }
+
+    redirect(isComplete ? '/dashboard' : '/onboarding');
+  } catch (err: any) {
+    if (err?.digest?.startsWith('NEXT_REDIRECT')) {
+      throw err;
+    }
     return { error: 'Không thể kết nối máy chủ đăng nhập. Vui lòng thử lại.' };
   }
-
-  redirect('/dashboard');
 }

@@ -1,10 +1,15 @@
-// Weekly AI report — tổng hợp 7 ngày qua
+// Weekly AI report - tổng hợp 7 ngày qua
 import { createClient } from '@/lib/supabase/server';
 import { callGemini } from './gemini';
 import { isMainRepsExercise } from '@/lib/training/workout-phases';
+import type { MinimalAIPersonalizationContext } from './personalization-context';
+import { bodyCompositionNarrative, personalizationFactors, type PersonalizationFactors } from './personalization-integration';
+
+export type ReportDataStatus = 'insufficient_data' | 'factual' | 'trend_ready';
 
 export type WeeklyReport = {
   period: { from: string; to: string };
+  data_status: ReportDataStatus;
   totals: {
     workouts: number;
     total_sets: number;
@@ -16,19 +21,24 @@ export type WeeklyReport = {
   weight_change_kg: number | null;
   prs: { exercise_slug: string; record_type: string; value: number }[];
   ai_summary: string;
+  body_composition_note: string | null;
+  personalization: PersonalizationFactors;
 };
 
-export async function generateWeeklyReport(userId: string): Promise<WeeklyReport> {
+export async function generateWeeklyReport(
+  userId: string,
+  personalization?: MinimalAIPersonalizationContext,
+): Promise<WeeklyReport> {
   const supabase = await createClient();
   const today = new Date();
   const from = new Date(today.getTime() - 7 * 86400_000).toISOString().slice(0, 10);
 
   const [workoutsRes, setsRes, weightRes, prsRes, feedbackRes] = await Promise.all([
     supabase.from('workouts').select('id, status, started_at, completed_at, planned_duration, workout_exercises(workout_exercises.muscles_via_targets)').eq('user_id', userId).gte('date', from).eq('status', 'completed'),
-    supabase.from('workout_sets').select('weight, reps, set_type, completed, workout_exercises!inner(phase, prescription_mode, workouts!inner(user_id, date))').eq('completed', true).eq('workout_exercises.workouts.user_id', userId).gte('workout_exercises.workouts.date', from),
+    supabase.from('workout_sets').select('weight, reps, set_type, completed, workout_exercises!inner(phase, prescription_mode, workouts!inner(user_id, date, status))').eq('completed', true).eq('workout_exercises.workouts.user_id', userId).eq('workout_exercises.workouts.status', 'completed').gte('workout_exercises.workouts.date', from),
     supabase.from('body_weight_logs').select('weight_kg, recorded_date').eq('user_id', userId).gte('recorded_date', from).order('recorded_date'),
     supabase.from('personal_records').select('record_type, value, exercises(slug), achieved_at').eq('user_id', userId).gte('achieved_at', from.toString()),
-    supabase.from('workout_feedback').select('difficulty, energy, quality, workouts!inner(user_id, date)').eq('workouts.user_id', userId).gte('workouts.date', from),
+    supabase.from('workout_feedback').select('difficulty, energy, quality, workouts!inner(user_id, date, status)').eq('workouts.user_id', userId).eq('workouts.status', 'completed').gte('workouts.date', from),
   ]);
 
   const workouts = workoutsRes.data ?? [];
@@ -60,34 +70,63 @@ export async function generateWeeklyReport(userId: string): Promise<WeeklyReport
     ? Number(weights[weights.length - 1].weight_kg) - Number(weights[0].weight_kg)
     : null;
 
-  // PR list
   const prList = prs.map((p: any) => ({
     exercise_slug: p.exercises?.slug ?? '',
     record_type: p.record_type,
     value: Number(p.value),
   }));
+  const bodyCompositionNote = bodyCompositionNarrative(personalization);
 
-  // Tóm tắt AI
+  // 0 completed workouts: Return insufficient_data immediately without calling Gemini
+  if (workouts.length === 0) {
+    return {
+      period: { from, to: today.toISOString().slice(0, 10) },
+      data_status: 'insufficient_data',
+      totals: {
+        workouts: 0,
+        total_sets: 0,
+        total_volume_kg: 0,
+        avg_session_min: null,
+      },
+      muscles_hit: {},
+      feedback_avg: { difficulty: null, energy: null, quality: null },
+      weight_change_kg: weightChange != null ? Number(weightChange.toFixed(1)) : null,
+      prs: [],
+      ai_summary: 'Chưa ghi nhận buổi tập nào hoàn tất trong 7 ngày qua. Hãy hoàn thành buổi tập đầu tiên để AI Coach tổng hợp dữ liệu thực tế và phân tích tiến độ cho bạn.',
+      body_composition_note: bodyCompositionNote,
+      personalization: personalizationFactors(personalization, { includeBodyComposition: true, includePerformance: true }),
+    };
+  }
+
+  const dataStatus: ReportDataStatus = workouts.length >= 3 ? 'trend_ready' : 'factual';
+
+  // AI Narrative grounded strictly on facts
   let aiSummary = '';
   try {
-    const prompt = `Bạn là AI coach gym. Viết báo cáo tuần (1 đoạn, 80-120 từ tiếng Việt) cho user:
+    const prompt = `Bạn là AI coach gym. Viết báo cáo tuần ngắn gọn (1 đoạn 60-90 từ tiếng Việt) dựa hoàn toàn trên dữ liệu thực tế sau:
 
-Số buổi tập: ${workouts.length}
-Tổng working sets: ${totalSets}
-Tổng volume: ${Math.round(totalVolume)} kg
-Buổi dài TB: ${avgSession ? Math.round(avgSession) + ' phút' : 'chưa rõ'}
-Feedback trung bình (độ khó/năng lượng/chất lượng 1-5): ${fbAvg('difficulty')}/${fbAvg('energy')}/${fbAvg('quality')}
-Cân nặng thay đổi: ${weightChange != null ? weightChange.toFixed(1) + 'kg' : 'không có dữ liệu'}
-PR mới: ${prList.length === 0 ? 'không có' : prList.map((p) => `${p.exercise_slug}=${p.value}`).join(', ')}
+Số buổi tập hoàn tất: ${workouts.length} buổi
+Tổng hiệp tập chính: ${totalSets} sets
+Tổng tải tích lũy: ${Math.round(totalVolume)} kg
+Thời lượng trung bình mỗi buổi: ${avgSession ? Math.round(avgSession) + ' phút' : 'chưa rõ'}
+Đánh giá buổi tập trung bình: Độ khó=${fbAvg('difficulty') ?? 'chưa có'}/5, Năng lượng=${fbAvg('energy') ?? 'chưa có'}/5, Form=${fbAvg('quality') ?? 'chưa có'}/5
+Cân nặng thay đổi: ${weightChange != null ? weightChange.toFixed(1) + 'kg' : 'không có'}
+Kỷ lục mới: ${prList.length === 0 ? 'không có' : prList.map((p) => `${p.exercise_slug}=${p.value}`).join(', ')}
+Thành phần cơ thể: ${bodyCompositionNote ?? 'không có'}
 
-Giọng thân thiện, có icon, nhắc điểm mạnh + gợi ý buổi tới.`;
-    aiSummary = await callGemini({ prompt, temperature: 0.7, maxOutputTokens: 350 });
+QUY TẮC BẮT BUỘC:
+- Dùng đúng số buổi tập thực tế (${workouts.length} buổi), KHÔNG được gọi là 0 buổi hoặc tuần nghỉ xả hơi nếu ${workouts.length} > 0.
+- KHÔNG đưa khẳng định sinh lý học hoặc liều dinh dưỡng cứng nhắc khi thiếu thông tin.
+- Giữ giọng khuyến khích, súc tích, chuyên nghiệp.`;
+
+    aiSummary = await callGemini({ prompt, temperature: 0.5, maxOutputTokens: 300 });
   } catch (e) {
-    aiSummary = `Tuần qua bạn đã hoàn thành ${workouts.length} buổi tập với tổng ${totalSets} sets chính và ${Math.round(totalVolume)}kg volume.`;
+    aiSummary = `Tuần qua bạn đã hoàn thành ${workouts.length} buổi tập với tổng ${totalSets} sets chính và ${Math.round(totalVolume)} kg volume.`;
   }
 
   return {
     period: { from, to: today.toISOString().slice(0, 10) },
+    data_status: dataStatus,
     totals: {
       workouts: workouts.length,
       total_sets: totalSets,
@@ -99,5 +138,7 @@ Giọng thân thiện, có icon, nhắc điểm mạnh + gợi ý buổi tới.`
     weight_change_kg: weightChange != null ? Number(weightChange.toFixed(1)) : null,
     prs: prList,
     ai_summary: aiSummary.trim(),
+    body_composition_note: bodyCompositionNote,
+    personalization: personalizationFactors(personalization, { includeBodyComposition: true, includePerformance: true }),
   };
 }

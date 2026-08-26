@@ -1,6 +1,6 @@
 # TIP-021B: Move /exercises-test → (app)/exercises + Consolidate Library Route
 
-> Vibecode Kit v6.1 — TIP (Task Instruction Pack) format.
+> Vibecode Kit v6.1 - TIP (Task Instruction Pack) format.
 > Contractor: chủ thầu đã approve scope với Human (2026-08-18).
 > Builder: Cursor agent thực thi.
 > Depends on: TIP-002 (design tokens in place), TIP-007A (data/exercises/*.json + loader).
@@ -13,14 +13,14 @@
 **Working directory:** `d:\GymAI-Coach`
 
 **Key files (đã tồn tại, KHÔNG sửa trừ khi TIP yêu cầu):**
-- `src/lib/exercises.ts` — loader JSON, `getAllExercises`, `getExerciseBySlug`, `filterExercises`, `getExerciseFacets`, `getResolvedAlternatives`. Cache in-memory. **Dùng nguyên.**
-- `src/lib/exercises-types.ts` — TypeScript types mirror schema JSON. **Dùng nguyên.**
-- `src/app/(app)/layout.tsx` — auth gate + sidebar nav inject. Route mới tự kế thừa.
-- `src/components/nav.tsx` — sidebar đã có item `/exercises` (label "Bài tập"). Highlight theo `pathname.startsWith(href + '/')`. **Không đổi.**
-- `src/app/globals.css` — design tokens đã có (`.card`, `.btn-primary`, `.chip`, `.input`, `.corner-screws`, `.shadow-inset`, `.blueprint-grid`, `.led-pulse`, `.ex-detail-bg`, `.ex-chassis`). **Không đổi.**
-- `tailwind.config.ts` — colors `chassis / ink / accent / warn / success / danger / info`, shadows `neumorph`, `inset`, `pressed`, `accent`. **Không đổi.**
-- `next.config.mjs` — đã whitelist `images.unsplash.com` + `upload.wikimedia.org`. **Không đổi.**
-- `data/exercises/*.json` — 7 bài (back-squat, barbell-row, bench-press, deadlift, hip-thrust, overhead-press, pull-up, romanian-deadlift). **Source of truth, không đổi nội dung.**
+- `src/lib/exercises.ts` - loader JSON, `getAllExercises`, `getExerciseBySlug`, `filterExercises`, `getExerciseFacets`, `getResolvedAlternatives`. Cache in-memory. **Dùng nguyên.**
+- `src/lib/exercises-types.ts` - TypeScript types mirror schema JSON. **Dùng nguyên.**
+- `src/app/(app)/layout.tsx` - auth gate + sidebar nav inject. Route mới tự kế thừa.
+- `src/components/nav.tsx` - sidebar đã có item `/exercises` (label "Bài tập"). Highlight theo `pathname.startsWith(href + '/')`. **Không đổi.**
+- `src/app/globals.css` - design tokens đã có (`.card`, `.btn-primary`, `.chip`, `.input`, `.corner-screws`, `.shadow-inset`, `.blueprint-grid`, `.led-pulse`, `.ex-detail-bg`, `.ex-chassis`). **Không đổi.**
+- `tailwind.config.ts` - colors `chassis / ink / accent / warn / success / danger / info`, shadows `neumorph`, `inset`, `pressed`, `accent`. **Không đổi.**
+- `next.config.mjs` - đã whitelist `images.unsplash.com` + `upload.wikimedia.org`. **Không đổi.**
+- `data/exercises/*.json` - 7 bài (back-squat, barbell-row, bench-press, deadlift, hip-thrust, overhead-press, pull-up, romanian-deadlift). **Source of truth, không đổi nội dung.**
 
 **Files cần MOVE (không viết lại):**
 - `src/app/exercises-test/page.tsx` → `src/app/(app)/exercises/page.tsx`
@@ -30,10 +30,10 @@
 - `src/app/exercises-test/new/exercise-ai-client.tsx` → `src/app/(app)/exercises/new/exercise-ai-client.tsx`
 
 **Files giữ nguyên (KHÔNG move, KHÔNG xóa):**
-- `src/app/exercise-demo/page.tsx` — design reference, sau khi move sẽ thêm banner `@deprecated`.
-- `src/app/exercise-demo/video-guide.tsx` — component dùng chung, import từ `[slug]/page.tsx`.
-- `src/app/exercise-demo/performance-chart.tsx` — component dùng chung, import từ `[slug]/page.tsx`.
-- `src/app/exercise-demo/interactive-performance-chart.tsx` — chưa dùng ở trang nào, giữ nguyên.
+- `src/app/exercise-demo/page.tsx` - design reference, sau khi move sẽ thêm banner `@deprecated`.
+- `src/app/exercise-demo/video-guide.tsx` - component dùng chung, import từ `[slug]/page.tsx`.
+- `src/app/exercise-demo/performance-chart.tsx` - component dùng chung, import từ `[slug]/page.tsx`.
+- `src/app/exercise-demo/interactive-performance-chart.tsx` - chưa dùng ở trang nào, giữ nguyên.
 
 **Pattern đã chuẩn trong repo:**
 - Route group `(app)` dùng cho mọi trang sau auth.
@@ -41,14 +41,14 @@
 - `next/image` cho mọi ảnh (KHÔNG dùng `<img>`).
 - Tailwind tokens qua classes (`bg-chassis`, `text-ink`, `text-accent`, `shadow-neumorph-sm`...). KHÔNG hard-code màu.
 - Icons: `lucide-react` (đã có sẵn trong `package.json`).
-- Vietnamese UI strings hard-code (OQ-2 — `next-intl` deferred).
+- Vietnamese UI strings hard-code (OQ-2 - `next-intl` deferred).
 - Industrial Skeuomorphism: shadows neumorph, accent LED, technical labels uppercase mono.
 
 ---
 
 ## Task
 
-### Phase 1 — Copy & Adjust Imports
+### Phase 1 - Copy & Adjust Imports
 
 1. Tạo thư mục `src/app/(app)/exercises/`.
 2. Copy toàn bộ file từ `src/app/exercises-test/` (kể cả nested `[slug]/` và `new/`) sang `src/app/(app)/exercises/`. Preserve line endings (LF) và encoding (UTF-8).
@@ -62,30 +62,30 @@
    - KHÔNG đổi `className` hay `onClick` (chưa có handler).
 5. Trong `src/app/(app)/exercises/[slug]/page.tsx`, button "Áp dụng cho buổi tiếp theo" (dòng ~239):
    - Tương tự: thêm `aria-disabled="true"` + `title="Sẽ kết nối AI Coach trong TIP-015"`.
-6. **Không đổi** các import path khác — chúng đã trỏ đúng `@/lib/...` và `@/app/exercise-demo/...`.
+6. **Không đổi** các import path khác - chúng đã trỏ đúng `@/lib/...` và `@/app/exercise-demo/...`.
 
-### Phase 2 — Padding Audit
+### Phase 2 - Padding Audit
 
 7. Mở `(app)/layout.tsx` (đã đọc): root có `pb-20 md:pb-0 md:pl-60`. Nghĩa là mobile đã có 80px bottom padding cho nav bar.
 8. Trong `src/app/(app)/exercises/page.tsx`:
-   - Bỏ class `pb-24` (tránh double-padding). Đổi thành `pb-6` hoặc giữ nguyên nếu muốn card cuối cách nav xa hơn — tùy judgment L1. Ghi lại DEVIATIONS nếu đổi.
+   - Bỏ class `pb-24` (tránh double-padding). Đổi thành `pb-6` hoặc giữ nguyên nếu muốn card cuối cách nav xa hơn - tùy judgment L1. Ghi lại DEVIATIONS nếu đổi.
 9. Trong `src/app/(app)/exercises/[slug]/page.tsx`:
    - Tương tự: bỏ `pb-24` để tránh double, hoặc ghi DEVIATIONS.
 
-### Phase 3 — Placeholder Images
+### Phase 3 - Placeholder Images
 
-10. Tạo `public/exercises/demo/PLACEHOLDER.svg` — SVG đơn giản 800×500, nền `#e0e5ec` (chassis), chữ "DEMO IMAGE" ở giữa font JetBrains Mono fallback `monospace`, màu `#8896a5` (ink-muted), có viền dashed `#c7d0da`. Tên file UPPERCASE theo convention repo.
+10. Tạo `public/exercises/demo/PLACEHOLDER.svg` - SVG đơn giản 800×500, nền `#e0e5ec` (chassis), chữ "DEMO IMAGE" ở giữa font JetBrains Mono fallback `monospace`, màu `#8896a5` (ink-muted), có viền dashed `#c7d0da`. Tên file UPPERCASE theo convention repo.
 11. Update 6 file JSON (KHÔNG đổi các field khác, chỉ path):
-    - `data/exercises/barbell-row.json` — `gallery.main` + cả `gallery.views[].src` → `/exercises/demo/PLACEHOLDER.svg`
-    - `data/exercises/deadlift.json` — tương tự
-    - `data/exercises/hip-thrust.json` — tương tự
-    - `data/exercises/overhead-press.json` — tương tự
-    - `data/exercises/pull-up.json` — tương tự
-    - `data/exercises/romanian-deadlift.json` — tương tự
+    - `data/exercises/barbell-row.json` - `gallery.main` + cả `gallery.views[].src` → `/exercises/demo/PLACEHOLDER.svg`
+    - `data/exercises/deadlift.json` - tương tự
+    - `data/exercises/hip-thrust.json` - tương tự
+    - `data/exercises/overhead-press.json` - tương tự
+    - `data/exercises/pull-up.json` - tương tự
+    - `data/exercises/romanian-deadlift.json` - tương tự
 12. Validate JSON sau update: mỗi file phải `JSON.parse` không lỗi. (Dùng `node -e "JSON.parse(require('fs').readFileSync(...))"` hoặc tương đương PowerShell.)
-13. 2 file còn lại (back-squat, bench-press) — giữ nguyên ảnh hiện có.
+13. 2 file còn lại (back-squat, bench-press) - giữ nguyên ảnh hiện có.
 
-### Phase 4 — Deprecate Demo Page
+### Phase 4 - Deprecate Demo Page
 
 14. Trong `src/app/exercise-demo/page.tsx`, thêm banner sau vào **đầu `<main>`**, **trước** `<div className="mx-auto max-w-6xl ...">` hiện tại:
 
@@ -103,19 +103,19 @@
 </div>
 ```
 
-15. Thêm `import Link from 'next/link';` ở đầu file (đã có sẵn trong bản hiện tại — verify trước khi thêm).
+15. Thêm `import Link from 'next/link';` ở đầu file (đã có sẵn trong bản hiện tại - verify trước khi thêm).
 
-### Phase 5 — Cleanup Staging
+### Phase 5 - Cleanup Staging
 
 16. Xóa toàn bộ `src/app/exercises-test/`.
 17. Verify `grep -r "exercises-test"` toàn repo → phải trả về 0 hit. (PowerShell: `Get-ChildItem -Recurse | Select-String "exercises-test"`.)
 
-### Phase 6 — Docs
+### Phase 6 - Docs
 
 18. Trong `data/exercises/README.md`, sau dòng "Hiện tại `[slug]/page.tsx` đang đọc từ Supabase..." thêm:
     ```
     Trang chính để xem các bài này là `/exercises` (TIP-021A, Phase 1 MVP).
-    Trang `/exercise-demo` đã deprecated — chỉ dùng làm design reference.
+    Trang `/exercise-demo` đã deprecated - chỉ dùng làm design reference.
     ```
 19. Trong `DECISIONS_LOG.md`, append cuối file:
 
@@ -153,7 +153,7 @@ Mỗi AC phải pass trước khi Builder nộp Completion Report. Đánh số A
 | AC-12 | Tất cả 7 bài có ảnh render (placeholder OK) | Visual navigate 7 slug |
 
 **Bonus (không bắt buộc nhưng ghi trong Completion Report nếu làm):**
-- AC-13: `data/exercises/validate.ps1` còn chạy được (nếu touch script — không touch trong TIP này).
+- AC-13: `data/exercises/validate.ps1` còn chạy được (nếu touch script - không touch trong TIP này).
 
 ---
 
@@ -162,17 +162,17 @@ Mỗi AC phải pass trước khi Builder nộp Completion Report. Đánh số A
 ### Làm được
 - Dùng `next/image` cho mọi ảnh.
 - Dùng Tailwind tokens, KHÔNG hard-code hex color.
-- Refactor nhỏ trong cùng file (L1) nếu phát hiện cần — ghi DEVIATIONS.
+- Refactor nhỏ trong cùng file (L1) nếu phát hiện cần - ghi DEVIATIONS.
 - Thêm comment ngắn giải thích nếu placeholder SVG cần thiết cho build pass.
 
 ### KHÔNG làm (L2/L3 nếu cần → escalate Contractor)
 - **KHÔNG** sửa `data/exercises/*.json` ngoài 6 file được liệt kê ở Task.11, **CHỈ** đổi `gallery.main` + `gallery.views[].src`, **không** thêm field, không đổi nội dung.
-- **KHÔNG** sửa schema `exercise.schema.json` — không thêm field mới.
+- **KHÔNG** sửa schema `exercise.schema.json` - không thêm field mới.
 - **KHÔNG** đụng Supabase, RLS, migrations.
 - **KHÔNG** đổi design tokens (`globals.css`, `tailwind.config.ts`).
 - **KHÔNG** đổi `package.json` (đủ deps rồi: `next`, `react`, `lucide-react`, `tailwindcss`, `zod`).
 - **KHÔNG** implement handler cho "Thêm vào buổi tập" / "Áp dụng AI" (TIP-011 + TIP-015).
-- **KHÔNG** xóa `/exercise-demo/*` — giữ components.
+- **KHÔNG** xóa `/exercise-demo/*` - giữ components.
 - **KHÔNG** tự ý đổi sang `<img>` thay vì `next/image`.
 - **KHÔNG** hard-code tiếng Anh trong UI mới (giữ Vietnamese theo OQ-2).
 - **KHÔNG** skip lint hoặc build errors.
@@ -184,7 +184,7 @@ Mỗi AC phải pass trước khi Builder nộp Completion Report. Đánh số A
 Thợ phải nộp bằng cách paste **chính xác** format sau vào chat khi xong. Thiếu một mục → VERIFY fail.
 
 ```markdown
-# Completion Report — TIP-021B
+# Completion Report - TIP-021B
 
 **STATUS:** DONE | PARTIAL | BLOCKED
 
@@ -194,7 +194,7 @@ Thợ phải nộp bằng cách paste **chính xác** format sau vào chat khi x
 - [list path mới + số dòng, vd: `src/app/(app)/exercises/page.tsx` (139 lines)]
 
 ### Modified
-- [list path đã sửa + tóm tắt thay đổi 1 dòng, vd: `src/app/(app)/exercises/[slug]/page.tsx` — đổi dynamic → static import cho generateStaticParams]
+- [list path đã sửa + tóm tắt thay đổi 1 dòng, vd: `src/app/(app)/exercises/[slug]/page.tsx` - đổi dynamic → static import cho generateStaticParams]
 
 ### Deleted
 - [list path đã xóa, vd: `src/app/exercises-test/` (toàn bộ)]
@@ -213,7 +213,7 @@ Thợ phải nộp bằng cách paste **chính xác** format sau vào chat khi x
 - Hoặc: "None."
 
 ## DEVIATIONS
-- [Cái gì đổi so với TIP + lý do + impact. Ví dụ: "Bỏ pb-24 trong page.tsx vì `(app)/layout.tsx` đã có pb-20 mobile — tránh double."]
+- [Cái gì đổi so với TIP + lý do + impact. Ví dụ: "Bỏ pb-24 trong page.tsx vì `(app)/layout.tsx` đã có pb-20 mobile - tránh double."]
 
 ## SUGGESTIONS (cho Contractor)
 - [Bất cứ cải tiến nào phát hiện khi làm. Ví dụ: "Schema JSON nên có `media_type: 'placeholder'` flag để sau này TIP-007A biết bài nào cần thay URL."]
@@ -246,4 +246,4 @@ grep -r "exercises-test"  # hoặc tương đương PowerShell
 
 **Contractor (Chủ thầu):** đã approve scope với Human lúc 2026-08-18 23:51 UTC+7.
 **Builder (Thợ):** Cursor agent.
-**Estimated:** 90 phút. 1–2 commit tùy judgment.
+**Estimated:** 90 phút. 1-2 commit tùy judgment.

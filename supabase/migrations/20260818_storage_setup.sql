@@ -3,8 +3,8 @@
 -- Project: GymAI Coach
 -- =====================================================================
 -- Creates two buckets:
---   1. avatars — public, for user profile pictures
---   2. equipment-scans — private, for user-uploaded equipment photos
+--   1. avatars - public, for user profile pictures
+--   2. equipment-scans - private, for user-uploaded equipment photos
 -- =====================================================================
 
 -- Public bucket for user avatars

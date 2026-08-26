@@ -50,7 +50,7 @@ export default async function CoachDashboardPage() {
   const perClient = new Map<string, number>();
   (recentWorkouts ?? []).forEach((w: any) => {
     const count = (w.workout_exercises ?? []).reduce((s: number, we: any) =>
-      s + ((we.phase ?? 'main') === 'main' && (we.prescription_mode ?? 'reps') === 'reps'
+      s + ((we.phase ?? 'main') === 'main'
         ? (we.workout_sets ?? []).filter((ss: any) => ss.completed && ss.set_type !== 'warmup').length
         : 0), 0);
     perClient.set(w.user_id, (perClient.get(w.user_id) ?? 0) + count);
@@ -80,7 +80,7 @@ export default async function CoachDashboardPage() {
                 className="card group p-5 hover:-translate-y-1 transition-all duration-300">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-bold text-ink">{c.display_name ?? '—'}</h3>
+                    <h3 className="font-bold text-ink">{c.display_name ?? '-'}</h3>
                     <p className="font-mono text-[10px] text-ink-muted uppercase tracking-wider mt-0.5">
                       {c.goal} · {c.experience_level}
                     </p>
@@ -89,7 +89,7 @@ export default async function CoachDashboardPage() {
                 </div>
                 <div className="flex items-center gap-4 text-sm">
                   <span className="font-mono text-xs text-ink-secondary">
-                    <span className="text-ink-muted">Cân: </span>{c.current_weight_kg ?? '—'}kg
+                    <span className="text-ink-muted">Cân: </span>{c.current_weight_kg ?? '-'}kg
                   </span>
                 </div>
                 <div className="mt-3 pt-3 border-t border-chassis-lo flex items-center justify-between">

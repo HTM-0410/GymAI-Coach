@@ -1,7 +1,7 @@
-# VERIFY REPORT — AI Workout Phases
+# VERIFY REPORT - AI Workout Phases
 
 Date: 2026-08-21  
-Method: Vibecode Kit v6.1 — Contractor VERIFY after TIP-REFINE-001
+Method: Vibecode Kit v6.1 - Contractor VERIFY after TIP-REFINE-001
 
 ## Requirement coverage
 
@@ -47,18 +47,18 @@ TIP-REFINE-001 addressed those findings and VERIFY round 2 retested them.
 
 ## Deferred and deployment conditions
 
-1. P1 — The additive migration
+1. P1 - The additive migration
    `20260821090000_add_workout_phases_and_exercise_taxonomy.sql` has not been
    applied. It must be reviewed and applied before releasing the application.
-2. P1 — Authenticated generate -> confirm -> logger E2E remains unverified on a
+2. P1 - Authenticated generate -> confirm -> logger E2E remains unverified on a
    disposable Supabase instance with that migration applied. No safe local auth
    fixture exists in the repository.
-3. P2 — Six ambiguous exercises remain `needs_review` and are intentionally
+3. P2 - Six ambiguous exercises remain `needs_review` and are intentionally
    excluded from warm-up/cooldown pools.
-4. P2 — A 240-minute selection may use less than the maximum. The approved
+4. P2 - A 240-minute selection may use less than the maximum. The approved
    requirement sets a ceiling, not a minimum utilization policy; this is a later
    product decision.
-5. P2 — Actual accessory duration is approximated from prescribed values and
+5. P2 - Actual accessory duration is approximated from prescribed values and
    exercise timestamps; no dedicated actual-duration column was approved.
 
 ## Contractor decision

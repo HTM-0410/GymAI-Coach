@@ -1,12 +1,12 @@
 # GymAI Coach
 
-> **AI Personal Trainer** — lập kế hoạch → tập luyện → ghi lại → phân tích → điều chỉnh.
+> **AI Personal Trainer** - lập kế hoạch → tập luyện → ghi lại → phân tích → điều chỉnh.
 
 ## Tech Stack
 
 - **Frontend:** Next.js 14 (App Router, RSC, Server Actions), React 18, TypeScript, Tailwind CSS, lucide-react
 - **Backend:** Supabase (PostgreSQL + Auth + Storage + RLS)
-- **AI:** Gemini 3.5 Flash-Lite (Google AI Studio) — free tier
+- **AI:** Gemini 3.5 Flash-Lite (Google AI Studio) - free tier
 - **Data source:** Web admin (Postgres via Supabase MCP applied migrations)
 
 ## Quick Start
@@ -107,9 +107,38 @@ Route (app)                              Size     First Load JS
 20 routes total
 ```
 
+## Cloudflare CI/CD
+
+Workflow `.github/workflows/deploy-cloudflare.yml` tự động kiểm tra và deploy
+Worker production khi có commit được push lên nhánh `main`. Có thể chạy lại thủ
+công từ tab Actions bằng `workflow_dispatch`.
+
+Thiết lập bốn GitHub Actions repository secrets trước khi chạy lần đầu:
+
+```text
+CLOUDFLARE_API_TOKEN
+CLOUDFLARE_ACCOUNT_ID
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+```
+
+API token Cloudflare chỉ nên được cấp quyền `Edit Cloudflare Workers` cho đúng
+account triển khai. Các runtime secrets như `SUPABASE_SERVICE_ROLE_KEY` và
+`GEMINI_API_KEY` tiếp tục được quản lý trên Cloudflare, không đưa vào GitHub.
+Workflow deploy với `--keep-vars` để giữ nguyên các runtime variables đã cấu hình.
+
+Pipeline chạy theo thứ tự:
+
+1. `npm ci`
+2. TypeScript typecheck
+3. Toàn bộ unit tests
+4. OpenNext production build
+5. Deploy Worker `gymai-coach`
+6. Smoke test trang chủ và trang đăng nhập production
+
 ## Phase Status
 
-### Phase 1 MVP — DONE ✅
+### Phase 1 MVP - DONE ✅
 
 | TIP | Feature | Status |
 |-----|---------|--------|
@@ -127,7 +156,7 @@ Route (app)                              Size     First Load JS
 | TIP-019 | Dashboard | ✅ |
 | TIP-020 | Build verification | ✅ |
 
-### Phase 2 — DONE ✅
+### Phase 2 - DONE ✅
 
 - Layered AI (deterministic rules + Gemini explainer)
 - Progressive overload rule engine (`src/lib/ai/rules.ts`)
@@ -140,7 +169,7 @@ Route (app)                              Size     First Load JS
 - Previous performance widget trong logger
 - Recommendation Accept/Reject UI `/recommendations`
 
-### Phase 3 — DONE ✅
+### Phase 3 - DONE ✅
 
 - Trainer account + Coach dashboard
 - Program marketplace (public share programs)

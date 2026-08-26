@@ -1,4 +1,4 @@
-// Phase 3: Social feed — public workout/PR sharing
+// Phase 3: Social feed - public workout/PR sharing
 import { createClient } from '@/lib/supabase/server';
 import { isMainRepsExercise } from '@/lib/training/workout-phases';
 

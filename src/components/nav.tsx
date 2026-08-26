@@ -6,13 +6,14 @@ import { usePathname } from 'next/navigation';
 import type { LucideIcon } from 'lucide-react';
 import {
   LayoutDashboard, Dumbbell, CalendarDays, Brain, TrendingUp, User, LogOut,
-  Sparkles, MessageCircle, Menu, X, Target, BarChart3,
+  Sparkles, MessageCircle, Menu, X, Target, BarChart3, HeartPulse,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './theme-toggle';
 import { BrandLogo } from './brand-logo';
+import { isMuscleReadinessClientEnabled } from '@/lib/recovery/feature-flags';
 
-type NavItem = {
+export type NavItem = {
   href: string;
   label: string;
   icon: LucideIcon;
@@ -20,23 +21,62 @@ type NavItem = {
   badge?: string | null;
 };
 
-const navItems: NavItem[] = [
+export const navItems: NavItem[] = [
   { href: '/dashboard',    label: 'Tổng quan',          icon: LayoutDashboard },
   { href: '/workouts/new', label: 'Tập luyện AI',       icon: Brain, isAi: true, badge: 'HOT' },
   { href: '/exercises',    label: 'Thư viện bài tập',   icon: Dumbbell },
   { href: '/programs',     label: 'Chương trình tập',   icon: CalendarDays },
   { href: '/gyms',         label: 'Phòng gym cá nhân',  icon: Target },
   { href: '/progress',     label: 'Tiến độ & Kỷ lục',   icon: TrendingUp },
+  ...(isMuscleReadinessClientEnabled() ? [{ href: '/recovery', label: 'Phục hồi cơ bắp', icon: HeartPulse }] : []),
   { href: '/weekly',       label: 'Báo cáo tuần',       icon: BarChart3 },
 ];
 
-const mobileTabs: NavItem[] = [
+export const getMobileTabs = (recoveryEnabled: boolean): NavItem[] => [
   { href: '/dashboard',    label: 'Tổng quan', icon: LayoutDashboard },
   { href: '/exercises',    label: 'Bài tập',   icon: Dumbbell },
   { href: '/workouts/new', label: 'Tập ngay',  icon: Brain, isAi: true },
-  { href: '/programs',     label: 'Giáo án',   icon: CalendarDays },
+  ...(recoveryEnabled
+    ? [{ href: '/recovery', label: 'Phục hồi', icon: HeartPulse }]
+    : [{ href: '/programs', label: 'Giáo án',   icon: CalendarDays }]),
   { href: '/profile',      label: 'Tôi',       icon: User },
 ];
+
+export function isMobileTabActive(
+  it: NavItem,
+  pathname: string,
+  recoveryEnabled: boolean,
+): boolean {
+  if (!pathname) return false;
+
+  if (it.href === '/dashboard') {
+    return pathname === '/dashboard' || pathname === '/';
+  }
+  if (it.href === '/exercises') {
+    if (recoveryEnabled) {
+      return (
+        pathname === '/exercises' ||
+        pathname.startsWith('/exercises/') ||
+        pathname === '/programs' ||
+        pathname.startsWith('/programs/')
+      );
+    }
+    return pathname === '/exercises' || pathname.startsWith('/exercises/');
+  }
+  if (it.href === '/workouts/new') {
+    return pathname === '/workouts/new' || pathname.startsWith('/workouts');
+  }
+  if (it.href === '/recovery') {
+    return pathname === '/recovery' || pathname.startsWith('/recovery/');
+  }
+  if (it.href === '/programs') {
+    return pathname === '/programs' || pathname.startsWith('/programs/');
+  }
+  if (it.href === '/profile') {
+    return pathname === '/profile' || pathname.startsWith('/profile');
+  }
+  return pathname === it.href;
+}
 
 export default function Nav({ displayName }: { displayName: string }) {
   const pathname = usePathname();
@@ -44,6 +84,9 @@ export default function Nav({ displayName }: { displayName: string }) {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const enterTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const recoveryEnabled = isMuscleReadinessClientEnabled();
+  const currentMobileTabs = getMobileTabs(recoveryEnabled);
 
   function handleMouseEnter() {
     if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
@@ -58,6 +101,13 @@ export default function Nav({ displayName }: { displayName: string }) {
       setIsHovered(false);
     }, 150);
   }
+
+  const isWorkoutFlow =
+    Boolean(pathname) &&
+    pathname.startsWith('/workouts/') &&
+    pathname !== '/workouts/new';
+
+  if (isWorkoutFlow) return null;
 
   const initial = (displayName || 'U').charAt(0).toUpperCase();
 
@@ -77,7 +127,7 @@ export default function Nav({ displayName }: { displayName: string }) {
             : 'w-16',
         )}
       >
-        {/* Brand Header — Exactly centered at 64px rail (36px logo + 2x14px padding) */}
+        {/* Brand Header - Exactly centered at 64px rail (36px logo + 2x14px padding) */}
         <div className="h-16 flex items-center shrink-0 border-b border-black/[0.04] dark:border-white/[0.06] overflow-hidden">
           <Link
             href="/dashboard"
@@ -162,7 +212,7 @@ export default function Nav({ displayName }: { displayName: string }) {
           })}
         </nav>
 
-        {/* Footer Widget — Pixel-Perfect Symmetry & Zero Layout Shift */}
+        {/* Footer Widget - Pixel-Perfect Symmetry & Zero Layout Shift */}
         <div className="p-2 border-t border-black/[0.04] dark:border-white/[0.06] shrink-0">
           <div className="rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.06] p-1.5 flex flex-col gap-1">
             
@@ -307,17 +357,17 @@ export default function Nav({ displayName }: { displayName: string }) {
       )}
 
       {/* ── MOBILE FLOATING CYBERNETIC DOCK ── */}
-      <nav className="md:hidden fixed bottom-3 inset-x-3 z-40 h-16
+      <nav className="md:hidden fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom,0px))] inset-x-3 z-40 h-16
                       bg-chassis-hi/95 dark:bg-[#0c1017]/95 backdrop-blur-2xl
                       border border-black/[0.08] dark:border-white/[0.12] rounded-2xl
                       shadow-neumorph-lg dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)]
                       px-2 flex items-center justify-around">
-        {mobileTabs.map((it) => {
+        {currentMobileTabs.map((it) => {
           const Icon = it.icon;
-          const active = pathname === it.href;
+          const active = isMobileTabActive(it, pathname, recoveryEnabled);
 
           if (it.isAi && it.href === '/workouts/new') {
-            const isWorkoutActive = pathname === '/workouts/new' || pathname.startsWith('/workouts');
+            const isWorkoutActive = active;
             return (
               <Link
                 key={it.href}

@@ -5,9 +5,9 @@
  * Media đã chuyển từ public/exercise-media/ lên Supabase Storage.
  *
  * Xem:
- *   - src/lib/exercises-db.ts        — DB loader (active)
- *   - scripts/upload-exercise-media.ts — upload 2648 files lên Storage
- *   - scripts/sync-exercises.ts        — full-replace DB sync
+ *   - src/lib/exercises-db.ts        - DB loader (active)
+ *   - scripts/upload-exercise-media.ts - upload 2648 files lên Storage
+ *   - scripts/sync-exercises.ts        - full-replace DB sync
  */
 
 export {

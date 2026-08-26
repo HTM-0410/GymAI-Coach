@@ -1,8 +1,11 @@
-// Layer 3 — Exercise substitution
+// Layer 3 - Exercise substitution
 // Tìm bài thay thế theo: cùng primary muscle + equipment có sẵn + difficulty phù hợp
 
 import { createClient } from '@/lib/supabase/server';
 import { callGemini } from './gemini';
+import { effectiveGymEquipment, isEquipmentCompatible } from './workout-constraints';
+import type { MinimalAIPersonalizationContext } from './personalization-context';
+import { filterPersonalizedExerciseCandidates, minimalPromptContext } from './personalization-integration';
 
 export type Substitute = {
   exercise_slug: string;
@@ -19,6 +22,7 @@ export async function findSubstitutes(args: {
   exerciseSlug: string;
   gymId: string | null;
   limit?: number;
+  personalization?: MinimalAIPersonalizationContext;
 }): Promise<Substitute[]> {
   const supabase = await createClient();
   const { data: ex } = await supabase
@@ -36,11 +40,14 @@ export async function findSubstitutes(args: {
   // Equipment đang có trong gym
   let gymEquipment: string[] = [];
   if (args.gymId) {
-    const { data: ge } = await supabase
-      .from('gym_equipment')
-      .select('equipment(slug)')
-      .eq('gym_id', args.gymId);
-    gymEquipment = (ge ?? []).map((r: any) => r.equipment?.slug).filter(Boolean);
+    const [{ data: ge }, { data: dumbbells }] = await Promise.all([
+      supabase.from('gym_equipment').select('equipment(slug)').eq('gym_id', args.gymId),
+      supabase.from('gym_dumbbell_inventory').select('id').eq('gym_id', args.gymId).limit(1),
+    ]);
+    gymEquipment = effectiveGymEquipment(
+      (ge ?? []).map((r: any) => r.equipment?.slug).filter(Boolean),
+      Boolean(dumbbells?.length),
+    );
   }
 
   // Lấy exercises khác cùng primary muscle
@@ -51,16 +58,14 @@ export async function findSubstitutes(args: {
     .in('muscles.slug', primaryMuscles.length > 0 ? primaryMuscles : ['_none_'])
     .neq('exercises.slug', args.exerciseSlug);
 
-  const allCands = ((candidates ?? []) as any[])
+  const allCands = filterPersonalizedExerciseCandidates(((candidates ?? []) as any[])
     .map((c) => c.exercises)
-    .filter((e: any) => e && e.status === 'published' && (!e.owner_user_id || e.owner_user_id === args.userId));
+    .filter((e: any) => e && e.status === 'published' && (!e.owner_user_id || e.owner_user_id === args.userId)), args.personalization);
 
   // Filter equipment
   const filtered = allCands.filter((c: any) => {
     const required = (c.exercise_equipment ?? []).map((e: any) => e.equipment?.slug).filter(Boolean);
-    if (required.length === 0) return true;
-    if (gymEquipment.length === 0) return true;
-    return required.every((slug: string) => gymEquipment.includes(slug));
+    return isEquipmentCompatible(required, gymEquipment, args.gymId === null);
   });
 
   // Nếu Gemini ranking được thì gọi; nếu không thì fallback top 5
@@ -76,6 +81,9 @@ export async function findSubstitutes(args: {
 
 CANDIDATES:
 ${candList}
+
+GIỚI HẠN VẬN ĐỘNG DO USER KHAI (context, không phải chẩn đoán):
+${JSON.stringify(minimalPromptContext(args.personalization, 'planner')?.constraints.movementLimitations ?? [])}
 
 Trả về JSON:
 [{ "exercise_slug": "...", "reason": "1 câu ngắn ≤ 15 từ", "confidence": 0.0-1.0 }]`;

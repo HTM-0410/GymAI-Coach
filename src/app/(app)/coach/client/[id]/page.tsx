@@ -38,7 +38,7 @@ export default async function CoachClientPage({ params }: { params: Promise<{ id
             <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_6px_rgba(249,115,22,0.6)]" />
             <span className="font-mono text-[10px] uppercase tracking-widest text-ink-muted">Client Profile</span>
           </div>
-          <h1 className="text-2xl font-extrabold text-ink tracking-tight">{client.display_name ?? '—'}</h1>
+          <h1 className="text-2xl font-extrabold text-ink tracking-tight">{client.display_name ?? '-'}</h1>
           <p className="text-sm text-ink-secondary mt-1 font-mono">
             {client.goal} · {client.experience_level} · {client.preferred_training_days} ngày/tuần · {client.preferred_session_duration} phút/buổi
           </p>
@@ -46,8 +46,8 @@ export default async function CoachClientPage({ params }: { params: Promise<{ id
 
         {/* Stats */}
         <section className="grid grid-cols-3 gap-4">
-          <StatTile icon={<TrendingUp className="h-5 w-5 text-accent" strokeWidth={1.5} />} label="Cân nặng" value={`${client.current_weight_kg ?? '—'} kg`} />
-          <StatTile icon={<TrendingUp className="h-5 w-5 text-accent" strokeWidth={1.5} />} label="Chiều cao" value={`${client.height_cm ?? '—'} cm`} />
+          <StatTile icon={<TrendingUp className="h-5 w-5 text-accent" strokeWidth={1.5} />} label="Cân nặng" value={`${client.current_weight_kg ?? '-'} kg`} />
+          <StatTile icon={<TrendingUp className="h-5 w-5 text-accent" strokeWidth={1.5} />} label="Chiều cao" value={`${client.height_cm ?? '-'} cm`} />
           <StatTile icon={<Award className="h-5 w-5 text-accent" strokeWidth={1.5} />} label="PRs" value={(prsRes.data?.length ?? 0).toString()} />
         </section>
 
@@ -60,11 +60,11 @@ export default async function CoachClientPage({ params }: { params: Promise<{ id
           <div className="space-y-3">
             {(workoutsRes.data ?? []).map((w: any) => {
               const sets = (w.workout_exercises ?? []).reduce((s: number, we: any) =>
-                s + ((we.phase ?? 'main') === 'main' && (we.prescription_mode ?? 'reps') === 'reps'
+                s + ((we.phase ?? 'main') === 'main'
                   ? (we.workout_sets ?? []).filter((ss: any) => ss.completed && ss.set_type !== 'warmup').length
                   : 0), 0);
               const mainExerciseCount = (w.workout_exercises ?? []).filter((we: any) =>
-                (we.phase ?? 'main') === 'main' && (we.prescription_mode ?? 'reps') === 'reps',
+                (we.phase ?? 'main') === 'main',
               ).length;
               return (
                 <div key={w.id} className="card shadow-neumorph-sm rounded-xl p-4 flex items-center justify-between">

@@ -4,6 +4,9 @@ import { createClient } from '@/lib/supabase/server';
 import { createServiceClient } from '@/lib/supabase/service';
 import { buildProgressionRecommendations } from '@/lib/ai/progression';
 import { findSubstitutes } from '@/lib/ai/substitute';
+import { buildPersonalizationContextForUser } from '@/lib/ai/personalization-context.server';
+import { projectMinimalAIContext } from '@/lib/ai/personalization-context';
+import { personalizationFactors } from '@/lib/ai/personalization-integration';
 
 const Body = z.object({
   kind: z.enum(['progression', 'substitute']),
@@ -18,9 +21,13 @@ export async function POST(req: NextRequest) {
 
   const body = Body.parse(await req.json());
   const svc = createServiceClient();
+  const personalization = projectMinimalAIContext(
+    await buildPersonalizationContextForUser(user.id, 'planner'),
+    'planner',
+  );
 
   if (body.kind === 'progression') {
-    const recs = await buildProgressionRecommendations(user.id);
+    const recs = await buildProgressionRecommendations(user.id, personalization);
     // Lưu PENDING vào ai_recommendations
     if (recs.length > 0) {
       await svc.from('ai_recommendations').insert(
@@ -37,7 +44,10 @@ export async function POST(req: NextRequest) {
         }))
       );
     }
-    return NextResponse.json({ recommendations: recs });
+    return NextResponse.json({
+      recommendations: recs,
+      personalization: personalizationFactors(personalization, { includePerformance: true }),
+    });
   }
 
   if (body.kind === 'substitute') {
@@ -46,8 +56,12 @@ export async function POST(req: NextRequest) {
       userId: user.id,
       exerciseSlug: body.exerciseSlug,
       gymId: body.gymId ?? null,
+      personalization,
     });
-    return NextResponse.json({ substitutes: subs });
+    return NextResponse.json({
+      substitutes: subs,
+      personalization: personalizationFactors(personalization),
+    });
   }
 
   return NextResponse.json({ error: 'bad_kind' }, { status: 400 });

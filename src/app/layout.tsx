@@ -12,7 +12,6 @@ export const viewport: Viewport = {
   themeColor: '#e0e5ec',
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
 };
 
 import { ThemeProvider } from '@/components/theme-provider';

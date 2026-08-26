@@ -2,7 +2,7 @@
  * Mapping từ equipment_vi trong DB sang các nhóm hiển thị ổn định.
  * Phân chia đầy đủ 13 nhóm thiết bị theo chuẩn phòng tập (Tạ Đòn, Tạ Đơn, Tạ Ấm, Ghế Tập...).
  *
- * Mỗi exercise có thể match nhiều category nếu có nhiều equipment_vi trùng —
+ * Mỗi exercise có thể match nhiều category nếu có nhiều equipment_vi trùng -
  * nhưng trong sidebar ta đếm unique exercise, không cộng dồn.
  */
 

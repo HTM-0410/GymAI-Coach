@@ -13,6 +13,8 @@ import {
 } from '../src/lib/training/workout-phases';
 import {
   deterministicFallback,
+  parseRequestedExercises,
+  promptMatchedMainExercises,
   preserveNonTargetPhases,
   validatePlan,
   type ReferencedCandidate,
@@ -228,17 +230,10 @@ test('deterministic fallback is valid for every duration/toggle matrix case', ()
   }
 });
 
-test('tampered phase/prescription combinations are rejected by both contracts', () => {
+test('tracking mode is independent from phase when the metric shape is valid', () => {
   for (const [phase, prescriptionMode] of [
     ['warmup', 'reps'], ['main', 'time'], ['main', 'hold'], ['cooldown', 'reps'],
   ] as const) {
-    assert.equal(WorkoutDraftRequestSchema.safeParse({
-      programDayId: PROGRAM_DAY_ID,
-      gymId: null,
-      durationMinutes: 60,
-      options: { includeWarmup: phase === 'warmup', includeCooldown: phase === 'cooldown' },
-      exercises: [{ ...exercise(phase), prescriptionMode }],
-    }).success, false);
     const snake = {
       exercise_slug: 'X_001', phase, prescription_mode: prescriptionMode,
       target_sets: prescriptionMode === 'reps' ? 2 : 1,
@@ -248,7 +243,7 @@ test('tampered phase/prescription combinations are rejected by both contracts', 
       duration_seconds: prescriptionMode === 'time' ? 60 : null,
       hold_seconds: prescriptionMode === 'hold' ? 30 : null, per_side: false, ai_reason: '',
     };
-    assert.equal(PlannedExerciseSchema.safeParse(snake).success, false);
+    assert.equal(PlannedExerciseSchema.safeParse(snake).success, true);
   }
 });
 
@@ -299,6 +294,42 @@ test('explicit avoidance is applied before deterministic fallback', () => {
   const fallback = deterministicFallback({ warmup: [], main: refs, cooldown: [] }, { includeWarmup: false, includeCooldown: false }, { warmup: 0, main: 60, cooldown: 0 });
   assert.equal(fallback.some((item) => item.exercise_slug === 'push-up'), false);
   assert.equal(fallback.length, 1);
+});
+
+test('Coach handoff parser preserves requested sets, reps and rest', () => {
+  const prompt = 'Tạo buổi tập bám sát đề xuất AI Coach: 1. **Squat với thanh đòn (Barbell Back Squat):** 3 hiệp x 8-10 reps (Nghỉ 90 giây/hiệp) 2. **Đạp đùi trên máy (Leg Press):** 3 hiệp x 10-12 reps (Nghỉ 60 giây/hiệp) 3. **Cuốn chân nằm sấp máy (Seated/Lying Leg Curl):** 3 hiệp x 12 reps (Nghỉ 60 giây/hiệp)';
+  assert.deepEqual(parseRequestedExercises(prompt), [
+    { name: 'Squat với thanh đòn (Barbell Back Squat)', targetSets: 3, targetRepMin: 8, targetRepMax: 10, restSeconds: 90 },
+    { name: 'Đạp đùi trên máy (Leg Press)', targetSets: 3, targetRepMin: 10, targetRepMax: 12, restSeconds: 60 },
+    { name: 'Cuốn chân nằm sấp máy (Seated/Lying Leg Curl)', targetSets: 3, targetRepMin: 12, targetRepMax: 12, restSeconds: 60 },
+  ]);
+});
+
+test('prompt-aware fallback selects requested leg exercises instead of earlier irrelevant candidates', () => {
+  const candidates = [
+    { id: 'push', slug: 'archer-push-up', name: 'Archer Push Up', name_vi: 'Chống Đẩy Kiểu Cung Thủ' },
+    { id: 'stretch', slug: 'assisted-prone-rectus-femoris-stretch', name: 'Assisted Prone Rectus Femoris Stretch', name_vi: 'Kéo Giãn Đùi Trước Nằm Sấp' },
+    { id: 'squat', slug: 'barbell-back-squat', name: 'Barbell Back Squat', name_vi: 'Squat với thanh đòn' },
+    { id: 'press', slug: 'leg-press', name: 'Leg Press', name_vi: 'Đạp đùi trên máy' },
+    { id: 'curl', slug: 'lying-leg-curl', name: 'Lying Leg Curl', name_vi: 'Cuốn chân nằm sấp máy' },
+    { id: 'calf', slug: 'standing-calf-raise', name: 'Standing Calf Raise', name_vi: 'Nhón bắp chân đứng' },
+  ];
+  const refs = candidates.map((candidate, index) => ({ ref: `M_${String(index + 1).padStart(3, '0')}`, phase: 'main' as const, candidate }));
+  const prompt = '1. Squat với thanh đòn (Barbell Back Squat): 3 hiệp x 8-10 reps (Nghỉ 90 giây/hiệp) 2. Đạp đùi trên máy (Leg Press): 3 hiệp x 10-12 reps (Nghỉ 60 giây/hiệp) 3. Cuốn chân nằm sấp máy (Seated/Lying Leg Curl): 3 hiệp x 12 reps (Nghỉ 60 giây/hiệp) 4. Nhón bắp chân đứng (Standing Calf Raise): 3 hiệp x 15 reps (Nghỉ 45 giây/hiệp)';
+  const matched = promptMatchedMainExercises(refs, 60, prompt);
+  assert.deepEqual(matched.exercises.map((item) => item.exercise_slug), ['M_003', 'M_004', 'M_005', 'M_006']);
+  assert.deepEqual(matched.exercises.map((item) => [item.target_sets, item.target_rep_min, item.target_rep_max, item.rest_seconds]), [
+    [3, 8, 10, 90], [3, 10, 12, 60], [3, 12, 12, 60], [3, 15, 15, 45],
+  ]);
+  assert.equal(matched.exercises.some((item) => item.exercise_slug === 'M_001'), false);
+
+  const fallback = deterministicFallback(
+    { warmup: [], main: refs, cooldown: [] },
+    { includeWarmup: false, includeCooldown: false },
+    { warmup: 0, main: 60, cooldown: 0 },
+    prompt,
+  );
+  assert.deepEqual(fallback.map((item) => item.exercise_slug), ['M_003', 'M_004', 'M_005', 'M_006']);
 });
 
 test('phase regeneration preserves every non-target exercise exactly and fails closed', () => {

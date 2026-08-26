@@ -1,4 +1,4 @@
-# TIP-AI-WORKOUT-PHASES — Vibecode Kit v6.1
+# TIP-AI-WORKOUT-PHASES - Vibecode Kit v6.1
 
 ## Header
 
@@ -41,11 +41,11 @@
 
 ## Task graph
 
-1. TIP-001 — shared Zod/types and additive migration.
-2. TIP-002 — canonical taxonomy, reviewed manifest and local validator.
-3. TIP-003 — deterministic budgets, phase pools, structured Gemini output, fallback, generate/confirm persistence.
-4. TIP-004 — switches, live budgets, phase review, phase-aware picker/regeneration.
-5. TIP-005 — active logger, analytics isolation, tests and technical verification.
+1. TIP-001 - shared Zod/types and additive migration.
+2. TIP-002 - canonical taxonomy, reviewed manifest and local validator.
+3. TIP-003 - deterministic budgets, phase pools, structured Gemini output, fallback, generate/confirm persistence.
+4. TIP-004 - switches, live budgets, phase review, phase-aware picker/regeneration.
+5. TIP-005 - active logger, analytics isolation, tests and technical verification.
 
 ## Acceptance criteria
 

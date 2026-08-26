@@ -1,6 +1,6 @@
-# Acceptance Checklist — TIP-021B
+# Acceptance Checklist - TIP-021B
 
-> Vibecode Kit v6.1 — Verify Report template.
+> Vibecode Kit v6.1 - Verify Report template.
 > Builder paste vào Completion Report. Contractor kiểm tra theo checklist này.
 
 ---
@@ -11,7 +11,7 @@
 | Mục | Đếm | Tổng | % |
 |---|---|---|---|
 | AC implement (12 mục trong TIP §Acceptance Criteria) | __ | 12 | __% |
-| Tasks trong TIP §Task (19 mục Phase 1–6) | __ | 19 | __% |
+| Tasks trong TIP §Task (19 mục Phase 1-6) | __ | 19 | __% |
 
 ### SCENARIO RESULTS
 | Severity | Count | Chi tiết |
@@ -29,9 +29,9 @@
 | `grep -r "exercises-test"` hits | __ | (mục tiêu: 0) |
 
 ### OVERALL STATUS
-- **READY** — pass tất cả AC, không BLOCKER, không MAJOR.
-- **READY with deferred** — có MINOR đã liệt kê, Human chọn ship/fix.
-- **NOT READY** — còn BLOCKER hoặc MAJOR.
+- **READY** - pass tất cả AC, không BLOCKER, không MAJOR.
+- **READY with deferred** - có MINOR đã liệt kê, Human chọn ship/fix.
+- **NOT READY** - còn BLOCKER hoặc MAJOR.
 
 ---
 
@@ -45,7 +45,7 @@
 
 ### B. Library page (`/exercises`)
 - [ ] Grid 3 cols desktop / 2 tablet / 1 mobile
-- [ ] Tất cả 7 bài hiển thị: back-squat, barbell-row, bench-press, deadlift, hip-thrust, overhead-press, pull-up, romanian-deadlift (đếm lại — verify 8 slug đã seed)
+- [ ] Tất cả 7 bài hiển thị: back-squat, barbell-row, bench-press, deadlift, hip-thrust, overhead-press, pull-up, romanian-deadlift (đếm lại - verify 8 slug đã seed)
 - [ ] Search input dùng `.input` class (recessed shadow)
 - [ ] Search filter real-time, dùng URL param `q`
 - [ ] Muscle chips: hiển thị tất cả distinct muscle groups từ `getExerciseFacets()`
@@ -67,8 +67,8 @@
 - [ ] Aside: AI Coach đề xuất + button `aria-disabled="true"` + tooltip
 - [ ] Aside: Lưu ý an toàn
 - [ ] Hiệu suất gần đây: 3 metric cards + PerformanceChart SVG render đúng
-- [ ] Bài thay thế: 0–3 cards, mỗi card link tới `/exercises/[alt-slug]`
-- [ ] "Thêm vào buổi tập" button fixed bottom (mobile) / inline (desktop) — `aria-disabled="true"` + tooltip
+- [ ] Bài thay thế: 0-3 cards, mỗi card link tới `/exercises/[alt-slug]`
+- [ ] "Thêm vào buổi tập" button fixed bottom (mobile) / inline (desktop) - `aria-disabled="true"` + tooltip
 
 ### D. Visual consistency (Industrial Skeuomorphism)
 - [ ] Background `bg-chassis` + `blueprint-grid`

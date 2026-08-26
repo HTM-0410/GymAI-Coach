@@ -9,7 +9,7 @@ import {
   normalizeEquipmentWeightKg,
 } from '@/lib/equipment-detection';
 
-const MAX_SIZE = 5 * 1024 * 1024;
+const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED = ['image/jpeg', 'image/png', 'image/webp'];
 
 const DetectedSchema = z.object({
@@ -41,21 +41,79 @@ type NormalizedDetection = {
 };
 
 export async function POST(req: NextRequest) {
-  // Auth
+  // Auth check
   const serverSupabase = await createClient();
   const { data: { user } } = await serverSupabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
+  if (!user) {
+    return NextResponse.json(
+      {
+        error: 'unauthorized',
+        message: 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.',
+      },
+      { status: 401 },
+    );
+  }
 
-  const form = await req.formData();
+  // Safe FormData Parsing
+  let form: FormData;
+  try {
+    form = await req.formData();
+  } catch (err: any) {
+    return NextResponse.json(
+      {
+        error: 'no_image',
+        message: 'Không thể đọc dữ liệu ảnh tải lên.',
+        detail: String(err?.message ?? err),
+      },
+      { status: 400 },
+    );
+  }
+
   const file = form.get('image') as File | null;
   const rawGymId = form.get('gymId');
   const gymId = typeof rawGymId === 'string' && rawGymId ? rawGymId : null;
-  if (!file) return NextResponse.json({ error: 'no_image' }, { status: 400 });
-  if (file.size > MAX_SIZE) return NextResponse.json({ error: 'too_large' }, { status: 413 });
-  if (!ALLOWED.includes(file.type)) return NextResponse.json({ error: 'bad_mime' }, { status: 400 });
-  if (gymId && !z.string().uuid().safeParse(gymId).success) {
-    return NextResponse.json({ error: 'invalid_gym_id' }, { status: 400 });
+
+  if (!file) {
+    return NextResponse.json(
+      {
+        error: 'no_image',
+        message: 'Không tìm thấy file ảnh để phân tích.',
+      },
+      { status: 400 },
+    );
   }
+
+  if (file.size > MAX_SIZE) {
+    return NextResponse.json(
+      {
+        error: 'too_large',
+        message: 'Kích thước ảnh vượt quá giới hạn cho phép (tối đa 5MB).',
+        maxBytes: MAX_SIZE,
+      },
+      { status: 413 },
+    );
+  }
+
+  if (!ALLOWED.includes(file.type)) {
+    return NextResponse.json(
+      {
+        error: 'bad_mime',
+        message: 'Định dạng ảnh không được hỗ trợ. Vui lòng chọn ảnh JPG, PNG hoặc WebP.',
+      },
+      { status: 400 },
+    );
+  }
+
+  if (gymId && !z.string().uuid().safeParse(gymId).success) {
+    return NextResponse.json(
+      {
+        error: 'invalid_gym_id',
+        message: 'Mã phòng tập không hợp lệ.',
+      },
+      { status: 400 },
+    );
+  }
+
   if (gymId) {
     const { data: ownedGym } = await serverSupabase
       .from('gyms')
@@ -63,7 +121,15 @@ export async function POST(req: NextRequest) {
       .eq('id', gymId)
       .eq('owner_user_id', user.id)
       .maybeSingle();
-    if (!ownedGym) return NextResponse.json({ error: 'gym_not_found' }, { status: 404 });
+    if (!ownedGym) {
+      return NextResponse.json(
+        {
+          error: 'gym_not_found',
+          message: 'Không tìm thấy phòng tập hoặc bạn không có quyền truy cập.',
+        },
+        { status: 404 },
+      );
+    }
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
@@ -132,7 +198,14 @@ export async function POST(req: NextRequest) {
       dumbbells: [...normalizedByWeight.values()].sort((a, b) => a.weight_kg - b.weight_kg),
     };
   } catch (e: any) {
-    return NextResponse.json({ error: 'ai_failed', detail: String(e?.message ?? e) }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: 'ai_failed',
+        message: 'AI không thể phân tích ảnh lúc này. Vui lòng thử lại sau.',
+        detail: String(e?.message ?? e),
+      },
+      { status: 500 },
+    );
   }
 
   // Upload original to storage (private bucket)
@@ -143,7 +216,14 @@ export async function POST(req: NextRequest) {
     .from('equipment-scans')
     .upload(path, buffer, { contentType: file.type, upsert: false });
   if (uploadError) {
-    return NextResponse.json({ error: 'scan_upload_failed', detail: uploadError.message }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: 'scan_upload_failed',
+        message: 'Không thể lưu trữ ảnh quét. Vui lòng thử lại.',
+        detail: uploadError.message,
+      },
+      { status: 500 },
+    );
   }
   const imageUrl = svc.storage.from('equipment-scans').getPublicUrl(path).data.publicUrl;
 
@@ -166,5 +246,10 @@ export async function POST(req: NextRequest) {
     response_json: parsed,
   });
 
-  return NextResponse.json({ ...parsed, scanId: scan?.id ?? null, imageUrl });
+  return NextResponse.json({
+    ...parsed,
+    scanId: scan?.id ?? null,
+    imageUrl,
+    message: 'Phân tích thiết bị thành công.',
+  });
 }

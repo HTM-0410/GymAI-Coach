@@ -97,7 +97,7 @@ INSERT INTO equipment (slug, name, name_vi, category) VALUES
 ON CONFLICT (slug) DO NOTHING;
 
 -- =====================================================================
--- PROGRAM 1 — PPL 6-day (Push/Pull/Legs)
+-- PROGRAM 1 - PPL 6-day (Push/Pull/Legs)
 -- =====================================================================
 DO $$
 DECLARE
@@ -109,7 +109,7 @@ BEGIN
   INSERT INTO training_programs (owner_user_id, type, name, name_vi, description, duration_weeks)
   VALUES (NULL, 'system', 'Push Pull Legs 6-day',
           'Push Pull Legs 6 buổi/tuần',
-          'Tần suất cao cho mỗi nhóm cơ — 2 buổi/tuần mỗi nhóm. Phù hợp intermediate tập 6 ngày, muốn hypertrophy tối đa.',
+          'Tần suất cao cho mỗi nhóm cơ - 2 buổi/tuần mỗi nhóm. Phù hợp intermediate tập 6 ngày, muốn hypertrophy tối đa.',
           8)
   ON CONFLICT DO NOTHING
   RETURNING id INTO pid;
@@ -122,41 +122,41 @@ BEGIN
   IF pid IS NOT NULL THEN
     -- Push 1
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 0, 'Push A', 'Push A — Ngực/Vai/Tay sau (nặng)', 0)
+    VALUES (pid, 0, 'Push A', 'Push A - Ngực/Vai/Tay sau (nặng)', 0)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi
     RETURNING id INTO d_push;
 
     -- Pull 1
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 2, 'Pull A', 'Pull A — Lưng/Tay trước (nặng)', 1)
+    VALUES (pid, 2, 'Pull A', 'Pull A - Lưng/Tay trước (nặng)', 1)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi
     RETURNING id INTO d_pull;
 
     -- Legs 1
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 4, 'Legs A', 'Legs A — Đùi/Mông (nặng)', 2)
+    VALUES (pid, 4, 'Legs A', 'Legs A - Đùi/Mông (nặng)', 2)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi
     RETURNING id INTO d_leg;
 
     -- Push 2
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 1, 'Push B', 'Push B — Ngực/Vai/Tay sau (volume)', 3)
+    VALUES (pid, 1, 'Push B', 'Push B - Ngực/Vai/Tay sau (volume)', 3)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     -- Pull 2
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 3, 'Pull B', 'Pull B — Lưng/Tay trước (volume)', 4)
+    VALUES (pid, 3, 'Pull B', 'Pull B - Lưng/Tay trước (volume)', 4)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     -- Legs 2
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 5, 'Legs B', 'Legs B — Đùi/Mông (volume)', 5)
+    VALUES (pid, 5, 'Legs B', 'Legs B - Đùi/Mông (volume)', 5)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
   END IF;
 END $$;
 
 -- =====================================================================
--- PROGRAM 2 — Upper/Lower 4-day
+-- PROGRAM 2 - Upper/Lower 4-day
 -- =====================================================================
 DO $$
 DECLARE
@@ -177,25 +177,25 @@ BEGIN
 
   IF pid IS NOT NULL THEN
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 0, 'Upper A', 'Upper A — Thân trên (compound)', 0)
+    VALUES (pid, 0, 'Upper A', 'Upper A - Thân trên (compound)', 0)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 1, 'Lower A', 'Lower A — Chân (compound)', 1)
+    VALUES (pid, 1, 'Lower A', 'Lower A - Chân (compound)', 1)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 3, 'Upper B', 'Upper B — Thân trên (volume)', 2)
+    VALUES (pid, 3, 'Upper B', 'Upper B - Thân trên (volume)', 2)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 4, 'Lower B', 'Lower B — Chân (volume)', 3)
+    VALUES (pid, 4, 'Lower B', 'Lower B - Chân (volume)', 3)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
   END IF;
 END $$;
 
 -- =====================================================================
--- PROGRAM 3 — Full Body 3-day
+-- PROGRAM 3 - Full Body 3-day
 -- =====================================================================
 DO $$
 DECLARE
@@ -204,7 +204,7 @@ BEGIN
   INSERT INTO training_programs (owner_user_id, type, name, name_vi, description, duration_weeks)
   VALUES (NULL, 'system', 'Full Body 3-day',
           'Full Body 3 buổi/tuần',
-          'Mỗi buổi tập toàn thân. Lý tưởng cho beginner hoặc người bận rộn — chỉ cần 3 ngày mỗi tuần.',
+          'Mỗi buổi tập toàn thân. Lý tưởng cho beginner hoặc người bận rộn - chỉ cần 3 ngày mỗi tuần.',
           12)
   ON CONFLICT DO NOTHING
   RETURNING id INTO pid;
@@ -216,21 +216,21 @@ BEGIN
 
   IF pid IS NOT NULL THEN
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 0, 'Full Body A', 'Full Body A — Compound focus', 0)
+    VALUES (pid, 0, 'Full Body A', 'Full Body A - Compound focus', 0)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 2, 'Full Body B', 'Full Body B — Volume', 1)
+    VALUES (pid, 2, 'Full Body B', 'Full Body B - Volume', 1)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 4, 'Full Body C', 'Full Body C — Volume', 2)
+    VALUES (pid, 4, 'Full Body C', 'Full Body C - Volume', 2)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
   END IF;
 END $$;
 
 -- =====================================================================
--- PROGRAM 4 — Bro Split 5-day
+-- PROGRAM 4 - Bro Split 5-day
 -- =====================================================================
 DO $$
 DECLARE
@@ -273,7 +273,7 @@ BEGIN
 END $$;
 
 -- =====================================================================
--- PROGRAM 5 — 5x5 Strength (Stronglifts-style)
+-- PROGRAM 5 - 5x5 Strength (Stronglifts-style)
 -- =====================================================================
 DO $$
 DECLARE
@@ -294,21 +294,21 @@ BEGIN
 
   IF pid IS NOT NULL THEN
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 0, 'Workout A', 'Buổi A — Squat/Bench/Row', 0)
+    VALUES (pid, 0, 'Workout A', 'Buổi A - Squat/Bench/Row', 0)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 2, 'Workout B', 'Buổi B — Squat/OHP/Deadlift', 1)
+    VALUES (pid, 2, 'Workout B', 'Buổi B - Squat/OHP/Deadlift', 1)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 4, 'Workout A (repeat)', 'Buổi A — Squat/Bench/Row', 2)
+    VALUES (pid, 4, 'Workout A (repeat)', 'Buổi A - Squat/Bench/Row', 2)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
   END IF;
 END $$;
 
 -- =====================================================================
--- PROGRAM 6 — PHAT (Power Hypertrophy Adaptive Training)
+-- PROGRAM 6 - PHAT (Power Hypertrophy Adaptive Training)
 -- =====================================================================
 DO $$
 DECLARE
@@ -316,8 +316,8 @@ DECLARE
 BEGIN
   INSERT INTO training_programs (owner_user_id, type, name, name_vi, description, duration_weeks)
   VALUES (NULL, 'system', 'PHAT',
-          'PHAT — Power/Hypertrophy Adaptive Training',
-          'Lai giữa sức mạnh (low-rep) và hypertrophy (high-rep) trong 1 tuần. 5 buổi/tuần, phù hợp intermediate–advanced.',
+          'PHAT - Power/Hypertrophy Adaptive Training',
+          'Lai giữa sức mạnh (low-rep) và hypertrophy (high-rep) trong 1 tuần. 5 buổi/tuần, phù hợp intermediate-advanced.',
           8)
   ON CONFLICT DO NOTHING
   RETURNING id INTO pid;
@@ -329,23 +329,23 @@ BEGIN
 
   IF pid IS NOT NULL THEN
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 0, 'Upper Power', 'Upper — Power (sức mạnh)', 0)
+    VALUES (pid, 0, 'Upper Power', 'Upper - Power (sức mạnh)', 0)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 1, 'Lower Power', 'Lower — Power (sức mạnh)', 1)
+    VALUES (pid, 1, 'Lower Power', 'Lower - Power (sức mạnh)', 1)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 2, 'Chest/Arms', 'Ngực & Tay — Hypertrophy', 2)
+    VALUES (pid, 2, 'Chest/Arms', 'Ngực & Tay - Hypertrophy', 2)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 3, 'Back/Shoulders', 'Lưng & Vai — Hypertrophy', 3)
+    VALUES (pid, 3, 'Back/Shoulders', 'Lưng & Vai - Hypertrophy', 3)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
 
     INSERT INTO training_program_days (program_id, day_of_week, name, name_vi, order_index)
-    VALUES (pid, 4, 'Legs Hypertrophy', 'Chân — Hypertrophy', 4)
+    VALUES (pid, 4, 'Legs Hypertrophy', 'Chân - Hypertrophy', 4)
     ON CONFLICT (program_id, day_of_week) DO UPDATE SET name_vi = EXCLUDED.name_vi;
   END IF;
 END $$;
@@ -357,7 +357,7 @@ END $$;
 -- Helper view: not allowed in migrations cleanly, use CTE per program.
 -- Pattern: for each program, for each day, insert rows.
 
--- ===== PPL — Push A =====
+-- ===== PPL - Push A =====
 DO $$
 DECLARE
   d_id UUID;
@@ -387,7 +387,7 @@ BEGIN
   END IF;
 END $$;
 
--- ===== PPL — Pull A =====
+-- ===== PPL - Pull A =====
 DO $$
 DECLARE
   d_id UUID;
@@ -417,7 +417,7 @@ BEGIN
   END IF;
 END $$;
 
--- ===== PPL — Legs A =====
+-- ===== PPL - Legs A =====
 DO $$
 DECLARE
   d_id UUID;
@@ -447,7 +447,7 @@ BEGIN
   END IF;
 END $$;
 
--- ===== PPL — Push B =====
+-- ===== PPL - Push B =====
 DO $$
 DECLARE
   d_id UUID;
@@ -477,7 +477,7 @@ BEGIN
   END IF;
 END $$;
 
--- ===== PPL — Pull B =====
+-- ===== PPL - Pull B =====
 DO $$
 DECLARE
   d_id UUID;
@@ -506,7 +506,7 @@ BEGIN
   END IF;
 END $$;
 
--- ===== PPL — Legs B =====
+-- ===== PPL - Legs B =====
 DO $$
 DECLARE
   d_id UUID;
@@ -536,7 +536,7 @@ BEGIN
   END IF;
 END $$;
 
--- ===== Upper/Lower — Upper A =====
+-- ===== Upper/Lower - Upper A =====
 DO $$
 DECLARE
   d_id UUID;
@@ -567,7 +567,7 @@ BEGIN
   END IF;
 END $$;
 
--- ===== Upper/Lower — Lower A =====
+-- ===== Upper/Lower - Lower A =====
 DO $$
 DECLARE
   d_id UUID;
@@ -596,7 +596,7 @@ BEGIN
   END IF;
 END $$;
 
--- ===== Upper/Lower — Upper B =====
+-- ===== Upper/Lower - Upper B =====
 DO $$
 DECLARE
   d_id UUID;
@@ -627,7 +627,7 @@ BEGIN
   END IF;
 END $$;
 
--- ===== Upper/Lower — Lower B =====
+-- ===== Upper/Lower - Lower B =====
 DO $$
 DECLARE
   d_id UUID;
@@ -909,7 +909,7 @@ BEGIN
           rest_seconds = EXCLUDED.rest_seconds;
   END IF;
 
-  -- Workout A (repeat) — same as Workout A
+  -- Workout A (repeat) - same as Workout A
   SELECT d.id INTO d_id FROM training_program_days d
     JOIN training_programs p ON p.id = d.program_id
     WHERE p.name = '5x5 Strength' AND d.name = 'Workout A (repeat)' LIMIT 1;

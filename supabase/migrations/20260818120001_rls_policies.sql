@@ -1,5 +1,5 @@
 -- =====================================================================
--- GymAI Coach — Phase 1 MVP: Row Level Security Policies
+-- GymAI Coach - Phase 1 MVP: Row Level Security Policies
 -- Migration: 20260818120001_rls_policies.sql
 -- =====================================================================
 -- Nguyen tac:

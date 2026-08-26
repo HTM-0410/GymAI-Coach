@@ -131,18 +131,18 @@ function getSingleMuscleKey(item: TargetMuscleItem): MuscleName | null {
 // Map muscle name to specific PNG asset in /public/muscle-groups/
 function getMuscleImagePath(name: string): string {
   const n = name.toLowerCase();
-  if (n.includes('ngực') || n.includes('chest')) return '/muscle-groups/chest.png';
-  if (n.includes('vai') || n.includes('shoulder') || n.includes('delt')) return '/muscle-groups/shoulders.png';
-  if (n.includes('lưng') || n.includes('back') || n.includes('xô') || n.includes('lat')) return '/muscle-groups/back.png';
-  if (n.includes('tay trước') || n.includes('bicep')) return '/muscle-groups/biceps.png';
-  if (n.includes('tay sau') || n.includes('tricep')) return '/muscle-groups/triceps.png';
-  if (n.includes('đùi trước') || n.includes('quad')) return '/muscle-groups/quads.png';
-  if (n.includes('đùi sau') || n.includes('hamstring')) return '/muscle-groups/hamstrings.png';
-  if (n.includes('mông') || n.includes('glute')) return '/muscle-groups/glutes.png';
-  if (n.includes('bắp chân') || n.includes('calf')) return '/muscle-groups/calves.png';
-  if (n.includes('bụng') || n.includes('core') || n.includes('abs')) return '/muscle-groups/core.png';
-  if (n.includes('cẳng tay') || n.includes('forearm')) return '/muscle-groups/forearms.png';
-  return '/muscle-groups/quads.png';
+  if (n.includes('ngực') || n.includes('chest')) return '/muscle-groups/full/chest.png';
+  if (n.includes('vai') || n.includes('shoulder') || n.includes('delt')) return '/muscle-groups/full/shoulders.png';
+  if (n.includes('lưng') || n.includes('back') || n.includes('xô') || n.includes('lat')) return '/muscle-groups/full/back.png';
+  if (n.includes('tay trước') || n.includes('bicep')) return '/muscle-groups/full/biceps.png';
+  if (n.includes('tay sau') || n.includes('tricep')) return '/muscle-groups/full/triceps.png';
+  if (n.includes('đùi trước') || n.includes('quad')) return '/muscle-groups/full/quads.png';
+  if (n.includes('đùi sau') || n.includes('hamstring')) return '/muscle-groups/full/hamstrings.png';
+  if (n.includes('mông') || n.includes('glute')) return '/muscle-groups/full/glutes.png';
+  if (n.includes('bắp chân') || n.includes('calf')) return '/muscle-groups/full/calves.png';
+  if (n.includes('bụng') || n.includes('core') || n.includes('abs')) return '/muscle-groups/full/core.png';
+  if (n.includes('cẳng tay') || n.includes('forearm')) return '/muscle-groups/full/forearms.png';
+  return '/muscle-groups/full/quads.png';
 }
 
 export default function DayMuscleMap({

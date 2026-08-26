@@ -97,8 +97,16 @@ export default function ProgramDaysViewer({ days }: ProgramDaysViewerProps) {
           <div className="bg-gradient-to-r from-chassis-hi/80 via-chassis to-chassis-lo/80 p-1.5 sm:p-2 rounded-2xl border border-black/[0.06] dark:border-white/10 shadow-neumorph-sm backdrop-blur-md">
             <div className="flex items-center gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-0.5">
               {days.map((day, idx) => {
+                const rawShortName = getShortSessionName(day.name_vi, day.name);
+                const primaryMuscles = (day.target_muscles ?? [])
+                  .filter((t) => t.role === 'primary' && t.muscle_name_vi)
+                  .map((t) => t.muscle_name_vi)
+                  .join(', ');
+                const shortName =
+                  !rawShortName || /^(?:Buổi(?:\s+tập)?|Day|Workout)\s*(?:#?\d+|[A-Za-z])$/iu.test(rawShortName)
+                    ? primaryMuscles || rawShortName || `Buổi ${idx + 1}`
+                    : rawShortName;
                 const isSelected = selectedIdx === idx;
-                const shortName = getShortSessionName(day.name_vi, day.name);
                 const weekdayLabel = DAY_OF_WEEK_LABELS_VI[day.day_of_week] ?? `D${idx + 1}`;
 
                 return (

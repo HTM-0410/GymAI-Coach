@@ -28,7 +28,7 @@ import {
 } from '@/lib/exercises';
 import { MOVEMENT_PATTERN_VI } from '@/lib/exercises-i18n';
 
-// ISR — exercises are stable for ~1 day; refresh hourly.
+// ISR - exercises are stable for ~1 day; refresh hourly.
 // Note: page uses supabase server client which requires dynamic rendering.
 export const revalidate = 3600;
 export const dynamic = 'force-dynamic';
@@ -77,8 +77,8 @@ export default async function ExerciseDetailPage({
 
   const alternatives = await getResolvedAlternatives(slug);
   const primaryMuscle = ex.primary_muscle;
-  const secondaryMuscle = ex.secondary_muscles.join(', ') || '—';
-  const equipmentNames = ex.equipment.join(', ') || '—';
+  const secondaryMuscle = ex.secondary_muscles.join(', ') || '-';
+  const equipmentNames = ex.equipment.join(', ') || '-';
   const gallery = ex.gallery;
   const galleryViews = Array.isArray(gallery.views) ? gallery.views : [];
   const animationUrl = gallery.animation ?? galleryViews[0]?.src ?? null;

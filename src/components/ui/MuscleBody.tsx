@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
+import { type MuscleRegionId } from '@/components/ui/MuscleFatigueMap';
 
 /**
- * MuscleBody — Medical-Grade High-Definition Anatomical Muscle Vector Map
+ * MuscleBody - Medical-Grade High-Definition Anatomical Muscle Vector Map
  * Full Light & Dark Mode theme support.
  */
 
@@ -16,28 +17,93 @@ export type MuscleName =
   | 'FOREARMS'
   | 'ABS'
   | 'LEGS'
-  | 'GLUTES';
+  | 'GLUTES'
+  | 'CALVES';
 
-export type Props = {
-  type?: 'front' | 'back';
-  highlighted?: MuscleName[];
-  secondaryMuscles?: MuscleName[];
-  accentColor?: string;
-  className?: string;
-  interactive?: boolean;
-  hoveredMuscle?: MuscleName | null;
-  onHoverMuscle?: (muscle: MuscleName | null) => void;
+export const REGION_GROUP_MAP: Record<MuscleRegionId, MuscleName | null> = {
+  head: null,
+  neck: 'SHOULDERS',
+  trap_l: 'SHOULDERS',
+  trap_r: 'SHOULDERS',
+  delt_l: 'SHOULDERS',
+  delt_r: 'SHOULDERS',
+  pec_l: 'CHEST',
+  pec_r: 'CHEST',
+  biceps_l: 'BICEPS',
+  biceps_r: 'BICEPS',
+  forearm_l: 'FOREARMS',
+  forearm_r: 'FOREARMS',
+  hand_l: null,
+  hand_r: null,
+  abs_upper_l: 'ABS',
+  abs_upper_r: 'ABS',
+  abs_mid_l: 'ABS',
+  abs_mid_r: 'ABS',
+  abs_lower_l: 'ABS',
+  abs_lower_r: 'ABS',
+  oblique_l: 'ABS',
+  oblique_r: 'ABS',
+  quad_outer_l: 'LEGS',
+  quad_mid_l: 'LEGS',
+  quad_inner_l: 'LEGS',
+  quad_outer_r: 'LEGS',
+  quad_mid_r: 'LEGS',
+  quad_inner_r: 'LEGS',
+  shin_outer_l: 'CALVES',
+  shin_inner_l: 'CALVES',
+  shin_outer_r: 'CALVES',
+  shin_inner_r: 'CALVES',
+  foot_l: null,
+  foot_r: null,
+  head_back: null,
+  neck_back: 'SHOULDERS',
+  trap_back_l: 'BACK',
+  trap_back_r: 'BACK',
+  rear_delt_l: 'SHOULDERS',
+  rear_delt_r: 'SHOULDERS',
+  lat_l: 'BACK',
+  lat_r: 'BACK',
+  triceps_l: 'TRICEPS',
+  triceps_r: 'TRICEPS',
+  lower_back_l: 'BACK',
+  lower_back_r: 'BACK',
+  glute_l: 'GLUTES',
+  glute_r: 'GLUTES',
+  hamstring_outer_l: 'LEGS',
+  hamstring_inner_l: 'LEGS',
+  hamstring_outer_r: 'LEGS',
+  hamstring_inner_r: 'LEGS',
+  calf_l: 'CALVES',
+  calf_r: 'CALVES',
+  foot_back_l: null,
+  foot_back_r: null,
+  forearm_back_l: 'FOREARMS',
+  forearm_back_r: 'FOREARMS',
+  hand_back_l: null,
+  hand_back_r: null,
 };
 
 /* ─── Vector Path Data ────────────────────────────────────── */
 
-const FRONT_SILHOUETTE =
+export const FRONT_SILHOUETTE =
   'M 57.89,9.51 L 53.37,11.32 L 51.26,13.42 L 49.45,17.95 L 49.15,23.37 L 48.25,23.37 L 47.95,23.97 L 47.95,26.08 L 49.45,30.3 L 50.96,30.9 L 51.26,33.92 L 52.16,35.42 L 51.86,40.85 L 49.45,42.96 L 41.32,47.18 L 40.71,48.68 L 36.79,48.68 L 32.27,50.49 L 28.96,53.51 L 27.15,56.82 L 26.25,61.04 L 26.25,64.36 L 26.85,68.27 L 28.36,68.58 L 28.36,70.68 L 27.75,71.59 L 25.34,71.59 L 25.34,70.08 L 24.44,72.49 L 24.14,74.9 L 25.95,75.21 L 25.04,81.84 L 23.23,81.84 L 22.93,83.64 L 18.71,91.78 L 17.51,96.9 L 16.3,105.64 L 14.19,113.48 L 13.29,115.29 L 8.16,119.51 L 6.66,122.22 L 4.85,124.03 L 4.85,124.93 L 8.47,125.23 L 8.47,127.64 L 6.96,131.26 L 6.66,133.67 L 7.26,134.27 L 9.37,134.58 L 9.67,136.38 L 13.89,136.38 L 15.1,133.97 L 18.11,133.97 L 18.71,128.55 L 20.52,122.22 L 20.52,117.1 L 23.53,111.37 L 29.56,102.33 L 31.07,99.01 L 32.58,93.89 L 33.18,87.86 L 34.08,85.75 L 32.88,85.45 L 32.88,83.64 L 34.68,80.63 L 35.59,76.71 L 36.19,76.41 L 36.49,66.77 L 38.6,67.07 L 39.81,69.18 L 42.22,71.29 L 41.92,73.4 L 39.51,73.1 L 39.21,73.7 L 38.6,73.7 L 38.6,76.71 L 38.0,77.01 L 41.62,86.05 L 42.22,89.37 L 42.22,93.59 L 41.32,97.21 L 41.32,103.23 L 39.81,107.45 L 38.9,114.68 L 36.49,125.84 L 36.49,127.34 L 38.0,127.64 L 38.0,129.45 L 37.1,131.56 L 36.49,134.88 L 35.89,145.12 L 36.49,145.42 L 37.7,152.36 L 39.81,157.78 L 38.9,162.9 L 38.9,171.04 L 38.0,174.66 L 38.9,174.96 L 38.9,177.97 L 38.3,182.79 L 36.49,182.79 L 36.49,184.9 L 38.6,185.21 L 39.21,187.62 L 38.9,190.63 L 37.4,190.63 L 40.71,207.21 L 40.41,216.85 L 38.0,220.16 L 34.08,223.78 L 34.08,226.19 L 37.1,227.4 L 44.03,228.0 L 46.74,225.59 L 47.04,223.78 L 49.45,221.37 L 49.45,218.96 L 48.85,217.45 L 49.15,212.33 L 48.25,209.92 L 48.25,207.21 L 50.36,194.55 L 50.36,191.84 L 50.96,190.93 L 52.16,185.51 L 51.86,171.95 L 53.97,166.22 L 54.88,158.99 L 53.67,158.68 L 53.97,149.04 L 53.37,146.93 L 53.67,144.52 L 55.78,144.82 L 56.08,147.53 L 58.79,135.48 L 61.21,135.78 L 61.81,140.6 L 63.62,147.53 L 63.92,144.22 L 64.52,143.92 L 64.82,141.81 L 66.93,142.11 L 65.42,151.45 L 66.03,156.88 L 65.73,159.59 L 64.82,159.59 L 65.73,166.22 L 67.84,172.25 L 67.53,185.51 L 69.04,191.23 L 69.04,193.34 L 71.15,205.7 L 71.15,210.52 L 70.25,212.93 L 70.55,218.05 L 69.95,221.07 L 72.36,223.48 L 72.96,225.59 L 75.07,227.7 L 78.08,228.0 L 85.62,226.19 L 85.92,224.68 L 79.29,216.85 L 79.29,212.93 L 78.68,209.32 L 81.1,195.75 L 79.89,200.27 L 79.29,200.58 L 78.68,203.59 L 76.58,203.29 L 76.88,200.27 L 77.48,199.97 L 77.48,198.16 L 79.59,191.84 L 81.7,192.14 L 81.7,193.64 L 83.21,184.0 L 81.1,183.7 L 81.1,179.18 L 80.49,176.77 L 80.79,174.66 L 81.7,174.66 L 80.49,169.23 L 80.79,163.21 L 80.49,159.59 L 79.89,159.29 L 79.89,157.48 L 81.7,153.26 L 82.9,147.23 L 83.51,146.93 L 83.51,137.59 L 82.9,132.77 L 82.0,130.36 L 82.3,127.64 L 83.21,127.64 L 83.21,126.44 L 80.79,115.29 L 79.89,107.15 L 78.38,103.53 L 78.38,97.21 L 77.48,93.59 L 77.78,87.26 L 81.4,77.62 L 81.1,74.0 L 80.19,73.7 L 80.19,72.79 L 78.08,72.49 L 78.08,70.68 L 81.4,66.77 L 83.51,67.07 L 83.51,74.9 L 84.71,80.03 L 86.82,83.64 L 86.52,85.75 L 85.62,85.75 L 86.52,87.86 L 86.82,92.08 L 88.63,99.01 L 91.34,104.44 L 97.07,112.88 L 99.18,117.4 L 99.18,123.12 L 100.68,127.64 L 101.59,134.27 L 104.3,134.27 L 105.21,136.08 L 106.11,136.38 L 110.03,136.38 L 110.63,134.27 L 112.44,134.27 L 113.04,133.67 L 113.04,132.47 L 111.23,127.64 L 111.53,124.93 L 114.55,125.23 L 115.15,124.63 L 113.04,122.22 L 111.53,119.51 L 109.73,117.7 L 107.62,116.49 L 105.81,114.38 L 103.4,105.95 L 102.19,96.9 L 100.68,91.18 L 96.77,83.64 L 96.47,81.84 L 94.36,81.53 L 93.75,77.62 L 94.05,74.9 L 95.56,74.9 L 94.96,71.59 L 94.66,73.4 L 92.55,73.1 L 91.34,70.68 L 91.64,68.27 L 93.15,68.27 L 93.45,64.36 L 93.15,59.23 L 92.25,56.22 L 90.74,53.51 L 87.73,50.79 L 82.6,48.68 L 77.78,48.38 L 77.78,46.88 L 70.25,42.96 L 67.84,40.85 L 67.53,35.42 L 68.44,33.92 L 69.04,30.6 L 70.25,30.3 L 71.75,26.08 L 71.75,23.97 L 70.25,23.07 L 69.95,16.74 L 68.14,13.12 L 65.73,11.01 L 61.81,9.51 Z';
 
-const BACK_SILHOUETTE =
+export const BACK_SILHOUETTE =
   'M 58.34,9.51 L 55.33,10.41 L 51.71,13.42 L 49.9,17.95 L 49.6,23.37 L 48.4,24.27 L 48.4,26.08 L 49.9,30.3 L 51.41,30.9 L 51.71,33.62 L 52.62,35.42 L 52.62,38.74 L 53.82,39.04 L 53.82,40.85 L 51.11,42.96 L 49.0,43.86 L 47.19,43.86 L 46.89,44.77 L 42.07,46.88 L 40.86,48.68 L 35.74,48.38 L 33.03,49.59 L 28.51,54.11 L 27.0,58.93 L 26.1,64.05 L 26.7,64.36 L 27.3,66.16 L 27.3,67.97 L 25.19,71.29 L 24.29,74.9 L 23.99,83.34 L 23.08,83.95 L 19.16,92.08 L 17.96,96.9 L 16.75,105.95 L 14.04,114.99 L 8.92,119.21 L 7.41,121.92 L 5.6,123.73 L 5.3,124.93 L 9.22,125.23 L 9.22,127.04 L 7.11,132.77 L 7.41,133.97 L 9.82,134.27 L 10.12,136.38 L 14.34,136.38 L 15.25,135.48 L 15.55,134.27 L 18.56,134.27 L 19.47,127.64 L 20.97,122.82 L 21.27,116.49 L 24.59,110.47 L 29.71,102.93 L 32.42,96.6 L 33.33,92.68 L 33.63,87.86 L 34.53,85.75 L 33.33,85.45 L 33.33,83.64 L 36.64,78.82 L 39.66,78.82 L 41.47,82.74 L 43.58,90.27 L 43.27,92.38 L 42.67,92.38 L 42.67,94.19 L 41.77,97.51 L 41.77,103.53 L 40.26,107.45 L 39.36,115.29 L 36.95,126.44 L 36.34,132.16 L 36.34,144.82 L 39.36,158.68 L 40.86,158.99 L 40.56,161.4 L 39.66,161.4 L 39.66,162.6 L 40.56,162.9 L 40.26,166.52 L 40.86,167.12 L 40.86,169.84 L 37.85,179.78 L 37.55,186.11 L 38.15,189.42 L 39.05,191.23 L 38.45,194.85 L 40.86,207.51 L 41.16,213.23 L 40.56,214.74 L 40.56,218.05 L 38.15,220.16 L 35.74,221.07 L 34.84,221.97 L 34.84,222.88 L 36.04,224.38 L 38.75,225.29 L 42.37,227.4 L 47.19,227.7 L 49.6,226.19 L 49.9,223.78 L 49.3,221.37 L 49.3,218.05 L 49.9,215.04 L 48.7,211.12 L 49.3,203.29 L 50.81,195.75 L 50.81,192.14 L 51.71,190.33 L 52.32,186.11 L 53.22,185.51 L 52.62,185.21 L 52.32,179.48 L 50.81,173.75 L 51.11,171.64 L 52.62,171.64 L 54.73,165.01 L 55.63,157.78 L 55.93,149.95 L 58.34,140.9 L 59.25,135.48 L 61.66,135.48 L 62.56,141.81 L 64.37,148.14 L 65.88,164.71 L 67.99,171.34 L 69.79,171.64 L 69.79,174.05 L 68.89,176.47 L 67.99,181.59 L 67.99,186.11 L 68.89,190.33 L 69.79,192.14 L 69.79,195.45 L 71.9,208.41 L 71.9,211.12 L 70.7,215.34 L 71.3,217.75 L 71.0,225.89 L 72.51,227.4 L 76.73,227.7 L 83.36,224.99 L 85.77,223.18 L 85.77,221.97 L 84.86,221.07 L 81.55,219.56 L 80.04,218.05 L 80.04,214.74 L 79.44,213.23 L 79.44,209.32 L 82.15,194.85 L 82.15,189.42 L 83.05,185.51 L 82.45,178.27 L 79.74,169.84 L 79.74,167.12 L 80.34,166.82 L 79.74,162.6 L 80.04,159.29 L 81.25,159.29 L 81.25,158.68 L 79.44,158.38 L 79.74,155.67 L 81.85,155.97 L 81.85,157.18 L 83.36,151.15 L 84.26,145.12 L 84.26,131.86 L 83.05,122.52 L 80.95,113.18 L 80.64,108.96 L 78.84,103.23 L 78.84,97.21 L 77.93,92.68 L 77.03,92.38 L 77.03,90.27 L 79.14,83.04 L 80.34,80.33 L 80.95,80.33 L 81.85,77.92 L 83.66,77.92 L 84.26,78.52 L 85.77,81.84 L 87.27,83.64 L 86.97,85.75 L 86.07,85.75 L 86.97,87.56 L 87.58,94.19 L 88.48,97.51 L 91.19,103.23 L 96.62,111.37 L 99.63,117.1 L 99.63,122.22 L 101.44,128.55 L 101.74,132.77 L 102.34,134.27 L 105.36,134.27 L 105.66,135.78 L 106.56,136.38 L 110.48,136.38 L 111.08,133.97 L 113.49,133.67 L 112.89,130.36 L 111.68,127.64 L 111.99,124.93 L 115.0,125.23 L 115.6,124.33 L 113.49,122.22 L 111.99,119.51 L 106.86,115.29 L 105.96,113.48 L 103.55,104.44 L 102.95,98.41 L 101.74,92.68 L 99.03,86.66 L 97.22,83.64 L 96.32,83.04 L 96.62,77.01 L 94.81,69.48 L 93.3,67.97 L 93.3,66.16 L 93.9,63.75 L 94.51,63.45 L 94.51,61.95 L 93.9,61.64 L 93.6,57.12 L 92.7,56.22 L 92.7,55.01 L 90.89,52.3 L 88.18,49.89 L 82.75,47.78 L 81.55,48.99 L 79.44,48.68 L 79.14,46.58 L 77.93,46.58 L 74.32,44.16 L 72.51,44.16 L 69.19,42.66 L 67.08,40.85 L 67.08,39.34 L 65.58,39.04 L 65.58,38.14 L 64.67,36.93 L 64.97,34.82 L 67.08,35.12 L 67.38,36.93 L 67.99,37.23 L 67.99,38.74 L 67.99,35.42 L 68.89,33.92 L 69.49,30.6 L 70.7,30.3 L 72.21,26.38 L 72.21,23.97 L 71.9,23.37 L 70.7,23.07 L 70.7,17.95 L 68.89,13.42 L 66.78,11.32 L 64.37,10.11 L 62.26,9.51 Z';
 
-const FRONT_MUSCLE_PATHS: Record<string, string[]> = {
+const FRONT_ARM_CONTOUR_REPAIRS = [
+  'M 27.2,60.8 C 26.2,64.4 26.6,67.5 27.8,69.4 C 26.0,72.4 24.6,76.8 24.0,82.8',
+  'M 42.1,72.7 C 40.2,73.2 38.6,75.1 37.7,77.8 C 36.8,81.2 35.2,84.1 33.0,85.9',
+  'M 92.8,60.8 C 93.8,64.4 93.4,67.5 92.2,69.4 C 94.0,72.4 95.4,76.8 96.0,82.8',
+  'M 77.9,72.7 C 79.8,73.2 81.4,75.1 82.3,77.8 C 83.2,81.2 84.8,84.1 87.0,85.9',
+  'M 38.9,173.0 C 38.1,179.5 38.2,186.5 39.2,191.2 C 40.2,197.2 41.2,205.5 40.5,213.0 C 40.1,217.0 38.2,220.2 35.0,222.6',
+  'M 52.0,176.0 C 52.6,182.5 51.8,189.0 50.6,194.5 C 49.4,201.0 48.7,209.0 49.2,217.0',
+  'M 81.1,173.0 C 81.9,179.5 81.8,186.5 80.8,191.2 C 79.8,197.2 78.8,205.5 79.5,213.0 C 79.9,217.0 81.8,220.2 85.0,222.6',
+  'M 68.0,176.0 C 67.4,182.5 68.2,189.0 69.4,194.5 C 70.6,201.0 71.3,209.0 70.8,217.0',
+  'M 54.8,146.5 C 56.0,143.0 57.2,138.0 58.8,135.0 C 59.4,134.0 60.6,134.0 61.2,135.0 C 62.8,138.0 64.0,143.0 65.2,146.5',
+] as const;
+
+export const FRONT_MUSCLE_PATHS: Record<string, string[]> = {
   CHEST: [
     'M 42.22,52.9 L 39.81,55.32 L 38.9,56.82 L 37.1,61.64 L 37.4,65.26 L 39.81,69.18 L 42.22,71.29 L 45.23,72.49 L 50.96,72.49 L 53.97,71.89 L 56.99,70.68 L 57.89,69.78 L 58.79,67.67 L 58.79,56.52 L 57.59,53.51 L 54.88,52.0 L 48.55,51.1 L 45.23,51.1 Z',
     'M 63.62,52.3 L 61.81,53.81 L 60.9,55.92 L 60.6,64.96 L 60.9,67.97 L 61.51,69.48 L 63.92,71.29 L 69.04,72.49 L 74.16,72.49 L 76.27,71.89 L 77.78,70.99 L 80.19,68.58 L 82.6,64.05 L 82.6,61.95 L 81.4,58.33 L 79.89,55.62 L 78.38,53.81 L 74.47,51.1 L 70.85,51.1 Z',
@@ -51,8 +117,8 @@ const FRONT_MUSCLE_PATHS: Record<string, string[]> = {
     'M 84.11,66.47 L 83.21,69.18 L 83.21,72.49 L 84.71,80.03 L 86.22,83.04 L 89.53,86.66 L 91.34,87.86 L 92.85,87.56 L 94.05,83.64 L 94.05,77.92 L 92.55,72.49 L 91.04,69.78 L 88.63,67.37 L 86.52,66.16 Z',
   ],
   FOREARMS: [
-    'M 34.08,85.75 L 30.16,89.07 L 27.15,89.37 L 25.34,87.86 L 24.44,86.05 L 23.53,81.84 L 22.93,83.64 L 18.71,91.78 L 17.51,96.9 L 16.3,105.64 L 14.19,113.48 L 13.29,115.29 L 10.27,117.7 L 10.27,123.73 L 20.22,123.73 L 20.52,122.22 L 20.22,118.3 L 20.52,117.1 L 23.53,111.37 L 27.75,105.34 L 30.47,100.52 L 32.58,93.89 L 33.18,87.86 Z',
-    'M 85.92,86.36 L 86.52,87.86 L 87.42,95.1 L 89.23,100.52 L 91.34,104.44 L 96.16,111.37 L 99.18,117.4 L 99.18,123.12 L 99.48,123.73 L 109.42,123.73 L 109.42,117.7 L 107.62,116.49 L 105.81,114.38 L 103.4,105.95 L 102.19,96.9 L 101.29,92.99 L 100.08,89.67 L 96.77,83.64 L 96.47,81.84 L 95.86,83.64 L 96.16,84.55 L 95.86,86.05 L 95.26,86.66 L 94.96,86.05 L 94.05,88.16 L 92.85,89.37 L 91.34,89.37 L 90.14,88.77 L 89.23,89.07 L 89.23,88.47 L 87.12,88.47 L 88.33,88.16 L 86.22,86.96 Z',
+    'M 34.08,85.75 C 31.5,87.9 29.2,89.2 27.15,89.37 C 24.9,88.8 23.8,86.4 22.93,83.64 C 20.2,88.5 18.2,93.4 17.51,97.4 C 16.7,103.0 15.7,108.8 14.19,113.48 C 13.7,114.9 13.3,116.1 13.2,117.4 C 14.8,118.2 16.9,118.2 18.6,117.4 C 19.1,116.1 19.7,114.5 20.6,112.8 C 22.6,109.6 25.3,106.1 27.75,102.9 C 30.2,99.4 31.8,95.6 32.58,93.2 C 33.2,90.8 33.5,88.1 34.08,85.75 Z',
+    'M 85.92,85.75 C 88.5,87.9 90.8,89.2 92.85,89.37 C 95.1,88.8 96.2,86.4 97.07,83.64 C 99.8,88.5 101.8,93.4 102.49,97.4 C 103.3,103.0 104.3,108.8 105.81,113.48 C 106.3,114.9 106.7,116.1 106.8,117.4 C 105.2,118.2 103.1,118.2 101.4,117.4 C 100.9,116.1 100.3,114.5 99.4,112.8 C 97.4,109.6 94.7,106.1 92.25,102.9 C 89.8,99.4 88.2,95.6 87.42,93.2 C 86.8,90.8 86.5,88.1 85.92,85.75 Z',
   ],
   ABS: [
     'M 58.19,73.1 L 56.68,73.1 L 53.97,74.0 L 51.86,75.21 L 50.36,77.62 L 50.05,79.12 L 50.36,80.93 L 51.86,81.23 L 55.78,79.12 L 58.79,78.22 L 59.1,77.62 L 59.1,74.3 Z',
@@ -71,6 +137,8 @@ const FRONT_MUSCLE_PATHS: Record<string, string[]> = {
     'M 81.4,128.25 L 80.79,128.25 L 81.1,137.89 L 80.49,143.01 L 77.18,155.97 L 77.18,159.29 L 77.78,160.49 L 78.68,160.49 L 81.4,154.16 L 83.21,146.03 L 83.51,137.59 L 82.9,132.77 Z',
     'M 51.56,139.4 L 50.66,139.4 L 50.05,145.12 L 47.34,152.96 L 46.74,155.97 L 47.04,159.89 L 47.64,161.4 L 48.85,162.6 L 50.05,162.6 L 51.86,161.4 L 53.07,159.59 L 53.97,156.58 L 53.97,149.04 Z',
     'M 68.14,139.4 L 66.03,146.63 L 65.42,154.16 L 66.03,158.08 L 66.93,160.19 L 68.14,161.7 L 69.04,162.3 L 70.55,162.6 L 72.05,161.4 L 72.66,159.59 L 72.96,156.58 L 72.36,153.26 L 69.64,145.42 L 69.04,140.0 L 68.74,139.4 Z',
+  ],
+  CALVES: [
     'M 39.81,173.75 L 38.6,178.27 L 38.6,185.51 L 39.81,191.23 L 43.42,202.38 L 43.73,204.79 L 44.33,204.79 L 43.73,199.97 L 43.73,186.11 L 43.12,181.59 L 40.71,173.75 Z',
     'M 79.89,173.45 L 78.99,173.75 L 77.18,178.58 L 76.27,183.1 L 75.67,190.63 L 75.97,196.36 L 75.37,204.49 L 75.97,204.49 L 80.79,186.71 L 81.1,179.18 Z',
     'M 51.56,176.16 L 50.66,176.16 L 48.25,180.68 L 47.34,184.0 L 47.95,188.52 L 49.45,191.53 L 50.66,191.53 L 52.16,185.51 L 52.16,180.38 Z',
@@ -78,7 +146,7 @@ const FRONT_MUSCLE_PATHS: Record<string, string[]> = {
   ],
 };
 
-const BACK_MUSCLE_PATHS: Record<string, string[]> = {
+export const BACK_MUSCLE_PATHS: Record<string, string[]> = {
   SHOULDERS: [
     'M 43.27,52.0 L 40.26,50.19 L 38.75,48.38 L 36.04,48.68 L 32.12,50.19 L 30.01,52.3 L 27.6,56.82 L 26.7,60.74 L 26.7,65.26 L 28.21,65.26 L 30.01,63.75 L 35.74,60.74 L 41.47,55.01 L 43.27,54.11 Z',
     'M 76.73,52.9 L 76.73,53.51 L 77.33,54.11 L 79.14,55.01 L 84.56,60.44 L 91.19,64.05 L 92.7,65.56 L 93.6,65.56 L 93.9,64.96 L 93.9,60.74 L 93.0,56.52 L 90.89,52.9 L 90.89,52.3 L 89.38,50.79 L 86.37,48.99 L 83.96,48.38 L 82.15,48.38 L 80.04,50.49 L 77.93,51.7 Z',
@@ -109,22 +177,53 @@ const BACK_MUSCLE_PATHS: Record<string, string[]> = {
     'M 49.0,131.86 L 47.19,131.86 L 45.99,132.47 L 44.18,134.27 L 42.37,139.1 L 41.47,145.12 L 41.16,159.29 L 40.56,163.21 L 40.56,165.92 L 41.16,165.92 L 45.08,158.08 L 46.59,152.96 L 48.1,142.11 Z',
     'M 51.11,132.16 L 50.51,132.16 L 50.21,133.07 L 50.21,134.88 L 49.9,135.18 L 48.7,143.92 L 48.7,146.93 L 47.19,155.07 L 47.49,160.49 L 49.9,167.42 L 50.51,167.42 L 50.21,162.3 L 50.51,159.29 L 53.22,146.93 L 53.52,140.6 L 52.92,136.99 Z',
     'M 69.49,132.16 L 67.38,138.19 L 67.08,144.52 L 70.1,158.99 L 70.4,161.7 L 70.1,167.42 L 70.7,167.42 L 72.51,162.9 L 73.71,156.27 L 72.51,150.85 L 71.9,146.63 L 71.9,143.32 L 70.1,132.16 Z',
+  ],
+  CALVES: [
     'M 42.67,166.82 L 41.47,167.12 L 37.55,181.59 L 37.85,188.22 L 38.45,190.33 L 39.36,191.53 L 40.86,191.53 L 42.07,190.93 L 43.58,188.52 L 43.88,187.01 L 43.88,180.38 L 44.78,172.25 L 43.88,168.63 Z',
     'M 77.93,166.82 L 76.73,168.63 L 75.82,172.25 L 76.73,180.99 L 76.73,187.01 L 77.33,189.42 L 77.93,190.33 L 79.44,191.53 L 81.25,191.53 L 82.15,190.33 L 82.75,187.92 L 83.05,181.89 L 82.15,177.07 L 80.34,172.25 L 80.34,171.04 L 78.84,166.82 Z',
-    'M 47.79,168.33 L 46.59,170.44 L 45.68,174.05 L 45.08,180.08 L 45.08,187.01 L 45.68,189.12 L 47.19,191.84 L 48.4,193.04 L 50.21,193.34 L 50.81,192.74 L 52.01,189.12 L 52.62,185.81 L 52.62,181.89 L 51.41,174.96 L 49.3,168.93 L 48.7,168.33 Z',
-    'M 71.6,168.33 L 69.19,175.26 L 67.99,181.59 L 67.99,186.11 L 68.89,190.33 L 70.1,193.04 L 71.6,193.34 L 73.71,191.23 L 75.52,187.01 L 75.52,180.38 L 74.62,172.85 L 73.11,168.63 Z',
   ],
 };
+
+export interface Props {
+  type?: 'front' | 'back';
+  highlighted?: MuscleName[];
+  secondaryMuscles?: MuscleName[];
+  accentColor?: string;
+  className?: string;
+  interactive?: boolean;
+  hoveredMuscle?: MuscleName | null;
+  onHoverMuscle?: (muscle: MuscleName | null) => void;
+  readinessScores?: Partial<Record<MuscleName, number | null>>;
+  selectedMuscle?: MuscleName | null;
+  onSelectMuscle?: (muscle: MuscleName, trigger?: HTMLElement | SVGElement) => void;
+  muscleLabels?: Partial<Record<MuscleName, string>>;
+}
+
+const RECOVERY_COLORS = {
+  recovering: 'var(--recovery-recovering)',
+  lightOnly: 'var(--recovery-light-only)',
+  trainable: 'var(--recovery-trainable)',
+  ready: 'var(--recovery-ready)',
+} as const;
+
+function recoveryColor(score: number | null): string {
+  if (score === null || score >= 90) return RECOVERY_COLORS.ready;
+  if (score >= 80) return RECOVERY_COLORS.trainable;
+  if (score >= 60) return RECOVERY_COLORS.lightOnly;
+  return RECOVERY_COLORS.recovering;
+}
 
 export default function MuscleBody({
   type = 'front',
   highlighted = [],
   secondaryMuscles = [],
-  accentColor = '#f97316',
   className = '',
   interactive = false,
   hoveredMuscle = null,
   onHoverMuscle,
+  readinessScores,
+  selectedMuscle = null,
+  onSelectMuscle,
 }: Props) {
   const isFront = type === 'front';
   const idPrefix = isFront ? 'mb_front_' : 'mb_back_';
@@ -141,7 +240,7 @@ export default function MuscleBody({
       aria-hidden
     >
       <defs>
-        {/* Primary Glowing Flame Gradient (Đỏ Lửa / Cam Neon) */}
+        {/* Primary Glowing Flame Gradient */}
         <linearGradient id={`${idPrefix}primary_grad`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#fff7ed" />
           <stop offset="25%" stopColor="#fb923c" />
@@ -183,35 +282,76 @@ export default function MuscleBody({
         d={silhouette}
         className="fill-slate-300 dark:fill-[#090d16] stroke-slate-400 dark:stroke-[#1e293b] transition-colors duration-300"
         strokeWidth="1.0"
+        strokeLinecap="round"
         strokeLinejoin="round"
         filter={`url(#${idPrefix}shadow)`}
       />
 
+      {readinessScores && isFront && (
+        <g pointerEvents="none" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          {FRONT_ARM_CONTOUR_REPAIRS.map((d) => (
+            <React.Fragment key={d}>
+              <path
+                d={d}
+                className="stroke-slate-300 dark:stroke-[#090d16]"
+                strokeWidth="3.6"
+              />
+              <path
+                d={d}
+                className="stroke-slate-400 dark:stroke-[#1e293b]"
+                strokeWidth="0.75"
+              />
+            </React.Fragment>
+          ))}
+        </g>
+      )}
+
       {/* Anatomical Muscle Groups Layer */}
       {Object.entries(muscleDict).map(([groupKey, paths]) => {
-        const isPrimary = highlighted.includes(groupKey as MuscleName);
-        const isSec = secondaryMuscles.includes(groupKey as MuscleName);
-        const isHovered = hoveredMuscle === groupKey;
-        const isActive = isPrimary || isSec || isHovered;
+        const group = groupKey as MuscleName;
+        const hasScore = Boolean(readinessScores && Object.prototype.hasOwnProperty.call(readinessScores, group));
+        const rawScore = hasScore ? readinessScores?.[group] : null;
+        const score = typeof rawScore === 'number' ? rawScore : null;
+        const isPrimary = highlighted.includes(group) || (hasScore && (score === null || score < 60));
+        const isSec = secondaryMuscles.includes(group) || (hasScore && score !== null && score >= 60 && score < 80);
+        const isHovered = hoveredMuscle === group;
+        const isSelected = selectedMuscle === group;
+        const isActive = isPrimary || isSec || isHovered || isSelected || (hasScore && score !== null && score >= 80);
 
-        const fillUrl = isPrimary || isHovered
-          ? `url(#${idPrefix}primary_grad)`
-          : isSec
-          ? `url(#${idPrefix}secondary_grad)`
+        const fillColor = hasScore
+          ? recoveryColor(score)
+          : (isPrimary || isHovered || isSelected)
+            ? `url(#${idPrefix}primary_grad)`
+            : isSec
+              ? `url(#${idPrefix}secondary_grad)`
+              : undefined;
+
+        const strokeColor = hasScore
+          ? (isHovered || isSelected ? 'var(--recovery-muscle-selected)' : 'var(--recovery-muscle-stroke)')
+          : (isActive || isSelected ? '#ffffff' : undefined);
+        const strokeWidth = hasScore
+          ? (isHovered || isSelected ? 1.4 : 0.8)
+          : (isActive || isSelected ? 0.9 : 0.4);
+        const filter = !hasScore && (isActive || isSelected) ? `url(#${idPrefix}glow)` : undefined;
+        const recoveryTransform = hasScore && group === 'ABS'
+          ? 'translate(-8.4 -1.2) scale(1.14 1)'
           : undefined;
-
-        const strokeColor = isActive ? '#ffffff' : undefined;
-        const strokeWidth = isActive ? 0.9 : 0.4;
-        const filter = isActive ? `url(#${idPrefix}glow)` : undefined;
 
         return (
           <g
             key={groupKey}
             filter={filter}
+            transform={recoveryTransform}
             className={`transition-all duration-300 ${
               interactive ? 'cursor-pointer hover:opacity-90' : ''
             }`}
-            onMouseEnter={() => interactive && onHoverMuscle?.(groupKey as MuscleName)}
+            onClick={(event) => {
+              if (interactive) {
+                const trigger = event.currentTarget as unknown as HTMLElement | SVGElement;
+                onSelectMuscle?.(group, trigger);
+              }
+            }}
+            onMouseEnter={() => interactive && onHoverMuscle?.(group)}
             onMouseLeave={() => interactive && onHoverMuscle?.(null)}
           >
             {paths.map((d, i) => (
@@ -219,19 +359,20 @@ export default function MuscleBody({
                 {/* Base Muscle Slab */}
                 <path
                   d={d}
-                  fill={fillUrl}
+                  fill={fillColor}
                   stroke={strokeColor}
                   className={
-                    isActive
+                    isActive || hasScore
                       ? 'transition-all duration-300'
                       : 'fill-slate-200 dark:fill-[#121927] stroke-slate-300 dark:stroke-[#1e293b] transition-colors duration-300'
                   }
                   strokeWidth={strokeWidth}
+                  strokeLinecap="round"
                   strokeLinejoin="round"
                 />
 
                 {/* Sợi cơ (Muscle Striations Overlay) */}
-                {isActive && (
+                {isActive && !hasScore && (
                   <path
                     d={d}
                     fill={`url(#${idPrefix}fiber)`}
@@ -247,3 +388,6 @@ export default function MuscleBody({
     </svg>
   );
 }
+
+
+

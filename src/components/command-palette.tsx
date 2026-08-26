@@ -5,9 +5,10 @@ import { useRouter } from 'next/navigation';
 import {
   Search, LayoutDashboard, Brain, Dumbbell, CalendarDays, Target,
   MessageCircle, Sparkles, TrendingUp, BarChart3, User, Moon, Sun,
-  LogOut, CornerDownLeft, X, ArrowRight,
+  LogOut, CornerDownLeft, X, ArrowRight, HeartPulse,
 } from 'lucide-react';
 import { useTheme } from './theme-provider';
+import { isMuscleReadinessClientEnabled } from '@/lib/recovery/feature-flags';
 
 type CommandItem = {
   id: string;
@@ -31,6 +32,7 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean; onClose: 
     { id: 'prog', title: 'Chương trình tập luyện', category: 'Trang', icon: CalendarDays, action: () => router.push('/programs') },
     { id: 'gyms', title: 'Phòng gym cá nhân', category: 'Trang', icon: Target, action: () => router.push('/gyms') },
     { id: 'progress', title: 'Tiến độ & Kỷ lục cá nhân', category: 'Trang', icon: TrendingUp, action: () => router.push('/progress') },
+    ...(isMuscleReadinessClientEnabled() ? [{ id: 'recovery', title: 'Phục hồi cơ bắp', category: 'Trang' as const, icon: HeartPulse, action: () => router.push('/recovery') }] : []),
     { id: 'weekly', title: 'Báo cáo phân tích tuần', category: 'Trang', icon: BarChart3, action: () => router.push('/weekly') },
     { id: 'profile', title: 'Hồ sơ cá nhân', category: 'Trang', icon: User, action: () => router.push('/profile') },
 

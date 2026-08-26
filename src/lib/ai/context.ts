@@ -2,9 +2,15 @@ import { createClient } from '@/lib/supabase/server';
 import type { DumbbellInventoryItem } from '@/lib/dumbbell-inventory';
 import type { WorkoutPhase } from './workout-contract';
 import { effectiveGymEquipment, filterExplicitlyAvoided, isEquipmentCompatible, isExerciseRoleAllowed } from './workout-constraints';
+import type { MinimalAIPersonalizationContext } from './personalization-context';
+import { filterPersonalizedExerciseCandidates } from './personalization-integration';
+import {
+  getMuscleSlugsForBodyGroups,
+  type BodyMuscleGroup,
+} from '@/lib/recovery/muscle-groups';
 
-export const TARGETED_EXERCISE_SELECT = 'id, slug, name, name_vi, difficulty, exercise_type, status, owner_user_id, workout_role, workout_role_review_status, exercise_muscles!inner(muscles!inner(slug)), exercise_equipment(equipment(slug))';
-export const ACCESSORY_EXERCISE_SELECT = 'id, slug, name, name_vi, difficulty, exercise_type, status, owner_user_id, workout_role, workout_role_review_status, exercise_muscles(muscles(slug)), exercise_equipment(equipment(slug))';
+export const TARGETED_EXERCISE_SELECT = 'id, slug, name, name_vi, difficulty, exercise_type, status, owner_user_id, workout_role, workout_role_review_status, default_tracking_mode, allowed_tracking_modes, tracking_mode_review_status, load_basis, exercise_muscles!inner(muscles!inner(slug)), exercise_equipment(equipment(slug))';
+export const ACCESSORY_EXERCISE_SELECT = 'id, slug, name, name_vi, difficulty, exercise_type, status, owner_user_id, workout_role, workout_role_review_status, default_tracking_mode, allowed_tracking_modes, tracking_mode_review_status, load_basis, exercise_muscles(muscles(slug)), exercise_equipment(equipment(slug))';
 
 export function rankAccessoryCandidates<T extends { workout_role?: string | null; exercise_muscles?: any[] }>(
   candidates: T[],
@@ -26,6 +32,8 @@ type Ctx = {
   gymId: string | null;
   durationMinutes: number;
   userPrompt?: string | null;
+  personalization?: MinimalAIPersonalizationContext;
+  targetMuscleGroups?: BodyMuscleGroup[];
 };
 
 export async function buildContext(ctx: Ctx) {
@@ -36,7 +44,7 @@ export async function buildContext(ctx: Ctx) {
       .select('id, name, training_programs(name), training_day_targets(role, target_sets, muscles(slug, name_vi))')
       .eq('id', ctx.programDayId)
       .maybeSingle(),
-    ctx.gymId
+    ctx.gymId && ctx.gymId !== 'bodyweight' && ctx.gymId !== 'no_equipment'
       ? supabase.from('gyms').select('id, gym_equipment(equipment(slug, name_vi)), gym_dumbbell_inventory(weight_kg, quantity)').eq('id', ctx.gymId).eq('owner_user_id', ctx.userId).maybeSingle()
       : Promise.resolve({ data: null }),
     supabase
@@ -54,13 +62,21 @@ export async function buildContext(ctx: Ctx) {
       .limit(5),
   ]);
 
-  const dumbbellInventory = ((gymRes.data as any)?.gym_dumbbell_inventory ?? []).map((item: any) => ({
-    weight_kg: Number(item.weight_kg),
-    quantity: Number(item.quantity),
-  })) as DumbbellInventoryItem[];
-  const gymEquipment = effectiveGymEquipment(((gymRes.data as any)?.gym_equipment ?? [])
-    .map((item: any) => item.equipment?.slug)
-    .filter(Boolean), dumbbellInventory.length > 0);
+  const isBodyweightMode = ctx.gymId === 'bodyweight' || ctx.gymId === 'no_equipment';
+  const dumbbellInventory = isBodyweightMode
+    ? []
+    : (((gymRes.data as any)?.gym_dumbbell_inventory ?? []).map((item: any) => ({
+        weight_kg: Number(item.weight_kg),
+        quantity: Number(item.quantity),
+      })) as DumbbellInventoryItem[]);
+  const gymEquipment = isBodyweightMode
+    ? ['bodyweight']
+    : effectiveGymEquipment(
+        ((gymRes.data as any)?.gym_equipment ?? [])
+          .map((item: any) => item.equipment?.slug)
+          .filter(Boolean),
+        dumbbellInventory.length > 0,
+      );
 
   return {
     profile: ctx.profile,
@@ -83,9 +99,11 @@ export async function candidateExercises(
   const supabase = await createClient();
   const c = existingContext ?? await buildContext(ctx);
 
-  const targetMuscles = ((c.programDay as any)?.training_day_targets ?? [])
-    .map((t: any) => t.muscles?.slug)
-    .filter(Boolean);
+  const targetMuscles = ctx.targetMuscleGroups?.length
+    ? getMuscleSlugsForBodyGroups(ctx.targetMuscleGroups)
+    : ((c.programDay as any)?.training_day_targets ?? [])
+        .map((t: any) => t.muscles?.slug)
+        .filter(Boolean);
 
   // If userPrompt is provided, also dynamically incorporate requested muscles/categories
   const promptLower = (ctx.userPrompt ?? '').toLowerCase();
@@ -147,11 +165,11 @@ export async function candidateExercises(
     ? (exerciseRows ?? [])
     : rankAccessoryCandidates(exerciseRows ?? [], combinedMuscles);
 
-  const eligibleExercises = rankedRows.filter((e: any) => {
+  const eligibleExercises = filterPersonalizedExerciseCandidates(rankedRows, ctx.personalization).filter((e: any) => {
       if (!e || e.status !== 'published') return false;
       if (e.owner_user_id && e.owner_user_id !== ctx.userId) return false;
       if (e.difficulty && ctx.profile.experience_level === 'beginner' && e.difficulty === 'advanced') return false;
-      const mode = phase === 'main' ? 'reps' : 'time';
+      const mode = e.default_tracking_mode ?? 'reps';
       return isExerciseRoleAllowed(phase, mode, e, ctx.userId);
     });
   const candIds = eligibleExercises.map((exercise: any) => exercise.id);
@@ -171,14 +189,21 @@ export async function candidateExercises(
       .filter(Boolean));
   });
 
-  const exerciseMuscleMap = new Map<string, { primaryVi?: string; primarySlug?: string; allMusclesVi: string[] }>();
+  const exerciseMuscleMap = new Map<string, {
+    primaryVi?: string;
+    primarySlug?: string;
+    allMusclesVi: string[];
+    allMuscleSlugs: string[];
+  }>();
   (muscleLinks ?? []).forEach((m: any) => {
     if (!exerciseMuscleMap.has(m.exercise_id)) {
-      exerciseMuscleMap.set(m.exercise_id, { allMusclesVi: [] });
+      exerciseMuscleMap.set(m.exercise_id, { allMusclesVi: [], allMuscleSlugs: [] });
     }
     const info = exerciseMuscleMap.get(m.exercise_id)!;
     const nameVi = m.muscles?.name_vi || m.muscles?.name;
+    const muscleSlug = m.muscles?.slug;
     if (nameVi && !info.allMusclesVi.includes(nameVi)) info.allMusclesVi.push(nameVi);
+    if (muscleSlug && !info.allMuscleSlugs.includes(muscleSlug)) info.allMuscleSlugs.push(muscleSlug);
     if (m.role === 'primary' && !info.primaryVi) {
       info.primaryVi = nameVi;
       info.primarySlug = m.muscles?.slug;
@@ -201,6 +226,7 @@ export async function candidateExercises(
             equipment_slugs: exerciseEquipmentMap.get(id) ?? [],
             primary_muscle_vi: muscleInfo?.primaryVi ?? muscleInfo?.allMusclesVi?.[0] ?? 'Toàn thân',
             primary_muscle_slug: muscleInfo?.primarySlug ?? '',
+            muscle_slugs: muscleInfo?.allMuscleSlugs ?? [],
             muscle_names_vi: muscleInfo?.allMusclesVi ?? [],
           }
         : null;
@@ -213,7 +239,7 @@ export async function candidateExercises(
 export async function visibleExercisesBySlugs(
   ctx: Ctx,
   slugs: string[],
-  phaseBySlug: Map<string, { phase: WorkoutPhase; mode: 'reps' | 'time' | 'hold' }>,
+  phaseBySlug: Map<string, { phase: WorkoutPhase; mode: import('@/lib/workouts/metrics').CompatibleTrackingMode }>,
   existingContext?: Awaited<ReturnType<typeof buildContext>>,
 ) {
   if (slugs.length === 0) return [];
@@ -221,14 +247,14 @@ export async function visibleExercisesBySlugs(
   const c = existingContext ?? await buildContext(ctx);
   const { data } = await supabase
     .from('exercises')
-    .select('id, slug, name, name_vi, difficulty, exercise_type, status, owner_user_id, workout_role, workout_role_review_status, exercise_equipment(equipment(slug))')
+    .select('id, slug, name, name_vi, difficulty, exercise_type, status, owner_user_id, workout_role, workout_role_review_status, default_tracking_mode, allowed_tracking_modes, tracking_mode_review_status, load_basis, exercise_equipment(equipment(slug))')
     .in('slug', slugs)
     .eq('status', 'published');
 
-  return (data ?? []).map((exercise: any) => ({
+  return filterPersonalizedExerciseCandidates((data ?? []).map((exercise: any) => ({
     ...exercise,
     equipment_slugs: (exercise.exercise_equipment ?? []).map((link: any) => link.equipment?.slug).filter(Boolean),
-  })).filter((exercise: any) => {
+  })), ctx.personalization).filter((exercise: any) => {
     const requested = phaseBySlug.get(exercise.slug);
     return requested
       && (!exercise.owner_user_id || exercise.owner_user_id === ctx.userId)

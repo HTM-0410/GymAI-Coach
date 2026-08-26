@@ -3,8 +3,8 @@
 -- Migration: 20260819000011_exercise_storage_buckets.sql
 -- =====================================================================
 -- Two public buckets:
---   - exercise-images     — 1324 JPG thumbnails (≤512 KB / file)
---   - exercise-animations — 1324 GIF animations (≤2 MB / file)
+--   - exercise-images     - 1324 JPG thumbnails (≤512 KB / file)
+--   - exercise-animations - 1324 GIF animations (≤2 MB / file)
 --
 -- Idempotent: safe to re-run.
 -- =====================================================================

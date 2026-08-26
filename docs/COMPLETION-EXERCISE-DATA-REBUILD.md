@@ -1,4 +1,4 @@
-# Completion Report — Exercise data rebuild (prototype)
+# Completion Report - Exercise data rebuild (prototype)
 
 STATUS: PARTIAL
 

@@ -22,6 +22,7 @@ import {
   WORKOUT_ROLE_REVIEW_STATUSES,
   workoutRoleManifestSchema,
 } from '../src/lib/exercises/workout-role';
+import { reviewedWorkoutMetric } from '../src/lib/exercises/workout-metrics-taxonomy';
 
 // ─── ENV ─────────────────────────────────────────────────────────────────────
 import { randomUUID } from 'node:crypto';
@@ -107,6 +108,11 @@ const ExerciseSchema = z.object({
   workout_role_review_status: z.enum(WORKOUT_ROLE_REVIEW_STATUSES).optional(),
   workout_role_confidence: z.number().min(0).max(1).optional(),
   workout_role_source: z.string().min(1).optional(),
+  default_tracking_mode: z.enum(['weight_reps', 'reps', 'duration', 'duration_distance']).default('reps'),
+  allowed_tracking_modes: z.array(z.enum(['weight_reps', 'reps', 'duration', 'duration_distance'])).min(1).default(['reps']),
+  tracking_mode_review_status: z.enum(['reviewed', 'needs_review']).default('needs_review'),
+  tracking_mode_source: z.string().min(1).default('safe_fallback'),
+  load_basis: z.enum(['external_total', 'per_implement', 'assistance', 'none']).default('none'),
   media_metadata: z.object({
     version: z.string().regex(/^\d+\.\d+\.\d+$/),
     last_updated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -157,7 +163,7 @@ const MUSCLE_ALIASES: Record<string, string> = {
   'serratus anterior': 'serratus-anterior',
   'cơ lõi': 'core',
   'cơ gập hông': 'hip_flexors',
-  // Non-muscle "muscle" labels in JSON — map to nearest existing muscle
+  // Non-muscle "muscle" labels in JSON - map to nearest existing muscle
   'cardiovascular system': 'cardiovascular-system',
   'upper back': 'upper-back',
   'spine': 'spine',
@@ -525,7 +531,7 @@ async function main() {
   //     Collect all muscle/equipment names referenced by valid exercises,
   //     then upsert any that don't yet exist in DB.
 
-  // Muscles not in seed — collected from JSON (slug derived from name_vi).
+  // Muscles not in seed - collected from JSON (slug derived from name_vi).
   function slugify(s: string): string {
     return s
       .toLowerCase()
@@ -621,18 +627,22 @@ async function main() {
   }
 
   if (newMuscles.length > 0) {
-    console.log(`Creating ${newMuscles.length} missing muscles...`);
-    const { data, error } = await supa
-      .from('muscles')
-      .upsert(newMuscles, { onConflict: 'slug', ignoreDuplicates: false })
-      .select('id, slug');
-    if (error) console.error('  ✗ muscle upsert:', error.message);
-    else {
-      for (const m of data ?? []) {
-        MUSCLE_ID_BY_SLUG.set(m.slug, m.id);
-        // Also add aliases so resolveMuscleSlug picks up the original name_vi
-        const orig = newMuscles.find((x) => x.slug === m.slug);
-        if (orig) MUSCLE_NAME_TO_SLUG.set(orig.name_vi.toLowerCase().trim(), m.slug);
+    if (DRY_RUN) {
+      console.log(`[DRY-RUN] Would create ${newMuscles.length} missing muscles.`);
+    } else {
+      console.log(`Creating ${newMuscles.length} missing muscles...`);
+      const { data, error } = await supa
+        .from('muscles')
+        .upsert(newMuscles, { onConflict: 'slug', ignoreDuplicates: false })
+        .select('id, slug');
+      if (error) console.error('  ✗ muscle upsert:', error.message);
+      else {
+        for (const m of data ?? []) {
+          MUSCLE_ID_BY_SLUG.set(m.slug, m.id);
+          // Also add aliases so resolveMuscleSlug picks up the original name_vi
+          const orig = newMuscles.find((x) => x.slug === m.slug);
+          if (orig) MUSCLE_NAME_TO_SLUG.set(orig.name_vi.toLowerCase().trim(), m.slug);
+        }
       }
     }
   }
@@ -643,7 +653,7 @@ async function main() {
   for (const ex of exercises) {
     const seed = SEED_BY_SLUG.get(ex.slug);
 
-    // Resolve primary_muscle slug — fallback seed nếu JSON resolve fail
+    // Resolve primary_muscle slug - fallback seed nếu JSON resolve fail
     let primarySlug = resolveMuscleSlug(ex.primary_muscle);
     if (!primarySlug && seed?.primary_muscles?.[0]) primarySlug = seed.primary_muscles[0];
     if (!primarySlug || !MUSCLE_ID_BY_SLUG.has(primarySlug)) {
@@ -664,7 +674,7 @@ async function main() {
       if (s && s !== primarySlug && MUSCLE_ID_BY_SLUG.has(s)) secondarySlugs.push(s);
     }
 
-    // Resolve equipment — ưu tiên JSON; fallback về seed.equipment nếu resolve fail
+    // Resolve equipment - ưu tiên JSON; fallback về seed.equipment nếu resolve fail
     const equipmentSlugs: string[] = [];
     for (const eq of ex.equipment) {
       let s = resolveEquipmentSlug(eq);
@@ -689,6 +699,7 @@ async function main() {
 
     // Use existing id if present (for stable upsert), else generate UUID
     const existingId = EX_ID_BY_SLUG.get(ex.slug);
+    const metricReview = reviewedWorkoutMetric(ex.slug);
     newRows.push({
       ...(existingId ? { id: existingId } : { id: randomUUID() }),
       slug: ex.slug,
@@ -724,6 +735,11 @@ async function main() {
             workout_role_source: ex.workout_role_source,
           }
         : {}),
+      default_tracking_mode: metricReview?.defaultTrackingMode ?? ex.default_tracking_mode,
+      allowed_tracking_modes: metricReview?.allowedTrackingModes ?? ex.allowed_tracking_modes,
+      tracking_mode_review_status: metricReview ? 'reviewed' : ex.tracking_mode_review_status,
+      tracking_mode_source: metricReview?.source ?? ex.tracking_mode_source,
+      load_basis: metricReview?.loadBasis ?? ex.load_basis,
       // Storage URLs override local paths. After upload-exercise-media.ts ran,
       // gallery.main is the JPG public URL and gallery.animation is the GIF URL.
       gallery_json: ex.gallery,
@@ -764,9 +780,29 @@ async function main() {
   const { data: allExs } = await supa.from('exercises').select('id, slug').eq('type', 'system').is('owner_user_id', null);
   for (const e of allExs ?? []) EX_ID_BY_SLUG.set(e.slug, e.id);
 
-  // 6. exercise_muscles (delete old + insert new)
+  // 6. exercise_muscles (preserve curated contribution, then rebuild mappings)
   console.log(`\nSyncing exercise_muscles...`);
-  await supa.from('exercise_muscles').delete().neq('exercise_id', '00000000-0000-0000-0000-000000000000');
+  const { data: existingMuscleRows, error: existingMuscleError } = await supa
+    .from('exercise_muscles')
+    .select('exercise_id, muscle_id, role, contribution');
+  if (existingMuscleError) {
+    throw new Error(`Không thể đọc contribution hiện tại: ${existingMuscleError.message}`);
+  }
+  const existingContributions = new Map(
+    (existingMuscleRows ?? [])
+      .filter((row) => row.contribution != null)
+      .map((row) => [
+        `${row.exercise_id}:${row.muscle_id}:${row.role}`,
+        Number(row.contribution),
+      ]),
+  );
+  const { error: deleteMuscleError } = await supa
+    .from('exercise_muscles')
+    .delete()
+    .neq('exercise_id', '00000000-0000-0000-0000-000000000000');
+  if (deleteMuscleError) {
+    throw new Error(`Không thể xóa mapping cơ cũ: ${deleteMuscleError.message}`);
+  }
   const muscleRows: any[] = [];
   for (const ex of exercises) {
     const seed = SEED_BY_SLUG.get(ex.slug);
@@ -775,7 +811,15 @@ async function main() {
 
     let primarySlug = resolveMuscleSlug(ex.primary_muscle) ?? seed?.primary_muscles?.[0];
     if (primarySlug && MUSCLE_ID_BY_SLUG.has(primarySlug)) {
-      muscleRows.push({ exercise_id: eid, muscle_id: MUSCLE_ID_BY_SLUG.get(primarySlug)!, role: 'primary', sort_order: 0 });
+      const muscleId = MUSCLE_ID_BY_SLUG.get(primarySlug)!;
+      const key = `${eid}:${muscleId}:primary`;
+      muscleRows.push({
+        exercise_id: eid,
+        muscle_id: muscleId,
+        role: 'primary',
+        contribution: existingContributions.get(key) ?? 1,
+        sort_order: 0,
+      });
     }
 
     const secondaryNames = ex.secondary_muscles.length > 0 ? ex.secondary_muscles : seed?.secondary_muscles ?? [];
@@ -789,7 +833,15 @@ async function main() {
       }
       if (s && s !== primarySlug && MUSCLE_ID_BY_SLUG.has(s) && !seen.has(s)) {
         seen.add(s);
-        muscleRows.push({ exercise_id: eid, muscle_id: MUSCLE_ID_BY_SLUG.get(s)!, role: 'secondary', sort_order: order++ });
+        const muscleId = MUSCLE_ID_BY_SLUG.get(s)!;
+        const key = `${eid}:${muscleId}:secondary`;
+        muscleRows.push({
+          exercise_id: eid,
+          muscle_id: muscleId,
+          role: 'secondary',
+          contribution: existingContributions.get(key) ?? 0.5,
+          sort_order: order++,
+        });
       }
     }
   }
@@ -836,7 +888,7 @@ async function main() {
   }
   console.log(`✓ exercise_equipment: ${eOk} rows`);
 
-  // 8. exercise_media — SKIPPED.
+  // 8. exercise_media - SKIPPED.
   //    Media URLs are now stored in exercises.gallery_json (Storage URLs).
   //    See scripts/upload-exercise-media.ts + src/lib/exercises-db.ts.
   console.log(`\nSkipping exercise_media (Storage URLs in gallery_json).`);

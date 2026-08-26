@@ -20,7 +20,7 @@ type GymItem = {
   name: string;
   description: string | null;
   created_at?: string;
-  gym_equipment: { count: number }[];
+  gym_equipment?: Array<{ equipment?: { slug?: string; name_vi?: string | null } | null; count?: number }>;
 };
 
 export default function GymsListClient({ initialGyms }: { initialGyms: GymItem[] }) {
@@ -158,8 +158,25 @@ export default function GymsListClient({ initialGyms }: { initialGyms: GymItem[]
       {/* ── GYM LIST ── */}
       <section className="space-y-3.5">
         {gyms.map((g) => {
-          const eqCount = g.gym_equipment?.[0]?.count ?? 0;
+          const rawEquipments = g.gym_equipment ?? [];
+          const physicalEquipments = rawEquipments.filter((ge: any) =>
+            ge.equipment?.slug ? ge.equipment.slug !== 'bodyweight' : true,
+          );
+          const eqCount = physicalEquipments.length;
           const isCurrentDeleting = deletingId === g.id;
+
+          const eqNames = physicalEquipments
+            .map((ge: any) => ge.equipment?.name_vi)
+            .filter((name): name is string => Boolean(name && name.toLowerCase() !== 'bodyweight'));
+
+          const displayDesc =
+            g.description && !g.description.includes('khởi tạo') && !g.description.includes('hồ sơ')
+              ? g.description
+              : eqNames.length > 0
+              ? eqNames.length <= 3
+                ? `Gồm: ${eqNames.join(', ')}`
+                : `Gồm: ${eqNames.slice(0, 3).join(', ')} và +${eqNames.length - 3} thiết bị khác`
+              : null;
 
           return (
             <div
@@ -180,9 +197,9 @@ export default function GymsListClient({ initialGyms }: { initialGyms: GymItem[]
                       <Dumbbell className="h-3 w-3 text-accent" />
                       {eqCount} thiết bị
                     </span>
-                    {g.description && (
+                    {displayDesc && (
                       <span className="text-xs text-ink-muted truncate hidden sm:inline">
-                        • {g.description}
+                        • {displayDesc}
                       </span>
                     )}
                   </div>

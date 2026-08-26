@@ -3,9 +3,24 @@ const GEMINI_MODEL = process.env.GEMINI_MODEL ?? 'gemini-3.5-flash-lite';
 
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
+export function getGeminiModel() {
+  return GEMINI_MODEL;
+}
+
+export class GeminiApiError extends Error {
+  constructor(public readonly status: number, message: string) {
+    super(message);
+    this.name = 'GeminiApiError';
+  }
+}
+
 type CallOpts = {
   prompt: string;
-  images?: { base64: string; mimeType: string }[];
+  images?: {
+    base64: string;
+    mimeType: string;
+    mediaResolution?: 'MEDIA_RESOLUTION_LOW' | 'MEDIA_RESOLUTION_MEDIUM' | 'MEDIA_RESOLUTION_HIGH' | 'MEDIA_RESOLUTION_ULTRA_HIGH';
+  }[];
   jsonSchema?: boolean;
   responseSchema?: Record<string, unknown>;
   temperature?: number;
@@ -18,7 +33,10 @@ export async function callGemini(opts: CallOpts): Promise<string> {
   const parts: any[] = [{ text: opts.prompt }];
   if (opts.images) {
     for (const img of opts.images) {
-      parts.push({ inline_data: { mime_type: img.mimeType, data: img.base64 } });
+      parts.push({
+        inline_data: { mime_type: img.mimeType, data: img.base64 },
+        ...(img.mediaResolution ? { media_resolution: { level: img.mediaResolution } } : {}),
+      });
     }
   }
 
@@ -27,7 +45,7 @@ export async function callGemini(opts: CallOpts): Promise<string> {
     body.generationConfig.response_mime_type = 'application/json';
   }
   if (opts.responseSchema) {
-    body.generationConfig.response_schema = opts.responseSchema;
+    body.generationConfig.responseJsonSchema = opts.responseSchema;
   }
 
   const res = await fetch(`${ENDPOINT}?key=${GEMINI_KEY}`, {
@@ -37,7 +55,7 @@ export async function callGemini(opts: CallOpts): Promise<string> {
   });
   if (!res.ok) {
     const errTxt = await res.text();
-    throw new Error(`Gemini ${res.status}: ${errTxt.slice(0, 200)}`);
+    throw new GeminiApiError(res.status, `Gemini ${res.status}: ${errTxt.slice(0, 500)}`);
   }
   const data = await res.json();
   return data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';

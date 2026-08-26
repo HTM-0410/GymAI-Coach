@@ -2,6 +2,9 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter, usePathname } from 'next/navigation';
+import type { CoachNavigationAction } from '@/lib/ai/coach-actions';
+import { COACH_WORKOUT_HANDOFF_STORAGE_KEY } from '@/lib/ai/coach-workout-handoff';
 import {
   Send,
   Loader2,
@@ -13,6 +16,8 @@ import {
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 
+const COACH_AVATAR_SRC = '/images/landing/gym-ai-robot-head-logo.png';
+
 const promptSuggestions = [
   'Làm sao để vượt ngưỡng (plateau) Bench Press?',
   'Khi nào thì tôi cần một tuần Deload?',
@@ -21,7 +26,10 @@ const promptSuggestions = [
 ];
 
 export default function FloatingCoachWidget() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: 'assistant',
@@ -58,6 +66,16 @@ export default function FloatingCoachWidget() {
       const data = await res.json();
       if (res.ok) {
         setMessages((m) => [...m, { role: 'assistant', content: data.reply }]);
+        const action = data.action as CoachNavigationAction | undefined;
+        if (action?.type === 'navigate') {
+          if (action.workoutHandoff) {
+            sessionStorage.setItem(COACH_WORKOUT_HANDOFF_STORAGE_KEY, JSON.stringify(action.workoutHandoff));
+          }
+          setTimeout(() => {
+            setIsOpen(false);
+            router.push(action.href);
+          }, 450);
+        }
       } else {
         setMessages((m) => [
           ...m,
@@ -115,10 +133,18 @@ export default function FloatingCoachWidget() {
     };
   }, []);
 
+  const isWorkoutActive =
+    Boolean(pathname) &&
+    pathname.startsWith('/workouts/') &&
+    !pathname.endsWith('/done') &&
+    pathname !== '/workouts/new';
+
+  const isDonePage = Boolean(pathname?.endsWith('/done'));
+
   return (
     <>
       {/* ── FLOATING MASCOT BUTTON (Bottom Right Thumb Zone) ── */}
-      <div className="fixed right-4 bottom-24 sm:right-6 sm:bottom-6 z-50 flex items-center gap-2">
+      <div className={`fixed right-4 sm:right-6 z-40 flex items-center gap-2 ${isDonePage ? 'bottom-6' : 'bottom-24 sm:bottom-6'}`}>
         {/* Optional Teaser Bubble on Desktop (auto-hides after click) */}
         {!isOpen && showTeaser && (
           <div className="hidden md:flex items-center gap-2 bg-chassis-hi dark:bg-[#0f141d] text-ink text-xs font-semibold px-3 py-1.5 rounded-xl border border-black/[0.08] dark:border-white/15 shadow-neumorph-sm animate-in fade-in slide-in-from-right-3 duration-300">
@@ -155,13 +181,14 @@ export default function FloatingCoachWidget() {
           }`}
           aria-label={isOpen ? 'Đóng AI Coach' : 'Mở AI Coach'}
         >
-          {/* Circular Muscular Robot Avatar */}
+          {/* Circular GymAI Chibi Robot Avatar */}
           <div className="relative w-full h-full rounded-full overflow-hidden bg-black/60 border border-accent/50">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/ai-coach-avatar.jpg"
-              alt="GymAI Muscular Coach Robot"
-              className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
+            <Image
+              src={COACH_AVATAR_SRC}
+              alt="GymAI Chibi Robot Coach"
+              fill
+              sizes="56px"
+              className="object-contain p-0.5 scale-100 group-hover:scale-110 transition-transform duration-300"
             />
 
             {/* Glowing Visor Ambient Accent */}
@@ -195,11 +222,11 @@ export default function FloatingCoachWidget() {
               <div className="flex items-center gap-2.5">
                 <div className="relative h-8 w-8 rounded-xl overflow-hidden border border-accent/40 shadow-xs bg-black shrink-0">
                   <Image
-                    src="/images/ai-coach-avatar.jpg"
-                    alt="AI Coach"
+                    src={COACH_AVATAR_SRC}
+                    alt="GymAI Chibi Robot Coach"
                     fill
                     sizes="32px"
-                    className="object-cover"
+                    className="object-contain p-0.5"
                   />
                 </div>
                 <div>

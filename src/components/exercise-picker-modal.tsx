@@ -16,8 +16,9 @@ import {
   Timer,
   Layers,
 } from 'lucide-react';
-import type { PrescriptionMode, WorkoutPhase } from '@/lib/ai/workout-contract';
+import type { PrescriptionMode, TrackingMode, WorkoutPhase } from '@/lib/ai/workout-contract';
 import { matchExerciseSearch } from '@/lib/exercises-search';
+import { distanceFromCanonical, distanceToCanonical, distanceUnitLabel, roundCanonical, type UnitSystem } from '@/lib/workouts/metrics';
 
 export type SelectedExerciseConfig = {
   exerciseId: string;
@@ -38,6 +39,9 @@ export type SelectedExerciseConfig = {
   restSeconds: number;
   durationSeconds: number | null;
   holdSeconds: number | null;
+  targetDurationSeconds: number | null;
+  targetDistanceMeters: number | null;
+  durationStyle: 'active' | 'hold' | null;
   perSide: boolean;
   aiReason: string;
 };
@@ -56,6 +60,8 @@ type DbExerciseItem = {
   gallery_json: any;
   workout_role: string | null;
   workout_role_review_status: string | null;
+  default_tracking_mode: TrackingMode | null;
+  allowed_tracking_modes: TrackingMode[] | null;
 };
 
 const MUSCLE_FILTER_CHIPS = [
@@ -87,12 +93,14 @@ export default function ExercisePickerModal({
   onSelectExercise,
   existingSlugs = [],
   phase = 'main',
+  unitSystem = 'metric',
 }: {
   isOpen: boolean;
   onClose: () => void;
   onSelectExercise: (config: SelectedExerciseConfig) => void;
   existingSlugs?: string[];
   phase?: WorkoutPhase;
+  unitSystem?: UnitSystem;
 }) {
   const [exercises, setExercises] = useState<DbExerciseItem[]>(cachedExercises ?? []);
   const [loading, setLoading] = useState(!cachedExercises);
@@ -110,6 +118,8 @@ export default function ExercisePickerModal({
   const [durationSeconds, setDurationSeconds] = useState(90);
   const [holdSeconds, setHoldSeconds] = useState(30);
   const [perSide, setPerSide] = useState(true);
+  const [trackingMode, setTrackingMode] = useState<TrackingMode>('reps');
+  const [distanceMeters, setDistanceMeters] = useState(() => distanceFromCanonical(1000, unitSystem));
 
   useEffect(() => {
     if (!isOpen) return;
@@ -126,7 +136,7 @@ export default function ExercisePickerModal({
         const supabase = createClient();
         const { data, error } = await supabase
           .from('exercises')
-          .select('id, slug, name, name_vi, difficulty, exercise_type, primary_muscle_vi, equipment_vi, default_rest_seconds, default_rir, gallery_json, workout_role, workout_role_review_status')
+          .select('id, slug, name, name_vi, difficulty, exercise_type, primary_muscle_vi, equipment_vi, default_rest_seconds, default_rir, gallery_json, workout_role, workout_role_review_status, default_tracking_mode, allowed_tracking_modes, tracking_mode_review_status, load_basis')
           .eq('status', 'published')
           .order('name_vi', { ascending: true });
 
@@ -165,6 +175,8 @@ export default function ExercisePickerModal({
     setDurationSeconds(90);
     setHoldSeconds(30);
     setPerSide(true);
+    setTrackingMode(item.default_tracking_mode ?? 'reps');
+    setDistanceMeters(distanceFromCanonical(1000, unitSystem));
   }
 
   function handleConfirmAdd() {
@@ -176,11 +188,9 @@ export default function ExercisePickerModal({
       typeof view?.src === 'string' && /\.(gif|webm|mp4)(?:\?|$)/i.test(view.src),
     );
 
-    const prescriptionMode: PrescriptionMode = phase === 'main'
-      ? 'reps'
-      : phase === 'cooldown' && configuringExercise.workout_role === 'static_stretch'
-        ? 'hold'
-        : 'time';
+    const prescriptionMode: PrescriptionMode = trackingMode;
+    const isRepMode = trackingMode === 'reps' || trackingMode === 'weight_reps';
+    const isHold = trackingMode === 'duration' && configuringExercise.workout_role === 'static_stretch';
     const config: SelectedExerciseConfig = {
       exerciseId: configuringExercise.id,
       exerciseSlug: configuringExercise.slug,
@@ -193,14 +203,17 @@ export default function ExercisePickerModal({
       phase,
       prescriptionMode,
       targetSets,
-      targetRepMin: prescriptionMode === 'reps' ? repMin : null,
-      targetRepMax: prescriptionMode === 'reps' ? repMax : null,
+      targetRepMin: isRepMode ? repMin : null,
+      targetRepMax: isRepMode ? repMax : null,
       targetWeight: null,
-      targetRir: prescriptionMode === 'reps' ? targetRir : null,
-      restSeconds: prescriptionMode === 'reps' ? restSeconds : 0,
-      durationSeconds: prescriptionMode === 'time' ? durationSeconds : null,
-      holdSeconds: prescriptionMode === 'hold' ? holdSeconds : null,
-      perSide: prescriptionMode === 'hold' ? perSide : false,
+      targetRir: trackingMode === 'weight_reps' ? targetRir : null,
+      restSeconds: isRepMode ? restSeconds : 0,
+      durationSeconds: null,
+      holdSeconds: null,
+      targetDurationSeconds: isRepMode ? null : isHold ? holdSeconds : durationSeconds,
+      targetDistanceMeters: trackingMode === 'duration_distance' ? roundCanonical(distanceToCanonical(distanceMeters, unitSystem)) : null,
+      durationStyle: isHold ? 'hold' : trackingMode === 'duration' || trackingMode === 'duration_distance' ? 'active' : null,
+      perSide: isHold ? perSide : false,
       aiReason: 'Thêm thủ công từ kho bài tập hệ thống',
     };
 
@@ -467,10 +480,20 @@ export default function ExercisePickerModal({
             </div>
 
             {/* Form Fields */}
-            {phase === 'main' ? (
+            {(configuringExercise.allowed_tracking_modes?.length ?? 0) > 1 && (
+              <label className="block text-xs font-bold text-ink">
+                Cách ghi nhận
+                <select value={trackingMode} onChange={(event) => setTrackingMode(event.target.value as TrackingMode)} className="mt-2 w-full rounded-xl border border-black/10 bg-chassis p-3 text-ink dark:border-white/10">
+                  {(configuringExercise.allowed_tracking_modes ?? [configuringExercise.default_tracking_mode ?? 'reps']).map((mode) => (
+                    <option key={mode} value={mode}>{mode}</option>
+                  ))}
+                </select>
+              </label>
+            )}
+            {trackingMode === 'reps' || trackingMode === 'weight_reps' ? (
             <div className="grid grid-cols-2 gap-3">
               {/* Target Sets */}
-              <div className="p-3.5 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/10 space-y-2">
+              {trackingMode === 'weight_reps' && <div className="p-3.5 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/10 space-y-2">
                 <label className="flex items-center gap-1.5 font-mono text-[10px] uppercase font-bold text-ink-muted">
                   <Flame className="h-3.5 w-3.5 text-accent" />
                   <span>Số hiệp (Sets)</span>
@@ -492,7 +515,7 @@ export default function ExercisePickerModal({
                     +
                   </button>
                 </div>
-              </div>
+              </div>}
 
               {/* Rep Range */}
               <div className="p-3.5 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/10 space-y-2">
@@ -573,7 +596,7 @@ export default function ExercisePickerModal({
                 <p className="font-mono text-[10px] uppercase font-bold text-accent">
                   {phase === 'warmup' ? 'Prescription khởi động' : 'Prescription giãn cơ'}
                 </p>
-                {phase === 'cooldown' && configuringExercise.workout_role === 'static_stretch' ? (
+                {configuringExercise.workout_role === 'static_stretch' && trackingMode === 'duration' ? (
                   <>
                     <label className="block text-xs font-bold text-ink">
                       Giữ tư thế: {holdSeconds} giây
@@ -606,8 +629,14 @@ export default function ExercisePickerModal({
                     />
                   </label>
                 )}
+                {trackingMode === 'duration_distance' && (
+                  <label className="block text-xs font-bold text-ink">
+                    Quãng đường mục tiêu ({distanceUnitLabel(unitSystem)})
+                    <input type="number" min={unitSystem === 'imperial' ? 0.01 : 1} step={unitSystem === 'imperial' ? 0.1 : 100} value={distanceMeters} onChange={(event) => setDistanceMeters(Math.max(unitSystem === 'imperial' ? 0.01 : 1, Number(event.target.value) || 0))} className="mt-2 w-full rounded-xl border border-black/10 bg-chassis p-3 text-ink dark:border-white/10" />
+                  </label>
+                )}
                 <p className="text-[11px] text-ink-secondary">
-                  Bài time/hold không dùng mức tạ hoặc RIR và không được tính vào working volume.
+                  Bài theo thời gian hoặc quãng đường không dùng mức tạ hay RIR và không được tính vào lifting volume.
                 </p>
               </div>
             )}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
@@ -43,6 +43,8 @@ import {
   classifyEquipment,
   classifyWeightSubcategory,
 } from '@/lib/equipment-categories';
+import { preprocessImageForUpload } from '@/lib/client-image-preprocess';
+import { getEquipmentDetectErrorMessage } from '@/lib/equipment-detect-errors';
 
 type EquipmentItem = {
   id: string;
@@ -362,22 +364,45 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
     }
   }
 
+  const scanCleanupRef = useRef<(() => void) | null>(null);
+
+  useEffect(() => () => scanCleanupRef.current?.(), []);
+
+  function clearScanPreview() {
+    scanCleanupRef.current?.();
+    scanCleanupRef.current = null;
+    setScanPreview(null);
+  }
+
   // AI Photo Scan
   async function onPickPhoto(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setScanPreview(URL.createObjectURL(file));
+    e.target.value = '';
+
+    if (scanCleanupRef.current) {
+      scanCleanupRef.current();
+      scanCleanupRef.current = null;
+    }
+
     setScanLoading(true);
     setScanError(null);
     setScanResult(null);
     setScanConfirmed(false);
     try {
+      const { file: processedFile, previewUrl, cleanup } = await preprocessImageForUpload(file);
+      scanCleanupRef.current = cleanup;
+      setScanPreview(previewUrl);
+
       const fd = new FormData();
-      fd.append('image', file);
+      fd.append('image', processedFile);
       fd.append('gymId', gym.id);
       const res = await fetch('/api/equipment/detect', { method: 'POST', body: fd });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? 'Lỗi detect');
+      const data = await res.json().catch(() => ({ error: 'network_error' }));
+      if (!res.ok) {
+        const msg = getEquipmentDetectErrorMessage(data?.error, data?.message);
+        throw new Error(msg);
+      }
       setScanResult({
         scanId: data.scanId ?? null,
         detected: (data.detected ?? []).map((item: Omit<ScanDetectedItem, 'selected'>) => ({
@@ -501,33 +526,49 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
     }
   }
 
-  // Group active equipment by category for the main display
-  const activeEquipmentList = allEquipment.filter((eq) => selectedIds.has(eq.id));
+  // Physical equipment list (excludes bodyweight as it is implicitly available everywhere)
+  const physicalEquipmentList = useMemo(
+    () => allEquipment.filter((eq) => eq.slug !== 'bodyweight' && classifyEquipment(eq) !== 'no-equipment'),
+    [allEquipment],
+  );
 
-  const activeGroupedByCategory: { [catId: string]: { label: string; items: EquipmentItem[] } } = {};
+  // Group active physical equipment by category for the main display
+  const activeEquipmentList = useMemo(
+    () => physicalEquipmentList.filter((eq) => selectedIds.has(eq.id)),
+    [physicalEquipmentList, selectedIds],
+  );
 
-  activeEquipmentList.forEach((eq) => {
-    const catId = classifyEquipment(eq);
-    const catMeta = EQUIPMENT_CATEGORIES.find((c) => c.id === catId);
-    const catLabel = catMeta?.label_vi || 'Thiết bị khác';
+  const visibleSelectedCount = activeEquipmentList.length;
 
-    if (!activeGroupedByCategory[catId]) {
-      activeGroupedByCategory[catId] = { label: catLabel, items: [] };
-    }
-    activeGroupedByCategory[catId].items.push(eq);
-  });
+  const activeGroupedByCategory: { [catId: string]: { label: string; items: EquipmentItem[] } } = useMemo(() => {
+    const grouped: { [catId: string]: { label: string; items: EquipmentItem[] } } = {};
+    activeEquipmentList.forEach((eq) => {
+      const catId = classifyEquipment(eq);
+      const catMeta = EQUIPMENT_CATEGORIES.find((c) => c.id === catId);
+      const catLabel = catMeta?.label_vi || 'Thiết bị khác';
 
-  // Count all available equipment per category; selected count has its own row.
-  const categoryEquipmentCounts: Record<string, number> = {};
-  allEquipment.forEach((eq) => {
-    const catId = classifyEquipment(eq);
-    categoryEquipmentCounts[catId] = (categoryEquipmentCounts[catId] || 0) + 1;
-  });
+      if (!grouped[catId]) {
+        grouped[catId] = { label: catLabel, items: [] };
+      }
+      grouped[catId].items.push(eq);
+    });
+    return grouped;
+  }, [activeEquipmentList]);
+
+  // Count all available physical equipment per category; selected count has its own row.
+  const categoryEquipmentCounts: Record<string, number> = useMemo(() => {
+    const counts: Record<string, number> = {};
+    physicalEquipmentList.forEach((eq) => {
+      const catId = classifyEquipment(eq);
+      counts[catId] = (counts[catId] || 0) + 1;
+    });
+    return counts;
+  }, [physicalEquipmentList]);
 
   // Modal filtered equipment with multi-field search (name_vi, name, slug)
   const modalFilteredEquipment = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
-    return allEquipment.filter((eq) => {
+    return physicalEquipmentList.filter((eq) => {
       const matchesSearch =
         !q ||
         (eq.name_vi && eq.name_vi.toLowerCase().includes(q)) ||
@@ -541,7 +582,7 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
       const cat = classifyEquipment(eq);
       return cat === activeCategory;
     });
-  }, [allEquipment, searchQuery, activeCategory, selectedIds]);
+  }, [physicalEquipmentList, searchQuery, activeCategory, selectedIds]);
 
   const allFilteredSelected =
     modalFilteredEquipment.length > 0 &&
@@ -707,7 +748,7 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
               <h2 className="text-base font-bold text-ink tracking-tight flex items-center gap-2">
                 <span>Thiết bị hiện có trong phòng</span>
                 <span className="font-mono text-xs px-2 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/30 font-bold">
-                  {selectedIds.size} món
+                  {visibleSelectedCount} món
                 </span>
               </h2>
               <p className="text-xs text-ink-secondary mt-0.5 font-medium">
@@ -727,7 +768,7 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
         </div>
 
         {/* ── CURRENT EQUIPMENT GROUPED BY CATEGORY ── */}
-        {selectedIds.size > 0 ? (
+        {visibleSelectedCount > 0 ? (
           <div className="space-y-6">
             {Object.entries(activeGroupedByCategory).map(([catId, { label, items }]) => {
               const IconComp = CATEGORY_ICONS[catId] || Dumbbell;
@@ -834,7 +875,7 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
                     Chọn thiết bị cho &quot;{name}&quot;
                   </h2>
                   <p className="text-xs text-ink-secondary dark:text-slate-400 mt-0.5">
-                    Đã tích chọn: <strong className="text-accent font-mono">{selectedIds.size}</strong> / {allEquipment.length} thiết bị
+                    Đã tích chọn: <strong className="text-accent font-mono">{visibleSelectedCount}</strong> / {physicalEquipmentList.length} thiết bị
                   </p>
                 </div>
               </div>
@@ -843,16 +884,16 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
+                  aria-label="Chọn ảnh từ thư viện để AI quét thiết bị"
                   className="btn-ghost text-xs py-1.5 px-3 inline-flex items-center gap-1.5 border border-accent/30 text-accent hover:bg-accent/10 shrink-0"
                 >
                   <Camera className="h-3.5 w-3.5" />
-                  <span className="hidden sm:inline">{scanLoading ? 'Đang quét...' : 'AI Quét ảnh'}</span>
+                  <span>{scanLoading ? 'Đang quét...' : 'Chọn ảnh AI quét'}</span>
                 </button>
                 <input
                   ref={fileInputRef}
                   type="file"
                   accept="image/jpeg,image/png,image/webp"
-                  capture="environment"
                   className="hidden"
                   onChange={onPickPhoto}
                 />
@@ -904,7 +945,7 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
                 </div>
                 <button
                   type="button"
-                  onClick={() => setScanPreview(null)}
+                  onClick={clearScanPreview}
                   className="text-ink-muted hover:text-ink p-1"
                 >
                   <X className="h-3.5 w-3.5" />
@@ -1099,7 +1140,7 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
                     <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded font-bold shrink-0 ${
                       activeCategory === 'all' ? 'bg-white/20 text-white' : 'bg-black/5 dark:bg-white/10 text-ink-muted dark:text-slate-400'
                     }`}>
-                      {allEquipment.length}
+                      {physicalEquipmentList.length}
                     </span>
                   </button>
 
@@ -1120,14 +1161,14 @@ export default function GymDetailClient({ gym, allEquipment, inventoryCard }: Gy
                     <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded font-bold shrink-0 ${
                       activeCategory === 'selected' ? 'bg-white/20 text-white' : 'bg-accent/15 text-accent border border-accent/20'
                     }`}>
-                      {selectedIds.size}
+                      {visibleSelectedCount}
                     </span>
                   </button>
 
                   <div className="h-px bg-black/[0.06] dark:bg-white/[0.08] my-1 hidden md:block" />
 
                   {/* Equipment Categories */}
-                  {EQUIPMENT_CATEGORIES.map((cat) => {
+                  {EQUIPMENT_CATEGORIES.filter((cat) => cat.id !== 'no-equipment').map((cat) => {
                     const IconComp = CATEGORY_ICONS[cat.id] || Dumbbell;
                     const count = categoryEquipmentCounts[cat.id] || 0;
                     const isActive = activeCategory === cat.id;

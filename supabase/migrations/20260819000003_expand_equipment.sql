@@ -12,7 +12,7 @@
 ALTER TABLE equipment ADD COLUMN IF NOT EXISTS image_url TEXT;
 
 -- =====================================================================
--- 2. Expand equipment catalog (idempotent — ON CONFLICT DO NOTHING)
+-- 2. Expand equipment catalog (idempotent - ON CONFLICT DO NOTHING)
 -- 9 existing rows are preserved; 19 new rows are added below.
 -- =====================================================================
 INSERT INTO equipment (slug, name, name_vi, category) VALUES

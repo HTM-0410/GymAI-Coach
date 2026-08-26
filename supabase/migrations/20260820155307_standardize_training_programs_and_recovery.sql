@@ -14,63 +14,63 @@ CREATE TEMP TABLE _program_day_plan (
 ) ON COMMIT DROP;
 
 INSERT INTO _program_day_plan VALUES
-  ('Push Pull Legs (PPL)', 0, 1, 'Push A', 'Buổi 1 — Đẩy A (sức mạnh)', 'push_strength'),
-  ('Push Pull Legs (PPL)', 1, 2, 'Pull A', 'Buổi 2 — Kéo A (sức mạnh)', 'pull_strength'),
-  ('Push Pull Legs (PPL)', 2, 3, 'Legs A', 'Buổi 3 — Chân A (sức mạnh)', 'legs_strength'),
-  ('Push Pull Legs (PPL)', 3, 4, 'Push B', 'Buổi 4 — Đẩy B (tăng cơ)', 'push_hypertrophy'),
-  ('Push Pull Legs (PPL)', 4, 5, 'Pull B', 'Buổi 5 — Kéo B (tăng cơ)', 'pull_hypertrophy'),
-  ('Push Pull Legs (PPL)', 5, 6, 'Legs B', 'Buổi 6 — Chân B (tăng cơ)', 'legs_hypertrophy'),
+  ('Push Pull Legs (PPL)', 0, 1, 'Push A', 'Buổi 1 - Đẩy A (sức mạnh)', 'push_strength'),
+  ('Push Pull Legs (PPL)', 1, 2, 'Pull A', 'Buổi 2 - Kéo A (sức mạnh)', 'pull_strength'),
+  ('Push Pull Legs (PPL)', 2, 3, 'Legs A', 'Buổi 3 - Chân A (sức mạnh)', 'legs_strength'),
+  ('Push Pull Legs (PPL)', 3, 4, 'Push B', 'Buổi 4 - Đẩy B (tăng cơ)', 'push_hypertrophy'),
+  ('Push Pull Legs (PPL)', 4, 5, 'Pull B', 'Buổi 5 - Kéo B (tăng cơ)', 'pull_hypertrophy'),
+  ('Push Pull Legs (PPL)', 5, 6, 'Legs B', 'Buổi 6 - Chân B (tăng cơ)', 'legs_hypertrophy'),
 
-  ('Upper / Lower (4-day)', 0, 1, 'Upper A', 'Buổi 1 — Thân Trên A (sức mạnh)', 'upper_strength'),
-  ('Upper / Lower (4-day)', 1, 2, 'Lower A', 'Buổi 2 — Thân Dưới A (sức mạnh)', 'lower_strength'),
-  ('Upper / Lower (4-day)', 2, 4, 'Upper B', 'Buổi 3 — Thân Trên B (tăng cơ)', 'upper_hypertrophy'),
-  ('Upper / Lower (4-day)', 3, 5, 'Lower B', 'Buổi 4 — Thân Dưới B (tăng cơ)', 'lower_hypertrophy'),
+  ('Upper / Lower (4-day)', 0, 1, 'Upper A', 'Buổi 1 - Thân Trên A (sức mạnh)', 'upper_strength'),
+  ('Upper / Lower (4-day)', 1, 2, 'Lower A', 'Buổi 2 - Thân Dưới A (sức mạnh)', 'lower_strength'),
+  ('Upper / Lower (4-day)', 2, 4, 'Upper B', 'Buổi 3 - Thân Trên B (tăng cơ)', 'upper_hypertrophy'),
+  ('Upper / Lower (4-day)', 3, 5, 'Lower B', 'Buổi 4 - Thân Dưới B (tăng cơ)', 'lower_hypertrophy'),
 
-  ('PPL + Upper Lower (5-day)', 0, 1, 'Push', 'Buổi 1 — Đẩy', 'push_hypertrophy'),
-  ('PPL + Upper Lower (5-day)', 1, 2, 'Pull', 'Buổi 2 — Kéo', 'pull_hypertrophy'),
-  ('PPL + Upper Lower (5-day)', 2, 3, 'Legs', 'Buổi 3 — Chân', 'legs_hypertrophy'),
-  ('PPL + Upper Lower (5-day)', 3, 5, 'Upper', 'Buổi 4 — Thân Trên', 'upper_hypertrophy'),
-  ('PPL + Upper Lower (5-day)', 4, 6, 'Lower', 'Buổi 5 — Thân Dưới', 'lower_hypertrophy'),
+  ('PPL + Upper Lower (5-day)', 0, 1, 'Push', 'Buổi 1 - Đẩy', 'push_hypertrophy'),
+  ('PPL + Upper Lower (5-day)', 1, 2, 'Pull', 'Buổi 2 - Kéo', 'pull_hypertrophy'),
+  ('PPL + Upper Lower (5-day)', 2, 3, 'Legs', 'Buổi 3 - Chân', 'legs_hypertrophy'),
+  ('PPL + Upper Lower (5-day)', 3, 5, 'Upper', 'Buổi 4 - Thân Trên', 'upper_hypertrophy'),
+  ('PPL + Upper Lower (5-day)', 4, 6, 'Lower', 'Buổi 5 - Thân Dưới', 'lower_hypertrophy'),
 
-  ('Full Body (3-day)', 0, 1, 'Full Body A', 'Buổi 1 — Toàn Thân A', 'full_a'),
-  ('Full Body (3-day)', 1, 3, 'Full Body B', 'Buổi 2 — Toàn Thân B', 'full_b'),
-  ('Full Body (3-day)', 2, 5, 'Full Body C', 'Buổi 3 — Toàn Thân C', 'full_c'),
+  ('Full Body (3-day)', 0, 1, 'Full Body A', 'Buổi 1 - Toàn Thân A', 'full_a'),
+  ('Full Body (3-day)', 1, 3, 'Full Body B', 'Buổi 2 - Toàn Thân B', 'full_b'),
+  ('Full Body (3-day)', 2, 5, 'Full Body C', 'Buổi 3 - Toàn Thân C', 'full_c'),
 
-  ('Bro Split (5-day)', 0, 1, 'Chest', 'Buổi 1 — Ngực', 'chest'),
-  ('Bro Split (5-day)', 1, 2, 'Back', 'Buổi 2 — Lưng', 'back'),
-  ('Bro Split (5-day)', 2, 3, 'Legs', 'Buổi 3 — Chân', 'legs_hypertrophy'),
-  ('Bro Split (5-day)', 3, 5, 'Shoulders', 'Buổi 4 — Vai', 'shoulders'),
-  ('Bro Split (5-day)', 4, 6, 'Arms', 'Buổi 5 — Tay Trước & Tay Sau', 'arms'),
+  ('Bro Split (5-day)', 0, 1, 'Chest', 'Buổi 1 - Ngực', 'chest'),
+  ('Bro Split (5-day)', 1, 2, 'Back', 'Buổi 2 - Lưng', 'back'),
+  ('Bro Split (5-day)', 2, 3, 'Legs', 'Buổi 3 - Chân', 'legs_hypertrophy'),
+  ('Bro Split (5-day)', 3, 5, 'Shoulders', 'Buổi 4 - Vai', 'shoulders'),
+  ('Bro Split (5-day)', 4, 6, 'Arms', 'Buổi 5 - Tay Trước & Tay Sau', 'arms'),
 
-  ('Arnold Split', 0, 1, 'Chest + Back A', 'Buổi 1 — Ngực & Lưng A', 'chest_back'),
-  ('Arnold Split', 1, 2, 'Shoulders + Arms A', 'Buổi 2 — Vai & Tay A', 'shoulders_arms'),
-  ('Arnold Split', 2, 3, 'Legs A', 'Buổi 3 — Chân A', 'legs_strength'),
-  ('Arnold Split', 3, 4, 'Chest + Back B', 'Buổi 4 — Ngực & Lưng B', 'chest_back'),
-  ('Arnold Split', 4, 5, 'Shoulders + Arms B', 'Buổi 5 — Vai & Tay B', 'shoulders_arms'),
-  ('Arnold Split', 5, 6, 'Legs B', 'Buổi 6 — Chân B', 'legs_hypertrophy'),
+  ('Arnold Split', 0, 1, 'Chest + Back A', 'Buổi 1 - Ngực & Lưng A', 'chest_back'),
+  ('Arnold Split', 1, 2, 'Shoulders + Arms A', 'Buổi 2 - Vai & Tay A', 'shoulders_arms'),
+  ('Arnold Split', 2, 3, 'Legs A', 'Buổi 3 - Chân A', 'legs_strength'),
+  ('Arnold Split', 3, 4, 'Chest + Back B', 'Buổi 4 - Ngực & Lưng B', 'chest_back'),
+  ('Arnold Split', 4, 5, 'Shoulders + Arms B', 'Buổi 5 - Vai & Tay B', 'shoulders_arms'),
+  ('Arnold Split', 5, 6, 'Legs B', 'Buổi 6 - Chân B', 'legs_hypertrophy'),
 
-  ('5x5 Strength', 0, 1, 'Workout A', 'Buổi A — Squat, Bench Press, Barbell Row', 'five_a'),
-  ('5x5 Strength', 1, 3, 'Workout B', 'Buổi B — Squat, Overhead Press, Deadlift', 'five_b'),
-  ('5x5 Strength', 2, 5, 'Workout A', 'Buổi A — Squat, Bench Press, Barbell Row', 'five_a'),
+  ('5x5 Strength', 0, 1, 'Workout A', 'Buổi A - Squat, Bench Press, Barbell Row', 'five_a'),
+  ('5x5 Strength', 1, 3, 'Workout B', 'Buổi B - Squat, Overhead Press, Deadlift', 'five_b'),
+  ('5x5 Strength', 2, 5, 'Workout A', 'Buổi A - Squat, Bench Press, Barbell Row', 'five_a'),
 
-  ('PHAT', 0, 1, 'Upper Power', 'Buổi 1 — Thân Trên (Sức Mạnh)', 'phat_upper_power'),
-  ('PHAT', 1, 2, 'Lower Power', 'Buổi 2 — Thân Dưới (Sức Mạnh)', 'phat_lower_power'),
-  ('PHAT', 2, 4, 'Back + Shoulders', 'Buổi 3 — Lưng & Vai (Tăng Cơ)', 'phat_back_shoulders'),
-  ('PHAT', 3, 5, 'Legs Hypertrophy', 'Buổi 4 — Chân (Tăng Cơ)', 'legs_hypertrophy'),
-  ('PHAT', 4, 6, 'Chest + Arms', 'Buổi 5 — Ngực & Tay (Tăng Cơ)', 'phat_chest_arms');
+  ('PHAT', 0, 1, 'Upper Power', 'Buổi 1 - Thân Trên (Sức Mạnh)', 'phat_upper_power'),
+  ('PHAT', 1, 2, 'Lower Power', 'Buổi 2 - Thân Dưới (Sức Mạnh)', 'phat_lower_power'),
+  ('PHAT', 2, 4, 'Back + Shoulders', 'Buổi 3 - Lưng & Vai (Tăng Cơ)', 'phat_back_shoulders'),
+  ('PHAT', 3, 5, 'Legs Hypertrophy', 'Buổi 4 - Chân (Tăng Cơ)', 'legs_hypertrophy'),
+  ('PHAT', 4, 6, 'Chest + Arms', 'Buổi 5 - Ngực & Tay (Tăng Cơ)', 'phat_chest_arms');
 
 UPDATE training_programs p
 SET name_vi = v.name_vi,
     description = v.description
 FROM (VALUES
-  ('Push Pull Legs (PPL)', 'Đẩy – Kéo – Chân (6 buổi/tuần)', 'Mỗi nhóm cơ chính được tập 2 lần/tuần. Ba buổi đầu ưu tiên sức mạnh, ba buổi sau ưu tiên tăng cơ; phù hợp người tập trung cấp đã thích nghi với tần suất cao.'),
+  ('Push Pull Legs (PPL)', 'Đẩy - Kéo - Chân (6 buổi/tuần)', 'Mỗi nhóm cơ chính được tập 2 lần/tuần. Ba buổi đầu ưu tiên sức mạnh, ba buổi sau ưu tiên tăng cơ; phù hợp người tập trung cấp đã thích nghi với tần suất cao.'),
   ('Upper / Lower (4-day)', 'Thân Trên / Thân Dưới (4 buổi/tuần)', 'Mỗi vùng thân trên và thân dưới được tập 2 lần/tuần, xen kẽ ngày sức mạnh và ngày tăng cơ để cân bằng tiến bộ với phục hồi.'),
-  ('PPL + Upper Lower (5-day)', 'PPL + Thân Trên / Thân Dưới (5 buổi/tuần)', 'Ba buổi Đẩy–Kéo–Chân kết hợp hai buổi Thân Trên–Thân Dưới, phân bổ khối lượng mỗi nhóm cơ khoảng 2 lần/tuần.'),
+  ('PPL + Upper Lower (5-day)', 'PPL + Thân Trên / Thân Dưới (5 buổi/tuần)', 'Ba buổi Đẩy-Kéo-Chân kết hợp hai buổi Thân Trên-Thân Dưới, phân bổ khối lượng mỗi nhóm cơ khoảng 2 lần/tuần.'),
   ('Full Body (3-day)', 'Toàn Thân (3 buổi/tuần)', 'Lịch toàn thân vào Thứ Hai, Thứ Tư và Thứ Sáu; khối lượng mỗi buổi vừa phải, phù hợp người mới hoặc người có ít ngày tập.'),
   ('Bro Split (5-day)', 'Chia Nhóm Cơ (5 buổi/tuần)', 'Mỗi buổi tập trung một vùng cơ với khối lượng cao. Đây là lựa chọn thiên về sở thích; người mới nên ưu tiên Toàn Thân hoặc Thân Trên/Thân Dưới.'),
-  ('Arnold Split', 'Arnold Split (6 buổi/tuần)', 'Chu kỳ Ngực–Lưng, Vai–Tay, Chân lặp lại hai lần/tuần; dành cho người tập trung cấp hoặc nâng cao có khả năng phục hồi tốt.'),
+  ('Arnold Split', 'Arnold Split (6 buổi/tuần)', 'Chu kỳ Ngực-Lưng, Vai-Tay, Chân lặp lại hai lần/tuần; dành cho người tập trung cấp hoặc nâng cao có khả năng phục hồi tốt.'),
   ('5x5 Strength', '5×5 Sức Mạnh (3 buổi/tuần)', 'Ba buổi compound toàn thân cách ngày. Tuần kế tiếp nên đảo thứ tự A/B để cân bằng tần suất; luôn giữ kỹ thuật và dừng trước thất bại.'),
-  ('PHAT', 'PHAT — Sức Mạnh & Tăng Cơ (5 buổi/tuần)', 'Hai buổi sức mạnh đầu tuần, một ngày nghỉ, sau đó ba buổi tăng cơ theo nhóm; phù hợp người tập trung cấp–nâng cao.')
+  ('PHAT', 'PHAT - Sức Mạnh & Tăng Cơ (5 buổi/tuần)', 'Hai buổi sức mạnh đầu tuần, một ngày nghỉ, sau đó ba buổi tăng cơ theo nhóm; phù hợp người tập trung cấp-nâng cao.')
 ) AS v(name, name_vi, description)
 WHERE p.name = v.name AND p.type = 'system';
 

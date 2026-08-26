@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "reviewed_at": "2026-08-26",
+  "reviewer": "vibecode_contractor",
+  "source_mapping": "workout-metrics-llm-classification.json",
+  "overrides": [
+    {
+      "slug": "band-assisted-pull-up",
+      "default_tracking_mode": "reps",
+      "allowed_tracking_modes": ["reps"],
+      "load_basis": "none",
+      "rationale": "Dây kháng lực không cung cấp giá trị tải kg hoặc lb ổn định trong sản phẩm; bài được ghi theo số lần."
+    },
+    {
+      "slug": "bear-crawl",
+      "default_tracking_mode": "duration_distance",
+      "allowed_tracking_modes": ["duration_distance", "duration"],
+      "load_basis": "none",
+      "rationale": "Hướng dẫn quy định thực hiện theo quãng đường hoặc thời gian; đếm reps không phải cách ghi tự nhiên."
+    },
+    {
+      "slug": "dumbbell-single-arm-overhead-carry",
+      "default_tracking_mode": "duration_distance",
+      "allowed_tracking_modes": ["duration_distance", "duration"],
+      "load_basis": "none",
+      "rationale": "Contract hiện tại chưa biểu diễn đồng thời tải và quãng đường; quãng đường hoặc thời gian là metric thực hiện chính, còn weight_reps yêu cầu reps không phù hợp."
+    },
+    {
+      "slug": "farmers-walk",
+      "default_tracking_mode": "duration_distance",
+      "allowed_tracking_modes": ["duration_distance", "duration"],
+      "load_basis": "none",
+      "rationale": "Carry được hoàn thành theo quãng đường hoặc thời gian; weight_reps không phù hợp vì bài không có số lần lặp tự nhiên."
+    },
+    {
+      "slug": "london-bridge",
+      "default_tracking_mode": "reps",
+      "allowed_tracking_modes": ["reps"],
+      "load_basis": "none",
+      "rationale": "Bài dùng dây neo và hướng dẫn lặp chuyển động theo số lần, không có tải số hóa hoặc mục tiêu thời gian."
+    }
+  ]
+}

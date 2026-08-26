@@ -1,9 +1,11 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Camera, Loader2, X, Plus, Search, Check, Dumbbell, Sparkles } from 'lucide-react';
 import { EQUIPMENT_CATEGORIES, classifyEquipment } from '@/lib/equipment-categories';
+import { preprocessImageForUpload } from '@/lib/client-image-preprocess';
+import { getEquipmentDetectErrorMessage } from '@/lib/equipment-detect-errors';
 
 type Eq = { id: string; slug: string; name_vi: string | null; category: string | null };
 
@@ -21,6 +23,15 @@ export default function NewGymForm({ equipment }: { equipment: Eq[] }) {
   const [scanPreview, setScanPreview] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const scanCleanupRef = useRef<(() => void) | null>(null);
+
+  useEffect(() => () => scanCleanupRef.current?.(), []);
+
+  function clearScanPreview() {
+    scanCleanupRef.current?.();
+    scanCleanupRef.current = null;
+    setScanPreview(null);
+  }
 
   function toggle(slug: string) {
     const next = new Set(selected);
@@ -31,15 +42,28 @@ export default function NewGymForm({ equipment }: { equipment: Eq[] }) {
   async function onPickPhoto(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setScanPreview(URL.createObjectURL(file));
+    e.target.value = '';
+
+    if (scanCleanupRef.current) {
+      scanCleanupRef.current();
+      scanCleanupRef.current = null;
+    }
+
     setScanLoading(true);
     setScanError(null);
     try {
+      const { file: processedFile, previewUrl, cleanup } = await preprocessImageForUpload(file);
+      scanCleanupRef.current = cleanup;
+      setScanPreview(previewUrl);
+
       const fd = new FormData();
-      fd.append('image', file);
+      fd.append('image', processedFile);
       const res = await fetch('/api/equipment/detect', { method: 'POST', body: fd });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? 'Lỗi detect');
+      const data = await res.json().catch(() => ({ error: 'network_error' }));
+      if (!res.ok) {
+        const msg = getEquipmentDetectErrorMessage(data?.error, data?.message);
+        throw new Error(msg);
+      }
       const detected: { equipment_slug: string }[] = data.detected ?? [];
       setSelected((prev) => {
         const next = new Set(prev);
@@ -76,9 +100,14 @@ export default function NewGymForm({ equipment }: { equipment: Eq[] }) {
         return;
       }
 
-      if (selected.size > 0) {
+      // Auto-include bodyweight along with selected physical equipment
+      const bodyweightItem = equipment.find((e) => e.slug === 'bodyweight');
+      const selectedSlugs = new Set(selected);
+      if (bodyweightItem) selectedSlugs.add('bodyweight');
+
+      if (selectedSlugs.size > 0) {
         const eqRows = equipment
-          .filter((e) => selected.has(e.slug))
+          .filter((e) => selectedSlugs.has(e.slug))
           .map((e) => ({ gym_id: gym.id, equipment_id: e.id }));
         await supabase.from('gym_equipment').insert(eqRows);
       }
@@ -92,6 +121,8 @@ export default function NewGymForm({ equipment }: { equipment: Eq[] }) {
   }
 
   const filteredEquipment = equipment.filter((eq) => {
+    if (eq.slug === 'bodyweight' || classifyEquipment(eq) === 'no-equipment') return false;
+
     const matchesSearch =
       (eq.name_vi && eq.name_vi.toLowerCase().includes(searchQuery.toLowerCase())) ||
       eq.slug.toLowerCase().includes(searchQuery.toLowerCase());
@@ -171,13 +202,12 @@ export default function NewGymForm({ equipment }: { equipment: Eq[] }) {
               className="btn-primary text-xs py-2 px-3 inline-flex items-center gap-1.5 self-start sm:self-auto"
             >
               <Camera className="h-4 w-4" strokeWidth={1.5} />
-              <span>{scanLoading ? 'Đang phân tích...' : 'AI Quét từ ảnh phòng tập'}</span>
+              <span>{scanLoading ? 'Đang phân tích...' : 'Chọn ảnh để AI quét'}</span>
             </button>
             <input
               ref={fileInputRef}
               type="file"
               accept="image/jpeg,image/png,image/webp"
-              capture="environment"
               className="hidden"
               onChange={onPickPhoto}
             />
@@ -204,7 +234,7 @@ export default function NewGymForm({ equipment }: { equipment: Eq[] }) {
               </div>
               <button
                 type="button"
-                onClick={() => setScanPreview(null)}
+                onClick={clearScanPreview}
                 className="text-ink-muted hover:text-ink"
               >
                 <X className="h-4 w-4" />
@@ -249,7 +279,7 @@ export default function NewGymForm({ equipment }: { equipment: Eq[] }) {
                 ✓ Đã chọn ({selected.size})
               </button>
 
-              {EQUIPMENT_CATEGORIES.map((cat) => (
+              {EQUIPMENT_CATEGORIES.filter((cat) => cat.id !== 'no-equipment').map((cat) => (
                 <button
                   key={cat.id}
                   type="button"

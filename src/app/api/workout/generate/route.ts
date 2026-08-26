@@ -6,6 +6,11 @@ import {
   WorkoutDraftRequestSchema,
   WorkoutGenerateRequestSchema,
 } from '@/lib/ai/workout-contract';
+import { buildPersonalizationContextForUser } from '@/lib/ai/personalization-context.server';
+import { projectMinimalAIContext } from '@/lib/ai/personalization-context';
+import { buildRecoverySummary, type RecoveryStateReadRow } from '@/lib/recovery/read-model';
+import { buildRecoveryWorkoutSelection } from '@/lib/recovery/recommendation-policy';
+import { isMuscleReadinessEnabled } from '@/lib/recovery/feature-flags';
 
 export async function POST(req: NextRequest) {
   const supabase = await createClient();
@@ -30,21 +35,21 @@ export async function POST(req: NextRequest) {
       .eq('id', json.programDayId)
       .maybeSingle(),
     supabase.from('profiles').select('*').eq('user_id', user.id).single(),
-    json.gymId
+    json.gymId && json.gymId !== 'bodyweight' && json.gymId !== 'no_equipment'
       ? supabase
           .from('gyms')
           .select('id')
           .eq('id', json.gymId)
           .eq('owner_user_id', user.id)
           .maybeSingle()
-      : Promise.resolve({ data: null }),
+      : Promise.resolve({ data: json.gymId === 'bodyweight' || json.gymId === 'no_equipment' ? { id: json.gymId } : null }),
   ]);
 
   const prog = dayData?.training_programs as any;
   if (!dayData || !prog || (prog.type !== 'system' && prog.owner_user_id !== user.id)) {
     return NextResponse.json({ error: 'program_day_not_allowed' }, { status: 403 });
   }
-  if (json.gymId && !gymResult.data) {
+  if (json.gymId && json.gymId !== 'bodyweight' && json.gymId !== 'no_equipment' && !gymResult.data) {
     return NextResponse.json({ error: 'gym_not_allowed' }, { status: 403 });
   }
   if (!profile?.experience_level) {
@@ -54,16 +59,36 @@ export async function POST(req: NextRequest) {
   const startMs = Date.now();
   let plan;
   try {
+    const personalization = projectMinimalAIContext(
+      await buildPersonalizationContextForUser(user.id, 'planner'),
+      'planner',
+    );
+    let recoverySelection;
+    if (isMuscleReadinessEnabled() && json.requestedRecoveryGroups?.length) {
+      const { data: recoveryRows, error: recoveryError } = await supabase
+        .from('muscle_recovery_states')
+        .select('user_id, muscle_id, fatigue_score, fatigue_at, half_life_hours, confidence, last_workout_id, model_version, muscles(id, slug, name, name_vi)')
+        .eq('user_id', user.id);
+      if (recoveryError) throw new Error(`Không thể xác minh phục hồi cơ bắp: ${recoveryError.message}`);
+      const generatedAt = new Date().toISOString();
+      recoverySelection = buildRecoveryWorkoutSelection(
+        buildRecoverySummary((recoveryRows ?? []) as unknown as RecoveryStateReadRow[], generatedAt),
+        json.requestedRecoveryGroups,
+        json.recoveryDecision,
+      );
+    }
     plan = await generateWorkoutPlan({
       userId: user.id,
       profile,
+      personalization,
+      recoverySelection,
       ...json,
     });
   } catch (error: any) {
     const detail = String(error?.message ?? error);
-    const domainFailure = /Thời lượng|Chưa có bài|Không thể tự tạo buổi tập|Không có bài tập phù hợp/.test(detail);
+    const domainFailure = /Thời lượng|Chưa có bài|Không thể tự tạo buổi tập|Không có bài tập phù hợp|constraint_unsatisfied|vi phạm an toàn/.test(detail);
     return NextResponse.json(
-      { error: domainFailure ? 'workout_constraints_failed' : 'ai_failed', detail },
+      { error: domainFailure ? 'constraint_unsatisfied' : 'ai_failed', detail },
       { status: domainFailure ? 422 : 500 },
     );
   }
@@ -72,7 +97,7 @@ export async function POST(req: NextRequest) {
   const { data: exerciseRows, error: exerciseError } = await supabase
     .from('exercises')
     .select(
-      'id, slug, name, name_vi, difficulty, exercise_type, owner_user_id, default_rest_seconds, default_rir, gallery_json',
+      'id, slug, name, name_vi, difficulty, exercise_type, owner_user_id, default_rest_seconds, default_rir, default_tracking_mode, allowed_tracking_modes, load_basis, gallery_json',
     )
     .in('slug', slugs)
     .eq('status', 'published');
@@ -127,8 +152,11 @@ export async function POST(req: NextRequest) {
       restSeconds: item.rest_seconds ?? exercise.default_rest_seconds ?? 120,
       phase: item.phase,
       prescriptionMode: item.prescription_mode,
+      durationStyle: item.duration_style,
       durationSeconds: item.duration_seconds,
       holdSeconds: item.hold_seconds,
+      targetDurationSeconds: item.target_duration_seconds,
+      targetDistanceMeters: item.target_distance_meters,
       perSide: item.per_side,
       aiReason: item.ai_reason,
     };
@@ -160,5 +188,5 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  return NextResponse.json({ draft: draftResult.data });
+  return NextResponse.json({ draft: draftResult.data, personalization: plan.personalization });
 }

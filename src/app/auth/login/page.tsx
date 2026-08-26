@@ -1,11 +1,29 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import { isOnboardingComplete } from '@/lib/onboarding';
 import LoginForm from './login-form';
 
-export default async function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams?: { oauth_error?: string };
+}) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (user) redirect('/dashboard');
+  if (user) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('onboarding_step, experience_level, goal, preferred_training_days, preferred_session_duration')
+      .eq('user_id', user.id)
+      .maybeSingle();
+
+    if (isOnboardingComplete(profile)) {
+      redirect('/dashboard');
+    } else {
+      redirect('/onboarding');
+    }
+  }
+
   return (
     <main className="min-h-screen bg-chassis flex items-center justify-center px-4 py-12 blueprint-grid">
       <div className="w-full max-w-md">
@@ -19,7 +37,7 @@ export default async function LoginPage() {
               <h1 className="font-mono text-sm font-bold uppercase tracking-widest text-ink mt-0.5">Đăng nhập hệ thống</h1>
             </div>
           </div>
-          <LoginForm />
+          <LoginForm callbackError={Boolean(searchParams?.oauth_error)} />
         </div>
         {/* Footer */}
         <p className="text-center font-mono text-[10px] text-ink-muted mt-4 uppercase tracking-wider">

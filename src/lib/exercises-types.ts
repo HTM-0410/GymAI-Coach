@@ -1,6 +1,6 @@
 /**
  * TypeScript types mirror of data/exercises/exercise.schema.json.
- * Giữ đồng bộ với schema — nếu schema đổi, cập nhật ở đây.
+ * Giữ đồng bộ với schema - nếu schema đổi, cập nhật ở đây.
  */
 
 export type MovementPattern =
@@ -9,6 +9,9 @@ export type MovementPattern =
 export type ExerciseType = 'compound' | 'isolation';
 
 export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
+export type TrackingMode = 'weight_reps' | 'reps' | 'duration' | 'duration_distance';
+export type TrackingModeReviewStatus = 'reviewed' | 'needs_review';
+export type LoadBasis = 'external_total' | 'per_implement' | 'assistance' | 'none';
 
 export interface GalleryView {
   src: string;
@@ -87,9 +90,14 @@ export interface Exercise {
   ai_coach: AICoach;
   alternatives: Alternative[];
   media_metadata: MediaMetadata;
+  default_tracking_mode?: TrackingMode;
+  allowed_tracking_modes?: TrackingMode[];
+  tracking_mode_review_status?: TrackingModeReviewStatus;
+  tracking_mode_source?: string;
+  load_basis?: LoadBasis;
 }
 
-/** Summary shape dùng cho library list — không cần full content. */
+/** Summary shape dùng cho library list - không cần full content. */
 export interface ExerciseSummary {
   slug: string;
   name: string;

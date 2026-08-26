@@ -1,25 +1,32 @@
-// Layer 2 — Personalization
+// Layer 2 - Personalization
 // Inputs: previous workouts per exercise, load and rep trend
 // Sử dụng rule engine + Gemini explainer
 
 import { createClient } from '@/lib/supabase/server';
 import { progressionRule, detectPlateau, type Verdict, type SetRecord } from './rules';
 import { callGemini } from './gemini';
-import { isMainRepsExercise } from '@/lib/training/workout-phases';
+import { isMainWeightRepsExercise } from '@/lib/training/workout-phases';
+import type { MinimalAIPersonalizationContext } from './personalization-context';
+import { conservativelyCapProgression, personalizationFactors, type PersonalizationFactors } from './personalization-integration';
 
 type Result = {
   exercise_slug: string;
   exercise_name: string;
   previous: { weight: number; reps: number[] } | null;
   verdict: Verdict;
+  objective_verdict: Verdict;
   ai_explanation: string;
   suggested_weight: number;
   suggested_rep_min: number;
   suggested_rep_max: number;
   plateau: boolean;
+  personalization: PersonalizationFactors;
 };
 
-export async function buildProgressionRecommendations(userId: string): Promise<Result[]> {
+export async function buildProgressionRecommendations(
+  userId: string,
+  personalization?: MinimalAIPersonalizationContext,
+): Promise<Result[]> {
   const supabase = await createClient();
   // Lấy 6 buổi tập gần nhất + sets của chúng, join exercise info
   const { data: setsRaw } = await supabase
@@ -27,7 +34,7 @@ export async function buildProgressionRecommendations(userId: string): Promise<R
     .select(`
       set_number, weight, reps, set_type, completed, completed_at,
       workout_exercises!inner(
-        exercise_id, target_rep_min, target_rep_max, phase, prescription_mode,
+        exercise_id, target_rep_min, target_rep_max, target_weight, phase, prescription_mode, tracking_mode,
         exercises(slug, name_vi, name),
         workouts!inner(user_id, date, status)
       )
@@ -40,7 +47,7 @@ export async function buildProgressionRecommendations(userId: string): Promise<R
 
   const byExercise = new Map<string, any[]>();
   (setsRaw ?? []).forEach((row: any) => {
-    if (!isMainRepsExercise(row.workout_exercises ?? {})) return;
+    if (!isMainWeightRepsExercise({ ...(row.workout_exercises ?? {}), actual_weight: row.weight })) return;
     if ((row.set_type ?? 'working') !== 'working') return;
     const slug = row.workout_exercises?.exercises?.slug;
     if (!slug) return;
@@ -69,11 +76,12 @@ export async function buildProgressionRecommendations(userId: string): Promise<R
     }));
 
     const target = rows[0].workout_exercises;
-    const verdict = progressionRule(
+    const objectiveVerdict = progressionRule(
       target.target_rep_min ?? 8,
       target.target_rep_max ?? 12,
       lastSets
     );
+    const verdict = conservativelyCapProgression(objectiveVerdict, personalization);
 
     // History cho plateau
     const history = sortedDates.map((d) => {
@@ -112,11 +120,13 @@ Viết 1-2 câu giải thích ngắn (≤ 30 từ), giọng thân thiện. BẮT
         reps: lastSets.map((s) => s.reps ?? 0),
       },
       verdict,
+      objective_verdict: objectiveVerdict,
       ai_explanation: aiExplanation.trim(),
       suggested_weight: suggested,
       suggested_rep_min: target.target_rep_min ?? 8,
       suggested_rep_max: target.target_rep_max ?? 12,
       plateau: plateau.plateau,
+      personalization: personalizationFactors(personalization, { includePerformance: true }),
     });
   }
 

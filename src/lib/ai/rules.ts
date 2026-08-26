@@ -90,7 +90,7 @@ export function progressionRule(
   return {
     outcome: 'maintain',
     weight_delta: 0, rep_shift: 0, rest_delta: 0,
-    reason_vi: 'Dữ liệu chưa đủ rõ để khuyến nghị — giữ nguyên buổi sau.',
+    reason_vi: 'Dữ liệu chưa đủ rõ để khuyến nghị - giữ nguyên buổi sau.',
     confidence: 0.4,
   };
 }

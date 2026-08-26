@@ -1,12 +1,14 @@
 export type WorkoutPhaseValue = 'warmup' | 'main' | 'cooldown';
-export type PrescriptionModeValue = 'reps' | 'time' | 'hold';
+import { normalizeTrackingMode, type CompatibleTrackingMode, type TrackingMode } from '@/lib/workouts/metrics';
+
+export type PrescriptionModeValue = CompatibleTrackingMode;
 
 export function normalizeWorkoutPhase(value: string | null | undefined): WorkoutPhaseValue {
   return value === 'warmup' || value === 'cooldown' ? value : 'main';
 }
 
-export function normalizePrescriptionMode(value: string | null | undefined): PrescriptionModeValue {
-  return value === 'time' || value === 'hold' ? value : 'reps';
+export function normalizePrescriptionMode(value: string | null | undefined): TrackingMode {
+  return normalizeTrackingMode(value);
 }
 
 export function isMainRepsExercise(exercise: {
@@ -14,7 +16,21 @@ export function isMainRepsExercise(exercise: {
   prescription_mode?: string | null;
 }) {
   return normalizeWorkoutPhase(exercise.phase) === 'main'
-    && normalizePrescriptionMode(exercise.prescription_mode) === 'reps';
+    && ['weight_reps', 'reps'].includes(normalizePrescriptionMode(exercise.prescription_mode));
+}
+
+export function isMainWeightRepsExercise(exercise: {
+  phase?: string | null;
+  prescription_mode?: string | null;
+  tracking_mode?: string | null;
+  target_weight?: number | null;
+  actual_weight?: number | null;
+}) {
+  return normalizeWorkoutPhase(exercise.phase) === 'main'
+    && normalizeTrackingMode(exercise.tracking_mode ?? exercise.prescription_mode, {
+      targetWeight: exercise.target_weight,
+      actualWeight: exercise.actual_weight,
+    }) === 'weight_reps';
 }
 
 export function sortWorkoutExercises<T extends {
@@ -39,4 +55,27 @@ export function resolveRequestedExerciseIndex(raw: string | null, exerciseCount:
   if (raw == null || raw.trim() === '') return 0;
   const requested = Number(raw);
   return Number.isInteger(requested) && requested >= 0 && requested < exerciseCount ? requested : 0;
+}
+
+export function resolveOptimalResumeExerciseIndex<T extends {
+  started_at?: string | null;
+  completed_at?: string | null;
+  workout_sets?: Array<{ completed?: boolean }>;
+}>(exercises: readonly T[]): number {
+  if (!exercises || exercises.length === 0) return 0;
+  // 1. Exercise active gần nhất (started but not completed)
+  const activeIdx = exercises.findIndex((e) => Boolean(e.started_at && !e.completed_at));
+  if (activeIdx >= 0) return activeIdx;
+
+  // 2. Exercise đầu tiên chưa hoàn thành
+  const incompleteIdx = exercises.findIndex((e) => {
+    if (e.completed_at) return false;
+    if (Array.isArray(e.workout_sets) && e.workout_sets.length > 0) {
+      return e.workout_sets.some((s) => !s.completed);
+    }
+    return true;
+  });
+  if (incompleteIdx >= 0) return incompleteIdx;
+
+  return 0;
 }

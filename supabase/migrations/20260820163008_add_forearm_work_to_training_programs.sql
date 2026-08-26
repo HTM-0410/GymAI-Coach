@@ -21,26 +21,26 @@ CREATE TEMP TABLE _forearm_program_plan (
 ) ON COMMIT DROP;
 
 INSERT INTO _forearm_program_plan VALUES
-  ('Push Pull Legs (PPL)',          1, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay — nhóm duỗi cổ tay'),
-  ('Push Pull Legs (PPL)',          4, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay — nhóm gập cổ tay'),
+  ('Push Pull Legs (PPL)',          1, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay - nhóm duỗi cổ tay'),
+  ('Push Pull Legs (PPL)',          4, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay - nhóm gập cổ tay'),
 
-  ('Upper / Lower (4-day)',         0, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay — nhóm duỗi cổ tay'),
-  ('Upper / Lower (4-day)',         2, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay — nhóm gập cổ tay'),
+  ('Upper / Lower (4-day)',         0, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay - nhóm duỗi cổ tay'),
+  ('Upper / Lower (4-day)',         2, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay - nhóm gập cổ tay'),
 
-  ('PPL + Upper Lower (5-day)',     1, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay — nhóm duỗi cổ tay'),
-  ('PPL + Upper Lower (5-day)',     3, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay — nhóm gập cổ tay'),
+  ('PPL + Upper Lower (5-day)',     1, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay - nhóm duỗi cổ tay'),
+  ('PPL + Upper Lower (5-day)',     3, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay - nhóm gập cổ tay'),
 
-  ('Full Body (3-day)',             1, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay — nhóm duỗi cổ tay'),
-  ('Full Body (3-day)',             2, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay — nhóm gập cổ tay'),
+  ('Full Body (3-day)',             1, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay - nhóm duỗi cổ tay'),
+  ('Full Body (3-day)',             2, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay - nhóm gập cổ tay'),
 
-  ('Bro Split (5-day)',             4, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay — nhóm duỗi cổ tay'),
-  ('Bro Split (5-day)',             4, 1, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay — nhóm gập cổ tay'),
+  ('Bro Split (5-day)',             4, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay - nhóm duỗi cổ tay'),
+  ('Bro Split (5-day)',             4, 1, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay - nhóm gập cổ tay'),
 
-  ('Arnold Split',                  1, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay — nhóm duỗi cổ tay'),
-  ('Arnold Split',                  4, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay — nhóm gập cổ tay'),
+  ('Arnold Split',                  1, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay - nhóm duỗi cổ tay'),
+  ('Arnold Split',                  4, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay - nhóm gập cổ tay'),
 
-  ('PHAT',                          2, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay — nhóm duỗi cổ tay'),
-  ('PHAT',                          4, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay — nhóm gập cổ tay');
+  ('PHAT',                          2, 0, 'barbell-palms-down-wrist-curl-over-a-bench', 2, 12, 20, 2, 60, 'Cẳng tay - nhóm duỗi cổ tay'),
+  ('PHAT',                          4, 0, 'barbell-palms-up-wrist-curl-over-a-bench',   2, 12, 20, 2, 60, 'Cẳng tay - nhóm gập cổ tay');
 
 DO $$
 DECLARE

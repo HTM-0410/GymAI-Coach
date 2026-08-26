@@ -1,6 +1,9 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { Send, Loader2, Sparkles, Bot, Zap, ArrowUpRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import type { CoachNavigationAction } from '@/lib/ai/coach-actions';
+import { COACH_WORKOUT_HANDOFF_STORAGE_KEY } from '@/lib/ai/coach-workout-handoff';
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 
@@ -12,6 +15,7 @@ const promptSuggestions = [
 ];
 
 export default function ChatClient() {
+  const router = useRouter();
   const [messages, setMessages] = useState<Msg[]>([
     { role: 'assistant', content: 'Xin chào! Tôi là Trí tuệ Huấn luyện GymAI. Tôi có thể phân tích form tập, tối ưu volume, chiến lược deload, hay giải quyết tình trạng chững tạ của bạn. Bạn muốn bắt đầu từ đâu?' },
   ]);
@@ -37,6 +41,13 @@ export default function ChatClient() {
       const data = await res.json();
       if (res.ok) {
         setMessages((m) => [...m, { role: 'assistant', content: data.reply }]);
+        const action = data.action as CoachNavigationAction | undefined;
+        if (action?.type === 'navigate') {
+          if (action.workoutHandoff) {
+            sessionStorage.setItem(COACH_WORKOUT_HANDOFF_STORAGE_KEY, JSON.stringify(action.workoutHandoff));
+          }
+          setTimeout(() => router.push(action.href), 450);
+        }
       } else {
         setMessages((m) => [...m, { role: 'assistant', content: `Lỗi: ${data.detail ?? data.error ?? 'không rõ'}` }]);
       }

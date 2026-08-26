@@ -2,10 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   ArrowLeft,
+  AlertTriangle,
   Brain,
   Building2,
   Calendar,
@@ -24,6 +26,8 @@ import {
   Target,
   Timer,
   Trash2,
+  User,
+  X,
 } from 'lucide-react';
 import ExercisePickerModal, { type SelectedExerciseConfig } from '@/components/exercise-picker-modal';
 import {
@@ -31,6 +35,20 @@ import {
   type PrescriptionMode,
   type WorkoutPhase,
 } from '@/lib/ai/workout-contract';
+import {
+  COACH_WORKOUT_HANDOFF_STORAGE_KEY,
+  parseCoachWorkoutHandoff,
+  selectProgramDayForSuggestion,
+  workoutHandoffPrompt,
+} from '@/lib/ai/coach-workout-handoff';
+import {
+  BODY_MUSCLE_GROUPS,
+  getBodyMuscleGroup,
+  type BodyMuscleGroup,
+} from '@/lib/recovery/muscle-groups';
+import type { MuscleReadinessGroup } from '@/lib/recovery/read-model';
+import type { RecoveryGenerationDecision } from '@/lib/recovery/recommendation-policy';
+import { formatDistance, formatLoad, formatMetricDuration, isSingleSetTimedMode, normalizeTrackingMode, type UnitSystem } from '@/lib/workouts/metrics';
 
 type Day = { id: string; name: string; name_vi?: string | null; day_of_week: number; training_day_targets: any[] };
 
@@ -63,6 +81,9 @@ type DraftExercise = {
   restSeconds: number;
   durationSeconds: number | null;
   holdSeconds: number | null;
+  targetDurationSeconds: number | null;
+  targetDistanceMeters: number | null;
+  durationStyle: 'active' | 'hold' | null;
   perSide: boolean;
   aiReason: string;
 };
@@ -75,6 +96,18 @@ type WorkoutDraft = {
   phaseBudgets: { warmup: number; main: number; cooldown: number };
   exercises: DraftExercise[];
 };
+
+type RecoverySummaryResponse = {
+  generatedAt: string;
+  groups: MuscleReadinessGroup[];
+};
+
+function targetGroupsForDay(day: Day | undefined): BodyMuscleGroup[] {
+  const groups = (day?.training_day_targets ?? [])
+    .map((target: any) => getBodyMuscleGroup(target.muscles?.slug ?? ''))
+    .filter((group): group is BodyMuscleGroup => group !== null);
+  return [...new Set(groups)];
+}
 
 const PHASE_META: Record<WorkoutPhase, { label: string; description: string }> = {
   warmup: { label: 'Khởi động', description: 'Chuẩn bị cơ thể và khớp cho phần tập chính' },
@@ -94,6 +127,9 @@ function normalizeWorkoutDraft(value: any): WorkoutDraft {
       prescriptionMode: exercise.prescriptionMode ?? 'reps',
       durationSeconds: exercise.durationSeconds ?? null,
       holdSeconds: exercise.holdSeconds ?? null,
+      targetDurationSeconds: exercise.targetDurationSeconds ?? exercise.durationSeconds ?? exercise.holdSeconds ?? null,
+      targetDistanceMeters: exercise.targetDistanceMeters ?? null,
+      durationStyle: exercise.durationStyle ?? (exercise.prescriptionMode === 'hold' ? 'hold' : null),
       perSide: exercise.perSide ?? false,
     })),
   };
@@ -108,6 +144,32 @@ function cleanProgramName(name?: string | null): string {
   if (!name) return '';
   const cleaned = name.replace(/\s*\(\d+\s*buổi(?:\/tuần)?\)\s*$/i, '').trim();
   return normalizeHyphens(cleaned);
+}
+
+function getGymEquipmentSummary(gym: {
+  name?: string;
+  description?: string | null;
+  gym_equipment?: Array<{ equipment?: { slug?: string; name?: string; name_vi?: string | null } | null }>;
+  gym_dumbbell_inventory?: Array<{ weight_kg: number; quantity: number }>;
+}): string {
+  const eqNames = (gym.gym_equipment ?? [])
+    .map((ge) => ge.equipment?.name_vi || ge.equipment?.name)
+    .filter((name): name is string => Boolean(name && name.toLowerCase() !== 'bodyweight'));
+
+  if (eqNames.length === 0) {
+    if (gym.description && !gym.description.includes('khởi tạo') && !gym.description.includes('hồ sơ')) {
+      return normalizeHyphens(gym.description);
+    }
+    return 'Tập luyện tự do với trọng lượng cơ thể (Bodyweight)';
+  }
+
+  if (eqNames.length <= 3) {
+    return `Gồm: ${eqNames.join(', ')}`;
+  }
+
+  const top3 = eqNames.slice(0, 3).join(', ');
+  const remaining = eqNames.length - 3;
+  return `Gồm: ${top3} và +${remaining} thiết bị khác`;
 }
 
 function ProgramDropdown({
@@ -236,6 +298,7 @@ export default function NewWorkoutForm({
   activeProgramId = null,
   gyms,
   defaultDuration,
+  unitSystem,
 }: {
   programs: ProgramItem[];
   activeProgramId: string | null;
@@ -247,6 +310,7 @@ export default function NewWorkoutForm({
     gym_equipment?: any[];
   }[];
   defaultDuration: number;
+  unitSystem: UnitSystem;
 }) {
   const router = useRouter();
   const initialProgram = programs.find((p) => p.id === activeProgramId) ?? programs[0] ?? null;
@@ -274,21 +338,42 @@ export default function NewWorkoutForm({
   const [error, setError] = useState<string | null>(null);
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [pickerPhase, setPickerPhase] = useState<WorkoutPhase>('main');
+  const handoffStartedRef = useRef(false);
+  const [handoffStatus, setHandoffStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
+  const [recoverySummary, setRecoverySummary] = useState<RecoverySummaryResponse | null>(null);
+  const [recoveryWarningOpen, setRecoveryWarningOpen] = useState(false);
+  const [recoveryDecision, setRecoveryDecision] = useState<RecoveryGenerationDecision>('exclude_weak');
 
   const selectedGym = gyms.find((gym) => gym.id === gymId);
   const phaseBudgets = allocatePhaseBudgets(duration, { includeWarmup, includeCooldown });
   const dumbbellInventory = [...(selectedGym?.gym_dumbbell_inventory ?? [])]
     .sort((a, b) => Number(a.weight_kg) - Number(b.weight_kg));
+  const selectedDay = currentProgram?.training_program_days?.find((day) => day.id === dayId);
+  const selectedDayTargetGroups = useMemo(() => targetGroupsForDay(selectedDay), [selectedDay]);
+  const weakSelectedGroups = useMemo(() => {
+    const targets = new Set(selectedDayTargetGroups);
+    return (recoverySummary?.groups ?? []).filter((group) => (
+      targets.has(group.group)
+      && !group.stale
+      && group.readiness !== null
+      && group.readiness < 80
+    ));
+  }, [recoverySummary, selectedDayTargetGroups]);
 
   async function generateDraft(
     event?: React.FormEvent,
     promptOverride?: string,
     isFullReset: boolean = false,
     regeneratePhase?: WorkoutPhase,
+    programDayOverride?: string,
+    fromCoachHandoff: boolean = false,
+    recoveryGroupsOverride?: BodyMuscleGroup[],
+    recoveryDecisionOverride?: RecoveryGenerationDecision,
   ) {
     event?.preventDefault();
     setGenerating(true);
     setError(null);
+    if (fromCoachHandoff) setHandoffStatus('loading');
 
     const activePrompt = promptOverride !== undefined ? promptOverride : customPrompt;
     if (promptOverride !== undefined) {
@@ -310,6 +395,9 @@ export default function NewWorkoutForm({
           restSeconds: e.restSeconds,
           durationSeconds: e.durationSeconds,
           holdSeconds: e.holdSeconds,
+          targetDurationSeconds: e.targetDurationSeconds,
+          targetDistanceMeters: e.targetDistanceMeters,
+          durationStyle: e.durationStyle,
           perSide: e.perSide,
           aiReason: e.aiReason,
         }))
@@ -320,23 +408,43 @@ export default function NewWorkoutForm({
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-          programDayId: dayId,
+          programDayId: programDayOverride ?? dayId,
           gymId: gymId || null,
           durationMinutes: duration,
           options: { includeWarmup, includeCooldown },
           regeneratePhase,
           userPrompt: activePrompt.trim() || null,
           currentExercises: currentExercisesToSend,
+          requestedRecoveryGroups: recoveryGroupsOverride ?? BODY_MUSCLE_GROUPS,
+          recoveryDecision: recoveryDecisionOverride ?? recoveryDecision,
         }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.detail ?? data.error ?? 'Không thể tạo buổi tập');
       setDraft(normalizeWorkoutDraft(data.draft));
+      if (fromCoachHandoff) setHandoffStatus('ready');
     } catch (requestError: any) {
       setError(requestError?.message ?? 'Không thể tạo buổi tập');
+      if (fromCoachHandoff) setHandoffStatus('error');
     } finally {
       setGenerating(false);
     }
+  }
+
+  function requestDraft(event: React.FormEvent) {
+    event.preventDefault();
+    if (weakSelectedGroups.length > 0) {
+      setRecoveryWarningOpen(true);
+      return;
+    }
+    setRecoveryDecision('exclude_weak');
+    void generateDraft(undefined, undefined, true, undefined, undefined, false, undefined, 'exclude_weak');
+  }
+
+  function continueWithRecoveryDecision(decision: RecoveryGenerationDecision) {
+    setRecoveryDecision(decision);
+    setRecoveryWarningOpen(false);
+    void generateDraft(undefined, undefined, true, undefined, undefined, false, undefined, decision);
   }
 
   async function confirmDraft() {
@@ -378,6 +486,45 @@ export default function NewWorkoutForm({
       };
     });
   }
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/api/recovery', { signal: controller.signal, cache: 'no-store' })
+      .then(async (response) => {
+        if (!response.ok) throw new Error('recovery_read_failed');
+        return response.json() as Promise<RecoverySummaryResponse>;
+      })
+      .then(setRecoverySummary)
+      .catch((requestError: Error) => {
+        if (requestError.name !== 'AbortError') setRecoverySummary(null);
+      });
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    setRecoveryWarningOpen(false);
+    setRecoveryDecision('exclude_weak');
+  }, [dayId]);
+
+  useEffect(() => {
+    if (handoffStartedRef.current) return;
+    handoffStartedRef.current = true;
+
+    const handoff = parseCoachWorkoutHandoff(sessionStorage.getItem(COACH_WORKOUT_HANDOFF_STORAGE_KEY));
+    sessionStorage.removeItem(COACH_WORKOUT_HANDOFF_STORAGE_KEY);
+    if (!handoff) return;
+    const selection = selectProgramDayForSuggestion(handoff.suggestion, programs, activeProgramId);
+    const selectedDayId = selection?.dayId ?? dayId;
+    if (selection) {
+      setSelectedProgramId(selection.programId);
+      setDayId(selection.dayId);
+    }
+    const prompt = workoutHandoffPrompt(handoff.suggestion);
+    setCustomPrompt(prompt);
+    void generateDraft(undefined, prompt, true, undefined, selectedDayId, true);
+    // The handoff is intentionally consumed exactly once on initial mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!currentProgram) {
     return (
@@ -522,16 +669,24 @@ export default function NewWorkoutForm({
                     <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-accent/15 border border-accent/30 text-accent shadow-xs">
                       <Flame className="h-3.5 w-3.5 text-accent shrink-0" />
                       <span className="font-mono text-xs font-extrabold">
-                        {exercise.prescriptionMode === 'time'
-                          ? `${exercise.targetSets} hiệp × ${exercise.durationSeconds ?? 0} giây`
-                          : exercise.prescriptionMode === 'hold'
-                            ? `${exercise.targetSets} hiệp × giữ ${exercise.holdSeconds ?? 0} giây${exercise.perSide ? ' mỗi bên' : ''}`
-                            : `${exercise.targetSets} sets × ${exercise.targetRepMin ?? '?'}-${exercise.targetRepMax ?? '?'} reps`}
+                        {(() => {
+                          const mode = normalizeTrackingMode(exercise.prescriptionMode, { targetWeight: exercise.targetWeight });
+                          const singleTimedSet = isSingleSetTimedMode(mode, exercise.targetSets);
+                          if (mode === 'duration_distance') {
+                            const target = `${exercise.targetDurationSeconds ? formatMetricDuration(exercise.targetDurationSeconds) : ''}${exercise.targetDurationSeconds && exercise.targetDistanceMeters ? ' · ' : ''}${exercise.targetDistanceMeters ? formatDistance(exercise.targetDistanceMeters, unitSystem) : ''}`;
+                            return singleTimedSet ? target : `${exercise.targetSets} hiệp · ${target}`;
+                          }
+                          if (mode === 'duration') {
+                            const target = `${exercise.durationStyle === 'hold' ? 'giữ ' : ''}${formatMetricDuration(exercise.targetDurationSeconds ?? 0)}${exercise.perSide ? ' mỗi bên' : ''}`;
+                            return singleTimedSet ? target : `${exercise.targetSets} hiệp × ${target}`;
+                          }
+                          return `${exercise.targetSets} hiệp × ${exercise.targetRepMin ?? '?'}-${exercise.targetRepMax ?? '?'} lần`;
+                        })()}
                       </span>
                     </div>
 
                     {/* RIR Target */}
-                    {exercise.prescriptionMode === 'reps' && exercise.targetRir != null && (
+                    {normalizeTrackingMode(exercise.prescriptionMode, { targetWeight: exercise.targetWeight }) === 'weight_reps' && exercise.targetRir != null && (
                       <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-blue-500/10 dark:bg-blue-500/20 border border-blue-500/25 text-blue-600 dark:text-blue-400">
                         <Target className="h-3.5 w-3.5 shrink-0" />
                         <span className="font-mono text-xs font-bold">RIR {exercise.targetRir}</span>
@@ -539,7 +694,10 @@ export default function NewWorkoutForm({
                     )}
 
                     {/* Rest Time */}
-                    {exercise.restSeconds > 0 && (
+                    {exercise.restSeconds > 0 && !isSingleSetTimedMode(
+                      normalizeTrackingMode(exercise.prescriptionMode, { targetWeight: exercise.targetWeight }),
+                      exercise.targetSets,
+                    ) && (
                       <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400">
                         <Timer className="h-3.5 w-3.5 shrink-0" />
                         <span className="font-mono text-xs font-bold">Nghỉ {exercise.restSeconds}s</span>
@@ -547,11 +705,11 @@ export default function NewWorkoutForm({
                     )}
 
                     {/* Weight (Only show if specific target weight is set) */}
-                    {exercise.prescriptionMode === 'reps' && Boolean(exercise.targetWeight) && (
+                    {normalizeTrackingMode(exercise.prescriptionMode, { targetWeight: exercise.targetWeight }) === 'weight_reps' && Boolean(exercise.targetWeight) && (
                       <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 border border-purple-500/25 text-purple-600 dark:text-purple-400">
                         <Dumbbell className="h-3.5 w-3.5 shrink-0" />
                         <span className="font-mono text-xs font-bold">
-                          {exercise.targetWeight}kg
+                          {formatLoad(exercise.targetWeight!, unitSystem)}
                         </span>
                       </div>
                     )}
@@ -590,6 +748,18 @@ export default function NewWorkoutForm({
               </button>
             ))}
         </div>
+
+        {handoffStatus === 'ready' && (
+          <div className="rounded-xl border border-emerald-500/25 bg-emerald-500/[0.08] px-3.5 py-3 flex items-start gap-2.5">
+            <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
+            <p className="text-xs leading-relaxed text-ink-secondary">
+              <strong className="text-emerald-600 dark:text-emerald-400">
+                Đã tạo bản nháp từ đề xuất AI Coach.
+              </strong>{' '}
+              Hãy kiểm tra danh sách bên dưới; workout chưa được lưu cho tới khi bạn xác nhận.
+            </p>
+          </div>
+        )}
 
         {/* Interactive AI Custom Prompt Adjustment Box */}
         <div className="rounded-2xl border border-accent/25 bg-gradient-to-br from-accent/[0.06] via-chassis-hi/80 to-chassis-lo/80 p-4 shadow-neumorph-sm space-y-3">
@@ -719,13 +889,31 @@ export default function NewWorkoutForm({
           onSelectExercise={handleAddExerciseFromPicker}
           existingSlugs={draft.exercises.map((e) => e.exerciseSlug)}
           phase={pickerPhase}
+          unitSystem={unitSystem}
         />
       </section>
     );
   }
 
   return (
-    <form onSubmit={generateDraft} className="card shadow-neumorph-lg rounded-2xl p-4 sm:p-6 space-y-6 w-full max-w-full overflow-hidden">
+    <>
+    <form onSubmit={requestDraft} className="card shadow-neumorph-lg rounded-2xl p-4 sm:p-6 space-y-6 w-full max-w-full overflow-hidden">
+      {handoffStatus !== 'idle' && (
+        <div className={`rounded-xl border px-3.5 py-3 flex items-start gap-2.5 ${
+          handoffStatus === 'error'
+            ? 'border-danger/25 bg-danger/[0.07]'
+            : 'border-accent/25 bg-accent/[0.07]'
+        }`}>
+          {handoffStatus === 'loading'
+            ? <Loader2 className="h-4 w-4 text-accent animate-spin shrink-0 mt-0.5" />
+            : <Sparkles className="h-4 w-4 text-danger shrink-0 mt-0.5" />}
+          <p className="text-xs leading-relaxed text-ink-secondary">
+            {handoffStatus === 'loading'
+              ? 'Đã nhận lịch từ AI Coach. Hệ thống đang chọn ngày phù hợp và tạo bản nháp...'
+              : 'Đã nhận lịch từ AI Coach nhưng chưa tạo được bản nháp. Xem lỗi bên dưới hoặc chỉnh điều kiện rồi thử lại.'}
+          </p>
+        </div>
+      )}
       {/* ── PROGRAM & TRAINING DAYS ── */}
       <div className="space-y-3">
         {/* Program Header with Active Status & Quick Switcher */}
@@ -905,6 +1093,18 @@ export default function NewWorkoutForm({
         </div>
       </div>
 
+      {weakSelectedGroups.length > 0 && (
+        <div role="status" className="flex items-start gap-3 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3">
+          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" aria-hidden="true" />
+          <div className="min-w-0">
+            <p className="text-sm font-extrabold text-ink">Buổi tập này có nhóm cơ chưa hồi phục tốt</p>
+            <p className="mt-1 text-xs leading-relaxed text-ink-secondary">
+              {weakSelectedGroups.map((group) => `${group.label} ${group.readiness}%`).join(', ')}. Khi tạo, bạn có thể giữ các nhóm này với mức tải thận trọng hoặc yêu cầu AI loại chúng khỏi buổi tập.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Phòng gym & Thiết bị */}
       <div>
         <div className="flex items-center justify-between mb-2">
@@ -959,11 +1159,52 @@ export default function NewWorkoutForm({
             </div>
           </button>
 
+          {/* Option 2: Không dụng cụ (Bodyweight / Calisthenics) */}
+          <button
+            type="button"
+            onClick={() => setGymId('bodyweight')}
+            className={`text-left p-3.5 rounded-2xl border transition-all relative flex flex-col justify-between cursor-pointer select-none min-w-0 overflow-hidden ${
+              gymId === 'bodyweight'
+                ? 'border-accent bg-accent/[0.08] shadow-neumorph-sm ring-1 ring-accent/60'
+                : 'border-black/[0.07] dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] hover:border-accent/40 hover:bg-black/[0.04] dark:hover:bg-white/[0.05]'
+            }`}
+          >
+            <div className="flex items-start justify-between gap-2 w-full min-w-0">
+              <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                <div
+                  className={`h-8 w-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                    gymId === 'bodyweight' ? 'bg-accent text-white shadow-xs' : 'bg-black/[0.05] dark:bg-white/[0.08] text-ink-muted'
+                  }`}
+                >
+                  <User className="h-4 w-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-extrabold text-xs sm:text-sm text-ink truncate">Không dụng cụ</h4>
+                  <p className="text-[10px] text-ink-secondary mt-0.5 truncate">Trọng lượng cơ thể (Bodyweight)</p>
+                </div>
+              </div>
+              {gymId === 'bodyweight' && (
+                <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+              )}
+            </div>
+
+            <div className="mt-2.5 pt-2 border-t border-black/[0.04] dark:border-white/[0.06] flex items-center gap-1.5">
+              <span className="px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-mono text-[9px] font-bold">
+                Tiện lợi
+              </span>
+              <span className="font-mono text-[10px] text-ink-muted">Tại nhà / Du lịch</span>
+            </div>
+          </button>
+
           {/* Cards for User's Saved Gyms */}
           {gyms.map((gym) => {
             const isSelected = gymId === gym.id;
             const dbCount = gym.gym_dumbbell_inventory?.length ?? 0;
-            const eqCount = gym.gym_equipment?.length ?? 0;
+            const rawEquipments = gym.gym_equipment ?? [];
+            const physicalEquipments = rawEquipments.filter((ge: any) =>
+              ge.equipment?.slug ? ge.equipment.slug !== 'bodyweight' : true,
+            );
+            const eqCount = physicalEquipments.length;
             return (
               <button
                 key={gym.id}
@@ -987,7 +1228,7 @@ export default function NewWorkoutForm({
                     <div className="min-w-0 flex-1">
                       <h4 className="font-extrabold text-xs sm:text-sm text-ink truncate">{gym.name}</h4>
                       <p className="text-[10px] text-ink-secondary mt-0.5 truncate">
-                        {gym.description || 'Phòng gym đã lưu'}
+                        {getGymEquipmentSummary(gym)}
                       </p>
                     </div>
                   </div>
@@ -1110,6 +1351,36 @@ export default function NewWorkoutForm({
           : <><Brain className="h-4 w-4" />Tạo danh sách với AI</>}
       </button>
     </form>
+
+    <Dialog.Root open={recoveryWarningOpen} onOpenChange={setRecoveryWarningOpen}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
+        <Dialog.Content className="fixed inset-x-3 top-1/2 z-50 max-h-[85vh] -translate-y-1/2 overflow-y-auto rounded-2xl border border-amber-500/25 bg-chassis-hi p-5 shadow-2xl focus:outline-none sm:left-1/2 sm:max-w-lg sm:-translate-x-1/2">
+          <Dialog.Title className="pr-10 text-xl font-extrabold text-ink">Nhóm cơ của buổi này đang yếu</Dialog.Title>
+          <Dialog.Description className="mt-2 text-sm leading-relaxed text-ink-secondary">
+            {weakSelectedGroups.map((group) => `${group.label} ${group.readiness}%`).join(', ')} chưa đạt ngưỡng 80%. Bạn vẫn muốn AI tạo buổi này hay tạo một buổi khác và bỏ các nhóm cơ đó?
+          </Dialog.Description>
+          <Dialog.Close className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full text-ink-muted hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label="Đóng cảnh báo">
+            <X className="h-5 w-5" />
+          </Dialog.Close>
+          <div className="mt-5 rounded-xl border border-black/5 bg-black/[0.025] px-3.5 py-3 text-xs leading-relaxed text-ink-secondary dark:border-white/10 dark:bg-white/[0.03]">
+            Nếu vẫn tạo, AI sẽ nhận đầy đủ điểm phục hồi và giữ hoặc giảm tải. Đau hoặc chống chỉ định vẫn luôn được ưu tiên cao hơn lựa chọn này.
+          </div>
+          <div className="mt-6 grid gap-2">
+            <button type="button" onClick={() => continueWithRecoveryDecision('exclude_weak')} className="btn-primary min-h-11 px-4 py-2.5">
+              Tạo nhưng bỏ nhóm cơ yếu
+            </button>
+            <button type="button" onClick={() => continueWithRecoveryDecision('include_weak')} className="btn-ghost min-h-11 px-4 py-2.5">
+              Vẫn tạo và giảm tải
+            </button>
+            <Dialog.Close className="min-h-11 rounded-xl px-4 py-2.5 text-sm font-bold text-ink-muted hover:bg-black/5 dark:hover:bg-white/5">
+              Quay lại chọn buổi khác
+            </Dialog.Close>
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+    </>
   );
 }
 

@@ -6,7 +6,7 @@ const Body = z.object({
   tier: z.enum(['pro', 'elite']),
 });
 
-// Demo endpoint — would normally hit Stripe checkout session API
+// Demo endpoint - would normally hit Stripe checkout session API
 // Stripe keys: STRIPE_SECRET_KEY, STRIPE_PRICE_PRO, STRIPE_PRICE_ELITE
 
 export async function POST(req: NextRequest) {
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
 
   const stripeKey = process.env.STRIPE_SECRET_KEY;
   if (!stripeKey) {
-    // Demo mode — directly upgrade
+    // Demo mode - directly upgrade
     await supabase.from('profiles').update({
       subscription_tier: body.tier,
       subscription_renews_at: new Date(Date.now() + 30 * 86400_000).toISOString(),

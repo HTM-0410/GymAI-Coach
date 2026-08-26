@@ -1,4 +1,4 @@
-# COMPLETION REPORT — TIP-AI-WORKOUT-PHASES
+# COMPLETION REPORT - TIP-AI-WORKOUT-PHASES
 
 **STATUS:** DONE
 
@@ -6,16 +6,16 @@
 
 ### Created
 
-- `src/lib/ai/workout-contract.ts` — shared Zod/API contract, phase budgets and duration estimator.
-- `src/lib/training/workout-phases.ts` — legacy-safe main/reps classification helpers.
-- `src/lib/exercises/workout-role.ts` — canonical reviewed taxonomy contract.
-- `supabase/migrations/20260821090000_add_workout_phases_and_exercise_taxonomy.sql` — additive/backward-compatible phase, prescription and taxonomy migration plus reviewed seed subset.
-- `data/exercise-taxonomy/workout-role-classification.json` — 30 reviewed records and 6 unresolved records with provenance.
-- `scripts/validate-exercise-taxonomy.ts` — local manifest/catalog validator and reviewable SQL renderer.
-- `tests/workout-phases.test.ts` — boundary/toggle/legacy/validation/fallback/analytics unit-contract tests.
-- `docs/TIP-AI-WORKOUT-PHASES.md` — approved TIP audit artifact.
-- `docs/WORKOUT_ROLE_TAXONOMY_REVIEW.md` — human taxonomy review report.
-- `docs/COMPLETION-AI-WORKOUT-PHASES.md` — this report.
+- `src/lib/ai/workout-contract.ts` - shared Zod/API contract, phase budgets and duration estimator.
+- `src/lib/training/workout-phases.ts` - legacy-safe main/reps classification helpers.
+- `src/lib/exercises/workout-role.ts` - canonical reviewed taxonomy contract.
+- `supabase/migrations/20260821090000_add_workout_phases_and_exercise_taxonomy.sql` - additive/backward-compatible phase, prescription and taxonomy migration plus reviewed seed subset.
+- `data/exercise-taxonomy/workout-role-classification.json` - 30 reviewed records and 6 unresolved records with provenance.
+- `scripts/validate-exercise-taxonomy.ts` - local manifest/catalog validator and reviewable SQL renderer.
+- `tests/workout-phases.test.ts` - boundary/toggle/legacy/validation/fallback/analytics unit-contract tests.
+- `docs/TIP-AI-WORKOUT-PHASES.md` - approved TIP audit artifact.
+- `docs/WORKOUT_ROLE_TAXONOMY_REVIEW.md` - human taxonomy review report.
+- `docs/COMPLETION-AI-WORKOUT-PHASES.md` - this report.
 
 ### Modified in feature scope
 
@@ -51,21 +51,21 @@ Coverage: **13/13 requirements implemented (100%)**.
 
 ## Test results
 
-- `npm.cmd run test:workout-phases` — PASS: 7 tests, 0 failed.
-- `npm.cmd run exercises:validate-taxonomy` — PASS: 30 reviewed, 6 unresolved, 6/6 roles, 4/4 splits, 1,325 bilingual equipment records, 0 warnings/errors.
-- `npm.cmd exec tsc -- --noEmit --incremental false --pretty false` — PASS: 0 type errors.
-- Focused ESLint across 24 feature files — PASS: 0 errors/warnings.
-- `npm.cmd run lint` — PASS: 0 errors, 1 existing hook dependency warning in untracked `objective-set-tracker.tsx:164`.
-- `npm.cmd run build` — PASS: compiled, type/lint phase passed, 40/40 static pages generated; same single hook warning.
-- Production/authenticated E2E — not run because the approved safety boundary forbids applying the local migration or mutating external Supabase, and the repository has no local authenticated fixture.
+- `npm.cmd run test:workout-phases` - PASS: 7 tests, 0 failed.
+- `npm.cmd run exercises:validate-taxonomy` - PASS: 30 reviewed, 6 unresolved, 6/6 roles, 4/4 splits, 1,325 bilingual equipment records, 0 warnings/errors.
+- `npm.cmd exec tsc -- --noEmit --incremental false --pretty false` - PASS: 0 type errors.
+- Focused ESLint across 24 feature files - PASS: 0 errors/warnings.
+- `npm.cmd run lint` - PASS: 0 errors, 1 existing hook dependency warning in untracked `objective-set-tracker.tsx:164`.
+- `npm.cmd run build` - PASS: compiled, type/lint phase passed, 40/40 static pages generated; same single hook warning.
+- Production/authenticated E2E - not run because the approved safety boundary forbids applying the local migration or mutating external Supabase, and the repository has no local authenticated fixture.
 
 ## Issues discovered
 
-- **P1 — deployment prerequisite:** the new additive migration must be reviewed/applied by the deployment owner before new application code is released. It was not run locally or remotely.
-- **P1 — integration proof deferred:** authenticated end-to-end generation/confirm/logger behavior remains unverified against a migrated Supabase instance.
-- **P2 — taxonomy queue:** 6 ambiguous exercises remain `needs_review` and are deliberately ineligible for warm-up/cooldown pools.
-- **P2 — existing lint warning:** `objective-set-tracker.tsx:164` has an exhaustive-deps warning; build still passes and it was not altered as unrelated user-owned work.
-- **P2 — actual accessory duration:** completion reporting uses prescribed seconds and exercise timestamps; there is no dedicated actual-duration column.
+- **P1 - deployment prerequisite:** the new additive migration must be reviewed/applied by the deployment owner before new application code is released. It was not run locally or remotely.
+- **P1 - integration proof deferred:** authenticated end-to-end generation/confirm/logger behavior remains unverified against a migrated Supabase instance.
+- **P2 - taxonomy queue:** 6 ambiguous exercises remain `needs_review` and are deliberately ineligible for warm-up/cooldown pools.
+- **P2 - existing lint warning:** `objective-set-tracker.tsx:164` has an exhaustive-deps warning; build still passes and it was not altered as unrelated user-owned work.
+- **P2 - actual accessory duration:** completion reporting uses prescribed seconds and exercise timestamps; there is no dedicated actual-duration column.
 
 ## Deviations from spec
 
@@ -86,9 +86,9 @@ No Gemini call, external API write, Supabase migration, Supabase data mutation, 
 
 ---
 
-# REFINE COMPLETION REPORT — TIP-REFINE-001
+# REFINE COMPLETION REPORT - TIP-REFINE-001
 
-**STATUS:** DONE — supersedes the initial 7-test/13-of-13 readiness claim above after Contractor VERIFY returned **NOT READY**. Authenticated migrated E2E remains explicitly deferred.
+**STATUS:** DONE - supersedes the initial 7-test/13-of-13 readiness claim above after Contractor VERIFY returned **NOT READY**. Authenticated migrated E2E remains explicitly deferred.
 
 ## Refine files changed
 
@@ -109,14 +109,14 @@ No Gemini call, external API write, Supabase migration, Supabase data mutation, 
 
 ## Exact verification evidence
 
-- `npm.cmd run test:workout-phases` — PASS: 13 tests, 13 passed, 0 failed. Includes all four toggle combinations, 15/30/60/120/240 boundaries, legacy path, tampered phase/mode, role review, bodyweight, timer pause/reload/reset, explicit avoidance fallback and target-only regeneration.
-- `npm.cmd run exercises:validate-taxonomy` — PASS: 30 reviewed, 6 unresolved, all six roles, all four splits, bodyweight/common gym coverage, 1,325 bilingual equipment entries, 0 warnings/errors.
-- `npx.cmd tsc --noEmit --pretty false --incremental false` — PASS: 0 type errors.
-- Focused ESLint over the nine refine TS/TSX/test files — PASS: 0 errors/warnings.
-- `npm.cmd run lint` — PASS: 0 errors; one pre-existing exhaustive-deps warning at `objective-set-tracker.tsx:164`.
-- `npm.cmd run build` — PASS: optimized production build, type/lint stage and 40/40 static pages. Same pre-existing warning only.
-- `git diff --check` — PASS; Windows LF-to-CRLF notices only.
-- `git diff --cached --name-only` — empty; no files staged.
+- `npm.cmd run test:workout-phases` - PASS: 13 tests, 13 passed, 0 failed. Includes all four toggle combinations, 15/30/60/120/240 boundaries, legacy path, tampered phase/mode, role review, bodyweight, timer pause/reload/reset, explicit avoidance fallback and target-only regeneration.
+- `npm.cmd run exercises:validate-taxonomy` - PASS: 30 reviewed, 6 unresolved, all six roles, all four splits, bodyweight/common gym coverage, 1,325 bilingual equipment entries, 0 warnings/errors.
+- `npx.cmd tsc --noEmit --pretty false --incremental false` - PASS: 0 type errors.
+- Focused ESLint over the nine refine TS/TSX/test files - PASS: 0 errors/warnings.
+- `npm.cmd run lint` - PASS: 0 errors; one pre-existing exhaustive-deps warning at `objective-set-tracker.tsx:164`.
+- `npm.cmd run build` - PASS: optimized production build, type/lint stage and 40/40 static pages. Same pre-existing warning only.
+- `git diff --check` - PASS; Windows LF-to-CRLF notices only.
+- `git diff --cached --name-only` - empty; no files staged.
 
 ## Remaining issues
 
@@ -136,7 +136,7 @@ No Gemini call, external API write, remote/local Supabase migration, database mu
 
 ---
 
-# E2E REFINE — ACCESSORY CANDIDATE QUERY
+# E2E REFINE - ACCESSORY CANDIDATE QUERY
 
 **STATUS:** BUILDER FIX COMPLETE; awaiting Contractor authenticated verification.
 
@@ -155,18 +155,18 @@ Read-only remote diagnostics confirmed the deployed dataset has 20 published rev
 
 ## Verification
 
-- `npm.cmd run test:workout-phases` — PASS: 14/14.
-- `npm.cmd run exercises:validate-taxonomy` — PASS: 30 reviewed, 6 unresolved, all required roles/splits/equipment classes, 0 errors.
-- `npx.cmd tsc --noEmit --pretty false --incremental false` — PASS: 0 errors.
-- Focused ESLint for context and tests — PASS: 0 errors/warnings.
-- `npm.cmd run lint` — PASS: 0 errors; the same pre-existing warning at `objective-set-tracker.tsx:164` remains.
-- `git diff --check` — PASS with Windows line-ending notices only; staged file list remains empty.
+- `npm.cmd run test:workout-phases` - PASS: 14/14.
+- `npm.cmd run exercises:validate-taxonomy` - PASS: 30 reviewed, 6 unresolved, all required roles/splits/equipment classes, 0 errors.
+- `npx.cmd tsc --noEmit --pretty false --incremental false` - PASS: 0 errors.
+- Focused ESLint for context and tests - PASS: 0 errors/warnings.
+- `npm.cmd run lint` - PASS: 0 errors; the same pre-existing warning at `objective-set-tracker.tsx:164` remains.
+- `git diff --check` - PASS with Windows line-ending notices only; staged file list remains empty.
 
 ## Remote requirements
 
 No new migration or data write is needed when the additive taxonomy migration already reports all 30 reviewed seed slugs. Environments without those columns/seeds must apply the existing additive migration before application release. This Builder performed read-only diagnostics only and did not use or print user credentials.
 
-## E2E REFINE — GENERATE/CONFIRM EQUIPMENT PARITY
+## E2E REFINE - GENERATE/CONFIRM EQUIPMENT PARITY
 
 **STATUS:** BUILDER FIX COMPLETE; awaiting Contractor authenticated confirmation.
 
@@ -176,15 +176,15 @@ The compatibility contract now takes an explicit unrestricted flag. Only `gymId=
 
 Regression evidence:
 
-- `npm.cmd run test:workout-phases` — PASS: 15/15, including unrestricted versus selected-empty-gym, bodyweight, dumbbell inventory and shared compatibility cases.
-- `npx.cmd tsc --noEmit --pretty false --incremental false` — PASS: 0 errors.
-- Focused ESLint over constraints/context/confirm/tests — PASS: 0 errors/warnings.
-- `npm.cmd run lint` — PASS: 0 errors; unchanged pre-existing warning at `objective-set-tracker.tsx:164`.
-- `git diff --check` — PASS with line-ending notices only; staged list empty.
+- `npm.cmd run test:workout-phases` - PASS: 15/15, including unrestricted versus selected-empty-gym, bodyweight, dumbbell inventory and shared compatibility cases.
+- `npx.cmd tsc --noEmit --pretty false --incremental false` - PASS: 0 errors.
+- Focused ESLint over constraints/context/confirm/tests - PASS: 0 errors/warnings.
+- `npm.cmd run lint` - PASS: 0 errors; unchanged pre-existing warning at `objective-set-tracker.tsx:164`.
+- `git diff --check` - PASS with line-ending notices only; staged list empty.
 
 No migration or remote data update is required for this parity fix. No credentials, remote writes, staging, commit or push were used.
 
-## E2E REFINE — LOGGER EXERCISE ORDER
+## E2E REFINE - LOGGER EXERCISE ORDER
 
 **STATUS:** BUILDER FIX COMPLETE; awaiting Contractor page verification.
 
@@ -194,10 +194,10 @@ Supabase does not guarantee ordering for embedded `workout_exercises`, and the a
 
 Verification:
 
-- `npm.cmd run test:workout-phases` — PASS: 16/16, including a cooldown-first unordered relation and valid/invalid requested exercise indexes.
-- `npx.cmd tsc --noEmit --pretty false --incremental false` — PASS: 0 errors.
-- Focused ESLint for ordering helper/page/logger/tests — PASS: 0 errors/warnings.
-- `npm.cmd run lint` — PASS: 0 errors; unchanged existing warning at `objective-set-tracker.tsx:164`.
-- `git diff --check` — PASS with line-ending notices only; staged list empty.
+- `npm.cmd run test:workout-phases` - PASS: 16/16, including a cooldown-first unordered relation and valid/invalid requested exercise indexes.
+- `npx.cmd tsc --noEmit --pretty false --incremental false` - PASS: 0 errors.
+- Focused ESLint for ordering helper/page/logger/tests - PASS: 0 errors/warnings.
+- `npm.cmd run lint` - PASS: 0 errors; unchanged existing warning at `objective-set-tracker.tsx:164`.
+- `git diff --check` - PASS with line-ending notices only; staged list empty.
 
 No remote row was changed or deleted during this fix, and no migration is required.

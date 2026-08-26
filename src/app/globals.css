@@ -12,6 +12,12 @@
     --ink-muted:    100 116 139;       /* #64748b */
     --accent:       249 115 22;        /* #f97316 */
     --accent-dim:   234 88 12;         /* #ea580c */
+    --recovery-recovering: #d95568;
+    --recovery-light-only: #d98b2b;
+    --recovery-trainable: #3f78c5;
+    --recovery-ready: #1f9d73;
+    --recovery-muscle-stroke: #475569;
+    --recovery-muscle-selected: #0f172a;
     --shadow-dark:  #babecc;
     --shadow-light: #ffffff;
 
@@ -32,6 +38,12 @@
     --ink-muted:    120 135 152;       /* #788798 high contrast metadata */
     --accent:       249 115 22;        /* #f97316 */
     --accent-dim:   234 88 12;         /* #ea580c */
+    --recovery-recovering: #f06a7e;
+    --recovery-light-only: #ecaf52;
+    --recovery-trainable: #6b9ceb;
+    --recovery-ready: #42c795;
+    --recovery-muscle-stroke: #263247;
+    --recovery-muscle-selected: #f8fafc;
     --shadow-dark:  #000000;
     --shadow-light: rgba(255, 255, 255, 0.04);
 
@@ -427,7 +439,7 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* === EXERCISE DETAIL — Industrial Dark === */
+/* === EXERCISE DETAIL - Industrial Dark === */
 .ex-detail-bg {
   background-color: #0a0a0f;
   background-image:
@@ -670,6 +682,34 @@
   50% { transform: translateY(-4px); }
 }
 
+@keyframes landing-robot-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -7px, 0); }
+}
+
+.landing-robot-stage {
+  --robot-shift-x: 0px;
+  --robot-shift-y: 0px;
+  --robot-rotate-x: 0deg;
+  --robot-rotate-y: 0deg;
+  perspective: 1000px;
+}
+
+.landing-robot-float {
+  animation: landing-robot-float 5.5s ease-in-out infinite;
+}
+
+.landing-robot-image {
+  transform: translate3d(var(--robot-shift-x), var(--robot-shift-y), 0)
+    rotateX(var(--robot-rotate-x)) rotateY(var(--robot-rotate-y));
+  transform-origin: center 58%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-robot-float { animation: none; }
+  .landing-robot-image { transition-duration: 0.01ms !important; }
+}
+
 .animate-shimmer {
   position: relative;
   overflow: hidden;
@@ -743,4 +783,293 @@
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(249, 115, 22, 0.8);
+}
+
+/* ── ONBOARDING: calm, focused motion and controls ── */
+@keyframes onboarding-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes onboarding-step-forward {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes onboarding-step-back {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes onboarding-complete {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes onboarding-brand-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.08); }
+}
+
+@keyframes onboarding-progress-current {
+  0%, 100% { opacity: 0.72; }
+  50% { opacity: 1; }
+}
+
+.onboarding-enter {
+  animation: onboarding-enter 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.onboarding-step-forward {
+  animation: onboarding-step-forward 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.onboarding-step-back {
+  animation: onboarding-step-back 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.onboarding-complete {
+  animation: onboarding-complete 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.onboarding-brand-pulse {
+  animation: onboarding-brand-pulse 2.8s ease-in-out infinite;
+}
+
+.onboarding-progress-current {
+  animation: onboarding-progress-current 1.8s ease-in-out infinite;
+}
+
+.onboarding-athlete-stage {
+  height: min(455px, 49vh);
+}
+
+/* ── ONBOARDING: Robot Holographic Platform & Cyber Glow ── */
+.onboarding-holo-platform {
+  perspective: 600px;
+  transform-style: preserve-3d;
+}
+
+.onboarding-holo-ring-outer {
+  transform: rotateX(68deg);
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.4), inset 0 0 15px rgba(249, 115, 22, 0.25);
+  animation: holo-pulse 4s ease-in-out infinite;
+}
+
+.onboarding-holo-ring-inner {
+  transform: rotateX(68deg);
+  box-shadow: 0 0 18px rgba(249, 115, 22, 0.5), inset 0 0 10px rgba(249, 115, 22, 0.35);
+  animation: holo-pulse 4s ease-in-out infinite 0.6s;
+}
+
+.onboarding-holo-ring-core {
+  transform: rotateX(68deg);
+  box-shadow: 0 0 30px rgba(249, 115, 22, 0.7);
+}
+
+@keyframes holo-pulse {
+  0%, 100% {
+    opacity: 0.75;
+    transform: rotateX(68deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: rotateX(68deg) scale(1.03);
+  }
+}
+
+
+.onboarding-form-body {
+  scrollbar-gutter: stable;
+  scrollbar-color: rgba(148, 163, 184, 0.42) transparent;
+  scrollbar-width: thin;
+}
+
+.onboarding-form-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.onboarding-form-body::-webkit-scrollbar-track {
+  margin-block: 10px;
+  background: transparent;
+}
+
+.onboarding-form-body::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.42);
+  background-clip: padding-box;
+}
+
+.onboarding-form-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.72);
+  background-clip: padding-box;
+}
+
+.onboarding-input {
+  min-height: 54px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 13px;
+  background: rgba(5, 8, 12, 0.48);
+  padding: 0 16px;
+  color: #f8fafc;
+  font-size: 15px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.onboarding-input--leading {
+  padding-left: 52px;
+}
+
+.onboarding-input--trailing {
+  padding-right: 56px;
+}
+
+.onboarding-input::placeholder {
+  color: rgba(148, 163, 184, 0.46);
+  opacity: 1;
+}
+
+.onboarding-input:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.onboarding-input:focus {
+  outline: none;
+  border-color: rgba(251, 146, 60, 0.95);
+  background: rgba(8, 12, 18, 0.72);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16), 0 0 18px rgba(249, 115, 22, 0.08);
+}
+
+.onboarding-input[aria-invalid='true'] {
+  border-color: rgba(248, 113, 113, 0.7);
+}
+
+.onboarding-range {
+  --range-progress: 0%;
+  width: 100%;
+  height: 24px;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.onboarding-range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #f97316 0 var(--range-progress), rgba(255, 255, 255, 0.09) var(--range-progress) 100%);
+}
+
+.onboarding-range::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #f97316 0 var(--range-progress), rgba(255, 255, 255, 0.09) var(--range-progress) 100%);
+}
+
+.onboarding-range::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  margin-top: -7px;
+  appearance: none;
+  border: 4px solid #f97316;
+  border-radius: 999px;
+  background: #fff7ed;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.34);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.onboarding-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 4px solid #f97316;
+  border-radius: 999px;
+  background: #fff7ed;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.34);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.onboarding-range:hover::-webkit-slider-thumb,
+.onboarding-range:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.08);
+  box-shadow: 0 0 0 5px rgba(249, 115, 22, 0.12), 0 3px 12px rgba(0, 0, 0, 0.34);
+}
+
+.onboarding-range:hover::-moz-range-thumb,
+.onboarding-range:focus-visible::-moz-range-thumb {
+  transform: scale(1.08);
+  box-shadow: 0 0 0 5px rgba(249, 115, 22, 0.12), 0 3px 12px rgba(0, 0, 0, 0.34);
+}
+
+.onboarding-range:focus-visible {
+  outline: 2px solid rgba(249, 115, 22, 0.65);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .onboarding-enter,
+  .onboarding-step-forward,
+  .onboarding-step-back,
+  .onboarding-complete,
+  .onboarding-brand-pulse,
+  .onboarding-progress-current {
+    animation: none !important;
+  }
+
+  .onboarding-page *,
+  .onboarding-page *::before,
+  .onboarding-page *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 900px) {
+  .onboarding-form-body {
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+  }
+
+  .onboarding-step-header {
+    margin-bottom: 1rem;
+  }
+
+  .onboarding-input {
+    min-height: 48px;
+  }
+
+  .onboarding-athlete-stage {
+    height: min(380px, 44vh);
+  }
+}
+
+@media (max-width: 639px) {
+  .onboarding-form-shell {
+    border-radius: 16px;
+  }
+
+  .onboarding-input {
+    min-height: 50px;
+    font-size: 14px;
+  }
+
+  .onboarding-input--leading {
+    padding-left: 46px;
+  }
+
+  .onboarding-input--trailing {
+    padding-right: 48px;
+  }
+}
+
+/* Prevent default browser focus outline rectangle on SVG interactive elements */
+svg,
+svg *,
+svg g:focus,
+svg g:focus-visible,
+svg path:focus,
+svg path:focus-visible {
+  outline: none !important;
 }

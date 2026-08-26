@@ -25,6 +25,12 @@ export function nearestDumbbellWeight(target: number, availableWeights: number[]
   })[0];
 }
 
+export function dumbbellWeightAtOrBelow(ceiling: number, availableWeights: number[]): number | null {
+  if (!Number.isFinite(ceiling) || availableWeights.length === 0) return null;
+  const safeWeights = availableWeights.filter((weight) => Number.isFinite(weight) && weight <= ceiling);
+  return safeWeights.length > 0 ? Math.max(...safeWeights) : null;
+}
+
 export function formatDumbbellInventory(items: DumbbellInventoryItem[]): string {
   if (items.length === 0) return 'chưa khai báo chi tiết mức tạ';
   return sortDumbbellInventory(items)

@@ -1,5 +1,5 @@
 -- =====================================================================
--- Exercise Library Sync — extend schema for full JSON content
+-- Exercise Library Sync - extend schema for full JSON content
 -- Migration: 20260819000002_exercise_library_extend.sql
 -- =====================================================================
 -- Adds columns needed by scripts/sync-exercises.ts:

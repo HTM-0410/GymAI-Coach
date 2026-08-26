@@ -2,6 +2,9 @@ import { createClient } from '@/lib/supabase/server';
 import CyberSpotlightBackground from '@/components/cyber-spotlight-background';
 import NewWorkoutForm from './new-workout-form';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function NewWorkoutPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -41,8 +44,47 @@ export default async function NewWorkoutPage() {
       .select('id, name, description, gym_dumbbell_inventory(weight_kg, quantity), gym_equipment(equipment(slug, name_vi))')
       .eq('owner_user_id', user.id)
       .order('created_at', { ascending: false }),
-    supabase.from('profiles').select('preferred_session_duration').eq('user_id', user.id).single(),
+    supabase.from('profiles').select('preferred_session_duration, unit_system').eq('user_id', user.id).maybeSingle(),
   ]);
+
+  let gyms = (gymsRes.data ?? []) as any[];
+
+  // Auto-sync initial equipment from profile_equipment into gyms if user has no gym yet
+  if (gyms.length === 0) {
+    const { data: profileEquipment } = await supabase
+      .from('profile_equipment')
+      .select('equipment_id, equipment(slug, name_vi)')
+      .eq('profile_id', user.id);
+
+    if (profileEquipment && profileEquipment.length > 0) {
+      const { data: createdGym } = await supabase
+        .from('gyms')
+        .insert({
+          owner_user_id: user.id,
+          name: 'Phòng gym mặc định',
+          description: 'Đồng bộ tự động từ danh sách thiết bị trong hồ sơ của bạn.',
+        })
+        .select('id, name, description')
+        .single();
+
+      if (createdGym) {
+        await supabase.from('gym_equipment').insert(
+          profileEquipment.map((pe: any) => ({
+            gym_id: createdGym.id,
+            equipment_id: pe.equipment_id,
+          }))
+        );
+
+        const refetched = await supabase
+          .from('gyms')
+          .select('id, name, description, gym_dumbbell_inventory(weight_kg, quantity), gym_equipment(equipment(slug, name_vi))')
+          .eq('owner_user_id', user.id)
+          .order('created_at', { ascending: false });
+
+        gyms = refetched.data ?? [createdGym];
+      }
+    }
+  }
 
   const activeUserProgram = userProgramsRes.data?.find((up) => up.is_active);
   const activeProgramId = activeUserProgram?.program_id ?? userProgramsRes.data?.[0]?.program_id ?? null;
@@ -65,8 +107,9 @@ export default async function NewWorkoutPage() {
         <NewWorkoutForm
           programs={programs}
           activeProgramId={activeProgramId}
-          gyms={gymsRes.data ?? []}
+          gyms={gyms}
           defaultDuration={profileRes.data?.preferred_session_duration ?? 60}
+          unitSystem={profileRes.data?.unit_system === 'imperial' ? 'imperial' : 'metric'}
         />
       </div>
     </main>

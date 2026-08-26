@@ -1,5 +1,5 @@
 /**
- * PerformanceChart — biểu đồ đường SVG render từ data JSON.
+ * PerformanceChart - biểu đồ đường SVG render từ data JSON.
  * Tách ra từ StaticPerformanceChart trong exercise-demo/page.tsx để dùng chung.
  */
 

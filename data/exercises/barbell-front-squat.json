@@ -1,22 +1,23 @@
 {
   "slug": "barbell-front-squat",
   "name": "barbell front squat",
-  "name_vi": "Thanh đòn trước squat",
-  "subtitle_vi": "Bài tập upper legs với thanh đòn.",
+  "name_vi": "Gánh đùi trước với thanh đòn",
+  "subtitle_vi": "Bài tập compound phát triển đùi trước và sức mạnh thân trên.",
   "tags": [
     "upper legs",
+    "quadriceps",
     "Thanh đòn",
     "Gym visual"
   ],
   "movement_pattern": "squat",
   "exercise_type": "compound",
   "difficulty": "intermediate",
-  "primary_muscle": "Mông",
+  "primary_muscle": "Đùi trước",
   "secondary_muscles": [
-    "Đùi trước",
+    "Mông",
     "Đùi sau",
-    "Bắp chân",
-    "core"
+    "Core",
+    "Lưng trên"
   ],
   "equipment": [
     {
@@ -32,25 +33,30 @@
         "label": "Animation"
       }
     ],
-    "caption_vi": "Mô phỏng chuyển động bài tập.",
+    "caption_vi": "Mô phỏng chuyển động Front Squat chuẩn kỹ thuật.",
     "animation": "https://xncmtbenoxqduksxpeee.supabase.co/storage/v1/object/public/exercise-animations/barbell-front-squat.gif"
   },
-  "goal_vi": "Phát triển mông và rèn kỹ thuật chuyển động có kiểm soát.",
+  "goal_vi": "Phát triển khối lượng và sức mạnh cơ đùi trước (quadriceps), rèn khả năng gồng core và giữ thẳng lưng trên.",
   "instructions": [
-    "Start by standing with your feet shoulder-width apart, toes slightly turned out.",
-    "Hold the barbell in front of your shoulders, resting it on your collarbone and shoulders.",
-    "Engage your core and keep your chest up as you lower your body down into a squat position, pushing your hips back and bending your knees.",
-    "Lower until your thighs are parallel to the ground, or as low as you can comfortably go.",
-    "Pause for a moment at the bottom, then push through your heels to return to the starting position.",
-    "Repeat for the desired number of repetitions."
+    "Chỉnh giá đỡ (rack) ngang tầm ngực trên, thanh đòn đặt vững trên vai trước (front delts) và xương quai xanh.",
+    "Chọn tư thế tay phù hợp: Clean grip (các đầu ngón tay đỡ thanh đòn, khuỷu tay nâng cao) hoặc Cross-arm grip (bắt chéo hai tay qua thanh đòn).",
+    "Hít sâu, gồng chặt cơ bụng (brace core), nhấc thanh đòn ra khỏi giá và lùi 1-2 bước ngắn.",
+    "Đứng hai chân rộng bằng vai, mũi chân mở nhẹ 15-30 độ.",
+    "Từ từ hạ người xuống theo phương thẳng đứng bằng cách gập hông và gối đồng thời, giữ khuỷu tay luôn nâng cao để thanh đòn không trượt.",
+    "Hạ đùi tới mức song song với sàn (hoặc biên độ thoải mái không đau gối), dừng 1 nhịp có kiểm soát.",
+    "Đạp mạnh qua toàn bộ bàn chân để trở về vị trí ban đầu, thở ra khi hoàn thành động tác."
   ],
   "tips": [
-    "Giữ chuyển động chậm và kiểm soát.",
-    "Dừng lại nếu xuất hiện đau bất thường."
+    "Cài thanh an toàn (safety pins) ngang tầm đáy squat trước khi bắt đầu bài tập nặng.",
+    "Luôn chủ động đẩy khuỷu tay hướng lên trên trong suốt quá trình đi xuống và đi lên để giữ lưng thẳng.",
+    "Giữ toàn bộ bàn chân tiếp xúc mặt sàn, không nhấc gót chân.",
+    "QUY TẮC DỪNG AN TOÀN: Dừng bài tập ngay lập tức nếu xuất hiện cảm giác đau nhói ở khớp gối hoặc đau cổ tay. Chuyển sang Goblet Squat hoặc Leg Press."
   ],
   "common_mistakes": [
-    "Dùng đà thay vì kiểm soát cơ thể.",
-    "Thực hiện sai biên độ chuyển động."
+    "Khuỷu tay bị hạ thấp khiến thân trên gập về phía trước và tăng áp lực lên thắt lưng.",
+    "Đầu gối bị sụp vào trong (valgus) khi phát lực đứng dậy.",
+    "Nhấc gót chân khỏi sàn khi hạ sâu do thiếu linh hoạt cổ chân.",
+    "Không gồng chắc cơ bụng trước khi bắt đầu chuyển động hạ người."
   ],
   "setup": {
     "sets": "3",
@@ -59,7 +65,7 @@
     "rest_seconds": 90,
     "tempo": "2-0-2-0"
   },
-  "safety_vi": "Chọn mức độ phù hợp và giữ tư thế ổn định trong toàn bộ chuyển động.",
+  "safety_vi": "Thiết lập thanh đỡ an toàn trong rack. Không cố tập vượt ngưỡng đau nếu có tiền sử đau đầu gối.",
   "performance_metrics": {
     "current_weight_kg": 0,
     "rep_range": "8-12",
@@ -81,11 +87,14 @@
     "max": 1
   },
   "ai_coach": {
-    "next_session_vi": "Luyện tập Thanh đòn trước squat",
-    "rationale_vi": "Dữ liệu hiệu suất sẽ được cập nhật sau các buổi tập."
+    "next_session_vi": "Luyện tập Front Squat với mức tạ vừa phải, chú trọng giữ khuỷu tay cao.",
+    "rationale_vi": "Theo dõi khả năng giữ thân trên thẳng và biên độ khớp gối trước khi tăng tải."
   },
-  "alternatives": [],
-  "translation_status": "machine_pending",
+  "alternatives": [
+    "dumbbell-goblet-squat",
+    "leg-press-machine"
+  ],
+  "translation_status": "reviewed",
   "source": {
     "provider": "hasaneyldrm/exercises-dataset",
     "source_id": "0042",
@@ -94,21 +103,13 @@
     "raw_gif": "videos/0042-zG0zs85.gif",
     "raw_image": "images/0042-zG0zs85.jpg",
     "languages": [
-      "en",
-      "it",
-      "tr",
-      "es",
-      "ru",
-      "zh",
-      "hi",
-      "pl",
-      "ko",
-      "fr"
+      "vi",
+      "en"
     ]
   },
   "media_metadata": {
-    "version": "1.0.0",
-    "last_updated": "2026-08-19",
+    "version": "2.0.0",
+    "last_updated": "2026-08-24",
     "source": "Gym visual via hasaneyldrm/exercises-dataset",
     "language": "vi",
     "attribution": "© Gym visual — https://gymvisual.com/",

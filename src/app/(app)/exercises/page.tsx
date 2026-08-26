@@ -5,6 +5,7 @@ import ExerciseFilters from './exercise-filters';
 import BodyMapStrip from './body-map-grid';
 import EquipmentSidebar from './equipment-sidebar';
 import SaveExerciseButton from '@/components/exercises/save-exercise-button';
+import { TrainingLibraryTabs } from '@/components/training-library-tabs';
 import { filterExercises } from '@/lib/exercises';
 import { createClient } from '@/lib/supabase/server';
 import { fetchUserSavedExerciseSlugs } from '@/lib/saved-exercises';
@@ -26,7 +27,7 @@ import {
   type EquipmentCategoryId,
 } from '@/lib/equipment-categories';
 
-// ISR — exercises are stable for ~1 day; refresh hourly on edge.
+// ISR - exercises are stable for ~1 day; refresh hourly on edge.
 // Note: page uses supabase server client which requires dynamic rendering.
 export const revalidate = 3600;
 export const dynamic = 'force-dynamic';
@@ -186,9 +187,12 @@ export default async function ExercisesPage({
           </Link>
         </div>
 
+        {/* Mobile Training Library Switcher */}
+        <TrainingLibraryTabs activeTab="exercises" />
+
         {/* STICKY FILTER HEADER ON MOBILE (sm:static) */}
         <div className="sticky top-14 z-30 -mx-4 px-4 py-2.5 bg-chassis/95 dark:bg-[#0c1017]/95 backdrop-blur-2xl border-b border-black/[0.06] dark:border-white/[0.08] shadow-xs sm:shadow-none sm:border-none sm:bg-transparent sm:backdrop-blur-none sm:static sm:mx-0 sm:px-0 sm:py-0 space-y-2">
-          {/* BODY MAP STRIP — horizontal scrolling muscle filter */}
+          {/* BODY MAP STRIP - horizontal scrolling muscle filter */}
           <section>
             <BodyMapStrip categories={categoryCounts} />
           </section>
@@ -390,7 +394,7 @@ export default async function ExercisesPage({
             )}
           </div>
 
-          {/* Right sidebar — equipment filter (13 categories from exerciselibrary.app) */}
+          {/* Right sidebar - equipment filter (13 categories from exerciselibrary.app) */}
           <EquipmentSidebar
             categories={EQUIPMENT_CATEGORIES}
             counts={equipmentCounts}

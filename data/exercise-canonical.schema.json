@@ -20,7 +20,12 @@
     "instructions": {"type": "array", "items": {"type": "string"}},
     "translation_status": {"type": "string", "enum": ["machine_pending", "llm_pending", "review_required", "approved"]},
     "source": {"type": "object"},
-    "media_metadata": {"type": "object"}
+    "media_metadata": {"type": "object"},
+    "default_tracking_mode": {"type": "string", "enum": ["weight_reps", "reps", "duration", "duration_distance"], "default": "reps"},
+    "allowed_tracking_modes": {"type": "array", "items": {"type": "string", "enum": ["weight_reps", "reps", "duration", "duration_distance"]}, "minItems": 1, "uniqueItems": true, "default": ["reps"]},
+    "tracking_mode_review_status": {"type": "string", "enum": ["reviewed", "needs_review"], "default": "needs_review"},
+    "tracking_mode_source": {"type": "string", "default": "safe_fallback"},
+    "load_basis": {"type": "string", "enum": ["external_total", "per_implement", "assistance", "none"], "default": "none"}
   },
   "additionalProperties": true
 }
