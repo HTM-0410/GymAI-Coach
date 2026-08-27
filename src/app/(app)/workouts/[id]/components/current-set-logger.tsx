@@ -4,6 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { Minus, Plus, Check, Sparkles } from 'lucide-react';
 import type { TrackedSet, PerceivedEffort } from '../objective-set-tracker';
 import { loadFromCanonical, loadToCanonical, loadUnitLabel, roundCanonical, type UnitSystem } from '@/lib/workouts/metrics';
+import {
+  getSetDraftStorageKey,
+  parseSetDraftCache,
+  serializeSetDraftCache,
+} from '@/lib/workouts/set-draft-cache';
 
 type CurrentSetLoggerProps = {
   activeSet: TrackedSet;
@@ -88,13 +93,36 @@ export default function CurrentSetLogger({
   const [effort, setEffort] = useState<PerceivedEffort>(
     resolveDefaultEffort(activeSet.perceived_effort, activeSet.rir, targetRir)
   );
+  const [draftHydrated, setDraftHydrated] = useState(false);
+  const storageKey = getSetDraftStorageKey(activeSet.id);
 
-  // Sync state when activeSet changes
+  // Restore unfinished input after leaving and returning to the workout route.
   useEffect(() => {
+    setDraftHydrated(false);
     setWeight(loadFromCanonical(activeSet.weight ?? suggestedWeight ?? targetWeight ?? 20, unitSystem));
     setReps(activeSet.reps ?? suggestedReps ?? minReps ?? 10);
     setEffort(resolveDefaultEffort(activeSet.perceived_effort, activeSet.rir, targetRir));
-  }, [activeSet.id, activeSet.weight, activeSet.reps, activeSet.perceived_effort, activeSet.rir, suggestedWeight, suggestedReps, targetWeight, targetRir, minReps, unitSystem]);
+    try {
+      const cached = parseSetDraftCache(window.localStorage.getItem(storageKey));
+      if (cached) {
+        setWeight(cached.weight);
+        setReps(cached.reps);
+        setEffort(cached.effort);
+      }
+    } catch {
+      // Storage can be unavailable in private browsing or after quota errors.
+    }
+    setDraftHydrated(true);
+  }, [activeSet.id, storageKey, unitSystem]);
+
+  useEffect(() => {
+    if (!draftHydrated) return;
+    try {
+      window.localStorage.setItem(storageKey, serializeSetDraftCache({ weight, reps, effort }));
+    } catch {
+      // The server write remains the source of truth when local storage is unavailable.
+    }
+  }, [draftHydrated, effort, reps, storageKey, weight]);
 
   const isBonus = activeSet.note === 'bonus' || activeSet.set_number > totalTargetSets;
   const selectedOption = EFFORT_OPTIONS.find((opt) => opt.value === effort) ?? EFFORT_OPTIONS[2];
