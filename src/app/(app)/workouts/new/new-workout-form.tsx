@@ -299,6 +299,7 @@ export default function NewWorkoutForm({
   gyms,
   defaultDuration,
   unitSystem,
+  initialGymId,
 }: {
   programs: ProgramItem[];
   activeProgramId: string | null;
@@ -311,6 +312,7 @@ export default function NewWorkoutForm({
   }[];
   defaultDuration: number;
   unitSystem: UnitSystem;
+  initialGymId?: string | null;
 }) {
   const router = useRouter();
   const initialProgram = programs.find((p) => p.id === activeProgramId) ?? programs[0] ?? null;
@@ -318,7 +320,9 @@ export default function NewWorkoutForm({
 
   const currentProgram = programs.find((p) => p.id === selectedProgramId) ?? initialProgram;
   const [dayId, setDayId] = useState(currentProgram?.training_program_days?.[0]?.id ?? '');
-  const [gymId, setGymId] = useState<string>(gyms[0]?.id ?? '');
+  const [gymId, setGymId] = useState<string>(
+    initialGymId && gyms.some((gym) => gym.id === initialGymId) ? initialGymId : (gyms[0]?.id ?? ''),
+  );
 
   function handleSwitchProgram(newProgId: string) {
     setSelectedProgramId(newProgId);
@@ -1113,7 +1117,7 @@ export default function NewWorkoutForm({
             <span>Phòng gym & Thiết bị</span>
           </label>
           <Link
-            href="/gyms/new"
+            href="/gyms/new?returnTo=%2Fworkouts%2Fnew"
             className="text-[11px] font-mono text-accent hover:underline flex items-center gap-1 font-bold"
           >
             <Plus className="h-3 w-3" />

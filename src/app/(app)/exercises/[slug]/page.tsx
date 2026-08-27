@@ -35,9 +35,9 @@ export const dynamic = 'force-dynamic';
 
 type SlugParams = { slug: string };
 
-function safeWorkoutReturnPath(value?: string | string[]): string | null {
+function safeReturnPath(value?: string | string[]): string | null {
   if (typeof value !== 'string') return null;
-  return /^\/workouts\/[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}(?:\?exercise=\d+)?$/i.test(value)
+  return /^(?:\/workouts\/[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}(?:\?exercise=\d+)?|\/programs\/[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}(?:\?day=\d+)?(?:#day-\d+)?)$/i.test(value)
     ? value
     : null;
 }
@@ -63,7 +63,7 @@ export default async function ExerciseDetailPage({
   searchParams: Promise<{ returnTo?: string | string[] }>;
 }) {
   const { slug } = await params;
-  const returnPath = safeWorkoutReturnPath((await searchParams).returnTo);
+  const returnPath = safeReturnPath((await searchParams).returnTo);
   const ex = await getExerciseBySlug(slug);
   if (!ex) notFound();
 
@@ -95,8 +95,12 @@ export default async function ExerciseDetailPage({
               <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-0.5" />
             </span>
             <span>
-              <span className="block text-sm font-extrabold uppercase tracking-wide">Quay Lại Buổi Tập</span>
-              <span className="block text-[10px] font-medium text-white/80">Tiếp tục đúng bài đang tập</span>
+              <span className="block text-sm font-extrabold uppercase tracking-wide">
+                {returnPath.startsWith('/programs/') ? 'Quay Lại Giáo Án' : 'Quay Lại Buổi Tập'}
+              </span>
+              <span className="block text-[10px] font-medium text-white/80">
+                {returnPath.startsWith('/programs/') ? 'Tiếp tục đúng buổi đang xem' : 'Tiếp tục đúng bài đang tập'}
+              </span>
             </span>
           </Link>
         ) : (

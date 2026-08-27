@@ -21,10 +21,15 @@ import { getSessionName, getShortSessionName, formatRest } from '@/lib/programs/
 
 interface ProgramDaysViewerProps {
   days: ProgramDay[];
+  programId: string;
+  initialDayIndex?: number;
 }
 
-export default function ProgramDaysViewer({ days }: ProgramDaysViewerProps) {
-  const [selectedIdx, setSelectedIdx] = useState<number | 'all'>(0);
+export default function ProgramDaysViewer({ days, programId, initialDayIndex = 0 }: ProgramDaysViewerProps) {
+  const safeInitialDayIndex = Number.isInteger(initialDayIndex) && initialDayIndex >= 0 && initialDayIndex < days.length
+    ? initialDayIndex
+    : 0;
+  const [selectedIdx, setSelectedIdx] = useState<number | 'all'>(safeInitialDayIndex);
 
   if (!days || days.length === 0) {
     return (
@@ -191,7 +196,7 @@ export default function ProgramDaysViewer({ days }: ProgramDaysViewerProps) {
         /* View All Mode: Render each day card sequentially */
         <div className="space-y-8">
           {days.map((day, dayIdx) => (
-            <DayCard key={day.id} day={day} dayIdx={dayIdx} />
+            <DayCard key={day.id} day={day} dayIdx={dayIdx} programId={programId} />
           ))}
         </div>
       ) : currentDay ? (
@@ -199,6 +204,7 @@ export default function ProgramDaysViewer({ days }: ProgramDaysViewerProps) {
         <DayCard
           day={currentDay}
           dayIdx={typeof selectedIdx === 'number' ? selectedIdx : 0}
+          programId={programId}
           totalDays={days.length}
           onPrev={days.length > 1 ? goToPrevDay : undefined}
           onNext={days.length > 1 ? goToNextDay : undefined}
@@ -211,12 +217,14 @@ export default function ProgramDaysViewer({ days }: ProgramDaysViewerProps) {
 function DayCard({
   day,
   dayIdx,
+  programId,
   totalDays,
   onPrev,
   onNext,
 }: {
   day: ProgramDay;
   dayIdx: number;
+  programId: string;
   totalDays?: number;
   onPrev?: () => void;
   onNext?: () => void;
@@ -354,7 +362,7 @@ function DayCard({
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
                         <Link
-                          href={`/exercises/${pe.exercise.slug}`}
+                          href={`/exercises/${pe.exercise.slug}?returnTo=${encodeURIComponent(`/programs/${programId}?day=${dayIdx}#day-${dayIdx + 1}`)}`}
                           className="font-extrabold text-sm text-ink group-hover:text-accent transition-colors leading-tight hover:underline flex items-center gap-1"
                         >
                           <span>{pe.exercise.name_vi ?? pe.exercise.name}</span>

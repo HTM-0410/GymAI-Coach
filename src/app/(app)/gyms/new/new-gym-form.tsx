@@ -9,7 +9,7 @@ import { getEquipmentDetectErrorMessage } from '@/lib/equipment-detect-errors';
 
 type Eq = { id: string; slug: string; name_vi: string | null; category: string | null };
 
-export default function NewGymForm({ equipment }: { equipment: Eq[] }) {
+export default function NewGymForm({ equipment, returnTo }: { equipment: Eq[]; returnTo?: string | null }) {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [name, setName] = useState('');
@@ -112,7 +112,7 @@ export default function NewGymForm({ equipment }: { equipment: Eq[] }) {
         await supabase.from('gym_equipment').insert(eqRows);
       }
 
-      router.push(`/gyms/${gym.id}`);
+      router.push(returnTo ? `${returnTo}?gym=${encodeURIComponent(gym.id)}` : `/gyms/${gym.id}`);
       router.refresh();
     } catch (err: any) {
       console.error(err);

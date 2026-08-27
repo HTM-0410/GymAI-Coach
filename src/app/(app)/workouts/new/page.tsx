@@ -5,7 +5,13 @@ import NewWorkoutForm from './new-workout-form';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export default async function NewWorkoutPage() {
+export default async function NewWorkoutPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ gym?: string | string[] }>;
+}) {
+  const requestedGym = (await searchParams).gym;
+  const initialGymId = typeof requestedGym === 'string' ? requestedGym : null;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return null;
@@ -110,6 +116,7 @@ export default async function NewWorkoutPage() {
           gyms={gyms}
           defaultDuration={profileRes.data?.preferred_session_duration ?? 60}
           unitSystem={profileRes.data?.unit_system === 'imperial' ? 'imperial' : 'metric'}
+          initialGymId={initialGymId}
         />
       </div>
     </main>

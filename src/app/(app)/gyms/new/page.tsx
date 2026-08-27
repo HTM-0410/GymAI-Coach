@@ -5,7 +5,13 @@ export const revalidate = 0;
 import NewGymForm from './new-gym-form';
 import { MapPin } from 'lucide-react';
 
-export default async function NewGymPage() {
+export default async function NewGymPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ returnTo?: string | string[] }>;
+}) {
+  const requestedReturnTo = (await searchParams).returnTo;
+  const returnTo = requestedReturnTo === '/workouts/new' ? requestedReturnTo : null;
   const supabase = await createClient();
   const { data: equipment } = await supabase.from('equipment').select('id, slug, name_vi, category').order('name_vi');
   return (
@@ -21,7 +27,7 @@ export default async function NewGymPage() {
             Đặt tên + chọn thiết bị có sẵn tại phòng tập.
           </p>
         </div>
-        <NewGymForm equipment={equipment ?? []} />
+        <NewGymForm equipment={equipment ?? []} returnTo={returnTo} />
       </div>
     </main>
   );

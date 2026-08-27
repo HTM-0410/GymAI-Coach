@@ -17,10 +17,14 @@ import { getSessionName } from '@/lib/programs/utils';
 
 export default async function ProgramDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ day?: string | string[] }>;
 }) {
   const { id } = await params;
+  const rawDay = (await searchParams).day;
+  const parsedDay = typeof rawDay === 'string' ? Number(rawDay) : Number.NaN;
 
   const supabase = await createClient();
   const {
@@ -198,7 +202,11 @@ export default async function ProgramDetailPage({
         </header>
 
         {/* Workout Days Section with Interactive Tabs & Unobstructed Muscle Maps */}
-        <ProgramDaysViewer days={detail.days} />
+        <ProgramDaysViewer
+          days={detail.days}
+          programId={detail.id}
+          initialDayIndex={Number.isInteger(parsedDay) ? parsedDay : 0}
+        />
 
         {/* Bottom CTA Card */}
         <div className="mt-10 card shadow-neumorph rounded-3xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-white/80 dark:border-white/10 bg-gradient-to-r from-chassis-hi to-chassis">
