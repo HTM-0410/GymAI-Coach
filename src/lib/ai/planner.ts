@@ -25,6 +25,7 @@ import {
   filterCandidateExercises,
   isCandidateBanned,
   resolveWorkoutConstraints,
+  workoutConstraintsForPhase,
 } from './workout-constraints';
 import {
   filterCandidatesForRecovery,
@@ -63,6 +64,7 @@ type Args = {
   durationMinutes: number;
   options?: { includeWarmup?: boolean; includeCooldown?: boolean };
   regeneratePhase?: WorkoutPhase;
+  excludedExerciseSlugs?: string[];
   userPrompt?: string | null;
   currentExercises?: CurrentDraftExercise[] | null;
   personalization?: MinimalAIPersonalizationContext;
@@ -70,9 +72,60 @@ type Args = {
   targetMuscleGroups?: BodyMuscleGroup[];
 };
 
-export type PersonalizedWorkoutPlan = WorkoutPlan & { personalization: PersonalizationFactors };
+export type WorkoutGenerationSource = 'gemini' | 'gemini_repaired' | 'fallback';
+export type PersonalizedWorkoutPlan = WorkoutPlan & {
+  personalization: PersonalizationFactors;
+  generation_source: WorkoutGenerationSource;
+};
 
 export type ReferencedCandidate = { ref: string; phase: WorkoutPhase; candidate: any };
+
+export function excludeCandidatesBySlug<T extends { slug?: string | null }>(
+  candidates: T[],
+  excludedSlugs: readonly string[] = [],
+) {
+  if (excludedSlugs.length === 0) return candidates;
+  const excluded = new Set(excludedSlugs.map((slug) => slug.trim()).filter(Boolean));
+  return candidates.filter((candidate) => !candidate.slug || !excluded.has(candidate.slug));
+}
+
+export function repairGeneratedPlanPhases(
+  exercises: PlannedExercise[],
+  refs: Map<string, ReferencedCandidate>,
+  fallback: PlannedExercise[],
+  enabledPhases: WorkoutPhase[],
+) {
+  const seenCandidateIds = new Set<string>();
+  let repaired = false;
+  const valid = exercises.filter((exercise) => {
+    const referenced = refs.get(exercise.exercise_slug);
+    if (!referenced) throw new Error(`AI đã chọn mã ngoài candidate pool: ${exercise.exercise_slug}`);
+    if (referenced.phase !== exercise.phase) {
+      repaired = true;
+      return false;
+    }
+    if (seenCandidateIds.has(referenced.candidate.id)) {
+      repaired = true;
+      return false;
+    }
+    seenCandidateIds.add(referenced.candidate.id);
+    return true;
+  });
+
+  for (const phase of enabledPhases) {
+    if (valid.some((exercise) => exercise.phase === phase)) continue;
+    const replacement = fallback.find((exercise) => exercise.phase === phase);
+    if (replacement) {
+      valid.push(replacement);
+      repaired = true;
+    }
+  }
+
+  return {
+    exercises: PHASE_ORDER.flatMap((phase) => valid.filter((exercise) => exercise.phase === phase)),
+    repaired,
+  };
+}
 
 const PHASE_ORDER: WorkoutPhase[] = ['warmup', 'main', 'cooldown'];
 
@@ -299,8 +352,14 @@ function accessoryFallback(
 ): PlannedExercise[] {
   const count = Math.max(1, Math.min(refs.length, budget >= 5 ? 2 : 1));
   return refs.slice(0, count).map(({ ref, candidate }) => {
-    const staticHold = phase === 'cooldown' && candidate.workout_role === 'static_stretch';
-    const candidateMode = (candidate.default_tracking_mode ?? 'duration') as TrackingMode;
+    const candidateMode = normalizeTrackingMode(candidate.default_tracking_mode, {
+      defaultTrackingMode: candidate.default_tracking_mode,
+      allowedTrackingModes: candidate.allowed_tracking_modes,
+    });
+    const isRepMode = candidateMode === 'reps' || candidateMode === 'weight_reps';
+    const staticHold = phase === 'cooldown'
+      && candidate.workout_role === 'static_stretch'
+      && candidateMode === 'duration';
     const perSide = candidate.workout_role === 'dynamic_mobility' || candidate.workout_role === 'static_stretch';
     if (staticHold) {
       const multiplier = perSide ? 2 : 1;
@@ -322,6 +381,28 @@ function accessoryFallback(
         target_distance_meters: null,
         per_side: perSide,
         ai_reason: 'Giãn cơ tĩnh an toàn hỗ trợ hồi phục cơ sau buổi tập.',
+      };
+    }
+    if (isRepMode) {
+      return {
+        exercise_slug: ref,
+        phase,
+        prescription_mode: candidateMode,
+        duration_style: null,
+        target_sets: 1,
+        target_rep_min: 8,
+        target_rep_max: 12,
+        target_weight: null,
+        target_rir: null,
+        rest_seconds: 30,
+        duration_seconds: null,
+        hold_seconds: null,
+        target_duration_seconds: null,
+        target_distance_meters: null,
+        per_side: perSide,
+        ai_reason: phase === 'warmup'
+          ? 'Khởi động theo số lần phù hợp với cách theo dõi của bài tập.'
+          : 'Thả lỏng theo số lần phù hợp với cách theo dõi của bài tập.',
       };
     }
     const secondsPerExercise = Math.max(30, Math.floor((budget * 60 - count * 20) / count));
@@ -444,7 +525,10 @@ export async function generateWorkoutPlan(args: Args): Promise<PersonalizedWorko
 
   const resolvedConstraints = resolveWorkoutConstraints(args.personalization, args.userPrompt, effectiveDuration);
   for (const phase of enabledPhases) {
-    rawByPhase[phase] = filterCandidateExercises(rawByPhase[phase], resolvedConstraints);
+    rawByPhase[phase] = filterCandidateExercises(
+      rawByPhase[phase],
+      workoutConstraintsForPhase(resolvedConstraints, phase),
+    );
   }
   rawByPhase.main = filterCandidatesForRecovery(rawByPhase.main, args.recoverySelection);
   if (
@@ -452,14 +536,18 @@ export async function generateWorkoutPlan(args: Args): Promise<PersonalizedWorko
     && args.recoverySelection?.decision === 'exclude_weak'
     && args.recoverySelection.selectedGroups.length > 0
   ) {
-    const alternatives = await candidateExercises({
+      const alternatives = await candidateExercises({
       ...args,
       targetMuscleGroups: args.recoverySelection.selectedGroups,
     }, context, 'main');
     rawByPhase.main = filterCandidatesForRecovery(
-      filterCandidateExercises(alternatives, resolvedConstraints),
+      filterCandidateExercises(alternatives, workoutConstraintsForPhase(resolvedConstraints, 'main')),
       args.recoverySelection,
     );
+  }
+
+  for (const phase of enabledPhases) {
+    rawByPhase[phase] = excludeCandidatesBySlug(rawByPhase[phase], args.excludedExerciseSlugs);
   }
 
   for (const phase of enabledPhases) {
@@ -519,6 +607,7 @@ ${candidateList}
 
 RÀNG BUỘC KHÔNG ĐƯỢC GHI ĐÈ:
 - Chỉ trả phase đã bật, đúng thứ tự warmup -> main -> cooldown; mỗi phase có ít nhất 1 bài.
+- Prefix ref là bắt buộc: W_ chỉ thuộc warmup, M_ chỉ thuộc main, C_ chỉ thuộc cooldown. Không đặt ref vào phase khác prefix.
 - Không trùng ref. Dùng default_tracking_mode hoặc một mode trong allowed_tracking_modes của đúng bài, không suy mode chỉ từ phase.
 - weight_reps: sets 1-10, rep range 1-50, rest 30-600, RIR 0-10, target_weight có thể null để người dùng nhập an toàn.
 - reps: sets 1-10, rep range 1-50, rest 30-600, weight/RIR/duration/distance=null.
@@ -534,6 +623,7 @@ ${args.regeneratePhase ? `- Chỉ thay đổi phase=${args.regeneratePhase}; cá
 JSON: {"phases":[{"phase":"warmup|main|cooldown","exercises":[{"exercise_slug":"W_001","phase":"warmup","prescription_mode":"duration","duration_style":"active","target_sets":1,"target_rep_min":null,"target_rep_max":null,"target_weight":null,"target_rir":null,"rest_seconds":0,"duration_seconds":null,"hold_seconds":null,"target_duration_seconds":90,"target_distance_meters":null,"per_side":false,"ai_reason":"..."}]}]}`;
 
   let planned: PlannedExercise[];
+  let generationSource: WorkoutGenerationSource = 'gemini';
   try {
     const raw = await callGemini({ prompt, jsonSchema: true, temperature: 0.35, maxOutputTokens: 2400 });
     const parsed = AiWorkoutPlanSchema.parse(JSON.parse(raw));
@@ -545,10 +635,19 @@ JSON: {"phases":[{"phase":"warmup|main|cooldown","exercises":[{"exercise_slug":"
         ...planned.filter((exercise) => exercise.phase === 'cooldown'),
       ];
     }
+    const repairedPlan = repairGeneratedPlanPhases(
+      planned,
+      refMap,
+      deterministicFallback(byPhase, options, budgets, args.userPrompt, resolvedConstraints.exerciseCount),
+      enabledPhases,
+    );
+    planned = repairedPlan.exercises;
+    generationSource = repairedPlan.repaired ? 'gemini_repaired' : 'gemini';
     if (!args.regeneratePhase) validatePlan(planned, refMap, options, budgets);
   } catch (error) {
     console.warn('[workout-planner] Gemini plan rejected; using deterministic fallback:', error instanceof Error ? error.message : String(error));
     planned = deterministicFallback(byPhase, options, budgets, args.userPrompt, resolvedConstraints.exerciseCount);
+    generationSource = 'fallback';
   }
   if (promptMatches.unmatched.length > 0) {
     const mainIndex = planned.findIndex((exercise) => exercise.phase === 'main');
@@ -567,7 +666,7 @@ JSON: {"phases":[{"phase":"warmup|main|cooldown","exercises":[{"exercise_slug":"
   for (const ex of planned) {
     const ref = refMap.get(ex.exercise_slug);
     if (ref) {
-      const ban = isCandidateBanned(ref.candidate, resolvedConstraints);
+      const ban = isCandidateBanned(ref.candidate, workoutConstraintsForPhase(resolvedConstraints, ex.phase));
       if (ban.banned) {
         throw new Error(`Kế hoạch chứa bài tập vi phạm an toàn: ${ref.candidate.name_vi || ref.candidate.slug}. ${ban.reason}`);
       }
@@ -608,6 +707,7 @@ JSON: {"phases":[{"phase":"warmup|main|cooldown","exercises":[{"exercise_slug":"
   const parsed = WorkoutPlanSchema.parse({ options, phase_budgets: budgets, exercises: resolved });
   return {
     ...parsed,
+    generation_source: generationSource,
     personalization: {
       ...personalizationFactors(args.personalization, { includeBodyComposition: true, includePerformance: true }),
       factors_used: [

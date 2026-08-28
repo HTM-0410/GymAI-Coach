@@ -188,5 +188,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  return NextResponse.json({ draft: draftResult.data, personalization: plan.personalization });
+  return NextResponse.json({
+    draft: { ...draftResult.data, generationSource: plan.generation_source },
+    personalization: plan.personalization,
+  });
 }

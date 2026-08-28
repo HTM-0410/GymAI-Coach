@@ -9,7 +9,15 @@ import { getEquipmentDetectErrorMessage } from '@/lib/equipment-detect-errors';
 
 type Eq = { id: string; slug: string; name_vi: string | null; category: string | null };
 
-export default function NewGymForm({ equipment, returnTo }: { equipment: Eq[]; returnTo?: string | null }) {
+export default function NewGymForm({
+  equipment,
+  returnTo,
+  onSaved,
+}: {
+  equipment: Eq[];
+  returnTo?: string | null;
+  onSaved?: (gym: { id: string; name: string; description: string | null; equipmentSlugs: string[] }) => void;
+}) {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [name, setName] = useState('');
@@ -112,8 +120,17 @@ export default function NewGymForm({ equipment, returnTo }: { equipment: Eq[]; r
         await supabase.from('gym_equipment').insert(eqRows);
       }
 
-      router.push(returnTo ? `${returnTo}?gym=${encodeURIComponent(gym.id)}` : `/gyms/${gym.id}`);
-      router.refresh();
+      if (onSaved) {
+        onSaved({
+          id: gym.id,
+          name: name.trim(),
+          description: description.trim() || null,
+          equipmentSlugs: [...selectedSlugs],
+        });
+      } else {
+        router.push(returnTo ? `${returnTo}?gym=${encodeURIComponent(gym.id)}` : `/gyms/${gym.id}`);
+        router.refresh();
+      }
     } catch (err: any) {
       console.error(err);
       setIsSaving(false);

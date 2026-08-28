@@ -141,19 +141,34 @@ export async function POST(req: NextRequest) {
 
   const today = new Date().toISOString().slice(0, 10);
   const resolvedGymId = (draft.gymId && draft.gymId !== 'bodyweight' && draft.gymId !== 'no_equipment') ? draft.gymId : null;
-  const { data: workout, error: workoutError } = await supabase
+  const equipmentScope = draft.gymId === null
+    ? 'unrestricted'
+    : draft.gymId === 'bodyweight' || draft.gymId === 'no_equipment'
+      ? 'bodyweight'
+      : 'gym';
+  const workoutInsert = {
+    user_id: user.id,
+    training_program_day_id: draft.programDayId,
+    gym_id: resolvedGymId,
+    date: today,
+    status: 'planned',
+    planned_duration: draft.durationMinutes,
+    ai_generated: true,
+  };
+  let workoutResult = await supabase
     .from('workouts')
-    .insert({
-      user_id: user.id,
-      training_program_day_id: draft.programDayId,
-      gym_id: resolvedGymId,
-      date: today,
-      status: 'planned',
-      planned_duration: draft.durationMinutes,
-      ai_generated: true,
-    })
+    .insert({ ...workoutInsert, equipment_scope: equipmentScope })
     .select('id')
     .single();
+
+  if (workoutResult.error && /equipment_scope|schema cache/i.test(workoutResult.error.message)) {
+    workoutResult = await supabase
+      .from('workouts')
+      .insert(workoutInsert)
+      .select('id')
+      .single();
+  }
+  const { data: workout, error: workoutError } = workoutResult;
 
   if (workoutError) {
     return NextResponse.json(

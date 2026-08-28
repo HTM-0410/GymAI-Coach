@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronRight, History, Play } from 'lucide-react';
+import { ChevronRight, History, Play, RefreshCw } from 'lucide-react';
 import ExerciseMediaCard from './exercise-media-card';
 import FullscreenMediaModal from './fullscreen-media-modal';
 import { formatDistance, formatLoad, type TrackingMode, type UnitSystem } from '@/lib/workouts/metrics';
@@ -28,6 +28,8 @@ type ExerciseIdentityHeaderProps = {
   onOpenTechniqueSheet: () => void;
   onSkipPhase?: () => void;
   isNonMainPhase?: boolean;
+  onRequestSubstitute?: () => void;
+  canSubstitute?: boolean;
 };
 
 export default function ExerciseIdentityHeader({
@@ -51,6 +53,8 @@ export default function ExerciseIdentityHeader({
   onOpenTechniqueSheet,
   onSkipPhase,
   isNonMainPhase = false,
+  onRequestSubstitute,
+  canSubstitute = false,
 }: ExerciseIdentityHeaderProps) {
   const [showFullscreenMedia, setShowFullscreenMedia] = useState(false);
 
@@ -109,7 +113,7 @@ export default function ExerciseIdentityHeader({
       />
 
       {/* 5. COMPACT ACTION ROW */}
-      <div>
+      <div className="grid gap-2 sm:grid-cols-2">
         {/* Technique & Details Trigger */}
         <button
           type="button"
@@ -124,6 +128,23 @@ export default function ExerciseIdentityHeader({
           </div>
           <ChevronRight className="h-4 w-4 text-ink-muted" />
         </button>
+        {onRequestSubstitute && (
+          <button
+            type="button"
+            onClick={onRequestSubstitute}
+            disabled={!canSubstitute}
+            title={canSubstitute ? 'Đổi sang bài cùng cơ chính phù hợp với gym' : 'Chỉ đổi được trước khi hoàn thành hiệp'}
+            className="flex w-full items-center justify-between rounded-xl border border-accent/20 bg-accent/[0.04] px-3 py-2 text-xs font-bold text-accent transition-colors hover:bg-accent/10 disabled:cursor-not-allowed disabled:opacity-45"
+          >
+            <span className="flex items-center gap-2">
+              <span className="flex h-5 w-5 items-center justify-center rounded-lg bg-accent/15">
+                <RefreshCw className="h-3 w-3" />
+              </span>
+              Máy bận? Đổi bài
+            </span>
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        )}
       </div>
 
       {/* Fullscreen Lightbox Modal */}

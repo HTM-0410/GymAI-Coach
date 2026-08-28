@@ -19,6 +19,7 @@ import ExerciseTechniqueSheet from './components/exercise-technique-sheet';
 import WorkoutAICoachSheet from './components/workout-ai-coach-sheet';
 import WorkoutExitSheet from './components/workout-exit-sheet';
 import WorkoutIncompleteModal from './components/workout-incomplete-modal';
+import ExerciseSubstituteSheet from './components/exercise-substitute-sheet';
 import type { LiveWorkoutContext } from '@/lib/ai/coach';
 import { buildCompletedMetricSet, normalizeTrackingMode, type TrackingMode, type UnitSystem } from '@/lib/workouts/metrics';
 
@@ -121,8 +122,14 @@ export default function WorkoutLogger({
   const [exitSheetOpen, setExitSheetOpen] = useState(false);
   const [incompleteModalOpen, setIncompleteModalOpen] = useState(false);
   const [techniqueSheetOpen, setTechniqueSheetOpen] = useState(false);
+  const [substituteSheetOpen, setSubstituteSheetOpen] = useState(false);
 
   const ex = exercises[exIdx] || exercises[0];
+
+  useEffect(() => {
+    setExercises(workout.workout_exercises);
+    setExIdx((current) => Math.min(current, Math.max(0, workout.workout_exercises.length - 1)));
+  }, [workout.workout_exercises]);
 
   // Global elapsed timer interval
   useEffect(() => {
@@ -454,6 +461,8 @@ export default function WorkoutLogger({
           onOpenTechniqueSheet={() => setTechniqueSheetOpen(true)}
           onSkipPhase={skipCurrentPhase}
           isNonMainPhase={currentPhase !== 'main'}
+          onRequestSubstitute={() => setSubstituteSheetOpen(true)}
+          canSubstitute={!ex.completed_at && ex.workout_sets.every((set) => !set.completed)}
         />
 
         {/* Current Set / Timed Tracker */}
@@ -496,6 +505,18 @@ export default function WorkoutLogger({
         isOpen={techniqueSheetOpen}
         onClose={() => setTechniqueSheetOpen(false)}
         exercise={ex.exercises}
+      />
+
+      <ExerciseSubstituteSheet
+        isOpen={substituteSheetOpen}
+        workoutId={workout.id}
+        workoutExerciseId={ex.id}
+        currentName={ex.exercises.name_vi ?? ex.exercises.name}
+        onClose={() => setSubstituteSheetOpen(false)}
+        onSwapped={() => {
+          setSubstituteSheetOpen(false);
+          router.refresh();
+        }}
       />
 
       {/* ── 3. WORKOUT NAVIGATOR SHEET ── */}

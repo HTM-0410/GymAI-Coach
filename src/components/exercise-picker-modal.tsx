@@ -15,10 +15,12 @@ import {
   Flame,
   Timer,
   Layers,
+  RefreshCw,
 } from 'lucide-react';
 import type { PrescriptionMode, TrackingMode, WorkoutPhase } from '@/lib/ai/workout-contract';
 import { matchExerciseSearch } from '@/lib/exercises-search';
-import { distanceFromCanonical, distanceToCanonical, distanceUnitLabel, roundCanonical, type UnitSystem } from '@/lib/workouts/metrics';
+import { distanceFromCanonical, distanceToCanonical, distanceUnitLabel, normalizeTrackingMode, roundCanonical, type UnitSystem } from '@/lib/workouts/metrics';
+import { rankSimilarExercises } from '@/lib/training/exercise-similarity';
 
 export type SelectedExerciseConfig = {
   exerciseId: string;
@@ -92,6 +94,7 @@ export default function ExercisePickerModal({
   onClose,
   onSelectExercise,
   existingSlugs = [],
+  replacementConfig = null,
   phase = 'main',
   unitSystem = 'metric',
 }: {
@@ -99,6 +102,7 @@ export default function ExercisePickerModal({
   onClose: () => void;
   onSelectExercise: (config: SelectedExerciseConfig) => void;
   existingSlugs?: string[];
+  replacementConfig?: SelectedExerciseConfig | null;
   phase?: WorkoutPhase;
   unitSystem?: UnitSystem;
 }) {
@@ -167,16 +171,28 @@ export default function ExercisePickerModal({
   // Handle opening exercise config
   function handlePick(item: DbExerciseItem) {
     setConfiguringExercise(item);
-    setTargetSets(phase === 'main' ? 3 : 1);
-    setRepMin(8);
-    setRepMax(12);
-    setRestSeconds(120);
-    setTargetRir(item.default_rir ?? 2);
-    setDurationSeconds(90);
-    setHoldSeconds(30);
-    setPerSide(true);
-    setTrackingMode(item.default_tracking_mode ?? 'reps');
-    setDistanceMeters(distanceFromCanonical(1000, unitSystem));
+    const previousMode = replacementConfig
+      ? normalizeTrackingMode(replacementConfig.prescriptionMode, {
+          targetWeight: replacementConfig.targetWeight,
+          targetRir: replacementConfig.targetRir,
+        })
+      : null;
+    const allowedModes = item.allowed_tracking_modes?.length
+      ? item.allowed_tracking_modes
+      : [item.default_tracking_mode ?? 'reps'];
+    const nextMode = previousMode && allowedModes.includes(previousMode)
+      ? previousMode
+      : (item.default_tracking_mode ?? 'reps');
+    setTargetSets(replacementConfig?.targetSets ?? (phase === 'main' ? 3 : 1));
+    setRepMin(replacementConfig?.targetRepMin ?? 8);
+    setRepMax(replacementConfig?.targetRepMax ?? 12);
+    setRestSeconds(replacementConfig?.restSeconds ?? 120);
+    setTargetRir(replacementConfig?.targetRir ?? item.default_rir ?? 2);
+    setDurationSeconds(replacementConfig?.targetDurationSeconds ?? 90);
+    setHoldSeconds(replacementConfig?.targetDurationSeconds ?? 30);
+    setPerSide(replacementConfig?.perSide ?? true);
+    setTrackingMode(nextMode);
+    setDistanceMeters(distanceFromCanonical(replacementConfig?.targetDistanceMeters ?? 1000, unitSystem));
   }
 
   function handleConfirmAdd() {
@@ -214,7 +230,9 @@ export default function ExercisePickerModal({
       targetDistanceMeters: trackingMode === 'duration_distance' ? roundCanonical(distanceToCanonical(distanceMeters, unitSystem)) : null,
       durationStyle: isHold ? 'hold' : trackingMode === 'duration' || trackingMode === 'duration_distance' ? 'active' : null,
       perSide: isHold ? perSide : false,
-      aiReason: 'Thêm thủ công từ kho bài tập hệ thống',
+      aiReason: replacementConfig
+        ? `Đổi nhanh từ ${replacementConfig.nameVi ?? replacementConfig.name} sang bài tương tự.`
+        : 'Thêm thủ công từ kho bài tập hệ thống',
     };
 
     onSelectExercise(config);
@@ -228,7 +246,7 @@ export default function ExercisePickerModal({
     const muscleChip = MUSCLE_FILTER_CHIPS.find((m) => m.id === selectedMuscle);
     const equipChip = EQUIPMENT_FILTER_CHIPS.find((e) => e.id === selectedEquipment);
 
-    return exercises.filter((ex) => {
+    const phaseCandidates = exercises.filter((ex) => {
       const role = ex.workout_role ?? 'main_strength';
       if (phase === 'main' && role !== 'main_strength') return false;
       if (phase === 'warmup' && (
@@ -268,7 +286,30 @@ export default function ExercisePickerModal({
 
       return true;
     });
-  }, [exercises, searchQuery, selectedMuscle, selectedEquipment, phase]);
+    if (!replacementConfig) {
+      return phaseCandidates.filter((exercise) => !existingSlugs.includes(exercise.slug));
+    }
+    const source = exercises.find((exercise) => exercise.slug === replacementConfig.exerciseSlug);
+    if (!source) return [];
+    return rankSimilarExercises(
+      {
+        slug: source.slug,
+        name: source.name,
+        nameVi: source.name_vi,
+        primaryMuscleVi: source.primary_muscle_vi,
+        exerciseType: source.exercise_type,
+        equipmentVi: source.equipment_vi,
+      },
+      phaseCandidates.map((exercise) => ({
+        ...exercise,
+        nameVi: exercise.name_vi,
+        primaryMuscleVi: exercise.primary_muscle_vi,
+        exerciseType: exercise.exercise_type,
+        equipmentVi: exercise.equipment_vi,
+      })),
+      existingSlugs,
+    );
+  }, [exercises, searchQuery, selectedMuscle, selectedEquipment, phase, existingSlugs, replacementConfig]);
 
   if (!isOpen) return null;
 
@@ -285,9 +326,13 @@ export default function ExercisePickerModal({
               <Dumbbell className="h-4 w-4" />
             </div>
             <div>
-              <h2 className="font-extrabold text-base text-ink">Kho bài tập hệ thống</h2>
+              <h2 className="font-extrabold text-base text-ink">
+                {replacementConfig ? 'Đổi sang bài tương tự' : 'Kho bài tập hệ thống'}
+              </h2>
               <p className="font-mono text-[10px] uppercase tracking-wider text-ink-muted">
-                {exercises.length} bài tập chuẩn hóa GymAI
+                {replacementConfig
+                  ? `Thay ${replacementConfig.nameVi ?? replacementConfig.name}`
+                  : `${exercises.length} bài tập chuẩn hóa GymAI`}
               </p>
             </div>
           </div>
@@ -379,11 +424,14 @@ export default function ExercisePickerModal({
               ) : filteredList.length === 0 ? (
                 <div className="py-12 text-center text-ink-muted space-y-1.5">
                   <p className="font-mono text-sm font-bold text-ink">Không tìm thấy bài tập phù hợp</p>
-                  <p className="text-xs">Thử tìm kiếm với từ khóa khác hoặc xóa bộ lọc</p>
+                  <p className="text-xs">
+                    {replacementConfig
+                      ? 'Không còn bài cùng cơ chính phù hợp trong danh mục hiện tại'
+                      : 'Thử tìm kiếm với từ khóa khác hoặc xóa bộ lọc'}
+                  </p>
                 </div>
               ) : (
                 filteredList.map((item) => {
-                  const isAlreadyAdded = existingSlugs.includes(item.slug);
                   const gallery = item.gallery_json as any;
                   const thumb = gallery?.main || gallery?.views?.[0]?.src || null;
 
@@ -392,9 +440,7 @@ export default function ExercisePickerModal({
                       key={item.id}
                       onClick={() => handlePick(item)}
                       className={`p-3 rounded-2xl border transition-all flex items-center justify-between gap-3 group cursor-pointer ${
-                        isAlreadyAdded
-                          ? 'border-accent/30 bg-accent/[0.04] hover:bg-accent/[0.07]'
-                          : 'border-black/[0.06] dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.02] hover:border-accent/40 hover:bg-accent/[0.02]'
+                        'border-black/[0.06] dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.02] hover:border-accent/40 hover:bg-accent/[0.02]'
                       }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
@@ -420,11 +466,6 @@ export default function ExercisePickerModal({
                             <h3 className="font-extrabold text-xs sm:text-sm text-ink truncate group-hover:text-accent transition-colors">
                               {item.name_vi || item.name}
                             </h3>
-                            {isAlreadyAdded && (
-                              <span className="shrink-0 px-1.5 py-0.5 rounded bg-accent/15 text-accent font-mono text-[9px] font-bold">
-                                Đã có
-                              </span>
-                            )}
                           </div>
                           <p className="font-mono text-[10px] text-ink-muted uppercase truncate mt-0.5">
                             {item.slug}
@@ -449,7 +490,7 @@ export default function ExercisePickerModal({
                         type="button"
                         className="h-8 w-8 rounded-xl bg-accent/10 group-hover:bg-accent text-accent group-hover:text-white flex items-center justify-center shrink-0 transition-all shadow-xs"
                       >
-                        <Plus className="h-4 w-4" />
+                        {replacementConfig ? <RefreshCw className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                       </button>
                     </div>
                   );
@@ -656,7 +697,7 @@ export default function ExercisePickerModal({
                 className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-accent to-accent-dim text-white font-extrabold text-xs sm:text-sm shadow-xs flex items-center justify-center gap-2 cursor-pointer hover:brightness-110"
               >
                 <Check className="h-4 w-4 stroke-[3]" />
-                <span>Thêm bài vào buổi tập</span>
+                <span>{replacementConfig ? 'Đổi sang bài này' : 'Thêm bài vào buổi tập'}</span>
               </button>
             </div>
           </div>

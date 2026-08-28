@@ -16,7 +16,7 @@ export default async function NewWorkoutPage({
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const [userProgramsRes, allProgramsRes, gymsRes, profileRes] = await Promise.all([
+  const [userProgramsRes, allProgramsRes, gymsRes, profileRes, equipmentRes] = await Promise.all([
     supabase
       .from('user_programs')
       .select('program_id, is_active')
@@ -51,6 +51,7 @@ export default async function NewWorkoutPage({
       .eq('owner_user_id', user.id)
       .order('created_at', { ascending: false }),
     supabase.from('profiles').select('preferred_session_duration, unit_system').eq('user_id', user.id).maybeSingle(),
+    supabase.from('equipment').select('id, slug, name_vi, category').order('name_vi'),
   ]);
 
   let gyms = (gymsRes.data ?? []) as any[];
@@ -117,6 +118,7 @@ export default async function NewWorkoutPage({
           defaultDuration={profileRes.data?.preferred_session_duration ?? 60}
           unitSystem={profileRes.data?.unit_system === 'imperial' ? 'imperial' : 'metric'}
           initialGymId={initialGymId}
+          equipment={(equipmentRes.data ?? []) as any[]}
         />
       </div>
     </main>

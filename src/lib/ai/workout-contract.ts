@@ -220,6 +220,7 @@ export const WorkoutGenerateRequestSchema = z.object({
   durationMinutes: z.number().int().min(15).max(240).default(60),
   options: WorkoutOptionsSchema.optional().transform((value) => WorkoutOptionsSchema.parse(value ?? {})),
   regeneratePhase: WorkoutPhaseSchema.optional(),
+  excludedExerciseSlugs: z.array(z.string().min(1).max(160)).max(15).optional().default([]),
   userPrompt: z.string().max(4000).optional().nullable(),
   currentExercises: z.array(CurrentDraftExerciseSchema).max(15).optional().nullable(),
   requestedRecoveryGroups: z.array(z.enum([

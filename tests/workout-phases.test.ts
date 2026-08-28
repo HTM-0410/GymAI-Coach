@@ -19,7 +19,7 @@ import {
   validatePlan,
   type ReferencedCandidate,
 } from '../src/lib/ai/planner';
-import { PlannedExerciseSchema } from '../src/lib/ai/schema';
+import { PlannedExerciseSchema, WorkoutPlanSchema } from '../src/lib/ai/schema';
 import {
   filterExplicitlyAvoided,
   effectiveGymEquipment,
@@ -225,9 +225,91 @@ test('deterministic fallback is valid for every duration/toggle matrix case', ()
         const budgets = allocatePhaseBudgets(duration, options);
         const fallback = deterministicFallback(byPhase, options, budgets);
         assert.doesNotThrow(() => validatePlan(fallback, refs, options, budgets));
+        assert.equal(WorkoutPlanSchema.safeParse({ options, phase_budgets: budgets, exercises: fallback }).success, true);
       }
     }
   }
+});
+
+test('deterministic accessory fallback keeps reps candidates free of duration fields', () => {
+  const warmup: ReferencedCandidate = {
+    ref: 'W_001',
+    phase: 'warmup',
+    candidate: {
+      id: 'warmup-reps',
+      slug: 'warmup-reps',
+      workout_role: 'activation',
+      default_tracking_mode: 'reps',
+      allowed_tracking_modes: ['reps'],
+    },
+  };
+  const main: ReferencedCandidate = {
+    ref: 'M_001',
+    phase: 'main',
+    candidate: {
+      id: 'main-reps',
+      slug: 'main-reps',
+      workout_role: 'main_strength',
+      default_tracking_mode: 'reps',
+      allowed_tracking_modes: ['reps'],
+    },
+  };
+  const options = { includeWarmup: true, includeCooldown: false };
+  const budgets = allocatePhaseBudgets(75, options);
+  const fallback = deterministicFallback(
+    { warmup: [warmup], main: [main], cooldown: [] },
+    options,
+    budgets,
+  );
+
+  const parsed = WorkoutPlanSchema.parse({ options, phase_budgets: budgets, exercises: fallback });
+  const accessory = parsed.exercises[0];
+  assert.equal(accessory.prescription_mode, 'reps');
+  assert.deepEqual([accessory.target_rep_min, accessory.target_rep_max], [8, 12]);
+  assert.deepEqual([
+    accessory.duration_seconds,
+    accessory.hold_seconds,
+    accessory.target_duration_seconds,
+    accessory.target_distance_meters,
+  ], [null, null, null, null]);
+});
+
+test('deterministic accessory fallback keeps duration candidates free of rep fields', () => {
+  const warmup: ReferencedCandidate = {
+    ref: 'W_001',
+    phase: 'warmup',
+    candidate: {
+      id: 'warmup-duration',
+      slug: 'warmup-duration',
+      workout_role: 'general_warmup',
+      default_tracking_mode: 'duration',
+      allowed_tracking_modes: ['duration'],
+    },
+  };
+  const main: ReferencedCandidate = {
+    ref: 'M_001',
+    phase: 'main',
+    candidate: {
+      id: 'main-reps',
+      slug: 'main-reps',
+      workout_role: 'main_strength',
+      default_tracking_mode: 'reps',
+      allowed_tracking_modes: ['reps'],
+    },
+  };
+  const options = { includeWarmup: true, includeCooldown: false };
+  const budgets = allocatePhaseBudgets(75, options);
+  const fallback = deterministicFallback(
+    { warmup: [warmup], main: [main], cooldown: [] },
+    options,
+    budgets,
+  );
+
+  const parsed = WorkoutPlanSchema.parse({ options, phase_budgets: budgets, exercises: fallback });
+  const accessory = parsed.exercises[0];
+  assert.equal(accessory.prescription_mode, 'duration');
+  assert.ok((accessory.target_duration_seconds ?? 0) > 0);
+  assert.deepEqual([accessory.target_rep_min, accessory.target_rep_max], [null, null]);
 });
 
 test('tracking mode is independent from phase when the metric shape is valid', () => {

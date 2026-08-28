@@ -30,6 +30,7 @@ import {
   X,
 } from 'lucide-react';
 import ExercisePickerModal, { type SelectedExerciseConfig } from '@/components/exercise-picker-modal';
+import NewGymForm from '@/app/(app)/gyms/new/new-gym-form';
 import {
   allocatePhaseBudgets,
   type PrescriptionMode,
@@ -49,6 +50,7 @@ import {
 import type { MuscleReadinessGroup } from '@/lib/recovery/read-model';
 import type { RecoveryGenerationDecision } from '@/lib/recovery/recommendation-policy';
 import { formatDistance, formatLoad, formatMetricDuration, isSingleSetTimedMode, normalizeTrackingMode, type UnitSystem } from '@/lib/workouts/metrics';
+import { workoutRegenerationExclusions } from '@/lib/training/workout-regeneration';
 
 type Day = { id: string; name: string; name_vi?: string | null; day_of_week: number; training_day_targets: any[] };
 
@@ -95,11 +97,20 @@ type WorkoutDraft = {
   options: { includeWarmup: boolean; includeCooldown: boolean };
   phaseBudgets: { warmup: number; main: number; cooldown: number };
   exercises: DraftExercise[];
+  generationSource?: 'gemini' | 'gemini_repaired' | 'fallback';
 };
 
 type RecoverySummaryResponse = {
   generatedAt: string;
   groups: MuscleReadinessGroup[];
+};
+
+type GymOption = {
+  id: string;
+  name: string;
+  description?: string | null;
+  gym_dumbbell_inventory?: { weight_kg: number; quantity: number }[];
+  gym_equipment?: any[];
 };
 
 function targetGroupsForDay(day: Day | undefined): BodyMuscleGroup[] {
@@ -300,19 +311,15 @@ export default function NewWorkoutForm({
   defaultDuration,
   unitSystem,
   initialGymId,
+  equipment = [],
 }: {
   programs: ProgramItem[];
   activeProgramId: string | null;
-  gyms: {
-    id: string;
-    name: string;
-    description?: string | null;
-    gym_dumbbell_inventory?: { weight_kg: number; quantity: number }[];
-    gym_equipment?: any[];
-  }[];
+  gyms: GymOption[];
   defaultDuration: number;
   unitSystem: UnitSystem;
   initialGymId?: string | null;
+  equipment?: { id: string; slug: string; name_vi: string | null; category: string | null }[];
 }) {
   const router = useRouter();
   const initialProgram = programs.find((p) => p.id === activeProgramId) ?? programs[0] ?? null;
@@ -320,6 +327,8 @@ export default function NewWorkoutForm({
 
   const currentProgram = programs.find((p) => p.id === selectedProgramId) ?? initialProgram;
   const [dayId, setDayId] = useState(currentProgram?.training_program_days?.[0]?.id ?? '');
+  const [availableGyms, setAvailableGyms] = useState<GymOption[]>(gyms);
+  const [gymPopupOpen, setGymPopupOpen] = useState(false);
   const [gymId, setGymId] = useState<string>(
     initialGymId && gyms.some((gym) => gym.id === initialGymId) ? initialGymId : (gyms[0]?.id ?? ''),
   );
@@ -342,13 +351,14 @@ export default function NewWorkoutForm({
   const [error, setError] = useState<string | null>(null);
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [pickerPhase, setPickerPhase] = useState<WorkoutPhase>('main');
+  const [replacementExerciseId, setReplacementExerciseId] = useState<string | null>(null);
   const handoffStartedRef = useRef(false);
   const [handoffStatus, setHandoffStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
   const [recoverySummary, setRecoverySummary] = useState<RecoverySummaryResponse | null>(null);
   const [recoveryWarningOpen, setRecoveryWarningOpen] = useState(false);
   const [recoveryDecision, setRecoveryDecision] = useState<RecoveryGenerationDecision>('exclude_weak');
 
-  const selectedGym = gyms.find((gym) => gym.id === gymId);
+  const selectedGym = availableGyms.find((gym) => gym.id === gymId);
   const phaseBudgets = allocatePhaseBudgets(duration, { includeWarmup, includeCooldown });
   const dumbbellInventory = [...(selectedGym?.gym_dumbbell_inventory ?? [])]
     .sort((a, b) => Number(a.weight_kg) - Number(b.weight_kg));
@@ -406,6 +416,9 @@ export default function NewWorkoutForm({
           aiReason: e.aiReason,
         }))
       : null;
+    const excludedExerciseSlugs = draft
+      ? workoutRegenerationExclusions(draft.exercises, { fullReset: isFullReset, phase: regeneratePhase })
+      : [];
 
     try {
       const response = await fetch('/api/workout/generate', {
@@ -417,6 +430,7 @@ export default function NewWorkoutForm({
           durationMinutes: duration,
           options: { includeWarmup, includeCooldown },
           regeneratePhase,
+          excludedExerciseSlugs,
           userPrompt: activePrompt.trim() || null,
           currentExercises: currentExercisesToSend,
           requestedRecoveryGroups: recoveryGroupsOverride ?? BODY_MUSCLE_GROUPS,
@@ -483,12 +497,23 @@ export default function NewWorkoutForm({
   function handleAddExerciseFromPicker(config: SelectedExerciseConfig) {
     setDraft((current) => {
       if (!current) return current;
+      if (replacementExerciseId) {
+        return {
+          ...current,
+          exercises: current.exercises.map((exercise) => (
+            exercise.exerciseId === replacementExerciseId
+              ? { ...config, phase: exercise.phase }
+              : exercise
+          )),
+        };
+      }
       return {
         ...current,
           exercises: [...current.exercises, { ...config, phase: pickerPhase }]
             .sort((a, b) => ['warmup', 'main', 'cooldown'].indexOf(a.phase) - ['warmup', 'main', 'cooldown'].indexOf(b.phase)),
       };
     });
+    setReplacementExerciseId(null);
   }
 
   useEffect(() => {
@@ -568,6 +593,20 @@ export default function NewWorkoutForm({
           <ReviewStat label="Khối lượng" value={`${totalSets} sets`} />
           <ReviewStat label="Thời lượng" value={`~${draft.durationMinutes}p`} />
         </div>
+
+        {draft.generationSource && (
+          <div className={`rounded-xl border px-3.5 py-2.5 text-xs font-semibold ${
+            draft.generationSource === 'fallback'
+              ? 'border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300'
+              : 'border-emerald-500/25 bg-emerald-500/[0.08] text-emerald-700 dark:text-emerald-300'
+          }`}>
+            {draft.generationSource === 'gemini'
+              ? 'Nguồn: Gemini tạo trực tiếp.'
+              : draft.generationSource === 'gemini_repaired'
+                ? 'Nguồn: Gemini, hệ thống đã sửa phase sai để bảo đảm hợp lệ.'
+                : 'Nguồn: Fallback an toàn vì kết quả Gemini không vượt qua kiểm tra.'}
+          </div>
+        )}
 
         {customPrompt.trim() && (
           <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-accent/10 border border-accent/25 text-xs text-ink font-mono">
@@ -656,15 +695,31 @@ export default function NewWorkoutForm({
                       </div>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => removeExercise(exercise.exerciseId)}
-                      aria-label={`Bỏ ${exercise.nameVi ?? exercise.name}`}
-                      title="Xóa bài tập này"
-                      className="h-8 w-8 inline-flex items-center justify-center rounded-xl text-ink-muted hover:text-danger hover:bg-danger/10 transition-colors shrink-0 cursor-pointer border border-transparent hover:border-danger/20"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setReplacementExerciseId(exercise.exerciseId);
+                          setPickerPhase(exercise.phase ?? 'main');
+                          setIsPickerOpen(true);
+                        }}
+                        aria-label={`Đổi ${exercise.nameVi ?? exercise.name} sang bài tương tự`}
+                        title="Đổi nhanh sang bài tương tự"
+                        className="h-8 px-2.5 inline-flex items-center justify-center gap-1.5 rounded-xl text-accent hover:bg-accent/10 transition-colors cursor-pointer border border-accent/20"
+                      >
+                        <RefreshCw className="h-3.5 w-3.5" />
+                        <span className="text-[10px] font-bold">Đổi bài</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => removeExercise(exercise.exerciseId)}
+                        aria-label={`Bỏ ${exercise.nameVi ?? exercise.name}`}
+                        title="Xóa bài tập này"
+                        className="h-8 w-8 inline-flex items-center justify-center rounded-xl text-ink-muted hover:text-danger hover:bg-danger/10 transition-colors cursor-pointer border border-transparent hover:border-danger/20"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
 
                   {/* High-Readability Tactical Badges Row */}
@@ -744,7 +799,7 @@ export default function NewWorkoutForm({
               <button
                 key={phase}
                 type="button"
-                onClick={() => { setPickerPhase(phase); setIsPickerOpen(true); }}
+                onClick={() => { setReplacementExerciseId(null); setPickerPhase(phase); setIsPickerOpen(true); }}
                 className="py-3 px-3 rounded-2xl border-2 border-dashed border-accent/35 hover:border-accent bg-accent/[0.03] hover:bg-accent/[0.08] text-accent font-extrabold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
                 <Plus className="h-4 w-4" />
@@ -787,7 +842,7 @@ export default function NewWorkoutForm({
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && customPrompt.trim() && !generating) {
                   e.preventDefault();
-                  generateDraft();
+                  generateDraft(undefined, undefined, true);
                 }
               }}
               placeholder="Ví dụ: Bỏ bài đẩy vai, thêm bài ép ngực cáp, hôm nay đau vai nên dùng máy..."
@@ -795,7 +850,7 @@ export default function NewWorkoutForm({
             />
             <button
               type="button"
-              onClick={() => generateDraft()}
+              onClick={() => generateDraft(undefined, undefined, true)}
               disabled={generating || !customPrompt.trim()}
               className="absolute right-1.5 top-1.5 bottom-1.5 px-3 rounded-lg bg-gradient-to-r from-accent to-accent-dim text-white font-mono text-[11px] font-bold shadow-xs hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 transition-all cursor-pointer"
             >
@@ -829,7 +884,7 @@ export default function NewWorkoutForm({
                 type="button"
                 onClick={() => {
                   setCustomPrompt(preset);
-                  generateDraft(undefined, preset);
+                  generateDraft(undefined, preset, true);
                 }}
                 disabled={generating}
                 className="px-2.5 py-1 rounded-lg bg-black/[0.04] dark:bg-white/[0.06] hover:bg-accent/15 hover:text-accent hover:border-accent/30 border border-black/[0.05] dark:border-white/[0.08] text-[10px] font-medium text-ink-secondary transition-all cursor-pointer"
@@ -889,9 +944,10 @@ export default function NewWorkoutForm({
 
         <ExercisePickerModal
           isOpen={isPickerOpen}
-          onClose={() => setIsPickerOpen(false)}
+          onClose={() => { setIsPickerOpen(false); setReplacementExerciseId(null); }}
           onSelectExercise={handleAddExerciseFromPicker}
           existingSlugs={draft.exercises.map((e) => e.exerciseSlug)}
+          replacementConfig={draft.exercises.find((exercise) => exercise.exerciseId === replacementExerciseId) ?? null}
           phase={pickerPhase}
           unitSystem={unitSystem}
         />
@@ -1116,13 +1172,14 @@ export default function NewWorkoutForm({
             <Building2 className="h-4 w-4 text-accent" />
             <span>Phòng gym & Thiết bị</span>
           </label>
-          <Link
-            href="/gyms/new?returnTo=%2Fworkouts%2Fnew"
+          <button
+            type="button"
+            onClick={() => setGymPopupOpen(true)}
             className="text-[11px] font-mono text-accent hover:underline flex items-center gap-1 font-bold"
           >
             <Plus className="h-3 w-3" />
             <span>Thêm phòng gym</span>
-          </Link>
+          </button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -1201,7 +1258,7 @@ export default function NewWorkoutForm({
           </button>
 
           {/* Cards for User's Saved Gyms */}
-          {gyms.map((gym) => {
+          {availableGyms.map((gym) => {
             const isSelected = gymId === gym.id;
             const dbCount = gym.gym_dumbbell_inventory?.length ?? 0;
             const rawEquipments = gym.gym_equipment ?? [];
@@ -1261,6 +1318,43 @@ export default function NewWorkoutForm({
           })}
         </div>
       </div>
+
+      <Dialog.Root open={gymPopupOpen} onOpenChange={setGymPopupOpen}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
+          <Dialog.Content className="fixed inset-x-3 top-1/2 z-50 max-h-[90vh] -translate-y-1/2 overflow-y-auto rounded-2xl bg-chassis p-3 shadow-2xl focus:outline-none sm:left-1/2 sm:max-w-2xl sm:-translate-x-1/2 sm:p-5">
+            <div className="mb-3 flex items-center justify-between px-2">
+              <div>
+                <Dialog.Title className="text-lg font-extrabold text-ink">Thêm phòng gym</Dialog.Title>
+                <Dialog.Description className="mt-0.5 text-xs text-ink-secondary">
+                  Lưu nhanh thiết bị để tiếp tục tạo buổi tập.
+                </Dialog.Description>
+              </div>
+              <Dialog.Close className="grid h-9 w-9 place-items-center rounded-lg text-ink-muted hover:bg-black/5 dark:hover:bg-white/5" aria-label="Đóng">
+                <X className="h-4 w-4" />
+              </Dialog.Close>
+            </div>
+            <NewGymForm
+              equipment={equipment}
+              onSaved={(gym) => {
+                const equipmentRows = gym.equipmentSlugs
+                  .map((slug) => equipment.find((item) => item.slug === slug))
+                  .filter(Boolean)
+                  .map((item) => ({ equipment: item }));
+                const nextGym: GymOption = {
+                  id: gym.id,
+                  name: gym.name,
+                  description: gym.description,
+                  gym_equipment: equipmentRows,
+                };
+                setAvailableGyms((current) => [nextGym, ...current.filter((item) => item.id !== gym.id)]);
+                setGymId(gym.id);
+                setGymPopupOpen(false);
+              }}
+            />
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
 
       <div>
         <label className="label">

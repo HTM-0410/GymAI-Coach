@@ -18,6 +18,18 @@ export type ResolvedWorkoutConstraintsV1 = {
   deniedPositions: string[];
 };
 
+export function workoutConstraintsForPhase(
+  constraints: ResolvedWorkoutConstraintsV1,
+  phase: WorkoutPhase,
+): ResolvedWorkoutConstraintsV1 {
+  if (phase === 'main') return constraints;
+  return {
+    ...constraints,
+    allowedEquipment: [],
+    deniedEquipment: [],
+  };
+}
+
 const PHASE_ROLES: Record<WorkoutPhase, readonly string[]> = {
   warmup: ['general_warmup', 'dynamic_mobility', 'activation'],
   main: ['main_strength'],
@@ -146,6 +158,20 @@ export function resolveWorkoutConstraints(
       deniedEquipment.add('kettlebell');
       deniedEquipment.add('ez-bar');
       deniedEquipment.add('bodyweight');
+    }
+
+    const requestsMachineWithoutFreeWeights = (
+      (normPrompt.includes('uu tien dung machine') || normPrompt.includes('chi dung machine') || normPrompt.includes('chi bang machine'))
+      && (normPrompt.includes('bo ta tu do') || normPrompt.includes('khong ta tu do') || normPrompt.includes('tranh ta tu do'))
+    );
+    if (requestsMachineWithoutFreeWeights) {
+      allowedEquipment.add('machine');
+      allowedEquipment.add('cable-machine');
+      allowedEquipment.add('smith-machine');
+      deniedEquipment.add('barbell');
+      deniedEquipment.add('dumbbell');
+      deniedEquipment.add('kettlebell');
+      deniedEquipment.add('ez-bar');
     }
 
     // Negations on lower body / leg exercises
