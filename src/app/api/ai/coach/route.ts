@@ -9,6 +9,9 @@ import {
   requestsSuggestedWorkoutHandoff,
   resolveCoachNavigationAction,
 } from '@/lib/ai/coach-actions';
+import { GeminiApiError, getGeminiModel } from '@/lib/ai/gemini';
+
+const NO_STORE_HEADERS = { 'Cache-Control': 'no-store' } as const;
 
 const Body = z.object({
   messages: z.array(z.object({
@@ -38,9 +41,16 @@ const Body = z.object({
 export async function POST(req: NextRequest) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
+  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401, headers: NO_STORE_HEADERS });
 
-  const body = Body.parse(await req.json());
+  const parsed = Body.safeParse(await req.json().catch(() => null));
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: 'invalid_request', message: 'Yêu cầu gửi đến AI Coach không hợp lệ. Vui lòng tải lại trang và thử lại.' },
+      { status: 400, headers: NO_STORE_HEADERS },
+    );
+  }
+  const body = parsed.data;
   try {
     const latestUserMessage = [...body.messages].reverse().find((message) => message.role === 'user');
     let action = latestUserMessage ? resolveCoachNavigationAction(latestUserMessage.content) : null;
@@ -54,7 +64,7 @@ export async function POST(req: NextRequest) {
       }
     }
     if (action) {
-      return NextResponse.json({ reply: navigationReply(action), action });
+      return NextResponse.json({ reply: navigationReply(action), action }, { headers: NO_STORE_HEADERS });
     }
 
     const personalization = projectMinimalAIContext(
@@ -62,8 +72,22 @@ export async function POST(req: NextRequest) {
       'coach',
     );
     const result = await chatWithCoach(user.id, body.messages, personalization, body.workoutContext);
-    return NextResponse.json(result);
-  } catch (e: any) {
-    return NextResponse.json({ error: 'ai_failed', detail: String(e?.message ?? e) }, { status: 500 });
+    return NextResponse.json(result, { headers: NO_STORE_HEADERS });
+  } catch (error) {
+    const requestId = crypto.randomUUID();
+    const reason = error instanceof GeminiApiError ? `provider_${error.status}` : 'internal_error';
+    console.error(
+      `[ai/coach] request_id=${requestId} model=${getGeminiModel()} reason=${reason}`,
+      error instanceof Error ? error.message : String(error),
+    );
+    return NextResponse.json(
+      {
+        error: 'ai_failed',
+        reason,
+        requestId,
+        message: 'AI Coach đang tạm thời không phản hồi. Vui lòng thử lại sau ít phút.',
+      },
+      { status: 502, headers: NO_STORE_HEADERS },
+    );
   }
 }

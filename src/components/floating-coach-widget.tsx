@@ -60,6 +60,7 @@ export default function FloatingCoachWidget() {
     try {
       const res = await fetch('/api/ai/coach', {
         method: 'POST',
+        cache: 'no-store',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ messages: next.slice(-10) }),
       });
@@ -79,7 +80,7 @@ export default function FloatingCoachWidget() {
       } else {
         setMessages((m) => [
           ...m,
-          { role: 'assistant', content: `Lỗi: ${data.detail ?? data.error ?? 'không rõ'}` },
+          { role: 'assistant', content: data.message ?? 'AI Coach đang tạm thời không phản hồi. Vui lòng thử lại sau ít phút.' },
         ]);
       }
     } catch {

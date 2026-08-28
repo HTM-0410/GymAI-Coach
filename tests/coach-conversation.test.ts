@@ -6,6 +6,7 @@ import {
   prepareCoachConversation,
   type CoachMessage,
 } from '../src/lib/ai/coach-conversation';
+import { createGeminiApiError } from '../src/lib/ai/gemini';
 
 const welcome: CoachMessage = {
   role: 'assistant',
@@ -102,4 +103,34 @@ test('explicit concise requests remain concise without imposing that limit on ot
   assert.match(concise.responseGuidance, /1-3 ý/);
   assert.match(normal.responseGuidance, /không cắt bỏ thông tin cần thiết/);
   assert.equal(COACH_MAX_OUTPUT_TOKENS, 2048);
+});
+
+test('Gemini provider errors retain safe status and reason for server-side diagnosis', () => {
+  const error = createGeminiApiError(400, JSON.stringify({
+    error: {
+      status: 'INVALID_ARGUMENT',
+      message: 'Request contains an invalid argument.',
+      details: [{ reason: 'API_KEY_INVALID' }],
+    },
+  }));
+
+  assert.equal(error.status, 400);
+  assert.equal(error.providerStatus, 'INVALID_ARGUMENT');
+  assert.equal(error.providerReason, 'API_KEY_INVALID');
+  assert.match(error.message, /Request contains an invalid argument/);
+});
+
+test('mobile and full-page coach clients disable cache and do not expose raw provider errors', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const widget = await readFile(new URL('../src/components/floating-coach-widget.tsx', import.meta.url), 'utf8');
+  const page = await readFile(new URL('../src/app/(app)/coach/chat-client.tsx', import.meta.url), 'utf8');
+  const route = await readFile(new URL('../src/app/api/ai/coach/route.ts', import.meta.url), 'utf8');
+
+  for (const source of [widget, page]) {
+    assert.match(source, /cache: 'no-store'/);
+    assert.doesNotMatch(source, /data\.detail/);
+  }
+  assert.match(route, /Cache-Control': 'no-store'/);
+  assert.match(route, /requestId/);
+  assert.match(route, /status: 502/);
 });

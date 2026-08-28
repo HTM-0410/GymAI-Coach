@@ -12,6 +12,7 @@ import {
   type CoachMessage,
 } from './coach-conversation';
 import { extractWorkoutCoachActions, type WorkoutCoachAction } from './coach-actions';
+import { createGeminiApiError, GeminiApiError, getGeminiModel } from './gemini';
 
 export type ChatMessage = CoachMessage;
 
@@ -33,6 +34,46 @@ export type LiveWorkoutContext = {
   currentReps?: number | null;
   restRemaining?: number;
 };
+
+type GeminiContent = {
+  role: 'user' | 'model';
+  parts: Array<{ text: string }>;
+};
+
+type CoachGeminiBody = {
+  systemInstruction?: { parts: Array<{ text: string }> };
+  contents: GeminiContent[];
+  generationConfig: { temperature: number; maxOutputTokens: number };
+};
+
+async function requestCoachGemini(body: CoachGeminiBody) {
+  const apiKey = process.env.GEMINI_API_KEY ?? '';
+  if (!apiKey) throw new Error('GEMINI_API_KEY missing');
+
+  const model = getGeminiModel();
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
+    {
+      method: 'POST',
+      cache: 'no-store',
+      headers: {
+        'content-type': 'application/json',
+        'x-goog-api-key': apiKey,
+      },
+      body: JSON.stringify(body),
+    },
+  );
+  const raw = await response.text();
+  if (!response.ok) throw createGeminiApiError(response.status, raw);
+  return JSON.parse(raw);
+}
+
+function shouldRetryFlattened(error: unknown) {
+  return error instanceof GeminiApiError
+    && error.status === 400
+    && error.providerStatus === 'INVALID_ARGUMENT'
+    && error.providerReason !== 'API_KEY_INVALID';
+}
 
 export async function chatWithCoach(
   userId: string,
@@ -125,25 +166,33 @@ ${(recent ?? []).slice(0, 3).map((w: any) => `- Ngày ${w.date}: ${(w.workout_ex
 Hãy trả lời câu hỏi gần nhất của học viên một cách thân thiện, rõ ràng, thực tế và dễ áp dụng ngay!`;
 
   // Gemini format
-  const contents = conversation.messages.map((m) => ({
+  const contents: GeminiContent[] = conversation.messages.map((m) => ({
     role: m.role === 'assistant' ? 'model' : 'user',
     parts: [{ text: m.content }],
   }));
 
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${process.env.GEMINI_MODEL ?? 'gemini-3.5-flash-lite'}:generateContent?key=${process.env.GEMINI_API_KEY}`,
-    {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: ctx }] },
-        contents,
-        generationConfig: { temperature: 0.5, maxOutputTokens: COACH_MAX_OUTPUT_TOKENS },
-      }),
-    }
-  );
-  if (!res.ok) throw new Error(`Gemini ${res.status}`);
-  const data = await res.json();
+  const generationConfig = { temperature: 0.5, maxOutputTokens: COACH_MAX_OUTPUT_TOKENS };
+  let data;
+  try {
+    data = await requestCoachGemini({
+      systemInstruction: { parts: [{ text: ctx }] },
+      contents,
+      generationConfig,
+    });
+  } catch (error) {
+    if (!shouldRetryFlattened(error)) throw error;
+
+    const transcript = conversation.messages
+      .map((message) => `${message.role === 'assistant' ? 'AI Coach' : 'Học viên'}: ${message.content}`)
+      .join('\n');
+    data = await requestCoachGemini({
+      contents: [{
+        role: 'user',
+        parts: [{ text: `${ctx}\n\nHỘI THOẠI HIỆN TẠI:\n${transcript}` }],
+      }],
+      generationConfig,
+    });
+  }
   const rawReply = normalizeCoachReply(data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '', messages);
   const actions = extractWorkoutCoachActions(rawReply);
 

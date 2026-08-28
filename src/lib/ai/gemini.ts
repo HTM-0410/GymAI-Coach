@@ -8,10 +8,40 @@ export function getGeminiModel() {
 }
 
 export class GeminiApiError extends Error {
-  constructor(public readonly status: number, message: string) {
+  constructor(
+    public readonly status: number,
+    message: string,
+    public readonly providerStatus?: string,
+    public readonly providerReason?: string,
+  ) {
     super(message);
     this.name = 'GeminiApiError';
   }
+}
+
+export function createGeminiApiError(status: number, rawBody: string): GeminiApiError {
+  let providerStatus: string | undefined;
+  let providerReason: string | undefined;
+  let providerMessage = rawBody.trim();
+
+  try {
+    const payload = JSON.parse(rawBody) as {
+      error?: {
+        status?: unknown;
+        message?: unknown;
+        details?: Array<{ reason?: unknown }>;
+      };
+    };
+    if (typeof payload.error?.status === 'string') providerStatus = payload.error.status;
+    if (typeof payload.error?.message === 'string') providerMessage = payload.error.message;
+    const reason = payload.error?.details?.find((detail) => typeof detail?.reason === 'string')?.reason;
+    if (typeof reason === 'string') providerReason = reason;
+  } catch {
+    // Keep the bounded raw provider text when the response is not JSON.
+  }
+
+  const summary = providerMessage.slice(0, 500) || 'Unknown provider error';
+  return new GeminiApiError(status, `Gemini ${status}: ${summary}`, providerStatus, providerReason);
 }
 
 type CallOpts = {
@@ -55,7 +85,7 @@ export async function callGemini(opts: CallOpts): Promise<string> {
   });
   if (!res.ok) {
     const errTxt = await res.text();
-    throw new GeminiApiError(res.status, `Gemini ${res.status}: ${errTxt.slice(0, 500)}`);
+    throw createGeminiApiError(res.status, errTxt);
   }
   const data = await res.json();
   return data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
